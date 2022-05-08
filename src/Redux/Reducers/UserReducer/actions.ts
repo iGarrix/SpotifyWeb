@@ -136,6 +136,14 @@ export const getByUserNameUser = (username: string) => {
   };
 };
 
+export const LogoutUser = () => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    dispatch({ type: UserActionTypes.INITUSER_CLEAR, payload: true });
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiredin");
+  };
+};
+
 export const InitUser = async (
   token: string,
   dispatch: Dispatch<UserAction>

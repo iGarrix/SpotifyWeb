@@ -1,27 +1,21 @@
+import { ErrorMessage, useField } from "formik";
 import React from "react";
 import { FormikDefaultInputProps } from "./types";
 
 export const FormikDefaultInput: React.FC<FormikDefaultInputProps> = ({
-  field,
-  placeholder,
-  onChange,
-  value = "",
-  touched = null,
-  error = null,
-  type = "text",
+  label,
+  ...props
 }) => {
+  const [field, meta] = useField(props);
   return (
     <div>
       <input
-        placeholder={placeholder}
-        type={type}
-        name={field}
+        placeholder={label}
         className="outline-0 border-2 border-dark-1 rounded-md py-2 px-4"
-        defaultValue={value}
-        onChange={onChange}
+        {...field}
+        {...props}
       />
-      <h1>{touched && error ? error : ""}</h1>
-      <h1>{touched && error ? true : false}</h1>
+      <ErrorMessage component="div" name={field.name} className="error" />
     </div>
   );
 };

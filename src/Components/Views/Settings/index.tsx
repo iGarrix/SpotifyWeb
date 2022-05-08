@@ -1,9 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Settings: React.FC = () => {
-  return (
-    <div>
-      <h1>Settinga</h1>
-    </div>
-  );
+  return <div className="flex justify-center gap-5"></div>;
 };

@@ -9,6 +9,11 @@ import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 
+const theme = localStorage.getItem("theme");
+if (theme === null || theme === undefined) {
+  localStorage.setItem("theme", "light");
+}
+
 const token = localStorage.getItem("token");
 if (token !== null && token !== undefined) {
   if (token !== "") {

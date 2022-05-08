@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useActions } from "../../../Hooks/useActions";
 
 export const Welcome: React.FC = () => {
   const nav = useNavigate();
+
+  const { LogoutUser } = useActions();
 
   return (
     <div className="flex justify-center gap-5">
@@ -33,6 +36,13 @@ export const Welcome: React.FC = () => {
         }}
       >
         Settings
+      </button>
+      <button
+        onClick={async () => {
+          await LogoutUser();
+        }}
+      >
+        Logout
       </button>
     </div>
   );

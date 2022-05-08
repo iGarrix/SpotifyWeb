@@ -64,6 +64,7 @@ export interface IRegisterRequest {
   phone: number;
   name: string;
   surname: string;
+  birthday: Date | null;
   gender: string;
   country: string;
   device: string;

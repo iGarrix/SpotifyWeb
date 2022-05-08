@@ -1,23 +1,20 @@
+import { ErrorMessage, useField } from "formik";
 import React from "react";
 import { FormikDefaultDropdownProps } from "./types";
 
 export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
-  field,
-  placeholder,
+  label,
   options,
-  onChange,
-  value = "",
-  touched = null,
-  error = null,
+  ...props
 }) => {
+  const [field, meta] = useField(props);
+
   return (
     <div>
       <select
-        name={field}
         className="outline-0 border-2 border-dark-1 rounded-md py-2 px-4"
-        placeholder={placeholder}
-        defaultValue={value}
-        onChange={onChange}
+        {...field}
+        {...props}
       >
         <option value="" disabled>
           Select your gender
@@ -30,8 +27,7 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
           );
         })}
       </select>
-      <h1>{touched && error ? error : ""}</h1>
-      <h1>{touched && error ? true : false}</h1>
+      <ErrorMessage component="div" name={field.name} className="error" />
     </div>
   );
 };

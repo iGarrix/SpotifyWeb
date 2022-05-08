@@ -1,23 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { NotFound } from "./Components/Views/NotFound";
 import { LayAuth } from "./Components/Layout/LayAuth";
 import { LayStartup } from "./Components/Layout/LayStartup";
 import { Login } from "./Components/Views/Auth/Login";
 import { Register } from "./Components/Views/Auth/Register";
 import { Settings } from "./Components/Views/Settings";
-import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { Profile } from "./Components/Views/Profile";
 import { LayProfile } from "./Components/Layout/LayProfile";
 import { Welcome } from "./Components/Views/Welcome";
 
 function App() {
-  const nav = useNavigate();
+  const [isDark, setDark] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+
+  useEffect(() => {
+    if (theme !== null && theme !== undefined && theme !== "") {
+      if (theme === "dark") {
+        setDark(true);
+      } else {
+        setDark(false);
+      }
+    }
+  }, [localStorage.getItem("theme")]);
 
   return (
-    <div className="w-full min-h-screen overflow-y-hidden">
+    <div
+      className={`w-full min-h-screen overflow-y-hidden ${
+        isDark ? "dark" : null
+      }`}
+    >
       <Routes>
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />

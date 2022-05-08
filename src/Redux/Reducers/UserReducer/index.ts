@@ -28,7 +28,10 @@ export const userReducer = (
     case UserActionTypes.INITUSER_ERROR: {
       return {
         ...state,
-        error: action.payload,
+        error:
+          action.payload === undefined || action.payload === null
+            ? "Server error"
+            : action.payload,
         loading: false,
       };
     }

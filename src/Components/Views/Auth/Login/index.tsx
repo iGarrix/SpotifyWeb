@@ -1,4 +1,4 @@
-import { Form, FormikHelpers, FormikProvider, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
@@ -41,36 +41,24 @@ export const Login: React.FC = () => {
     }
   };
 
-  const formik = useFormik({
-    initialValues: initialValues,
-    validationSchema: emailLoginValidate,
-    onSubmit: onHandleSubmit,
-  });
-
-  const { errors, touched, handleChange, handleSubmit } = formik;
-
   return (
     <div className="flex w-screen h-screen justify-center items-center">
-      <FormikProvider value={formik}>
-        <Form onSubmit={handleSubmit}>
-          <div className="flex flex-col justify-center items-center gap-2">
-            {load ? <h1>Loading</h1> : null}
-            <h1>{error}</h1>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={emailLoginValidate}
+        onSubmit={onHandleSubmit}
+      >
+        <Form>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
+              {load ? <h1>Loading</h1> : null}
+              <h1>{error}</h1>
+            </div>
+            <FormikDefaultInput label="email" name="email" type="email" />
             <FormikDefaultInput
-              type="email"
-              field={"email"}
-              placeholder="Enter email"
-              error={errors.email}
-              touched={touched.email}
-              onChange={handleChange}
-            />
-            <FormikDefaultInput
+              label="password"
+              name="password"
               type="password"
-              field={"password"}
-              placeholder="Enter password"
-              error={errors.password}
-              touched={touched.password}
-              onChange={handleChange}
             />
             <input
               type="checkbox"
@@ -79,10 +67,12 @@ export const Login: React.FC = () => {
                 setRemember(!remember);
               }}
             />
-            <button type="submit">Login</button>
+            <button className="btn btn-dark mt-3" type="submit">
+              Register
+            </button>
           </div>
         </Form>
-      </FormikProvider>
+      </Formik>
     </div>
   );
 };
