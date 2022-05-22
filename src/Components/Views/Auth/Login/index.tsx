@@ -1,10 +1,12 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import GoogleLogin from "react-google-login";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import {
   emailLoginValidate,
+  IExternalRequest,
   ILoginByEmailForm,
   ILoginByEmailRequest,
 } from "../../../../Redux/Reducers/UserReducer/types";
@@ -12,7 +14,7 @@ import { DeviceType } from "../../../../types";
 import { FormikDefaultInput } from "../../../Commons/Inputs/FormikDefaultInput";
 
 export const Login: React.FC = () => {
-  const { loginByEmailUser } = useActions();
+  const { loginByEmailUser, externalLoginlUser } = useActions();
 
   const nav = useNavigate();
 
@@ -40,6 +42,19 @@ export const Login: React.FC = () => {
       console.error(error);
     }
   };
+
+  const responseGoogle = async (response : any) => {
+    var request : IExternalRequest = {
+      tokenId: response.tokenId,
+      accessToken: response.accessToken,
+    }
+    await externalLoginlUser(request);
+    nav("/profile");
+  }
+
+  const responseError = (error : any) => {
+    console.log(error);
+  }
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
@@ -70,6 +85,11 @@ export const Login: React.FC = () => {
             <button className="btn btn-dark mt-3" type="submit">
               Register
             </button>
+            <GoogleLogin
+        clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
+        onSuccess={responseGoogle}
+              onFailure={responseError}
+        cookiePolicy={'single_host_origin'}><h1 className="font-bold">Gooogle login</h1></GoogleLogin>
           </div>
         </Form>
       </Formik>

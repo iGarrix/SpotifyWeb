@@ -108,14 +108,22 @@ export interface ILoginByNicknameForm {
 }
 
 export interface IAuthResponse {
-  token: string;
+  accessToken: string;
+  refreshToken: string,
   expiredIn: Date;
   user: IUser;
 }
 
 export interface IInitGet {
   name: string;
+  email: string;
+  provider: string | null;
   roles: string;
+}
+
+export interface IExternalRequest {
+  tokenId : string,
+  accessToken: string,
 }
 
 export interface InitUserAction {
