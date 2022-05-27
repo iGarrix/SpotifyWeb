@@ -8,14 +8,14 @@ export const FormikDefaultInput: React.FC<FormikDefaultInputProps> = ({
 }) => {
   const [field, meta] = useField(props);
   return (
-    <div>
+    <div className="flex flex-col gap-2">
+      <ErrorMessage component="h1" name={field.name} className="error text-red-600 font-medium  " />
       <input
         placeholder={label}
-        className="outline-0 border-2 border-dark-1 rounded-md py-2 px-4"
+        className={`outline-0 border-2 rounded-xl py-3 px-5 text-dark-200 autofill:bg-white`}
         {...field}
         {...props}
       />
-      <ErrorMessage component="div" name={field.name} className="error" />
     </div>
   );
 };
