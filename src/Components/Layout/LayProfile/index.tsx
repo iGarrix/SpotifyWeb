@@ -8,13 +8,13 @@ export const LayProfile: React.FC = () => {
   const user = useTypedSelector((state) => state.userReducer.profile);
   const load = useTypedSelector((state) => state.userReducer.loading);
 
-  useEffect(() => {
-    if (user === null && load === false) {
-      nav(-1);
-    }
+  // useEffect(() => {
+  //   if (user === null && load === false) {
+  //     nav(-1);
+  //   }
 
-    return function clean() {};
-  }, [user]);
+  //   return function clean() {};
+  // }, [user]);
 
   return <Outlet />;
 };

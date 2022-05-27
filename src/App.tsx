@@ -36,9 +36,9 @@ function App() {
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />
           <Route path="settings" element={<Settings />} />
-        </Route>
-        <Route path="profile" element={<LayProfile />}>
-          <Route index element={<Profile />} />
+          <Route path="profile" element={<LayProfile />}>
+            <Route index element={<Profile />} />
+          </Route>
         </Route>
         <Route path="authorizate" element={<LayAuth />}>
           <Route index element={<Login />} />

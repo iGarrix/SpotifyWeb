@@ -80,10 +80,10 @@ export const Login: React.FC = () => {
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
       <div className="absolute w-full overflow-hidden grid grid-cols-12 grid-row-3 items-center">
         <img alt="logo" src={logo} className="z-10 col-start-6 col-span-4" width={350} height={350} />
-        <div className="w-full h-96 loginbackground overflow-hidden col-span-8 rounded-tr-3xl row-start-2"></div>
-        <div className="w-full h-80 loginbackground loginbackground2 overflow-hidden col-start-5 rounded-tr-3xl row-start-3 col-span-8"></div>
+        <div className="w-full h-96 loginbackground overflow-hidden col-span-8 rounded-tr-3xl row-start-2 shadow-xl"></div>
+        <div className="w-full h-96 loginbackground loginbackground2 overflow-hidden col-start-5 rounded-tr-3xl row-start-3 col-span-8 shadow-xl"></div>
       </div>
-      <div className="flex flex-col justify-center py-16 border-4 shadow-xl rounded-2xl text-white shadow-lg col-span-4 col-start-5 relative">
+      <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white col-span-4 col-start-5 relative">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue-400 to-indigo-400 rounded-xl p-2 opacity-98"></div>
         {load ?  <div className="absolute bg-black p-2 w-full h-full z-20 flex justify-center items-center opacity-30 transition-all rounded-xl"></div> : null}    
         {load ? <div className="flex flex-col gap-2 animate-spin absolute z-20">
@@ -137,13 +137,16 @@ export const Login: React.FC = () => {
                         <button onClick={() => {console.log("first")}}>Forgot password</button>
               </div>
               <div className="flex justify-center gap-3">
-              <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-5 w-full">
               <hr className="w-full" />
-              <GoogleLogin
-                  clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
-                  onSuccess={responseGoogle}
-                  onFailure={responseError}
-                  cookiePolicy={'single_host_origin'}><h1 className="font-semibold text-md">Sign in with Google</h1></GoogleLogin>
+                <div className="flex justify-center">
+                <GoogleLogin
+                    clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseError}
+                    cookiePolicy={'single_host_origin'}><h1 className="font-semibold text-md">Sign in with Google</h1></GoogleLogin>
+                </div>
+                <button onClick={() => {nav("/authorizate/register")}}>Don't have an account</button>
               </div>
               </div>
               </div>
@@ -152,41 +155,3 @@ export const Login: React.FC = () => {
     </div>
   );
 };
-
-
-{/* <div className="flex w-screen h-screen justify-center items-center">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={emailLoginValidate}
-        onSubmit={onHandleSubmit}>
-        <Form>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-3">
-              {load ? <h1>Loading</h1> : null}
-              <h1>{error}</h1>
-            </div>
-            <FormikDefaultInput label="email" name="email" type="email" />
-            <FormikDefaultInput
-              label="password"
-              name="password"
-              type="password"
-            />
-            <input
-              type="checkbox"
-              defaultChecked={remember}
-              onClick={() => {
-                setRemember(!remember);
-              }}
-            />
-            <button className="btn btn-dark mt-3" type="submit">
-              Register
-            </button>
-            <GoogleLogin
-        clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
-        onSuccess={responseGoogle}
-              onFailure={responseError}
-        cookiePolicy={'single_host_origin'}><h1 className="font-bold">Gooogle login</h1></GoogleLogin>
-          </div>
-        </Form>
-      </Formik>
-    </div> */}
