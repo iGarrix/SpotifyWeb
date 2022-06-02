@@ -17,7 +17,7 @@ import { gapi } from "gapi-script";
 import { DefaultButton } from "../../../Commons/DefaultButton";
 
 import "./styles.scss";
-
+import { CustomCheckbox } from "../../../Commons/Checkboxs/CustomCheckbox";
 const logo = require('../../../../Assets/Logo.png');
 
 export const Login: React.FC = () => {
@@ -25,7 +25,6 @@ export const Login: React.FC = () => {
 
   const nav = useNavigate();
 
-  const load = useTypedSelector((state) => state.userReducer.loading);
   const error = useTypedSelector((state) => state.userReducer.error);
   const [remember, setRemember] = useState(false);
 
@@ -36,12 +35,11 @@ export const Login: React.FC = () => {
 
   useEffect(() => {
 
-    function start()
-    {
-        gapi.client.init({
-          clientId: "62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com",
-          scope: "",
-        })
+    function start() {
+      gapi.client.init({
+        clientId: "62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com",
+        scope: "",
+      })
     }
     gapi.load('client:auth2', start);
 
@@ -56,15 +54,14 @@ export const Login: React.FC = () => {
         device: DeviceType.desktop,
       };
       await loginByEmailUser(request);
-
       nav("/profile");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const responseGoogle = async (response : any) => {
-    var request : IExternalRequest = {
+  const responseGoogle = async (response: any) => {
+    var request: IExternalRequest = {
       tokenId: response.tokenId,
       accessToken: response.accessToken,
     }
@@ -72,7 +69,7 @@ export const Login: React.FC = () => {
     nav("/profile");
   }
 
-  const responseError = (error : any) => {
+  const responseError = (error: any) => {
     console.log(error);
   }
 
@@ -85,27 +82,16 @@ export const Login: React.FC = () => {
       </div>
       <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white col-span-4 col-start-5 relative">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue-400 to-indigo-400 rounded-xl p-2 opacity-98"></div>
-        {load ?  <div className="absolute bg-black p-2 w-full h-full z-20 flex justify-center items-center opacity-30 transition-all rounded-xl"></div> : null}    
-        {load ? <div className="flex flex-col gap-2 animate-spin absolute z-20">
-                <div className="flex gap-2">
-                  <div className="bg-primary-100 p-3 rounded-md"></div>
-                  <div className="bg-primary-100 p-3 rounded-md"></div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="bg-primary-100 p-3 rounded-md"></div>
-                  <div className="bg-primary-100 p-3 rounded-md"></div>
-                </div>
-              </div> : null}
-            <div className="w-full flex flex-col px-32">        
-              <h1 className="font-bold text-3xl z-10 text-center">Log in</h1>
-              <div className="z-10 flex flex-col gap-6">
-              <Formik
+        <div className="w-full flex flex-col px-32">
+          <h1 className="font-bold text-3xl z-10 text-center">Log in</h1>
+          <div className="z-10 flex flex-col gap-6">
+            <Formik
               initialValues={initialValues}
               validationSchema={emailLoginValidate}
               onSubmit={onHandleSubmit}>
               <Form>
                 <div className="flex flex-col gap-6">
-                  <div className="flex flex-col gap-3 items-center">              
+                  <div className="flex flex-col gap-3 items-center">
                     <div className="mt-4">
                       <h1 className="text-red-500 font-semibold text-lg">{error}</h1>
                     </div>
@@ -118,39 +104,29 @@ export const Login: React.FC = () => {
                       type="password"
                     />
                   </div>
-                  <DefaultButton text="Login" onClick={() => {console.log("Login")} }/>
+                  <DefaultButton text="Login" onClick={() => { console.log("Login") }} />
                 </div>
               </Form>
-              </Formik>
-              <div className="flex justify-between">
-                        <div className="flex gap-1 justify-center items-center">
-                          <input
-                            type="checkbox"
-                            className="checked:bg-primary-100 w-5 h-5 border-0 outline-hidden"
-                            defaultChecked={remember}
-                            onClick={() => {
-                              setRemember(!remember);
-                            }}                
-                          />
-                          <h1>Remember me</h1>
-                        </div>
-                        <button onClick={() => {console.log("first")}}>Forgot password</button>
-              </div>
-              <div className="flex justify-center gap-3">
+            </Formik>
+            <div className="flex justify-between">
+              <CustomCheckbox value={remember} text="Remember me" onCheck={() => { setRemember(!remember) }} />
+              <button onClick={() => { console.log("first") }}>Forgot password</button>
+            </div>
+            <div className="flex justify-center gap-3">
               <div className="flex flex-col gap-5 w-full">
-              <hr className="w-full" />
+                <hr className="w-full" />
                 <div className="flex justify-center">
-                <GoogleLogin
+                  <GoogleLogin
                     clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
                     onSuccess={responseGoogle}
                     onFailure={responseError}
                     cookiePolicy={'single_host_origin'}><h1 className="font-semibold text-md">Sign in with Google</h1></GoogleLogin>
                 </div>
-                <button onClick={() => {nav("/authorizate/register")}}>Don't have an account</button>
-              </div>
-              </div>
+                <button onClick={() => { nav("/authorizate/register") }}>Don't have an account</button>
               </div>
             </div>
+          </div>
+        </div>
       </div>
     </div>
   );

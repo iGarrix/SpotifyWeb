@@ -25,3 +25,5 @@ export interface IUser {
   verify: string;
   emojie: string;
 }
+
+export const baseUrl = "https://localhost:7286/";

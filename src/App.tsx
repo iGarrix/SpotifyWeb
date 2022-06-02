@@ -11,6 +11,7 @@ import { Settings } from "./Components/Views/Settings";
 import { Profile } from "./Components/Views/Profile";
 import { LayProfile } from "./Components/Layout/LayProfile";
 import { Welcome } from "./Components/Views/Welcome";
+import { Search } from "./Components/Views/Search";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -28,14 +29,20 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen overflow-y-hidden ${
-        isDark ? "dark" : null
+      className={`w-full min-h-screen flex ${
+        isDark ? "dark" : ""
       }`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />
+          <Route path="search" element={<Search />} />
+          <Route path="genres" element={<Settings />} />
+          <Route path="createplaylist" element={<Settings />} />
+          <Route path="history" element={<Settings />} />
+          <Route path="queue" element={<Settings />} />
           <Route path="settings" element={<Settings />} />
+
           <Route path="profile" element={<LayProfile />}>
             <Route index element={<Profile />} />
           </Route>

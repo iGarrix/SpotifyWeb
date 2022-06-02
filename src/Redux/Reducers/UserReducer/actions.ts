@@ -81,7 +81,6 @@ export const loginByEmailUser = (data: ILoginByEmailRequest) => {
   };
 };
 
-// Not checked
 export const loginByNicknameUser = (data: ILoginByNicknameRequest) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
@@ -124,7 +123,6 @@ export const externalLoginlUser = (data: IExternalRequest) => {
         data
       );
       const { user, accessToken, refreshToken, expiredIn } = response.data;
-      console.log(response.data);
       localStorage.setItem("token", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       localStorage.setItem("expiredin", new Date(expiredIn).toUTCString());
@@ -148,7 +146,6 @@ export const externalLoginlUser = (data: IExternalRequest) => {
   };
 };
 
-// Not checked
 export const getByUserEmail = (email: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {

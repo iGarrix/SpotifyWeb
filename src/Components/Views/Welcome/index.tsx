@@ -10,7 +10,7 @@ export const Welcome: React.FC = () => {
   
 
   return (
-    <div className="flex justify-center gap-5">
+    <div className="flex justify-center gap-5 h-screen text-white">
       <button
         onClick={() => {
           nav("authorizate");
