@@ -14,7 +14,7 @@ import { DeviceType } from "../../../../types";
 import { FormikDefaultInput } from "../../../Commons/Inputs/FormikDefaultInput";
 
 import { gapi } from "gapi-script";
-import { DefaultButton } from "../../../Commons/DefaultButton";
+import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 
 import "./styles.scss";
 import { CustomCheckbox } from "../../../Commons/Checkboxs/CustomCheckbox";
@@ -104,7 +104,7 @@ export const Login: React.FC = () => {
                       type="password"
                     />
                   </div>
-                  <DefaultButton text="Login" onClick={() => { console.log("Login") }} />
+                  <DefaultButton text="Login" onClick={() => {}} />
                 </div>
               </Form>
             </Formik>

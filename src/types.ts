@@ -8,13 +8,19 @@ export enum DeviceType {
   desktop = "WebBrowser Desktop",
 }
 
+export enum VerifyType {
+  profile = "Profile",
+  artist = "Artist",
+  verify = "VerifyProfile",
+}
+
 export const MinPasswordLenght = 8;
 
 export interface IUser {
   username: string;
   email: string;
   phone: number;
-  emailconfirm: string;
+  emailconfirm: boolean;
   create: Date;
   name: string;
   surname: string;

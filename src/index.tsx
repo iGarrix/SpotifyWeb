@@ -21,6 +21,14 @@ if (token !== null && token !== undefined) {
   }
 }
 
+const notifications = localStorage.getItem("notifications");
+if (notifications) {
+  
+}
+else {
+  localStorage.setItem("notifications", "5");
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
