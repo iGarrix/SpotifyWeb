@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.scss";
 
 import { Route, Routes } from "react-router-dom";
@@ -16,17 +16,6 @@ import { Queue } from "./Components/Views/Queue";
 
 function App() {
   const [isDark, setDark] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
-
-  useEffect(() => {
-    if (theme !== null && theme !== undefined && theme !== "") {
-      if (theme === "dark") {
-        setDark(true);
-      } else {
-        setDark(false);
-      }
-    }
-  }, [localStorage.getItem("theme")]);
 
   return (
     <div
@@ -45,13 +34,15 @@ function App() {
           <Route path="settings" element={<Settings />} />
 
           <Route path="profile" element={<LayProfile />}>
-            <Route index element={<Profile />} />
+              <Route index element={<Profile />} />
           </Route>
         </Route>
+
         <Route path="authorizate" element={<LayAuth />}>
           <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

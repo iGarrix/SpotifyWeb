@@ -196,10 +196,10 @@ export const InitUser = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const serverError = error as AxiosError<any>;
-      dispatch({
-        type: UserActionTypes.INITUSER_ERROR,
-        payload: serverError.response?.data,
-      });
+      // dispatch({
+      //   type: UserActionTypes.INITUSER_ERROR,
+      //   payload: serverError.response?.data,
+      // });
       if (serverError && serverError.response) {
         return Promise.reject(serverError.response.data);
       }

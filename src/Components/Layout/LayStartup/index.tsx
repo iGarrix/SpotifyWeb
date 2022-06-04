@@ -12,7 +12,6 @@ export const LayStartup: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
 
   const nav = useNavigate();
-
   return (
     <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/90 to-dark-200">
       <div className="col-span-1 w-full h-full">

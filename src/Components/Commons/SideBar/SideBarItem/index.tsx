@@ -13,7 +13,7 @@ export const SideBarItem: React.FC<ISideBarItem> = ({ text, icon, isSelect, onCl
                         <FontAwesomeIcon className="text-white" icon={icon} />
                     </div>
                     <div>
-                        <h1 className="font-medium select-none">{text}</h1>
+                        <h1 className="select-none">{text}</h1>
                     </div>
                 </div>
             </div>

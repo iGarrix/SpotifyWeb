@@ -1,4 +1,4 @@
-import { faBell, faCheck, faCog, faCompactDisc, faPlus, faRightFromBracket, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faCheck, faCog, faCompactDisc, faRightFromBracket, faSquarePlus, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -75,13 +75,13 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
                     {!user?.emailconfirm ?
                         <div className="bg-red-500/60 py-2 px-4 flex items-center gap-3 transition-all hover:bg-red-500/90 cursor-pointer">
                             <FontAwesomeIcon className="text-2xl" icon={faTriangleExclamation}/>
-                            <h1 className="select-none">Email don't confirmed</h1>
+                            <h1 className="select-none text-sm">Email don't confirmed</h1>
                         </div> : null
                     }
                 </div>
-                <DropdownButtonItem text="Quick playlist" icon={<FontAwesomeIcon className="text-lg" icon={faPlus} />} onClick={() => { onNavigateClick("createplaylist");  }} />
-                <DropdownButtonItem text="Notification" notifications={notificate} icon={<FontAwesomeIcon className="text-lg" icon={faBell} />} onClick={() => { onNavigateClick("notifications");  }} />
-                <DropdownButtonItem text="Account Settings" icon={<FontAwesomeIcon className="text-lg" icon={faCog} />} onClick={() => { onNavigateClick("settings") }} />
+                <DropdownButtonItem text="Notification" notifications={notificate} icon={<FontAwesomeIcon className="text-lg" icon={faBell} />} onClick={() => { onNavigateClick("notifications");}} />
+                <DropdownButtonItem text="Creative Studio" icon={<FontAwesomeIcon className="text-lg" icon={faSquarePlus} />} onClick={() => { onNavigateClick("createplaylist"); }} />
+                <DropdownButtonItem text="Account Manage" icon={<FontAwesomeIcon className="text-lg" icon={faCog} />} onClick={() => { onNavigateClick("settings") }} />
                 <DropdownButtonItem text="Log out" isDanger={true} icon={<FontAwesomeIcon className="text-lg" icon={faRightFromBracket} />} onClick={() => { LogoutUser(); nav("/") }} />
             </div>
         </div>

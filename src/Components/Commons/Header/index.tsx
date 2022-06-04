@@ -1,5 +1,5 @@
 
-import { faMusic, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faMusic, faUpload, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ export const Header: React.FC = () => {
 
     const ImageSrc = user?.avatar.includes("http") ? user.avatar
         : baseUrl + "Images/Users/" + user?.avatar;
+        
 
 
     return (
@@ -25,13 +26,13 @@ export const Header: React.FC = () => {
                     user ?
                         user.avatar.length !== 0 ?
                             <div className="flex items-center gap-6">
-                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faMusic} onClick={() => { nav("createalbum") }} />
+                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
                                 <FixedModal trigger={<img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover" width={40} height={40} />} />
                             </div> :
                             <div className="flex items-center gap-6">
-                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faMusic} onClick={() => { nav("createalbum") }} />
+                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
                                 <FixedModal trigger={<div className="bg-primary-100 rounded-lg px-3 py-1 cursor-pointer">
-                                    <h1 className="text-white text-2xl">{user.username.charAt(0)}</h1>
+                                    <h1 className="text-white text-2xl select-none">{user.username.charAt(0)}</h1>
                                 </div>} />             
                             </div>
                         :
