@@ -13,8 +13,9 @@ import {
 
 import jwt_decode from "jwt-decode";
 
-import http from "../../../axios_creator";
+import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IUser } from "../../../types";
+import { RefreshToken } from "../../../refreshActions";
 
 // Not checked
 export const registerUser = (data: IRegisterRequest) => {
@@ -181,14 +182,15 @@ export const LogoutUser = () => {
 };
 
 export const InitUser = async (
-  token: string,
   dispatch: Dispatch<UserAction>
 ) => {
-  const data = jwt_decode(token) as IInitGet;
+  await RefreshToken(dispatch);  
+  const tok = localStorage.getItem("token");
+  const data = jwt_decode(tok ? tok : "") as IInitGet;
   try {
     dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
     const response = await http.get<IUser>(
-      "api/Profile/GetByEmail?email=" + data.email
+      "api/Profile/GetByEmail?email=" + data.email, AuthorizateHeader(tok)
     );
     dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
 
@@ -196,10 +198,7 @@ export const InitUser = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const serverError = error as AxiosError<any>;
-      // dispatch({
-      //   type: UserActionTypes.INITUSER_ERROR,
-      //   payload: serverError.response?.data,
-      // });
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
       if (serverError && serverError.response) {
         return Promise.reject(serverError.response.data);
       }

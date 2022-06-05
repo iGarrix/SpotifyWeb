@@ -14,12 +14,7 @@ if (theme === null || theme === undefined) {
   localStorage.setItem("theme", "light");
 }
 
-const token = localStorage.getItem("token");
-if (token !== null && token !== undefined) {
-  if (token !== "") {
-    InitUser(token, store.dispatch);
-  }
-}
+InitUser(store.dispatch);
 
 const notifications = localStorage.getItem("notifications");
 if (notifications) {

@@ -33,3 +33,8 @@ export interface IUser {
 }
 
 export const baseUrl = "https://localhost:7286/";
+
+export interface IRefreshModel {
+  accessToken: string,
+  refreshToken: string,
+}

@@ -7,3 +7,17 @@ export default axios.create({
     "Content-type": "application/json",
   },
 });
+
+export const AuthorizateHeader = (token : any) => {
+  // headers: {
+  //   Authorization: "Bearer " + localStorage.getItem("token"),
+  // }
+  return {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  }
+}
+export interface IAuthConfig {
+  headers: {Authorization : any};
+}
