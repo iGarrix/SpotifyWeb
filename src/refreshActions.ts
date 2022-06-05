@@ -3,7 +3,6 @@ import { Dispatch } from "react";
 import { UserAction, UserActionTypes, IAuthResponse } from "./Redux/Reducers/UserReducer/types";
 import { IRefreshModel } from "./types";
 import http from "./axios_creator";
-import { number } from "yup";
 
 const PrivateLogoutUser = (dispatch: Dispatch<UserAction>) => {
     dispatch({ type: UserActionTypes.INITUSER_CLEAR, payload: true });

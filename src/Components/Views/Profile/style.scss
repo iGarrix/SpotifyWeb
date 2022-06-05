@@ -1,0 +1,14 @@
+.profilenames {
+    .profilechangenames {
+        @apply opacity-0 transition-all cursor-pointer;
+
+        &:hover {
+            @apply animate-pulse;
+        }
+    }
+    &:hover {
+        .profilechangenames {
+            @apply opacity-100 transition-all;
+        }
+    }
+}

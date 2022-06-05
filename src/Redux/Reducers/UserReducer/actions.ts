@@ -7,6 +7,7 @@ import {
   ILoginByEmailRequest,
   ILoginByNicknameRequest,
   IRegisterRequest,
+  IUpdatePersonalData,
   UserAction,
   UserActionTypes,
 } from "./types";
@@ -17,7 +18,6 @@ import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IUser } from "../../../types";
 import { RefreshToken } from "../../../refreshActions";
 
-// Not checked
 export const registerUser = (data: IRegisterRequest) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
@@ -36,7 +36,6 @@ export const registerUser = (data: IRegisterRequest) => {
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log("Action problem", error);
         const serverError = error as AxiosError<any>;
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
@@ -172,6 +171,34 @@ export const getByUserEmail = (email: string) => {
   };
 };
 
+export const updatePDUser = (data: IUpdatePersonalData) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdatePersonalData",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
 export const LogoutUser = () => {
   return async (dispatch: Dispatch<UserAction>) => {
     dispatch({ type: UserActionTypes.INITUSER_CLEAR, payload: true });
@@ -185,22 +212,24 @@ export const InitUser = async (
   dispatch: Dispatch<UserAction>
 ) => {
   await RefreshToken(dispatch);  
-  const tok = localStorage.getItem("token");
-  const data = jwt_decode(tok ? tok : "") as IInitGet;
-  try {
-    dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
-    const response = await http.get<IUser>(
-      "api/Profile/GetByEmail?email=" + data.email, AuthorizateHeader(tok)
-    );
-    dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
-
-    return Promise.resolve();
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const serverError = error as AxiosError<any>;
-      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
-      if (serverError && serverError.response) {
-        return Promise.reject(serverError.response.data);
+  const token = localStorage.getItem("token");
+  if (token) {    
+    const data = jwt_decode(token) as IInitGet;
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const response = await http.get<IUser>(
+        "api/Profile/GetByEmail?email=" + data.email, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+  
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
       }
     }
   }

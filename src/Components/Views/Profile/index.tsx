@@ -1,66 +1,76 @@
-import moment from "moment";
+import { faCheck, faCompactDisc, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IInitGet } from "../../../Redux/Reducers/UserReducer/types";
-import jwtDecode from "jwt-decode";
+import { baseUrl, VerifyType } from "../../../types";
+import { FullScreenModal } from "../../Commons/Modals/FullScreenModal";
+import { RenameBioModal } from "../../Commons/Modals/FullScreenModal/RenameBioModal";
+import "./style.scss";
+
+const image = require('../../../Assets/Background1.png');
+
 
 export const Profile: React.FC = () => {
   const user = useTypedSelector((state) => state.userReducer.profile);
 
-  const [provider, setProvider] = useState<string | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  const [ImageSrc, setImageSrc] = useState("");
+  const [verifyImage, setVerifyImage] = useState<any>();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token !== null) {   
-      const data = jwtDecode(token) as IInitGet;
-      setProvider(data.provider);
+    if (user != null) {
+      setImageSrc(user.avatar.includes("http") ? user.avatar
+        : baseUrl + "Images/Users/" + user.avatar);
+      setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
+      user.verify === VerifyType.artist ? <FontAwesomeIcon icon={faCompactDisc} width={20} height={20} /> :
+        user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null)
     }
-  }, []);
+  }, [user]);
 
+
+  const onChangeName = () => {
+    setOpenModal(true);
+  }
+
+
+  const onSaveChanges = () => {
+    setOpenModal(false);
+  }
+  const onCloseModal = () => {
+    setOpenModal(false);
+  }
 
   return (
-    <div>
-      <h1>Profile</h1>
+    <div className="overflow-x-hidden text-white">
+      {
+        user ?
+          <FullScreenModal visible={openModal} center>
+            <RenameBioModal initialName={user.name} initialSurname={user.surname} onSave={onSaveChanges} onClose={onCloseModal} />
+          </FullScreenModal> : null
+      }
+      <div className="w-full h-full flex bg-cover bg-no-repeat" style={{ backgroundImage: `url("${image}")` }}>
+        <div className="flex gap-6 px-20 py-16">
+          {
+            user?.avatar.length !== 0 ? ImageSrc !== "" ? <img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover" width={192} height={192} /> :
+              <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
+              </div>
+              :
+              <div className="bg-primary-100 rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
+                <h1 className="text-white text-8xl select-none">{user?.username.charAt(0)}</h1>
+              </div>
+          }
+          <div className="flex flex-col gap-2">
+            <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
+              <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
+            </h1>
+            <p className="font-['Lexend']">1000 media | 10 playlist | 4 albums</p>
+            <p className="font-medium font-['Lexend'] text-lg">{user?.verify === VerifyType.profile ? "Profile" :
+              user?.verify === VerifyType.artist ? "Artist" :
+                user?.verify === VerifyType.verify ? "Verified" : null} {verifyImage}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-
-
-// return (
-//   <div className="w-screen h-screen flex flex-col justify-center items-center">
-//     {user !== null && user.avatar !== "" ? (
-//       <div>
-//         <img
-//           alt="avatar"
-//           className="rounded-full"
-//           width={300}
-//           height={300}
-//           src={`${provider !== null ? user.avatar : `https://localhost:7286/Images/Users/${user.avatar}`}`}
-//         />
-//       </div>
-//     ) :
-//       <div>
-//         <img
-//           alt="avatar"
-//           className="rounded-full"
-//           width={300}
-//           height={300}
-//           src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`}
-//         />
-//       </div>
-//     }
-//     <div className="flex flex-col items-center   justify-between gap-4">
-//       <h1 className="font-medium text-lg flex gap-2">
-//         {user?.name} {user?.surname} {user?.verify}
-//       </h1>
-//       <h1 className="font-medium text-lg flex gap-2">
-//         {user?.gender} {moment(user?.birthday).format("MM.DD.YYYY")}{" "}
-//         {user?.emailconfirm}
-//       </h1>
-//       <h1 className="font-medium text-lg flex gap-2">
-//         {user?.emojie} {user?.country} {user?.phone}
-//       </h1>
-//       <h1 className="font-medium text-lg flex gap-2">{user?.username}</h1>
-//     </div>
-//   </div>
-// );

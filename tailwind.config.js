@@ -3,6 +3,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        'sans-serif': ['Lexend'],
+      },
       colors: {
         primary: {
           100: "#005EB4",

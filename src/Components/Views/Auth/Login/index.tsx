@@ -39,6 +39,7 @@ export const Login: React.FC = () => {
       gapi.client.init({
         clientId: "62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com",
         scope: "",
+        uxMode: "redirect",
       })
     }
     gapi.load('client:auth2', start);
@@ -59,6 +60,8 @@ export const Login: React.FC = () => {
       console.error(error);
     }
   };
+
+ 
 
   const responseGoogle = async (response: any) => {
     var request: IExternalRequest = {
@@ -120,6 +123,8 @@ export const Login: React.FC = () => {
                     clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
                     onSuccess={responseGoogle}
                     onFailure={responseError}
+                    theme="dark"
+                               
                     cookiePolicy={'single_host_origin'}><h1 className="font-semibold text-md">Sign in with Google</h1></GoogleLogin>
                 </div>
                 <button onClick={() => { nav("/authorizate/register") }}>Don't have an account</button>

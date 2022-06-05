@@ -3,15 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { SideBarItem } from "./SideBarItem";
 
 import { faCompactDisc, faHistory, faHouse, faList, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 
 const logo = require("../../../Assets/Logo.png");
 
 export const SideBar : React.FC = () => {
 
     const nav = useNavigate();
-
-    const user = useTypedSelector(state => state.userReducer.profile);
 
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
@@ -24,7 +21,7 @@ export const SideBar : React.FC = () => {
                 <SideBarItem text="Search" isSelect={currentItem === "/search"} icon={faSearch} onClick={() => {setCurrentItem("/search"); nav("search")}} />
                 <SideBarItem text="Genres" isSelect={currentItem === "/genres"} icon={faCompactDisc} onClick={() => {setCurrentItem("/genres"); nav("genres")}} />
                 <div className="py-3">
-                    <hr />
+                    <hr className="border-dark-100" />
                 </div>
                 <SideBarItem text="Create playlist" isSelect={currentItem === "/createplaylist"} icon={faPlus} onClick={() => {setCurrentItem("/createplaylist"); nav("createplaylist")}} />
                 <SideBarItem text="History" isSelect={currentItem === "/history"} icon={faHistory} onClick={() => {setCurrentItem("/history"); nav("history")}} />

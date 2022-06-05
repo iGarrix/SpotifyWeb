@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { baseUrl, VerifyType } from "../../../../types";
+import { VerifyType } from "../../../../types";
 import { DropdownButtonItem } from "../../Buttons/DropdownButtonItem";
 
 import "./style.scss";
@@ -22,10 +22,8 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
     const {LogoutUser} = useActions();
     const nav = useNavigate();
 
-    const [ImageSrc, setImageSrc] = useState(user?.avatar.includes("http") ? user.avatar
-    : baseUrl + "Images/Users/" + user?.avatar)
 
-    const [verifyImage, setverifyImage] = useState(user?.verify === VerifyType.profile ? <FontAwesomeIcon className="verifyiconfixed" icon={faUser} width={12} height={12} /> :
+    const [verifyImage] = useState(user?.verify === VerifyType.profile ? <FontAwesomeIcon className="verifyiconfixed" icon={faUser} width={12} height={12} /> :
     user?.verify === VerifyType.artist ? <FontAwesomeIcon className="verifyiconfixed" icon={faCompactDisc} width={12} height={12} /> : 
     user?.verify === VerifyType.verify ? <FontAwesomeIcon className="verifyiconfixed" icon={faCheck} width={12} height={12} /> : null)
     useEffect(() => {
@@ -49,7 +47,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
         setOpen(false);
     }
 
-    const [notificate, setNotificate] = useState(() => {
+    const [notificate] = useState(() => {
         const notificationList = localStorage.getItem("notifications");
         if (notificationList) {
             return "5";
@@ -62,7 +60,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
             <div onClick={() => {setOpen(!isOpen)}}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-0 fixed right-10 top-16 flex flex-col text-white bg-dark-200/70 rounded-md overflow-hidden" 
+            <div ref={fixeddropdown} className={`${isOpen ? "border-dark-100/20 fixed right-10 top-16 flex flex-col text-white bg-dark-200/60 rounded-sm overflow-hidden" 
             : "hidden"}`}>
                 <div className="w-full py-2 px-4 gap-3 flex items-center transition-all hover:bg-primary-100 active:bg-primary-100/20 cursor-pointer mb-1 hoveredverifyfixed" onClick={() => { onNavigateClick("profile") }}>
                     {trigger}
@@ -80,7 +78,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
                     }
                 </div>
                 <DropdownButtonItem text="Notification" notifications={notificate} icon={<FontAwesomeIcon className="text-lg" icon={faBell} />} onClick={() => { onNavigateClick("notifications");}} />
-                <DropdownButtonItem text="Creative Studio" icon={<FontAwesomeIcon className="text-lg" icon={faSquarePlus} />} onClick={() => { onNavigateClick("createplaylist"); }} />
+                <DropdownButtonItem text="Creative Studio" icon={<FontAwesomeIcon className="text-lg" icon={faSquarePlus} />} onClick={() => { onNavigateClick("studio"); }} />
                 <DropdownButtonItem text="Account Manage" icon={<FontAwesomeIcon className="text-lg" icon={faCog} />} onClick={() => { onNavigateClick("settings") }} />
                 <DropdownButtonItem text="Log out" isDanger={true} icon={<FontAwesomeIcon className="text-lg" icon={faRightFromBracket} />} onClick={() => { LogoutUser(); nav("/") }} />
             </div>

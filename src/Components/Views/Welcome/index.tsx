@@ -7,7 +7,6 @@ export const Welcome: React.FC = () => {
   const nav = useNavigate();
 
   const { LogoutUser } = useActions();
-  
 
   return (
     <div className="flex justify-center gap-5 h-screen text-white">

@@ -107,6 +107,16 @@ export interface ILoginByNicknameForm {
   rememberMe: boolean;
 }
 
+export interface IUpdatePersonalData {
+  findEmail: string,
+  newName: string,
+  newSurname: string,
+  newBirthday: Date | null,
+  newGender: string,
+  newCountry: string,
+  device: string
+}
+
 export interface IAuthResponse {
   accessToken: string;
   refreshToken: string,
