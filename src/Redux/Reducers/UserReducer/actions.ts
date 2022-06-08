@@ -176,6 +176,7 @@ export const updatePDUser = (data: IUpdatePersonalData) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const token = localStorage.getItem("token");
+      await RefreshToken(dispatch); 
       const response = await http.put<IUser>(
         "api/Profile/UpdatePersonalData",
         data, AuthorizateHeader(token)

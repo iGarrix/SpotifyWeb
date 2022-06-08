@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
                         user.avatar.length !== 0 ?
                             <div className="flex items-center gap-6">
                                 <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
-                                <FixedModal trigger={ImageSrc !== "" ? <img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover" width={40} height={40} /> : 
+                                <FixedModal trigger={ImageSrc !== "" ? <div className="w-12 h-12 overflow-hidden"><img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full" /></div> : 
                                 <div className="bg-gray-600 w-10 h-10 animate-pulse rounded-lg px-3 py-1 cursor-pointer">
                                 </div>} />
                             </div> :

@@ -5,20 +5,18 @@ export enum UserActionTypes {
   INITUSER = "INITUSER",
   INITUSER_WAITING = "INITUSER_WAITING",
   INITUSER_ERROR = "INITUSER_ERROR",
-
   INITUSER_CLEAR = "INITUSER_CLEAR",
 }
 
 export const registerValidate = Yup.object({
   username: Yup.string().required("Nickname is required"),
+  age: Yup.string().required("Age is required"),
   email: Yup.string().email("Email is invalid").required("Email is required"),
-  phone: Yup.string()
-    .required("Phone is required")
-    .min(13, "Bad phone number")
-    .max(13, "Bad phone number"),
+  phone: Yup.string(),
   name: Yup.string().required("Name is required"),
   surname: Yup.string().required("Surname is required"),
   gender: Yup.string().required("Gender is equired"),
+  country: Yup.string().required("Country is equired"),
   password: Yup.string()
     .min(
       MinPasswordLenght,
@@ -61,7 +59,7 @@ export interface IUserState {
 export interface IRegisterRequest {
   username: string;
   email: string;
-  phone: number;
+  phone: string;
   name: string;
   surname: string;
   birthday: Date | null;
@@ -73,11 +71,13 @@ export interface IRegisterRequest {
 
 export interface IRegisterForm {
   username: string;
+  age: string,
   email: string;
-  phone: number;
+  phone: string;
   name: string;
   surname: string;
   gender: string;
+  country: string;
   password: string;
   passwordConfirm: string;
 }

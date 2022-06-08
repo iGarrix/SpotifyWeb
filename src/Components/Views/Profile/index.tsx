@@ -44,15 +44,15 @@ export const Profile: React.FC = () => {
   return (
     <div className="overflow-x-hidden text-white">
       {
-        user ?
-          <FullScreenModal visible={openModal} center>
-            <RenameBioModal initialName={user.name} initialSurname={user.surname} onSave={onSaveChanges} onClose={onCloseModal} />
+        user && openModal ?
+          <FullScreenModal visible center>
+            <RenameBioModal onSave={onSaveChanges} onClose={onCloseModal} />
           </FullScreenModal> : null
       }
       <div className="w-full h-full flex bg-cover bg-no-repeat" style={{ backgroundImage: `url("${image}")` }}>
         <div className="flex gap-6 px-20 py-16">
           {
-            user?.avatar.length !== 0 ? ImageSrc !== "" ? <img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover" width={192} height={192} /> :
+            user?.avatar.length !== 0 ? ImageSrc !== "" ? <div className="w-48 h-48"><img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full" /></div> :
               <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
               </div>
               :
@@ -64,7 +64,7 @@ export const Profile: React.FC = () => {
             <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
               <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
             </h1>
-            <p className="font-['Lexend']">1000 media | 10 playlist | 4 albums</p>
+            <p className="font-['Lexend']">{user?.username}</p>
             <p className="font-medium font-['Lexend'] text-lg">{user?.verify === VerifyType.profile ? "Profile" :
               user?.verify === VerifyType.artist ? "Artist" :
                 user?.verify === VerifyType.verify ? "Verified" : null} {verifyImage}</p>

@@ -44,8 +44,8 @@ const RefreshTokenAPI = async (data: IRefreshModel, dispatch: Dispatch<UserActio
 }
 
 const CompareTimeToken = (): boolean => {
-    const tok = localStorage.getItem("expiredin");
-    return Date.now() >= Date.parse(tok ? tok : "");
+    const token = localStorage.getItem("expiredin");
+    return Date.now() >= Date.parse(token ? token : "");
 }
 
 export const RefreshToken = async (dispatch: Dispatch<UserAction>) => {

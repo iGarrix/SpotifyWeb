@@ -9,13 +9,11 @@ import { Field } from "../../../Inputs/Field";
 import { QuadraticLoader } from "../../../Loaders/QuadraticLoader"
 
 export interface IRenameBioModal {
-    initialName: string,
-    initialSurname: string,
     onSave: () => void,
     onClose: () => void,
 }
 
-export const RenameBioModal: React.FC<IRenameBioModal> = ({ initialName, initialSurname, onSave, onClose }) => {
+export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
@@ -55,15 +53,13 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ initialName, initial
                     newCountry: user.country,
                     device: DeviceType.desktop,
                 }
-                if (request.newName === initialName && request.newSurname === initialSurname) {
+                if (request.newName === user.name && request.newSurname === user.surname) {
                     setEnterError("Field 'Name' 'Surname' is don't renamed");
                     return;
                 }
                 await updatePDUser(request);
-                event.target[0].value = "";
-                event.target[1].value = "";
                 setEnterError("");
-                onSave();
+                onSaveSubmit();
             }
         } catch (err) {
             setEnterError(error);
@@ -71,7 +67,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ initialName, initial
     }
 
     const onSaveSubmit = () => {
-        if (enterError && enterError === "" && error === "") {
+        if (enterError.length === 0) {
             onSave();
         }
     }
@@ -96,11 +92,14 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ initialName, initial
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
             }
             <form onSubmit={onSubmit}>
-                <div className="flex flex-col gap-3">
-                    <Field placeholder="Enter new name" value={initialName} onChange={(e: any) => { }} />
-                    <Field placeholder="Enter new surname" value={initialSurname} onChange={(e: any) => { }} />
-                    <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7" onClick={onSaveSubmit}>You want to rename pib?</button>
-                </div>
+                {
+                    user ?
+                    <div className="flex flex-col gap-3">
+                        <Field placeholder="Enter new name" value={user?.name} onChange={(e: any) => { }} />
+                        <Field placeholder="Enter new surname" value={user?.surname} onChange={(e: any) => { }} />
+                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to rename pib?</button>
+                    </div> : null
+                }
             </form>
         </div>
     )

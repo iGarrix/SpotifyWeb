@@ -1,5 +1,5 @@
 export interface IDefaultButton {
-    text: string,
+    text: any,
     type?: "submit" | "button",
     onClick: () => void,
 }

@@ -1,5 +1,7 @@
 .defbtn {
-    background-image: url(../../../../Assets/Background1.png);
+    background-image: url(../../../../Assets/Background2.png);
     background-size: cover;
+    object-fit: cover;
+    width: 100%;
     background-position: 300%;
 }
