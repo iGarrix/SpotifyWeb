@@ -60,7 +60,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
             <div onClick={() => {setOpen(!isOpen)}}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-dark-100/20 fixed right-10 top-16 flex flex-col text-white bg-dark-200/60 rounded-sm overflow-hidden" 
+            <div ref={fixeddropdown} className={`${isOpen ? "border-dark-100/20 fixed right-10 top-16 flex flex-col text-white bg-dark-200/80 rounded-sm overflow-hidden" 
             : "hidden"}`}>
                 <div className="w-full py-2 px-4 gap-3 flex items-center transition-all hover:bg-primary-100 active:bg-primary-100/20 cursor-pointer mb-1 hoveredverifyfixed" onClick={() => { onNavigateClick("profile") }}>
                     {trigger}

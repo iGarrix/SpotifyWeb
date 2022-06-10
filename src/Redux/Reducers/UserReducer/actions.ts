@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import {
   IAuthResponse,
+  IChangeAvatarRequest,
   IExternalRequest,
   IInitGet,
   ILoginByEmailRequest,
@@ -15,8 +16,9 @@ import {
 import jwt_decode from "jwt-decode";
 
 import http, { AuthorizateHeader } from "../../../axios_creator";
-import { IUser } from "../../../types";
-import { RefreshToken } from "../../../refreshActions";
+import { DeviceType, IUser } from "../../../types";
+import { MyPlaylistActionTypes } from "../MyPlaylistReducer/types";
+import { MyAlbumActionTypes } from "../MyAlbumReducer/types";
 
 export const registerUser = (data: IRegisterRequest) => {
   return async (dispatch: Dispatch<UserAction>) => {
@@ -176,7 +178,6 @@ export const updatePDUser = (data: IUpdatePersonalData) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      await RefreshToken(dispatch); 
       const response = await http.put<IUser>(
         "api/Profile/UpdatePersonalData",
         data, AuthorizateHeader(token)
@@ -200,9 +201,43 @@ export const updatePDUser = (data: IUpdatePersonalData) => {
   };
 };
 
-export const LogoutUser = () => {
+export const updateAvatarUser = (data: IChangeAvatarRequest) => {
   return async (dispatch: Dispatch<UserAction>) => {
-    dispatch({ type: UserActionTypes.INITUSER_CLEAR, payload: true });
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const form = new FormData();
+      form.append("FindEmail", data.findEmail);
+      form.append("NewAvatar", data.newAvatar);
+      form.append("Device", DeviceType.desktop);
+      console.log(form);
+      const response = await http.put<IUser>(
+        "api/Profile/UpdateAvatar",
+        form, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const LogoutUser = () => {
+  return async (dispatch: Dispatch<any>) => {
+    dispatch({ type: UserActionTypes.INITUSER_CLEAR });
+    dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_CLEAR });
+    dispatch({ type: MyAlbumActionTypes.INITMYALBUM_CLEAR });
     localStorage.removeItem("token");
     localStorage.removeItem("refreshtoken");
     localStorage.removeItem("expiredin");
@@ -212,7 +247,6 @@ export const LogoutUser = () => {
 export const InitUser = async (
   dispatch: Dispatch<UserAction>
 ) => {
-  await RefreshToken(dispatch);  
   const token = localStorage.getItem("token");
   if (token) {    
     const data = jwt_decode(token) as IInitGet;
@@ -220,7 +254,7 @@ export const InitUser = async (
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const response = await http.get<IUser>(
         "api/Profile/GetByEmail?email=" + data.email, AuthorizateHeader(token)
-      );
+        );
       dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
   
       return Promise.resolve();

@@ -136,6 +136,11 @@ export interface IExternalRequest {
   accessToken: string,
 }
 
+export interface IChangeAvatarRequest {
+  findEmail: string,
+  newAvatar: File,
+}
+
 export interface InitUserAction {
   type: UserActionTypes.INITUSER;
   payload: IUser | null;

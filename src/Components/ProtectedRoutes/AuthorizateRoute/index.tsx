@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IAuthorizateRoute } from "./types";
 
 export const AuthorizateRoute : React.FC<IAuthorizateRoute> = ({ user, children }) => {
 
-    const [loginToken, setLoginToken] = useState(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
 
-    return user || loginToken ? children : <Navigate replace to={"/authorizate"} />;
+    return user || token ? children : <Navigate replace to={"/authorizate"} />;
 };

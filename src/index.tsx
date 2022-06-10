@@ -8,12 +8,14 @@ import { store } from "./Redux/store";
 import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
+import setupInterceptors from "./setupInterceptors";
 
 const theme = localStorage.getItem("theme");
 if (theme === null || theme === undefined) {
   localStorage.setItem("theme", "light");
 }
 
+setupInterceptors();
 InitUser(store.dispatch);
 
 const notifications = localStorage.getItem("notifications");

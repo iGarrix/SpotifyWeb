@@ -7,6 +7,7 @@ import { ProtectedRoute } from "../../ProtectedRoutes/ProtectedRoute";
 export const LayAuth: React.FC = () => {
   const load = useTypedSelector((state) => state.userReducer.loading);
   const user = useTypedSelector((state) => state.userReducer.profile);
+
   return (
     <ProtectedRoute user={user}>
       <div className="w-full min-h-screen relative">

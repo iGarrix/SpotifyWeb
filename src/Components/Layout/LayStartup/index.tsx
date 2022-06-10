@@ -1,5 +1,5 @@
 import { faCog } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { PlayingFooter } from "../../Commons/Footers/PlayingFooter";
@@ -17,7 +17,7 @@ export const LayStartup: React.FC = () => {
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>
-      <div className="col-span-7 w-full h-full flex flex-col mb-32">
+      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-32" : ""}`}>
         <Header />
         <Outlet />
       </div>

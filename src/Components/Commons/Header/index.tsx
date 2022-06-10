@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
 
 
     return (
-        <div className="py-2 px-10 bg-dark-200/90 flex justify-end overflow-x-hidden sticky top-0">
+        <div className="py-2 px-10 bg-dark-200/90 flex justify-end overflow-x-hidden sticky top-0 z-10">
             <div className="flex gap-7 items-center">
                 {
                     user ?
@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
                             </div> :
                             <div className="flex items-center gap-6">
                                 <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
-                                <FixedModal trigger={<div className="bg-primary-100 w-10 h-10 rounded-lg px-3 py-1 cursor-pointer">
+                                <FixedModal trigger={<div className="bg-green-600 w-12 h-12 rounded-lg px-3 py-1 cursor-pointer flex justify-center items-center">
                                     <h1 className="text-white text-2xl select-none">{user.username.charAt(0)}</h1>
                                 </div>} />             
                             </div>

@@ -217,7 +217,8 @@ export const Register: React.FC = () => {
                           <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} />
                         </button>
                         :
-                        <button type="submit"><FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowCircleRight} /></button>
+                        step > 0 ?
+                        <button type="submit"><FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowCircleRight} /></button> : null
                     }
                   </div>
                 </div>

@@ -13,6 +13,9 @@ import { LayProfile } from "./Components/Layout/LayProfile";
 import { Welcome } from "./Components/Views/Welcome";
 import { Search } from "./Components/Views/Search";
 import { Queue } from "./Components/Views/Queue";
+import { ProfilePlaylists } from "./Components/Views/Profile/ProfilePlaylists";
+import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
+import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -32,9 +35,16 @@ function App() {
           <Route path="history" element={<Settings />} />
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="playlist" element={<Search />}>
+
+          </Route>
 
           <Route path="profile" element={<LayProfile />}>
-              <Route index element={<Profile />} />
+              <Route path="" element={<Profile />}>
+                <Route index element={<ProfileSingles />} />
+                <Route path="playlists" element={<ProfilePlaylists />} />
+                <Route path="albums" element={<ProfileAlbums />} />
+              </Route>
           </Route>
         </Route>
 

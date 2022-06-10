@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBarItem } from "./SideBarItem";
 
-import { faCompactDisc, faHistory, faHouse, faList, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCompactDisc, faHistory, faHouse, faList, faPlus, faPodcast, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const logo = require("../../../Assets/Logo.png");
 
@@ -24,8 +24,7 @@ export const SideBar : React.FC = () => {
                     <hr className="border-dark-100" />
                 </div>
                 <SideBarItem text="Create playlist" isSelect={currentItem === "/createplaylist"} icon={faPlus} onClick={() => {setCurrentItem("/createplaylist"); nav("createplaylist")}} />
-                <SideBarItem text="History" isSelect={currentItem === "/history"} icon={faHistory} onClick={() => {setCurrentItem("/history"); nav("history")}} />
-                <SideBarItem text="Queue" isSelect={currentItem === "/queue"} icon={faList} onClick={() => {setCurrentItem("/queue"); nav("queue")}} />
+                <SideBarItem text="My media library" isSelect={currentItem === "/medialibrary"} icon={faPodcast} onClick={() => {setCurrentItem("/medialibrary"); nav("medialibrary")}} />
             </div>
         </div>
     )

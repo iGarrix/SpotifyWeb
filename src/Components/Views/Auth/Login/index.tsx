@@ -62,14 +62,13 @@ export const Login: React.FC = () => {
       await loginByEmailUser(request);
       nav("/profile");
     } catch (error) {
-      console.error(error);
+      
     }
   };
 
  
 
   const responseGoogle = async (response: any) => {
-    console.log(response);
     var request: IExternalRequest = {
       tokenId: response.tokenId,
       accessToken: response.accessToken,
@@ -84,11 +83,6 @@ export const Login: React.FC = () => {
 
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
-      {/* <div className="absolute w-full overflow-hidden grid grid-cols-12 grid-row-3 items-center">
-        <img alt="logo" src={logo} className="z-10 col-start-6 col-span-4" width={350} height={350} />
-        <div className="w-full h-96 loginbackground overflow-hidden col-span-8 rounded-tr-3xl row-start-2 shadow-xl"></div>
-        <div className="w-full h-96 loginbackground loginbackground2 overflow-hidden col-start-5 rounded-tr-3xl row-start-3 col-span-8 shadow-xl"></div>
-      </div> */}
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
         <div className="col-span-full h-full flex items-center justify-center row-span-6">
           <img alt="logo" src={logo} width={360} height={360} />
