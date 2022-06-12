@@ -1,3 +1,4 @@
+import { DefaultServerError } from "../../../types";
 import { IMyAlbumStateState, MyAlbumAction, MyAlbumActionTypes } from "./types";
 
 const inialState: IMyAlbumStateState = {
@@ -52,7 +53,7 @@ export const myAlbumsReducer = (
         ...state,
         error:
           action.payload === undefined || action.payload === null
-            ? "Server error"
+            ? DefaultServerError
             : action.payload,
         loading: false,
       };

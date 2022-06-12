@@ -15,6 +15,7 @@ export enum VerifyType {
 }
 
 export const MinPasswordLenght = 8;
+export const DefaultServerError = "The service is temporarily disabled, please try again later";
 
 export interface IUser {
   username: string;
@@ -48,5 +49,3 @@ export interface IRefreshModel {
   accessToken: string,
   refreshToken: string,
 }
-
-

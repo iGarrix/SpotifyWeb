@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { NotFound } from "./Components/Views/NotFound";
 import { LayAuth } from "./Components/Layout/LayAuth";
 import { LayStartup } from "./Components/Layout/LayStartup";
@@ -16,6 +16,8 @@ import { Queue } from "./Components/Views/Queue";
 import { ProfilePlaylists } from "./Components/Views/Profile/ProfilePlaylists";
 import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
+import { ListeningSingle } from "./Components/Views/ListeningPage/ListeningSingle";
+import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -35,8 +37,15 @@ function App() {
           <Route path="history" element={<Settings />} />
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="playlist" element={<Search />}>
 
+          <Route path="single" element={<Outlet />}>
+            <Route path=":id" element={<ListeningSingle />} />
+          </Route>
+          <Route path="album" element={<Outlet />}>
+            <Route path=":id" element={<ListeningAlbum />} />
+          </Route>
+          <Route path="playlist" element={<Outlet />}>
+            <Route path=":id" element={<ListeningSingle />} />
           </Route>
 
           <Route path="profile" element={<LayProfile />}>

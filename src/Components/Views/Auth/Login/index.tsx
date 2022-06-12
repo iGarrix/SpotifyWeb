@@ -107,7 +107,7 @@ export const Login: React.FC = () => {
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3 items-center">
                       <div className="mt-4">
-                        <h1 className="text-red-500 font-semibold text-lg">{error}</h1>
+                        <h1 className="text-black font-semibold text-lg">{error}</h1>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">

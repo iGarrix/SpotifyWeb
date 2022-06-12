@@ -7,17 +7,19 @@ import { Header } from "../../Commons/Header";
 import { SideBar } from "../../Commons/SideBar";
 import { SideBarItem } from "../../Commons/SideBar/SideBarItem";
 
+//${isVisible ? "mb-32" : ""}
+
 export const LayStartup: React.FC = () => {
 
   const [isVisible, setVisible] = useState(false);
 
   const nav = useNavigate();
   return (
-    <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/90 to-dark-200">
+    <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200">
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>
-      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-32" : ""}`}>
+      <div className={`col-span-7 w-full h-full flex flex-col`}>
         <Header />
         <Outlet />
       </div>

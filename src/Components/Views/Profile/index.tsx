@@ -11,9 +11,6 @@ import { FullScreenModal } from "../../Commons/Modals/FullScreenModal";
 import { RenameBioModal } from "../../Commons/Modals/FullScreenModal/RenameBioModal";
 import "./style.scss";
 
-const image = require('../../../Assets/Background1.png');
-const bg2 = require('../../../Assets/Background2.png');
-
 export const Profile: React.FC = () => {
   const user = useTypedSelector((state) => state.userReducer.profile);
   const nav = useNavigate();

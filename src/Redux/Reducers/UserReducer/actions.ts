@@ -16,9 +16,8 @@ import {
 import jwt_decode from "jwt-decode";
 
 import http, { AuthorizateHeader } from "../../../axios_creator";
-import { DeviceType, IUser } from "../../../types";
-import { MyPlaylistActionTypes } from "../MyPlaylistReducer/types";
-import { MyAlbumActionTypes } from "../MyAlbumReducer/types";
+import {DeviceType, IUser } from "../../../types";
+import { ClearRedux } from "../../GlobalReduxFunc";
 
 export const registerUser = (data: IRegisterRequest) => {
   return async (dispatch: Dispatch<UserAction>) => {
@@ -135,7 +134,6 @@ export const externalLoginlUser = (data: IExternalRequest) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
-        console.log(serverError);
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
           payload: serverError.response?.data,
@@ -235,12 +233,7 @@ export const updateAvatarUser = (data: IChangeAvatarRequest) => {
 
 export const LogoutUser = () => {
   return async (dispatch: Dispatch<any>) => {
-    dispatch({ type: UserActionTypes.INITUSER_CLEAR });
-    dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_CLEAR });
-    dispatch({ type: MyAlbumActionTypes.INITMYALBUM_CLEAR });
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshtoken");
-    localStorage.removeItem("expiredin");
+    ClearRedux(dispatch);
   };
 };
 

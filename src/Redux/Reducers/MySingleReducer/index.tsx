@@ -1,32 +1,32 @@
 import { DefaultServerError } from "../../../types";
-import { IMyPlaylistStateState, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
+import { IMySingleStateState, MySingleAction, MySingleActionTypes } from "./types";
 
 
-const inialState: IMyPlaylistStateState = {
-  playlists: null,
+const inialState: IMySingleStateState = {
+  singles: null,
   loading: false,
   error: "",
   prevPage: null,
-  nextPage: null
+  nextPage: null,
 };
 
-export const myPlaylistReducer = (
+export const mySinglesReducer = (
   state = inialState,
-  action: MyPlaylistAction
-): IMyPlaylistStateState => {
+  action: MySingleAction
+): IMySingleStateState => {
   switch (action.type) {
-    case MyPlaylistActionTypes.INITMYPLAYLIST: {
+    case MySingleActionTypes.INITMYSINGLE: {
       return {
         ...state,
-        playlists: action.payload ? action.payload.pageables : [],
+        singles: action.payload ? action.payload.pageables : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case MyPlaylistActionTypes.ADDMYPLAYLIST: {
-      let arr = state.playlists ? state.playlists : [];
+    case MySingleActionTypes.ADDMYSINGLE: {
+      let arr = state.singles ? state.singles : [];
       if (action.payload && arr) {  
         if (action.payload.pageables) {  
           action.payload.pageables.forEach(e => {
@@ -36,20 +36,20 @@ export const myPlaylistReducer = (
       }
       return {
         ...state,
-        playlists: action.payload ? arr : null,
+        singles: action.payload ? arr : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case MyPlaylistActionTypes.INITMYPLAYLIST_WAITING: {
+    case MySingleActionTypes.INITMYSINGLE_WAITING: {
       return {
         ...state,
         loading: action.payload,
       };
     }
-    case MyPlaylistActionTypes.INITMYPLAYLIST_ERROR: {
+    case MySingleActionTypes.INITMYSINGLE_ERROR: {
       return {
         ...state,
         error:
@@ -60,10 +60,10 @@ export const myPlaylistReducer = (
       };
     }
 
-    case MyPlaylistActionTypes.INITMYPLAYLIST_CLEAR: {
+    case MySingleActionTypes.INITMYSINGLE_CLEAR: {
       return {
         ...state,
-        playlists: null,
+        singles: null,
         loading: false,
         error: "",
       };

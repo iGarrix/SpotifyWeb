@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IGetAllMyAlbumRequest } from "../../../../Redux/Reducers/MyAlbumReducer/types";
+import { IGetAllMyAlbumRequest, IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
 import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
@@ -22,7 +22,7 @@ export const ProfileAlbums : React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {      
-            if (user && !albums) {           
+            if (user && !albums && rx.error !== "List empty") {           
                 const rq: IGetAllMyAlbumRequest = {
                     email: user.email,
                     page: 1
@@ -43,6 +43,13 @@ export const ProfileAlbums : React.FC = () => {
         }
     }
 
+    const onSelectAlbum = (item: IPagableMyAlbumItem | null) => {
+        if (item) {    
+            localStorage.setItem("selectedAlbum", JSON.stringify(item));
+            nav("/album/" + item?.albomDto?.returnId);
+        }
+    }
+
 
     return (
         <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
@@ -56,7 +63,7 @@ export const ProfileAlbums : React.FC = () => {
                             {
                                 albums.map(item => {
                                     return (
-                                        <AlbumItem key={Guid.create().toString()} onClick={() => { } } name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
+                                        <AlbumItem key={Guid.create().toString()} onClick={() => { onSelectAlbum(item) } } name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
                                     )
                                 })
                             }  

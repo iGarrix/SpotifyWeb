@@ -11,7 +11,7 @@ export const FormikDefaultInput: React.FC<FormikDefaultInputProps> = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="h-5">
-        <ErrorMessage component="h1" name={field.name} className="error text-red-600 font-medium" />
+        <ErrorMessage component="h1" name={field.name} className="error text-black font-medium" />
       </div>
       <input type={type}
         placeholder={label}

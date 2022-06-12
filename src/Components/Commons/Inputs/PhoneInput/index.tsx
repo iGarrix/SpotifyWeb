@@ -43,7 +43,7 @@ export const DefaultPhoneInput : React.FC<PhoneInputProps> = ({
     return (
     <div className="flex flex-col gap-2">
       <div className="h-5">
-        <h1 className="text-red-600 font-medium">{localError}</h1>
+        <h1 className="text-black font-medium">{localError}</h1>
       </div> 
       <PhoneInput                         
         onChange={onLocalChange}

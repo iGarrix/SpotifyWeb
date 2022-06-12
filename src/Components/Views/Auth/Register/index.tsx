@@ -123,7 +123,7 @@ export const Register: React.FC = () => {
             {
               localError !== "" ?
                 <div className="flex flex-col gap-3 items-center">
-                  <div className="text-red-500 text-xl flex items-center gap-2">
+                  <div className="text-black text-xl flex items-center gap-2">
                     <FontAwesomeIcon icon={faTriangleExclamation} />
                     <h1 className="font-semibold">{localError}</h1>
                   </div>

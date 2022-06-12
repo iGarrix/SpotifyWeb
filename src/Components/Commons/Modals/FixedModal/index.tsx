@@ -80,7 +80,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
                 <DropdownButtonItem text="Notification" notifications={notificate} icon={<FontAwesomeIcon className="text-lg" icon={faBell} />} onClick={() => { onNavigateClick("notifications");}} />
                 <DropdownButtonItem text="Creative Studio" icon={<FontAwesomeIcon className="text-lg" icon={faSquarePlus} />} onClick={() => { onNavigateClick("studio"); }} />
                 <DropdownButtonItem text="Account Manage" icon={<FontAwesomeIcon className="text-lg" icon={faCog} />} onClick={() => { onNavigateClick("settings") }} />
-                <DropdownButtonItem text="Log out" isDanger={true} icon={<FontAwesomeIcon className="text-lg" icon={faRightFromBracket} />} onClick={() => { LogoutUser(); nav("/") }} />
+                <DropdownButtonItem text="Log out" isDanger={true} icon={<FontAwesomeIcon className="text-lg" icon={faRightFromBracket} />} onClick={() => { LogoutUser(); nav("/"); }} />
             </div>
         </div>
     )

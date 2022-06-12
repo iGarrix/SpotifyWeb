@@ -1,3 +1,4 @@
+import { DefaultServerError } from "../../../types";
 import { IUserState, UserAction, UserActionTypes } from "./types";
 
 const inialState: IUserState = {
@@ -30,7 +31,7 @@ export const userReducer = (
         ...state,
         error:
           action.payload === undefined || action.payload === null
-            ? "Server error"
+            ? DefaultServerError
             : action.payload,
         loading: false,
       };

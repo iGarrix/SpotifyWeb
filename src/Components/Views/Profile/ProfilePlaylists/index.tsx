@@ -23,7 +23,7 @@ export const ProfilePlaylists: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {      
-            if (user && !playlists) {           
+            if (user && !playlists && rx.error !== "List empty") {           
                 const rq: IGetAllMyPlaylistRequest = {
                     email: user.email,
                     page: 1
