@@ -3,10 +3,12 @@ import { IAlbum, IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 
 export enum SelectAlbumActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
+    INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
     INITSELECTTRACKS = "INITSELECTTRACKS",
     INITSELECTALBUMS_WAITING = "INITSELECTALBUMS_WAITING",
     INITSELECTALBUMS_ERROR = "INITSELECTALBUMS_ERROR",
     INITSELECTALBUMS_CLEAR = "INITSELECTALBUMS_CLEAR",
+    CLEARSELECTTRACK = "CLEARSELECTTRACK",
 }
 
 export interface ITrack {
@@ -24,20 +26,35 @@ export interface ITrackResponse {
 
 export interface ISelectAlbumStateState {
     album: IPagableMyAlbumItem | null;
-    tracks: ITrackResponse[] | null
+    tracks: ITrackResponse[] | null,
+    selectTrack: ITrackResponse | null,
     prevPage: number | null,
     nextPage: number | null,
     loading: boolean;
     error: string;
 }
 
+export interface IGetTracksRequest {
+    albomId: string,
+    page: number,
+}
+
+export interface IGetTracksResponse {
+    track: ITrack | null,
+    trackCreators: string | null;
+}
+
 export interface InitSelectAlbumAction {
     type: SelectAlbumActionTypes.INITSELECTALBUM;
     payload: IPagableMyAlbumItem | null;
 }
+export interface InitSelectAlbumTrackAction {
+    type: SelectAlbumActionTypes.INITSELECTALBUMTRACKS;
+    payload: IPagableResponse | null;
+}
 export interface InitSelectTrackAction {
     type: SelectAlbumActionTypes.INITSELECTTRACKS;
-    payload: IPagableResponse | null;
+    payload: ITrackResponse | null;
 }
 export interface InitSelectAlbumWaitAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING;
@@ -50,10 +67,15 @@ export interface InitSelectAlbumErrorAction {
 export interface InitSelectAlbumClearAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMS_CLEAR;
 }
+export interface ClearSelectTrackAction {
+    type: SelectAlbumActionTypes.CLEARSELECTTRACK;
+}
 
 export type SelectAlbumAction =
 InitSelectAlbumAction |
+InitSelectAlbumTrackAction |
 InitSelectTrackAction |
 InitSelectAlbumWaitAction |
 InitSelectAlbumErrorAction |
-InitSelectAlbumClearAction;
+InitSelectAlbumClearAction |
+ClearSelectTrackAction;

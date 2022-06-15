@@ -18,10 +18,23 @@ import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningSingle } from "./Components/Views/ListeningPage/ListeningSingle";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
+import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
+import { useActions } from "./Hooks/useActions";
+
 
 function App() {
   const [isDark, setDark] = useState(false);
-
+  
+  const {initSelectTrack} = useActions();
+  
+  const selectTrackStorage = localStorage.getItem("selectTrack");
+  if (selectTrackStorage) {
+    const selectTrack : ITrackResponse = JSON.parse(selectTrackStorage);
+    if (selectTrack) {
+      initSelectTrack(selectTrack);
+    }
+  }
+  
   return (
     <div
       className={`w-full min-h-screen flex scroller ${

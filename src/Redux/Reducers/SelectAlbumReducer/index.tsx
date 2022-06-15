@@ -2,12 +2,13 @@ import { DefaultServerError } from "../../../types";
 import { ISelectAlbumStateState, SelectAlbumAction, SelectAlbumActionTypes } from "./types";
 
 const inialState: ISelectAlbumStateState = {
-    album: null,
-    tracks: null,
-    loading: false,
-    error: "",
-    prevPage: null,
-    nextPage: null,
+  album: null,
+  tracks: null,
+  selectTrack: null,
+  loading: false,
+  error: "",
+  prevPage: null,
+  nextPage: null,
 };
 
 export const selectedAlbumReducer = (
@@ -23,14 +24,32 @@ export const selectedAlbumReducer = (
         error: "",
       };
     }
-    case SelectAlbumActionTypes.INITSELECTTRACKS: {
+    case SelectAlbumActionTypes.INITSELECTALBUMTRACKS: {
+      let arr = state.tracks ? state.tracks : [];
+      if (action.payload && arr) {  
+        if (action.payload.pageables) {  
+          action.payload.pageables.forEach(e => {
+            arr.push(e);
+          })
+        }   
+      }
         return {
           ...state,
-          tracks: action.payload ? action.payload.pageables : [],
+          tracks: action.payload ? arr : [],
+          nextPage: action.payload? action.payload.nextPage : null,
+          prevPage: action.payload? action.payload.prevPage : null,
           loading: false,
           error: "",
         };
       }
+    case SelectAlbumActionTypes.INITSELECTTRACKS: {
+      return {
+        ...state,
+        selectTrack: action.payload,
+        loading: false,
+        error: "",
+      };
+    }
     case SelectAlbumActionTypes.INITSELECTALBUMS_WAITING: {
       return {
         ...state,
@@ -52,12 +71,20 @@ export const selectedAlbumReducer = (
       return {
         ...state,
         album: null,
+        selectTrack: null,
         tracks: null,
         loading: false,
         error: "",
       };
     }
 
+    case SelectAlbumActionTypes.CLEARSELECTTRACK: {
+      return {
+        ...state,
+        selectTrack: null,
+        error: "",
+      };
+    }
     default:
       return state;
   }

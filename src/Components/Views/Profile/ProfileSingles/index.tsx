@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest, IPagableMySingleItem } from "../../../../Redux/Reducers/MySingleReducer/types";
-import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { SingleItem } from "../../../Commons/SingleItem";

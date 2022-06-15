@@ -1,7 +1,8 @@
 import { faCog } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { PlayingFooter } from "../../Commons/Footers/PlayingFooter";
 import { Header } from "../../Commons/Header";
 import { SideBar } from "../../Commons/SideBar";
@@ -12,6 +13,14 @@ import { SideBarItem } from "../../Commons/SideBar/SideBarItem";
 export const LayStartup: React.FC = () => {
 
   const [isVisible, setVisible] = useState(false);
+
+  const rx = useTypedSelector(state => state.selectedAlbumReducer);
+
+  useEffect(() => {
+    if (rx.selectTrack) {
+      setVisible(true);
+    }
+  }, [rx.selectTrack]);
 
   const nav = useNavigate();
   return (
