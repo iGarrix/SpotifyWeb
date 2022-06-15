@@ -1,14 +1,12 @@
 import { faArrowDown, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Guid } from "guid-typescript";
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest, IPagableMySingleItem } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
-import { SingleItem } from "../../../Commons/SingleItem";
 
 export const ProfileSingles : React.FC = () => {
 
@@ -20,18 +18,18 @@ export const ProfileSingles : React.FC = () => {
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
     const user = useTypedSelector(state => state.userReducer.profile);
 
-    useEffect(() => {
-        const fetchData = async () => {      
-            if (user && !singles && rx.error !== "List empty") {           
-                const rq: IGetAllMySingleRequest = {
-                    email: user.email,
-                    page: 1
-                }
-                await getMySingle(rq);       
-            }     
-        }
-        fetchData();
-    }, [user, singles]);
+    // useEffect(() => {
+    //     const fetchData = async () => {      
+    //         if (user && !singles && rx.error !== "List empty") {           
+    //             const rq: IGetAllMySingleRequest = {
+    //                 email: user.email,
+    //                 page: 1
+    //             }
+    //             await getMySingle(rq);       
+    //         }     
+    //     }
+    //     fetchData();
+    // }, [user, singles]);
 
     const FetchNext = async () => {
         if (rx.singles && rx.nextPage && user) {       
@@ -59,13 +57,13 @@ export const ProfileSingles : React.FC = () => {
                 singles && rx.error.length === 0 ?
                 <div className="w-full flex flex-col items-center gap-20">
                         <div className="grid grid-cols-4 gap-16">
-                            {
+                            {/* {
                                 singles.map(item => {
                                     return (
                                         <SingleItem key={Guid.create().toString()} onClick={() => {onSelectSingle(item); } } name={item.albomDto?.name} title={`Single`} imageSrc={item.albomDto?.image} />
                                     )
                                 })
-                            }  
+                            }   */}
                         </div>
                         {
                             rx.nextPage ?

@@ -8,7 +8,7 @@ import { Header } from "../../Commons/Header";
 import { SideBar } from "../../Commons/SideBar";
 import { SideBarItem } from "../../Commons/SideBar/SideBarItem";
 
-//${isVisible ? "mb-32" : ""}
+const icon_settings = require('../../../Assets/Icons/Settings.png');
 
 export const LayStartup: React.FC = () => {
 
@@ -17,10 +17,10 @@ export const LayStartup: React.FC = () => {
   const rx = useTypedSelector(state => state.selectedAlbumReducer);
 
   useEffect(() => {
-    if (rx.selectTrack) {
+    if (rx.queue) {
       setVisible(true);
     }
-  }, [rx.selectTrack]);
+  }, [rx.queue]);
 
   const nav = useNavigate();
   return (
@@ -34,7 +34,7 @@ export const LayStartup: React.FC = () => {
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-8 gap-y-6">
         <div className={`col-span-1 w-full ${isVisible ? "" : "mb-6"}`}>
-          <SideBarItem text="Settings" icon={faCog} onClick={() => {nav("settings")}} />
+          <SideBarItem text="Settings" icon={icon_settings} onClick={() => {nav("settings")}} />
         </div>
         {
           isVisible ?

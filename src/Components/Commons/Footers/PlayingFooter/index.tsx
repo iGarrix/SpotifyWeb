@@ -3,7 +3,7 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 
 export const PlayingFooter : React.FC = () => {
     
-    const rx = useTypedSelector(state => state.selectedAlbumReducer.selectTrack);
+    const rx = useTypedSelector(state => state.selectedAlbumReducer.queue);
 
     return (
         <>

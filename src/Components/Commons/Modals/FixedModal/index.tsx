@@ -9,6 +9,11 @@ import { DropdownButtonItem } from "../../Buttons/DropdownButtonItem";
 
 import "./style.scss";
 
+const icon_settings = require('../../../../Assets/Icons/Settings.png');
+const icon_studio = require('../../../../Assets/Icons/Studio.png');
+const icon_notifications = require('../../../../Assets/Icons/Notifications.png');
+const icon_logout = require('../../../../Assets/Icons/Logout.png');
+
 export interface IFixedModal {
     trigger: any,
 }
@@ -77,10 +82,10 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
                         </div> : null
                     }
                 </div>
-                <DropdownButtonItem text="Notification" notifications={notificate} icon={<FontAwesomeIcon className="text-lg" icon={faBell} />} onClick={() => { onNavigateClick("notifications");}} />
-                <DropdownButtonItem text="Creative Studio" icon={<FontAwesomeIcon className="text-lg" icon={faSquarePlus} />} onClick={() => { onNavigateClick("studio"); }} />
-                <DropdownButtonItem text="Account Manage" icon={<FontAwesomeIcon className="text-lg" icon={faCog} />} onClick={() => { onNavigateClick("settings") }} />
-                <DropdownButtonItem text="Log out" isDanger={true} icon={<FontAwesomeIcon className="text-lg" icon={faRightFromBracket} />} onClick={() => { LogoutUser(); nav("/"); }} />
+                <DropdownButtonItem text="Notification" notifications={notificate} icon={<img alt="icon" src={icon_notifications} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("notifications");}} />
+                <DropdownButtonItem text="Creative Studio" icon={<img alt="icon" src={icon_studio} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("studio"); }} />
+                <DropdownButtonItem text="Account Manage" icon={<img alt="icon" src={icon_settings} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("settings") }} />
+                <DropdownButtonItem text="Log out" isDanger={true} icon={<img alt="icon" src={icon_logout} className="w-[20px] h-[20px]" />} onClick={() => { LogoutUser(); nav("/"); }} />
             </div>
         </div>
     )

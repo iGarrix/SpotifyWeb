@@ -3,12 +3,12 @@ import { IAlbum, IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 
 export enum SelectAlbumActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
-    INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
-    INITSELECTTRACKS = "INITSELECTTRACKS",
     INITSELECTALBUMS_WAITING = "INITSELECTALBUMS_WAITING",
     INITSELECTALBUMS_ERROR = "INITSELECTALBUMS_ERROR",
     INITSELECTALBUMS_CLEAR = "INITSELECTALBUMS_CLEAR",
-    CLEARSELECTTRACK = "CLEARSELECTTRACK",
+    INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
+    INITQUEUE = "INITQUEUE",
+    CLEARQUEUE = "CLEARQUEUE",
 }
 
 export interface ITrack {
@@ -24,10 +24,15 @@ export interface ITrackResponse {
     trackCreators: string[] | null,
 }
 
+export interface IQueue {
+    soundobj : ITrackResponse,
+    isPlay: boolean,
+}
+
 export interface ISelectAlbumStateState {
     album: IPagableMyAlbumItem | null;
     tracks: ITrackResponse[] | null,
-    selectTrack: ITrackResponse | null,
+    queue: IQueue[] | null,
     prevPage: number | null,
     nextPage: number | null,
     loading: boolean;
@@ -52,9 +57,9 @@ export interface InitSelectAlbumTrackAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMTRACKS;
     payload: IPagableResponse | null;
 }
-export interface InitSelectTrackAction {
-    type: SelectAlbumActionTypes.INITSELECTTRACKS;
-    payload: ITrackResponse | null;
+export interface InitQueueAction {
+    type: SelectAlbumActionTypes.INITQUEUE;
+    payload: IQueue[] | null;
 }
 export interface InitSelectAlbumWaitAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING;
@@ -67,15 +72,15 @@ export interface InitSelectAlbumErrorAction {
 export interface InitSelectAlbumClearAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMS_CLEAR;
 }
-export interface ClearSelectTrackAction {
-    type: SelectAlbumActionTypes.CLEARSELECTTRACK;
+export interface ClearQueueAction {
+    type: SelectAlbumActionTypes.CLEARQUEUE;
 }
 
 export type SelectAlbumAction =
 InitSelectAlbumAction |
 InitSelectAlbumTrackAction |
-InitSelectTrackAction |
+InitQueueAction |
 InitSelectAlbumWaitAction |
 InitSelectAlbumErrorAction |
 InitSelectAlbumClearAction |
-ClearSelectTrackAction;
+ClearQueueAction;

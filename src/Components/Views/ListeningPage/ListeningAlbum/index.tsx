@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { faCircleChevronLeft, faCircleChevronRight, faCirclePlay, faHeart, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Guid } from "guid-typescript";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
-import { IPagableMySingleItem } from "../../../../Redux/Reducers/MySingleReducer/types";
+import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { baseUrl } from "../../../../types";
 import { SoundItem } from "../../../Commons/SoundItem";
 
@@ -12,7 +14,7 @@ export const ListeningAlbum : React.FC = () => {
     const {id} = useParams();
     const selectAlbumReducer = useTypedSelector(state => state.selectedAlbumReducer);
 
-    const {initSelectAlbum} = useActions();
+    const {initSelectAlbum, initQueue, clearQueue, getTracks} = useActions();
     const nav = useNavigate();
 
     useEffect(() => {
@@ -31,8 +33,57 @@ export const ListeningAlbum : React.FC = () => {
         work();
     }, []);
 
-    const onSelectTrack = () => {
+    useEffect(() => {
+        const fetchData = async () => {                
+            if (id && !selectAlbumReducer.tracks) {
+                const rq : IGetTracksRequest = {
+                    albomId: id,
+                    page: 1,
+                }
+                await getTracks(rq);  
+            }    
+        }
+        fetchData();
+    }, []);
 
+    const FetchNext = async () => {
+        if (selectAlbumReducer.tracks && selectAlbumReducer.nextPage && id) {       
+            const rq: IGetTracksRequest = {
+                albomId: id,
+                page: selectAlbumReducer.nextPage,
+            }
+            await getTracks(rq);
+        }
+    }
+
+    const onSelectTrack = async (item: ITrackResponse | null) => {
+        if (item) {
+            const storageQueue = localStorage.getItem("queue");
+            if (storageQueue) {
+                
+                return;
+            }
+
+            const newQueue : IQueue[] = [{soundobj: item, isPlay: true}];
+
+            // const getSelectTrack = localStorage.getItem("queue");
+            // if (getSelectTrack) {
+            //     await clearSelectTrack();
+            //     localStorage.removeItem("queue");
+            //     return;
+            // }
+            // localStorage.setItem("selectTrack", JSON.stringify(item));
+            //await initSelectTrack(item);
+            // if (!selectAlbumReducer.isPlay) {
+            //     localStorage.setItem("selectTrack", JSON.stringify(item));
+            //     await initSelectTrack(item);
+            //     await PlaySelectTrack(item.track? item.track.returnId : null);
+            //     return;
+            // }
+            // await PlaySelectTrack(null);
+            //await clearSelectTrack();
+            //await PlaySelectTrack(item.track? item.track.returnId : null);
+        }
     }
     
     return (
@@ -54,12 +105,12 @@ export const ListeningAlbum : React.FC = () => {
                             <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${selectAlbumReducer.album?.albomDto?.image}`}
                             className="h-96 w-96 object-cover rounded-xl bg-cover" />
                         }
-                        <div className="py-3 flex justify-between w-full">
-                            <div className="bg-indigo-400 rounded-full w-12 h-12"></div>
-                            <div className="bg-indigo-400 rounded-full w-12 h-12"></div>
-                            <div className="bg-indigo-400 rounded-full w-12 h-12"></div>
-                            <div className="bg-indigo-400 rounded-full w-12 h-12"></div>
-                            <div className="bg-indigo-400 rounded-full w-12 h-12"></div>
+                        <div className="py-3 flex items-center justify-between w-full">
+                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faShareFromSquare} />
+                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faCircleChevronLeft} />
+                            <FontAwesomeIcon className="text-5xl text-blue-400 cursor-pointer transition-all hover:scale-105" icon={faCirclePlay} />
+                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faCircleChevronRight} />
+                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faHeart} />
                         </div>
                     </div>
                 </div>
@@ -79,8 +130,27 @@ export const ListeningAlbum : React.FC = () => {
 
                         }
                         <div className="flex flex-col gap-4 overflow-y-auto pr-5">
-                            <SoundItem name={"Big baby tape - Dirrt"} isLiked={true} isPlay={true} duration={"02:10"} onClick={() => { }} />
-                            <SoundItem name={"Big baby tape - Windows"} isLiked={false} isPlay={false} duration={"02:10"} onClick={() => {}} />
+                        { selectAlbumReducer.loading ? 
+                                <div className="flex flex-col gap-4">
+                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div> 
+                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div> 
+                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div> 
+                                </div>
+                                :
+                                <div className="flex flex-col gap-[18px]">
+                                    {
+
+                                        selectAlbumReducer.tracks?.map(item => {
+                                            return (
+                                                <SoundItem key={Guid.create().toString()} name={`${item.trackCreators?.join(", ")} - ${item.track?.name}`} 
+                                                isLiked={true} 
+                                                isPlay={true} 
+                                                duration={item.track?.duration.replace(",", ":").substring(0, 4)} onClick={() => {onSelectTrack(item)}} />
+                                            )
+                                        })
+                                    }
+                                </div>                      
+                            }
 
                         </div>
                     </div>

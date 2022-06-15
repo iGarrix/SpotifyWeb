@@ -97,13 +97,13 @@ export const Profile: React.FC = () => {
             <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
               <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
             </h1>
-            <p className="font-['Lexend'] flex gap-1 items-center">{user?.username} {verifyImage}</p>
-            <p className="font-medium font-['Lexend'] text-lg">{user?.emojie}</p>
+            <p className="font-medium flex gap-1 items-center">{user?.username} {verifyImage}</p>
+            <p className="font-medium text-lg">{user?.emojie}</p>
           </div>
         </div>
       </div>
-      <div className="w-full h-full flex flex-col">
-          <div className="bg-dark-200/60 flex w-full justify-center gap-4">
+      <div className="h-full w-full flex flex-col items-center mt-5">
+          <div className="bg-dark-100/100 flex px-[50px] rounded-xl justify-center gap-[100px]">
               <ProfileButton text="My singles" isSelect={currentItem === "/profile"}  onClick={() => {onCurrentItem("/profile")}}/>
               <ProfileButton text="My Playlists" isSelect={currentItem === "/profile/playlists"}  onClick={() => {onCurrentItem("/profile/playlists")}}/>
               <ProfileButton text="My albums" isSelect={currentItem === "/profile/albums"}  onClick={() => {onCurrentItem("/profile/albums")}}/>

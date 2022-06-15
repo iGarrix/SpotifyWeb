@@ -16,6 +16,9 @@ module.exports = {
         dark: {
           100: "#434343",
           200: "#141414",
+        },
+        buttongray: {
+          100: "#424242",
         }
       },
       gridTemplateRows: {

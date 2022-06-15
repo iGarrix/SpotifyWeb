@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 import setupInterceptors from "./setupInterceptors";
-import { initSelectTrack } from "./Redux/Reducers/SelectAlbumReducer/actions";
+import { initQueue } from "./Redux/Reducers/SelectAlbumReducer/actions";
 import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
 
 const theme = localStorage.getItem("theme");

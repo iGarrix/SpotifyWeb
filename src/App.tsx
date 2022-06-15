@@ -16,22 +16,21 @@ import { Queue } from "./Components/Views/Queue";
 import { ProfilePlaylists } from "./Components/Views/Profile/ProfilePlaylists";
 import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
-import { ListeningSingle } from "./Components/Views/ListeningPage/ListeningSingle";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
-import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue } from "./Redux/Reducers/SelectAlbumReducer/types";
 import { useActions } from "./Hooks/useActions";
 
 
 function App() {
   const [isDark, setDark] = useState(false);
   
-  const {initSelectTrack} = useActions();
+  const {initQueue} = useActions();
   
-  const selectTrackStorage = localStorage.getItem("selectTrack");
-  if (selectTrackStorage) {
-    const selectTrack : ITrackResponse = JSON.parse(selectTrackStorage);
-    if (selectTrack) {
-      initSelectTrack(selectTrack);
+  const queueStorage = localStorage.getItem("queue");
+  if (queueStorage) {
+    const queue : IQueue[] = JSON.parse(queueStorage);
+    if (queue) {
+      initQueue(queue);
     }
   }
   
@@ -51,14 +50,11 @@ function App() {
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
 
-          <Route path="single" element={<Outlet />}>
-            <Route path=":id" element={<ListeningSingle />} />
-          </Route>
           <Route path="album" element={<Outlet />}>
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
-            <Route path=":id" element={<ListeningSingle />} />
+          
           </Route>
 
           <Route path="profile" element={<LayProfile />}>

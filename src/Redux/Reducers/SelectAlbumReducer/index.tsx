@@ -4,7 +4,7 @@ import { ISelectAlbumStateState, SelectAlbumAction, SelectAlbumActionTypes } fro
 const inialState: ISelectAlbumStateState = {
   album: null,
   tracks: null,
-  selectTrack: null,
+  queue: null,
   loading: false,
   error: "",
   prevPage: null,
@@ -42,10 +42,10 @@ export const selectedAlbumReducer = (
           error: "",
         };
       }
-    case SelectAlbumActionTypes.INITSELECTTRACKS: {
+    case SelectAlbumActionTypes.INITQUEUE: {
       return {
         ...state,
-        selectTrack: action.payload,
+        queue: action.payload,
         loading: false,
         error: "",
       };
@@ -71,18 +71,17 @@ export const selectedAlbumReducer = (
       return {
         ...state,
         album: null,
-        selectTrack: null,
+        queue: null,
         tracks: null,
         loading: false,
         error: "",
       };
     }
 
-    case SelectAlbumActionTypes.CLEARSELECTTRACK: {
+    case SelectAlbumActionTypes.CLEARQUEUE: {
       return {
         ...state,
-        selectTrack: null,
-        error: "",
+        queue: null,
       };
     }
     default:

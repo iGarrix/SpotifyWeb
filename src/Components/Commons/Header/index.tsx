@@ -7,6 +7,9 @@ import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { baseUrl } from "../../../types";
 import { FixedModal } from "../Modals/FixedModal";
 
+const bg = require('../../../Assets/Background1.png');
+const icon_upload = require('../../../Assets/Icons/Upload.png');
+
 export const Header: React.FC = () => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
@@ -23,8 +26,6 @@ export const Header: React.FC = () => {
 
     }, [user]);
         
-
-
     return (
         <div className="py-2 px-10 bg-dark-200/90 flex justify-end overflow-x-hidden sticky top-0 z-10">
             <div className="flex gap-7 items-center">
@@ -32,21 +33,25 @@ export const Header: React.FC = () => {
                     user ?
                         user.avatar.length !== 0 ?
                             <div className="flex items-center gap-6">
-                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
+                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer" 
+                                onClick={() => {nav('/upload')}}
+                                style={{backgroundImage: `url('${bg}')`}}>
+                                    <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
+                                </div>
                                 <FixedModal trigger={ImageSrc !== "" ? <div className="w-12 h-12 overflow-hidden"><img alt="avatar" src={ImageSrc} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full" /></div> : 
                                 <div className="bg-gray-600 w-10 h-10 animate-pulse rounded-lg px-3 py-1 cursor-pointer">
                                 </div>} />
                             </div> :
                             <div className="flex items-center gap-6">
-                                <FontAwesomeIcon className="text-blue-300 text-2xl cursor-pointer" icon={faUpload} onClick={() => { nav("studio") }} />
+                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover" style={{backgroundImage: `url('${bg}')`}}>
+                                    <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
+                                </div>
                                 <FixedModal trigger={<div className="bg-green-600 w-12 h-12 rounded-lg px-3 py-1 cursor-pointer flex justify-center items-center">
                                     <h1 className="text-white text-2xl select-none">{user.username.charAt(0)}</h1>
                                 </div>} />             
                             </div>
                         :
                         <FontAwesomeIcon className="text-white rounded-lg py-1.5 text-2xl cursor-pointer" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
-                    // <div className="flex items-center gap-6 bg-white py-1.5 rounded-lg">
-                    // </div>
                 }
             </div>
         </div>
