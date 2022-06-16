@@ -111,8 +111,8 @@ export const Register: React.FC = () => {
         <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[15] row-[span_9/span_30] bg-no-repeat bg-cover" style={{backgroundImage: `url(${background1})`}}></div>
       </div>
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">
-        <div className="col-span-full h-full flex items-center justify-center row-[span_10/span_10]">
-          <img alt="logo" src={logo} width={400} height={400} />
+        <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-[span_10/span_10]">
+          <img alt="logo" className="w-[260px]" src={logo} />
         </div>
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[11] row-[span_9/span_27] bg-no-repeat bg-cover"
         style={{backgroundImage: `url(${background2})`}}></div>

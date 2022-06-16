@@ -28,6 +28,7 @@ export interface IUser {
   birthday: Date;
   gender: string;
   avatar: string;
+  background: string;
   country: string;
   verify: string;
   emojie: string;

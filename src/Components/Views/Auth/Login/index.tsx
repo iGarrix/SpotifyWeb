@@ -84,8 +84,8 @@ export const Login: React.FC = () => {
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
-        <div className="col-span-full h-full flex items-center justify-center row-span-6">
-          <img alt="logo" src={logo} width={360} height={360} />
+        <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-span-6">
+          <img alt="logo" className="w-[270px]" src={logo} />
         </div>
         <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[7] row-[span_9/span_24] bg-no-repeat bg-cover" style={{backgroundImage: `url(${background2})`}}></div>
       </div>

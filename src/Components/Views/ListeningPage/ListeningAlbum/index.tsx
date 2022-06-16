@@ -60,12 +60,17 @@ export const ListeningAlbum : React.FC = () => {
         if (item) {
             const storageQueue = localStorage.getItem("queue");
             if (storageQueue) {
-                
+                const getqueue : IQueue = JSON.parse(storageQueue);
+                if (getqueue) {
+
+                    console.log(getqueue);
+                }
                 return;
             }
 
             const newQueue : IQueue[] = [{soundobj: item, isPlay: true}];
-
+            localStorage.setItem("queue", JSON.stringify(newQueue));
+            await initQueue(newQueue);
             // const getSelectTrack = localStorage.getItem("queue");
             // if (getSelectTrack) {
             //     await clearSelectTrack();
@@ -139,12 +144,14 @@ export const ListeningAlbum : React.FC = () => {
                                 :
                                 <div className="flex flex-col gap-[18px]">
                                     {
-
                                         selectAlbumReducer.tracks?.map(item => {
                                             return (
                                                 <SoundItem key={Guid.create().toString()} name={`${item.trackCreators?.join(", ")} - ${item.track?.name}`} 
                                                 isLiked={true} 
-                                                isPlay={true} 
+                                                isPlay={selectAlbumReducer.queue && selectAlbumReducer.queue[0].soundobj && selectAlbumReducer.queue[0].soundobj.trackCreators && item.trackCreators ?
+                                                    selectAlbumReducer.queue[0].soundobj.trackCreators[0] === item.trackCreators[0] && selectAlbumReducer.queue[0].soundobj.track?.returnId === item.track?.returnId && selectAlbumReducer.queue[0].isPlay ?
+                                                    true
+                                                : false : false}
                                                 duration={item.track?.duration.replace(",", ":").substring(0, 4)} onClick={() => {onSelectTrack(item)}} />
                                             )
                                         })

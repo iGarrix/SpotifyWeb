@@ -231,6 +231,38 @@ export const updateAvatarUser = (data: IChangeAvatarRequest) => {
   };
 };
 
+export const updateBackgroundUser = (data: IChangeAvatarRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const form = new FormData();
+      form.append("FindEmail", data.findEmail);
+      form.append("NewAvatar", data.newAvatar);
+      form.append("Device", DeviceType.desktop);
+      console.log(form);
+      const response = await http.put<IUser>(
+        "api/Profile/BackgroundUpdate",
+        form, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
 export const LogoutUser = () => {
   return async (dispatch: Dispatch<any>) => {
     ClearRedux(dispatch);
