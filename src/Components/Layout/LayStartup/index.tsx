@@ -14,7 +14,7 @@ export const LayStartup: React.FC = () => {
 
   const [isVisible, setVisible] = useState(false);
 
-  const rx = useTypedSelector(state => state.selectedAlbumReducer);
+  const rx = useTypedSelector(state => state.playingReducer);
 
   useEffect(() => {
     if (rx.queue) {
@@ -24,7 +24,7 @@ export const LayStartup: React.FC = () => {
 
   const nav = useNavigate();
   return (
-    <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/90 to-dark-200">
+    <div className="grid grid-cols-8 w-full nin-h-screen">
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>
@@ -32,7 +32,7 @@ export const LayStartup: React.FC = () => {
         <Header />
         <Outlet />
       </div>
-      <div className="fixed bottom-0 w-full grid grid-cols-8 gap-y-6">
+      <div className="fixed bottom-0 w-full grid grid-cols-8 z-[100]">
         <div className={`col-span-1 w-full ${isVisible ? "" : "mb-6"}`}>
           <SideBarItem text="Settings" icon={icon_settings} onClick={() => {nav("settings")}} />
         </div>

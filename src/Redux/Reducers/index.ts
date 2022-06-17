@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { myAlbumsReducer } from "./MyAlbumReducer";
 import { myPlaylistReducer } from "./MyPlaylistReducer";
 import { mySinglesReducer } from "./MySingleReducer";
-import { selectedAlbumReducer } from "./SelectAlbumReducer";
+import { playingReducer } from "./SelectAlbumReducer";
 import { userReducer } from "./UserReducer";
 
 export const rootReducer = combineReducers({
@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   myPlaylistReducer: myPlaylistReducer,
   myAlbumsReducer: myAlbumsReducer,
   mySingleReducer: mySinglesReducer,
-  selectedAlbumReducer: selectedAlbumReducer,
+  playingReducer: playingReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

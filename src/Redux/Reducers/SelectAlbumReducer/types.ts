@@ -1,7 +1,7 @@
 import { IPagableResponse } from "../../../types";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 
-export enum SelectAlbumActionTypes {
+export enum PlayingActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
     INITSELECTALBUMS_WAITING = "INITSELECTALBUMS_WAITING",
     INITSELECTALBUMS_ERROR = "INITSELECTALBUMS_ERROR",
@@ -30,7 +30,7 @@ export interface IQueue {
     isPlay: boolean,
 }
 
-export interface ISelectAlbumStateState {
+export interface IPlayingStateState {
     album: IPagableMyAlbumItem | null;
     tracks: ITrackResponse[] | null,
     queue: IQueue | null,
@@ -50,42 +50,42 @@ export interface IGetTracksResponse {
     trackCreators: string | null;
 }
 
-export interface InitSelectAlbumAction {
-    type: SelectAlbumActionTypes.INITSELECTALBUM;
+export interface InitPlayingAction {
+    type: PlayingActionTypes.INITSELECTALBUM;
     payload: IPagableMyAlbumItem | null;
 }
-export interface InitSelectAlbumTrackAction {
-    type: SelectAlbumActionTypes.INITSELECTALBUMTRACKS;
+export interface InitPlayingTrackAction {
+    type: PlayingActionTypes.INITSELECTALBUMTRACKS;
     payload: IPagableResponse | null;
 }
 export interface InitQueueAction {
-    type: SelectAlbumActionTypes.INITQUEUE;
+    type: PlayingActionTypes.INITQUEUE;
     payload: IQueue | null;
 }
-export interface InitSelectAlbumWaitAction {
-    type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING;
+export interface InitPlayingWaitAction {
+    type: PlayingActionTypes.INITSELECTALBUMS_WAITING;
     payload: boolean;
 }
-export interface InitSelectAlbumErrorAction {
-    type: SelectAlbumActionTypes.INITSELECTALBUMS_ERROR;
+export interface InitPlayingErrorAction {
+    type: PlayingActionTypes.INITSELECTALBUMS_ERROR;
     payload: string;
 }
-export interface InitSelectAlbumClearAction {
-    type: SelectAlbumActionTypes.INITSELECTALBUMS_CLEAR;
+export interface InitPlayingClearAction {
+    type: PlayingActionTypes.INITSELECTALBUMS_CLEAR;
 }
 export interface ClearQueueAction {
-    type: SelectAlbumActionTypes.CLEARQUEUE;
+    type: PlayingActionTypes.CLEARQUEUE;
 }
 export interface ClearTracksAction {
-    type: SelectAlbumActionTypes.CLEARTRACKS;
+    type: PlayingActionTypes.CLEARTRACKS;
 }
 
-export type SelectAlbumAction =
-InitSelectAlbumAction |
-InitSelectAlbumTrackAction |
+export type PlayingAction =
+InitPlayingAction |
+InitPlayingTrackAction |
 InitQueueAction |
-InitSelectAlbumWaitAction |
-InitSelectAlbumErrorAction |
-InitSelectAlbumClearAction |
+InitPlayingWaitAction |
+InitPlayingErrorAction |
+InitPlayingClearAction |
 ClearQueueAction |
 ClearTracksAction;

@@ -2,54 +2,53 @@ import { Dispatch } from "redux";
 import axios, { AxiosError } from "axios";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
-import {IGetTracksRequest, IGetTracksResponse, IQueue, SelectAlbumAction, SelectAlbumActionTypes } from "./types";
+import {IGetTracksRequest, IGetTracksResponse, IQueue, PlayingAction, PlayingActionTypes } from "./types";
 import { IPagableResponse } from "../../../types";
 
 
 
 export const initSelectAlbum = (data: IPagableMyAlbumItem) => {
-    return async (dispatch: Dispatch<SelectAlbumAction>) => {
-        dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUM, payload: data });
-        dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING, payload: false });
+    return async (dispatch: Dispatch<PlayingAction>) => {
+        dispatch({ type: PlayingActionTypes.INITSELECTALBUM, payload: data });
+        dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: false });
     };
 };
 
 export const initQueue = (data: IQueue) => {
-    return async (dispatch: Dispatch<SelectAlbumAction>) => {
-        dispatch({ type: SelectAlbumActionTypes.INITQUEUE, payload: data });
-        dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING, payload: false });
+    return async (dispatch: Dispatch<PlayingAction>) => {
+        dispatch({ type: PlayingActionTypes.INITQUEUE, payload: data });
     };
 };
 
 export const clearQueue = () => {
-  return async (dispatch: Dispatch<SelectAlbumAction>) => {
-      dispatch({ type: SelectAlbumActionTypes.CLEARQUEUE });
+  return async (dispatch: Dispatch<PlayingAction>) => {
+      dispatch({ type: PlayingActionTypes.CLEARQUEUE });
   };
 };
 
 export const clearTracks = () => {
-  return async (dispatch: Dispatch<SelectAlbumAction>) => {
-      dispatch({ type: SelectAlbumActionTypes.CLEARTRACKS });
+  return async (dispatch: Dispatch<PlayingAction>) => {
+      dispatch({ type: PlayingActionTypes.CLEARTRACKS });
   };
 };
 
 export const getTracks = (data: IGetTracksRequest) => {
-    return async (dispatch: Dispatch<SelectAlbumAction>) => {
+    return async (dispatch: Dispatch<PlayingAction>) => {
       try {
-        dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+        dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
         const token = localStorage.getItem("token");
         const response = await http.get<IPagableResponse<IGetTracksResponse>>(
           `api/Albom/GetTracks?albomId=${data.albomId}&page=${data.page}`,
           AuthorizateHeader(token)
         );
-        dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUMTRACKS, payload: response.data});
+        dispatch({ type: PlayingActionTypes.INITSELECTALBUMTRACKS, payload: response.data});
   
         return Promise.resolve();
       } catch (error) {
         if (axios.isAxiosError(error)) {
           const serverError = error as AxiosError<any>;
           dispatch({
-            type: SelectAlbumActionTypes.INITSELECTALBUMS_ERROR,
+            type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
             payload: serverError.response?.data,
           });
           if (serverError && serverError.response) {

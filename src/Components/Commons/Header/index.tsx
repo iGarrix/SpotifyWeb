@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
     }, [user]);
         
     return (
-        <div className="py-2 px-10 bg-dark-200/90 flex justify-end overflow-x-hidden sticky top-0 z-10">
+        <div className="py-2 px-10 bg-dark-200 flex justify-end overflow-x-hidden sticky top-0 z-[1000]">
             <div className="flex gap-7 items-center">
                 {
                     user ?

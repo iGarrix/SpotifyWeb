@@ -1,7 +1,7 @@
 import { DefaultServerError } from "../../../types";
-import { ISelectAlbumStateState, SelectAlbumAction, SelectAlbumActionTypes } from "./types";
+import { IPlayingStateState, PlayingAction, PlayingActionTypes } from "./types";
 
-const inialState: ISelectAlbumStateState = {
+const inialState: IPlayingStateState = {
   album: null,
   tracks: null,
   queue: null,
@@ -11,12 +11,12 @@ const inialState: ISelectAlbumStateState = {
   nextPage: null,
 };
 
-export const selectedAlbumReducer = (
+export const playingReducer = (
   state = inialState,
-  action: SelectAlbumAction
-): ISelectAlbumStateState => {
+  action: PlayingAction
+): IPlayingStateState => {
   switch (action.type) {
-    case SelectAlbumActionTypes.INITSELECTALBUM: {
+    case PlayingActionTypes.INITSELECTALBUM: {
       return {
         ...state,
         album: action.payload,
@@ -24,7 +24,7 @@ export const selectedAlbumReducer = (
         error: "",
       };
     }
-    case SelectAlbumActionTypes.INITSELECTALBUMTRACKS: {
+    case PlayingActionTypes.INITSELECTALBUMTRACKS: {
       let arr = state.tracks ? state.tracks : [];
       if (action.payload && arr) {  
         if (action.payload.pageables) {  
@@ -42,7 +42,7 @@ export const selectedAlbumReducer = (
           error: "",
         };
       }
-    case SelectAlbumActionTypes.INITQUEUE: {
+    case PlayingActionTypes.INITQUEUE: {
       return {
         ...state,
         queue: action.payload,
@@ -50,13 +50,13 @@ export const selectedAlbumReducer = (
         error: "",
       };
     }
-    case SelectAlbumActionTypes.INITSELECTALBUMS_WAITING: {
+    case PlayingActionTypes.INITSELECTALBUMS_WAITING: {
       return {
         ...state,
         loading: action.payload,
       };
     }
-    case SelectAlbumActionTypes.INITSELECTALBUMS_ERROR: {
+    case PlayingActionTypes.INITSELECTALBUMS_ERROR: {
       return {
         ...state,
         error:
@@ -67,7 +67,7 @@ export const selectedAlbumReducer = (
       };
     }
 
-    case SelectAlbumActionTypes.INITSELECTALBUMS_CLEAR: {
+    case PlayingActionTypes.INITSELECTALBUMS_CLEAR: {
       return {
         ...state,
         album: null,
@@ -78,14 +78,14 @@ export const selectedAlbumReducer = (
       };
     }
 
-    case SelectAlbumActionTypes.CLEARQUEUE: {
+    case PlayingActionTypes.CLEARQUEUE: {
       return {
         ...state,
         queue: null,
       };
     }
 
-    case SelectAlbumActionTypes.CLEARTRACKS: {
+    case PlayingActionTypes.CLEARTRACKS: {
       return {
         ...state,
         tracks: null,

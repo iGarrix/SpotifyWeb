@@ -4,18 +4,13 @@ import React from "react";
 import { SoundOptionModal } from "../Modals/SoundOptionModal";
 
 import "./style.scss";
+import { ISoundItem } from "./types";
 
-export interface ISoundItem {
-    name: any,
-    duration: any,
-    isPlay: boolean,
-    isLiked: boolean,
-    onClick: () => void,
-}
+
 
 export const SoundItem : React.FC<ISoundItem> = ({name, duration, isLiked, isPlay, onClick}) => {
     return (
-        <div className={`flex items-center justify-between rounded-[18px] px-4 py-[12px] ${isPlay ? `bg_select_sound` : "bg-dark-100"}`}>
+        <div className={`flex items-center justify-between rounded-[18px] px-4 py-[12px] bg-no-repeat ${isPlay ? `bg_select_sound` : "bg-dark-100"}`}>
             <div className="flex gap-6 items-center">
                 {
                     isPlay ? 

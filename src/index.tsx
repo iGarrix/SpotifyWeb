@@ -9,8 +9,6 @@ import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 import setupInterceptors from "./setupInterceptors";
-import { initQueue } from "./Redux/Reducers/SelectAlbumReducer/actions";
-import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
 
 const theme = localStorage.getItem("theme");
 if (theme === null || theme === undefined) {
@@ -20,13 +18,13 @@ if (theme === null || theme === undefined) {
 setupInterceptors();
 InitUser(store.dispatch);
 
-const notifications = localStorage.getItem("notifications");
-if (notifications) {
+// const notifications = localStorage.getItem("notifications");
+// if (notifications) {
   
-}
-else {
-  localStorage.setItem("notifications", "5");
-}
+// }
+// else {
+//   localStorage.setItem("notifications", "5");
+// }
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

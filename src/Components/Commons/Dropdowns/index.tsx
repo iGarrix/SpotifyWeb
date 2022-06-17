@@ -8,7 +8,7 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
   title,
   ...props
 }) => {
-  const [field, meta] = useField(props);
+  const [field] = useField(props);
 
   return (
     <div className="flex flex-col gap-2">

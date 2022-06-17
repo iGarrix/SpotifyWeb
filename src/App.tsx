@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 
 import { Outlet, Route, Routes } from "react-router-dom";
@@ -18,30 +18,38 @@ import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 import { IQueue } from "./Redux/Reducers/SelectAlbumReducer/types";
-import { useActions } from "./Hooks/useActions";
 import { StorageVariables } from "./types";
+import { useActions } from "./Hooks/useActions";
+import { useTypedSelector } from "./Hooks/useTypedSelector";
+import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
+import { StudioIntro } from "./Components/IntroView/StudioIntro";
 
 
 function App() {
   const [isDark, setDark] = useState(false);
-  
+
   const {initQueue} = useActions();
-  
-  const queueStorage = localStorage.getItem(StorageVariables.Queue);
-  if (queueStorage) {
-    let queue : IQueue = (JSON.parse(queueStorage) as IQueue);
-    queue.isPlay = false;
-    if (queue) {
-      initQueue(queue);
-      console.log("App");
+
+  const user = useTypedSelector(state => state.userReducer.profile);
+
+  useEffect(() => {
+    const queueStorage = localStorage.getItem(StorageVariables.Queue);
+    if (queueStorage) {
+      let queue: IQueue = (JSON.parse(queueStorage) as IQueue);
+      if (queue) {
+        if (queue.isPlay === true) {
+          queue.isPlay = false;
+          localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+        }
+        initQueue(queue);
+      }
     }
-  }
-  
+  }, []);
+
   return (
     <div
-      className={`w-full min-h-screen flex scroller ${
-        isDark ? "dark" : ""
-      }`}
+      className={`w-full min-h-screen flex scroller bg-gradient-to-b from-dark-200/90 to-dark-200 ${isDark ? "dark" : ""
+        }`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>
@@ -57,16 +65,21 @@ function App() {
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
-          
-          </Route>
+          </Route>   
 
           <Route path="profile" element={<LayProfile />}>
-              <Route path="" element={<Profile />}>
-                <Route index element={<ProfileSingles />} />
-                <Route path="playlists" element={<ProfilePlaylists />} />
-                <Route path="albums" element={<ProfileAlbums />} />
-              </Route>
+            <Route path="" element={<Profile />}>
+              <Route index element={<ProfileSingles />} />
+              <Route path="playlists" element={<ProfilePlaylists />} />
+              <Route path="albums" element={<ProfileAlbums />} />
+            </Route>
           </Route>
+        </Route>
+
+        <Route path="s&a" element={<AuthorizateRoute user={user}><Outlet/></AuthorizateRoute>}>
+          <Route index element={<StudioIntro />} />
+          <Route path="creativestudio" element={<div>studio</div>} />
+          <Route path="analytics" element={<div>analytics</div>} />
         </Route>
 
         <Route path="authorizate" element={<LayAuth />}>

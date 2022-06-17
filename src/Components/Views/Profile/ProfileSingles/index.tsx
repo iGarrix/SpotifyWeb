@@ -12,7 +12,7 @@ export const ProfileSingles : React.FC = () => {
 
     const nav = useNavigate();
 
-    const { getMySingle, addMySingle } = useActions();
+    const { addMySingle } = useActions();
 
     const rx = useTypedSelector(state => state.mySingleReducer);
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
@@ -41,12 +41,12 @@ export const ProfileSingles : React.FC = () => {
         }
     }
 
-    const onSelectSingle = (item: IPagableMySingleItem | null) => {
-        if (item) {          
-            localStorage.setItem("selectedSingle", JSON.stringify(item));
-            nav("/single/" + item?.albomDto?.returnId);
-        }
-    }
+    // const onSelectSingle = (item: IPagableMySingleItem | null) => {
+    //     if (item) {          
+    //         localStorage.setItem("selectedSingle", JSON.stringify(item));
+    //         nav("/single/" + item?.albomDto?.returnId);
+    //     }
+    // }
 
     return (
         <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
@@ -83,7 +83,7 @@ export const ProfileSingles : React.FC = () => {
                             <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
                         </div>
                         <div>
-                            <DefaultButton onClick={() => { } } text={"Upload you first single song"}/>
+                            <DefaultButton onClick={() => { console.log("gg") } } text={"Upload you first single song"}/>
                         </div>
                     </div>
                 </>
