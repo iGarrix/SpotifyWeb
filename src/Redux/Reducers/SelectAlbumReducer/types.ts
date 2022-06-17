@@ -1,5 +1,5 @@
 import { IPagableResponse } from "../../../types";
-import { IAlbum, IPagableMyAlbumItem } from "../MyAlbumReducer/types";
+import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 
 export enum SelectAlbumActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
@@ -9,6 +9,7 @@ export enum SelectAlbumActionTypes {
     INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
     INITQUEUE = "INITQUEUE",
     CLEARQUEUE = "CLEARQUEUE",
+    CLEARTRACKS = "CLEARTRACKS",
 }
 
 export interface ITrack {
@@ -25,14 +26,14 @@ export interface ITrackResponse {
 }
 
 export interface IQueue {
-    soundobj : ITrackResponse,
+    soundobjs : ITrackResponse[],
     isPlay: boolean,
 }
 
 export interface ISelectAlbumStateState {
     album: IPagableMyAlbumItem | null;
     tracks: ITrackResponse[] | null,
-    queue: IQueue[] | null,
+    queue: IQueue | null,
     prevPage: number | null,
     nextPage: number | null,
     loading: boolean;
@@ -59,7 +60,7 @@ export interface InitSelectAlbumTrackAction {
 }
 export interface InitQueueAction {
     type: SelectAlbumActionTypes.INITQUEUE;
-    payload: IQueue[] | null;
+    payload: IQueue | null;
 }
 export interface InitSelectAlbumWaitAction {
     type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING;
@@ -75,6 +76,9 @@ export interface InitSelectAlbumClearAction {
 export interface ClearQueueAction {
     type: SelectAlbumActionTypes.CLEARQUEUE;
 }
+export interface ClearTracksAction {
+    type: SelectAlbumActionTypes.CLEARTRACKS;
+}
 
 export type SelectAlbumAction =
 InitSelectAlbumAction |
@@ -83,4 +87,5 @@ InitQueueAction |
 InitSelectAlbumWaitAction |
 InitSelectAlbumErrorAction |
 InitSelectAlbumClearAction |
-ClearQueueAction;
+ClearQueueAction |
+ClearTracksAction;

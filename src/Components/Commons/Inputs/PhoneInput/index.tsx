@@ -1,15 +1,7 @@
-import { ErrorMessage, useField } from "formik";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-
-export type PhoneInputProps = {
-    name: string;
-    label: string;
-    value: string,
-    error: string,
-    onChange: (e: any) => void,
-  };
+import { PhoneInputProps } from "./types";
   
 
 export const DefaultPhoneInput : React.FC<PhoneInputProps> = ({
@@ -49,7 +41,7 @@ export const DefaultPhoneInput : React.FC<PhoneInputProps> = ({
         onChange={onLocalChange}
         name={name}
         value={value}    
-        className="text-black font-medium font-['Inter'] bg-white outline-0 py-3 px-5 rounded-xl focus:outline-0"
+        className="text-black font-medium font-['Overpass'] bg-white outline-0 py-3 px-5 rounded-xl focus:outline-0"
         placeholder="Enter phone number"/>
     </div>
     )

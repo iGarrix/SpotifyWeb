@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import axios, { AxiosError } from "axios";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
-import {IGetTracksRequest, IGetTracksResponse, IQueue, ITrackResponse, SelectAlbumAction, SelectAlbumActionTypes } from "./types";
+import {IGetTracksRequest, IGetTracksResponse, IQueue, SelectAlbumAction, SelectAlbumActionTypes } from "./types";
 import { IPagableResponse } from "../../../types";
 
 
@@ -14,7 +14,7 @@ export const initSelectAlbum = (data: IPagableMyAlbumItem) => {
     };
 };
 
-export const initQueue = (data: IQueue[]) => {
+export const initQueue = (data: IQueue) => {
     return async (dispatch: Dispatch<SelectAlbumAction>) => {
         dispatch({ type: SelectAlbumActionTypes.INITQUEUE, payload: data });
         dispatch({ type: SelectAlbumActionTypes.INITSELECTALBUMS_WAITING, payload: false });
@@ -24,6 +24,12 @@ export const initQueue = (data: IQueue[]) => {
 export const clearQueue = () => {
   return async (dispatch: Dispatch<SelectAlbumAction>) => {
       dispatch({ type: SelectAlbumActionTypes.CLEARQUEUE });
+  };
+};
+
+export const clearTracks = () => {
+  return async (dispatch: Dispatch<SelectAlbumAction>) => {
+      dispatch({ type: SelectAlbumActionTypes.CLEARTRACKS });
   };
 };
 

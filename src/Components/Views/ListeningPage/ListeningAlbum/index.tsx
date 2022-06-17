@@ -1,20 +1,27 @@
-import { faCircleChevronLeft, faCircleChevronRight, faCirclePlay, faHeart, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl } from "../../../../types";
+import { baseUrl, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/SoundItem";
+
+const bg = require('../../../../Assets/Background2.png');
+const icon_skip_forward = require('../../../../Assets/Icons/SkipForward.png');
+const icon_skip_next = require('../../../../Assets/Icons/SkipNext.png');
+const icon_shuffle = require('../../../../Assets/Icons/Shuffle.png');
+const icon_repeat = require('../../../../Assets/Icons/Repeat.png');
+const icon_play = require('../../../../Assets/Icons/Play.png');
+const icon_pause = require('../../../../Assets/Icons/Pause.png');
 
 export const ListeningAlbum : React.FC = () => {
 
     const {id} = useParams();
     const selectAlbumReducer = useTypedSelector(state => state.selectedAlbumReducer);
 
-    const {initSelectAlbum, initQueue, clearQueue, getTracks} = useActions();
+    const {initSelectAlbum, initQueue, getTracks} = useActions();
     const nav = useNavigate();
 
     useEffect(() => {
@@ -57,37 +64,9 @@ export const ListeningAlbum : React.FC = () => {
     }
 
     const onSelectTrack = async (item: ITrackResponse | null) => {
-        if (item) {
-            const storageQueue = localStorage.getItem("queue");
-            if (storageQueue) {
-                const getqueue : IQueue = JSON.parse(storageQueue);
-                if (getqueue) {
-
-                    console.log(getqueue);
-                }
-                return;
-            }
-
-            const newQueue : IQueue[] = [{soundobj: item, isPlay: true}];
-            localStorage.setItem("queue", JSON.stringify(newQueue));
-            await initQueue(newQueue);
-            // const getSelectTrack = localStorage.getItem("queue");
-            // if (getSelectTrack) {
-            //     await clearSelectTrack();
-            //     localStorage.removeItem("queue");
-            //     return;
-            // }
-            // localStorage.setItem("selectTrack", JSON.stringify(item));
-            //await initSelectTrack(item);
-            // if (!selectAlbumReducer.isPlay) {
-            //     localStorage.setItem("selectTrack", JSON.stringify(item));
-            //     await initSelectTrack(item);
-            //     await PlaySelectTrack(item.track? item.track.returnId : null);
-            //     return;
-            // }
-            // await PlaySelectTrack(null);
-            //await clearSelectTrack();
-            //await PlaySelectTrack(item.track? item.track.returnId : null);
+        const response = await SetPlayingTrack(item);
+        if (response) {
+            await initQueue(response);
         }
     }
     
@@ -111,11 +90,21 @@ export const ListeningAlbum : React.FC = () => {
                             className="h-96 w-96 object-cover rounded-xl bg-cover" />
                         }
                         <div className="py-3 flex items-center justify-between w-full">
-                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faShareFromSquare} />
-                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faCircleChevronLeft} />
-                            <FontAwesomeIcon className="text-5xl text-blue-400 cursor-pointer transition-all hover:scale-105" icon={faCirclePlay} />
-                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faCircleChevronRight} />
-                            <FontAwesomeIcon className="text-3xl cursor-pointer transition-all hover:text-blue-400" icon={faHeart} />
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
+                                <img alt="icon" className="w-[18px]" src={icon_shuffle} />
+                            </div>
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
+                                <img alt="icon" className="w-[14px]" src={icon_skip_forward} />
+                            </div>
+                            <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer" style={{backgroundImage: `url(${bg})`}}>
+                                <img alt="icon" className="w-[38px] -translate-x-[1px]" src={icon_play} />
+                            </div>
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
+                                <img alt="icon" className="w-[14px]" src={icon_skip_next} />
+                            </div>
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
+                                <img alt="icon" className="w-[18px]" src={icon_repeat} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,11 +136,8 @@ export const ListeningAlbum : React.FC = () => {
                                         selectAlbumReducer.tracks?.map(item => {
                                             return (
                                                 <SoundItem key={Guid.create().toString()} name={`${item.trackCreators?.join(", ")} - ${item.track?.name}`} 
-                                                isLiked={true} 
-                                                isPlay={selectAlbumReducer.queue && selectAlbumReducer.queue[0].soundobj && selectAlbumReducer.queue[0].soundobj.trackCreators && item.trackCreators ?
-                                                    selectAlbumReducer.queue[0].soundobj.trackCreators[0] === item.trackCreators[0] && selectAlbumReducer.queue[0].soundobj.track?.returnId === item.track?.returnId && selectAlbumReducer.queue[0].isPlay ?
-                                                    true
-                                                : false : false}
+                                                isLiked={true}
+                                                isPlay={selectAlbumReducer.queue && item.track ? selectAlbumReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && selectAlbumReducer.queue?.isPlay : false} 
                                                 duration={item.track?.duration.replace(",", ":").substring(0, 4)} onClick={() => {onSelectTrack(item)}} />
                                             )
                                         })

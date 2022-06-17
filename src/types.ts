@@ -14,6 +14,13 @@ export enum VerifyType {
   verify = "VerifyProfile",
 }
 
+export enum StorageVariables {
+  Queue = "queue",
+  Album = "selectAlbum",
+  Track = "selectTrack",
+  //Single = "selectSingle"
+}
+
 export const MinPasswordLenght = 8;
 export const DefaultServerError = "The service is temporarily disabled, please try again later";
 

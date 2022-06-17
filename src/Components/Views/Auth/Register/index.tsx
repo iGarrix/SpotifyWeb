@@ -138,7 +138,7 @@ export const Register: React.FC = () => {
                   <SignUpSteps selectedIndex={step} children={[
                       {
                         title: "Step 1",
-                        description: "Enter email and nickname",
+                        description: "Enter email and phone",
                         index: 1,
                         children: <>
                           <FormikDefaultInput label="email" name="email" type="email" />

@@ -84,6 +84,13 @@ export const selectedAlbumReducer = (
         queue: null,
       };
     }
+
+    case SelectAlbumActionTypes.CLEARTRACKS: {
+      return {
+        ...state,
+        tracks: null,
+      };
+    }
     default:
       return state;
   }

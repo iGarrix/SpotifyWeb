@@ -1,4 +1,4 @@
-import { faBell, faCheck, faCog, faCompactDisc, faRightFromBracket, faSquarePlus, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCompactDisc, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,15 +8,12 @@ import { VerifyType } from "../../../../types";
 import { DropdownButtonItem } from "../../Buttons/DropdownButtonItem";
 
 import "./style.scss";
+import { IFixedModal } from "./types";
 
 const icon_settings = require('../../../../Assets/Icons/Settings.png');
 const icon_studio = require('../../../../Assets/Icons/Studio.png');
 const icon_notifications = require('../../../../Assets/Icons/Notifications.png');
 const icon_logout = require('../../../../Assets/Icons/Logout.png');
-
-export interface IFixedModal {
-    trigger: any,
-}
 
 export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
 

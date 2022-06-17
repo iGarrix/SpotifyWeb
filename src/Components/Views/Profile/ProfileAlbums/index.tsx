@@ -14,7 +14,7 @@ export const ProfileAlbums : React.FC = () => {
 
     const nav = useNavigate();
 
-    const { getMyAlbum, addMyAlbum } = useActions();
+    const { getMyAlbum, addMyAlbum, clearTracks } = useActions();
 
     const rx = useTypedSelector(state => state.myAlbumsReducer);
     const albums = useTypedSelector(state => state.myAlbumsReducer.albums);
@@ -43,10 +43,11 @@ export const ProfileAlbums : React.FC = () => {
         }
     }
 
-    const onSelectAlbum = (item: IPagableMyAlbumItem | null) => {
+    const onSelectAlbum = async (item: IPagableMyAlbumItem | null) => {
         if (item) {    
             localStorage.setItem("selectedAlbum", JSON.stringify(item));
             nav("/album/" + item?.albomDto?.returnId);
+            await clearTracks();
         }
     }
 

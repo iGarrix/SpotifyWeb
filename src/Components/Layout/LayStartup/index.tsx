@@ -24,7 +24,7 @@ export const LayStartup: React.FC = () => {
 
   const nav = useNavigate();
   return (
-    <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200">
+    <div className="grid grid-cols-8 w-full nin-h-screen bg-gradient-to-b from-dark-200/90 to-dark-200">
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>

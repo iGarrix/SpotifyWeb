@@ -19,6 +19,7 @@ import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 import { IQueue } from "./Redux/Reducers/SelectAlbumReducer/types";
 import { useActions } from "./Hooks/useActions";
+import { StorageVariables } from "./types";
 
 
 function App() {
@@ -26,11 +27,13 @@ function App() {
   
   const {initQueue} = useActions();
   
-  const queueStorage = localStorage.getItem("queue");
+  const queueStorage = localStorage.getItem(StorageVariables.Queue);
   if (queueStorage) {
-    const queue : IQueue[] = JSON.parse(queueStorage);
+    let queue : IQueue = (JSON.parse(queueStorage) as IQueue);
+    queue.isPlay = false;
     if (queue) {
       initQueue(queue);
+      console.log("App");
     }
   }
   

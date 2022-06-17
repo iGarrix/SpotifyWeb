@@ -33,16 +33,10 @@ export const Profile: React.FC = () => {
         setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
         user.verify === VerifyType.artist ? <FontAwesomeIcon icon={faCompactDisc} width={20} height={20} /> :
         user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
-        if (user.background.length !== 0) {
-          setBackgroundSrc(baseUrl + "Images/Users/" +user.background);      
-        }
-        else {
-          setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg'); 
-        }
+        setBackgroundSrc(user.background.includes("http") ? user.background
+        : user.background.length !== 0 ? baseUrl + "Images/Users/" + user.background : 'https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
     }
   }, [user]);
-
-  console.log(BackgroundSrc);
 
 
   const onChangeName = () => {
@@ -102,7 +96,7 @@ export const Profile: React.FC = () => {
             <RenameBioModal onSave={onSaveChanges} onClose={onCloseModal} />
           </FullScreenModal> : null
       }
-      <div className="w-full h-full flex bg-cover bg-no-repeat object-cover" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
+      <div className="w-full h-full flex bg-cover bg-no-repeat object-cover bg-fixed" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
         <div className="flex flex-col w-full px-20 pt-16">
           <div className="flex gap-6 w-full">
             {

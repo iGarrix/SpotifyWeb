@@ -1,6 +1,7 @@
 import { faEllipsisVertical, faHeart, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { SoundOptionModal } from "../Modals/SoundOptionModal";
 
 import "./style.scss";
 
@@ -27,7 +28,8 @@ export const SoundItem : React.FC<ISoundItem> = ({name, duration, isLiked, isPla
             <div className="flex gap-4 items-center">
                 <h1 className="text-thin">{duration}</h1>
                 <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all`} icon={faHeart} />
-                <FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all" icon={faEllipsisVertical} />
+                <SoundOptionModal trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all" icon={faEllipsisVertical} />} />
+                
             </div>
         </div>
     )
