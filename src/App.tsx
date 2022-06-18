@@ -23,6 +23,7 @@ import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
 import { StudioIntro } from "./Components/IntroView/StudioIntro";
+import { UploadIntro } from "./Components/IntroView/UploadIntro";
 
 
 function App() {
@@ -80,6 +81,12 @@ function App() {
           <Route index element={<StudioIntro />} />
           <Route path="creativestudio" element={<div>studio</div>} />
           <Route path="analytics" element={<div>analytics</div>} />
+        </Route>
+
+        <Route path="upload" element={<AuthorizateRoute user={user}><Outlet/></AuthorizateRoute>}>
+          <Route index element={<UploadIntro />} />
+          <Route path="album" element={<div>album</div>} />
+          <Route path="single" element={<div>single</div>} />
         </Route>
 
         <Route path="authorizate" element={<LayAuth />}>
