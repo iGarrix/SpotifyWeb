@@ -10,7 +10,7 @@ export const DropdownButtonItem : React.FC<IDropdownButtonItem> = ({text, isDang
                 {icon} 
             </div>
             <div className="col-span-10 flex">
-             <p className="text-[1.05rem]">{text}</p>
+             <p className="text-[1.05rem] whitespace-nowrap">{text}</p>
             </div>
         {/* <p className={`${notifications ? "flex items-center justify-center bg-red-600 rounded-full w-[15px] h-[15px]" : ""}`}>{notifications}</p> */}
         </button>

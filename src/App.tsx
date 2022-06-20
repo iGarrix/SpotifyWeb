@@ -24,6 +24,7 @@ import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
 import { StudioIntro } from "./Components/IntroView/StudioIntro";
 import { UploadIntro } from "./Components/IntroView/UploadIntro";
+import { History } from "./Components/Views/History";
 
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="genres" element={<Settings />} />
           <Route path="createplaylist" element={<Settings />} />
-          <Route path="history" element={<Settings />} />
+          <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
 

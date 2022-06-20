@@ -1,7 +1,8 @@
+import { ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+
 export interface ISoundItem {
-    name: any,
-    duration: any,
     isPlay: boolean,
     isLiked: boolean,
+    item: ITrackResponse,
     onClick: () => void,
 }

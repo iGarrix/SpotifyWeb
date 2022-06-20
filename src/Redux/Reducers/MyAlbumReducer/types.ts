@@ -1,4 +1,4 @@
-import { IPagableResponse } from "../../../types";
+import { IPagableResponse, IUser } from "../../../types";
 
 export enum MyAlbumActionTypes {
     INITMYALBUM = "INITMYALBUM",
@@ -19,7 +19,7 @@ export interface IAlbum {
 
 export interface IPagableMyAlbumItem {
     albomDto: IAlbum | null,
-    creatorsAlbom: string[] | null,
+    creatorsAlbom: IUser[] | null,
     songs: number,
 }
 

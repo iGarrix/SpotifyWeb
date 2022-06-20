@@ -1,46 +1,46 @@
-import React from "react";
+import { faFloppyDisk, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Guid } from "guid-typescript";
+import React, { useEffect, useState, useTransition } from "react"
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { baseUrl } from "../../../types";
-
-const icon_play = require('../../../Assets/Icons/Play.png');
+import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const Queue: React.FC = () => {
 
-    const rx = useTypedSelector(state => state.playingReducer);
-
+    let rx = useTypedSelector(state => state.playingReducer);
     return (
-        <div className="w-full px-10 py-5 flex flex-col gap-6 items-start text-white">
+        <div className="w-full flex flex-col gap-6 items-start text-white px-[3%] py-[2%]">
             {
                 rx.queue ?
                     <div className="flex flex-col gap-6">
-                        <h1 className="font-semibold text-3xl">Playing track</h1>
-                        <div className="rounded-xl overflow-hidden bg-black relative">
-                            <div className="absolute top-0 w-full h-full bg-cover object-cover bg-no-repeat opacity-20" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.queue.soundobjs[0].track?.image}')` }}></div>
-                            <div className="py-6 px-8 flex gap-4">
-                                <img alt="image" className="w-[128px] h-[128px] rounded-xl bg-cover object-cover bg-no-repeat" src={baseUrl + "Images/Tracks/" + rx.queue.soundobjs[0].track?.image} />
-                                <div className="flex flex-col gap-2">
-                                    <h1 className="text-2xl font-semibold font-['Lexend']">{rx.queue.soundobjs[0].track?.name}</h1>
-                                    {
-                                        rx.queue.soundobjs[0].trackCreators ?
-                                            <p className="text-medium text-xl">{rx.queue.soundobjs[0].trackCreators[0]}</p>
-                                            :
-                                            <p className="text-medium text-lg">Unknown</p>
-                                    }
-                                </div>
-                                <div className="flex items-end ml-[64px]">
-                                    <h1 className="text-xl font-semibold animate-pulse">Current</h1>
-                                </div>
-                            </div>
-                        </div>
+                        <h1 className="font-semibold text-2xl">Selected track</h1>
+                        <SoundHistoryItem options={[{
+                            title: "Save", icon: <FontAwesomeIcon icon={faFloppyDisk} />, onClick: () => { }
+                        }]} track={rx.queue.soundobjs[0].track} trackCreators={rx.queue.soundobjs[0].trackCreators} onClick={() => { }} />
                         {
                             rx.queue.soundobjs.length === 1 ?
-                                <h1 className="font-semibold text-3xl">Queue is empty</h1>
+                                <h1 className="font-semibold text-2xl mt-4">Queue is empty</h1>
                                 :
-                                <div>
-                                    <h1 className="select-none text-3xl font-semibold">In Queue</h1>
+                                <div className="flex flex-col gap-6 mt-4">
+                                    <h1 className="font-semibold text-2xl">In queue</h1>
+                                    <div className="flex flex-col gap-6">
+                                        {
+                                            rx.queue.soundobjs.filter(f => f.track?.returnId !== rx.queue?.soundobjs[0].track?.returnId).map(item => {
+                                                return (
+                                                    <SoundHistoryItem key={Guid.create().toString()}
+                                                    options={[{
+                                                        title: "Save", icon: <FontAwesomeIcon icon={faFloppyDisk} />, onClick: () => { }
+                                                    }, {
+                                                        title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { }
+                                                    }]}
+                                                    track={item.track} trackCreators={item.trackCreators} onClick={() => { }} />
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
                         }
-
                     </div>
                     :
                     <div className="rounded-xl bg-dark-200/60 px-12 py-6 flex flex-col gap-6">

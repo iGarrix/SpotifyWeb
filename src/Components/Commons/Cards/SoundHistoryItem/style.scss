@@ -1,0 +1,11 @@
+.soundhistory {
+    .soundhistory_menu {
+        @apply opacity-0 transition-all;     
+    }
+
+    &:hover {
+        .soundhistory_menu {
+            @apply opacity-100;     
+        }
+    }
+}

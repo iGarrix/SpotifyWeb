@@ -28,7 +28,7 @@ export const LayStartup: React.FC = () => {
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>
-      <div className={`col-span-7 w-full h-full flex flex-col`}>
+      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-32" : ""}`}>
         <Header />
         <Outlet />
       </div>

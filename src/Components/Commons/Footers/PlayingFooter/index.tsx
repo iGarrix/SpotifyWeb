@@ -39,7 +39,6 @@ export const PlayingFooter : React.FC = () => {
     // }
 
     const onNav = (path: string) => {
-        console.log();
         if (window.location.pathname !== "/" + path) {      
             nav(path);
         }
@@ -58,7 +57,7 @@ export const PlayingFooter : React.FC = () => {
                         src={baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image} />
                         <div className="flex flex-col justify-center">
                             <div className="flex gap-3 items-center">
-                                <h1 className="font-semibold text-lg">{rx.soundobjs[0].trackCreators[0]}</h1> 
+                                <h1 className="font-semibold text-lg">{rx.soundobjs[0].trackCreators.map(i => i.username).join(', ')}</h1> 
                                 <img alt="icon" className="w-[24px] h-[24px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share}/>
                             </div>
                             <p className="">{rx.soundobjs[0].track?.name}</p>
@@ -69,13 +68,13 @@ export const PlayingFooter : React.FC = () => {
                     </div>
                     <div className="flex gap-5 z-10">
                         <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center" onClick={() => {onNav('queue');}}>
-                            <img alt="icon" className="w-[25px] h-[25px] cursor-pointer" src={icon_queue}/>
+                            <img alt="icon" className="w-[23px] h-[23px] cursor-pointer" src={icon_queue}/>
                         </div>
                         <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center" onClick={() => {onNav('history');}}>
-                            <img alt="icon" className="w-[25px] h-[25px] cursor-pointer" src={icon_history}/>
+                            <img alt="icon" className="w-[23px] h-[23px] cursor-pointer" src={icon_history}/>
                         </div>
                         <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center">
-                            <img alt="icon" className="w-[25px] h-[25px] cursor-pointer" src={icon_vol}/>
+                            <img alt="icon" className="w-[23px] h-[23px] cursor-pointer" src={icon_vol}/>
                         </div>
                         <div className="bg-green-500">
                            

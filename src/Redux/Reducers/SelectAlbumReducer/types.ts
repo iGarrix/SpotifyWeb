@@ -1,4 +1,4 @@
-import { IPagableResponse } from "../../../types";
+import { IPagableResponse, IUser } from "../../../types";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 
 export enum PlayingActionTypes {
@@ -18,11 +18,12 @@ export interface ITrack {
     duration: string,
     image: string,
     tracknameid: string,
+    create: Date,
 }
 
 export interface ITrackResponse {
     track: ITrack | null,
-    trackCreators: string[] | null,
+    trackCreators: IUser[] | null,
 }
 
 export interface IQueue {

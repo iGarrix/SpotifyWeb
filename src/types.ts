@@ -1,3 +1,5 @@
+import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
+
 export enum Theme {
   dark = "dark",
   light = "light",
@@ -16,6 +18,7 @@ export enum VerifyType {
 
 export enum StorageVariables {
   Queue = "queue",
+  History = "history",
   Album = "selectAlbum",
   Track = "selectTrack",
   //Single = "selectSingle"
@@ -39,6 +42,10 @@ export interface IUser {
   country: string;
   verify: string;
   emojie: string;
+}
+
+export interface IHistory {
+    soundobjs : ITrackResponse[],
 }
 
 export interface IPagableResponse<T = any> {
