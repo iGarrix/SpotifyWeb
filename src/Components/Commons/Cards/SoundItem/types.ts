@@ -1,4 +1,4 @@
-import { ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 
 export interface ISoundItem {
     isPlay: boolean,

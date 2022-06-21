@@ -1,12 +1,10 @@
 import { faEllipsisVertical, faFloppyDisk, faHeart, faPause, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { AddToQueue } from "../../../Helpers/QueueHelper";
-import { useActions } from "../../../Hooks/useActions";
-import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IQueue } from "../../../Redux/Reducers/SelectAlbumReducer/types";
-import { StorageVariables } from "../../../types";
-import { SoundOptionModal } from "../Modals/SoundOptionModal";
+import { AddToQueue } from "../../../../Helpers/QueueHelper";
+import { useActions } from "../../../../Hooks/useActions";
+import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
 import "./style.scss";
 import { ISoundItem } from "./types";

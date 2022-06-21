@@ -6,7 +6,7 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { baseUrl, StorageVariables } from "../../../../types";
-import { SoundItem } from "../../../Commons/SoundItem";
+import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 const bg = require('../../../../Assets/Background2.png');
 const icon_skip_forward = require('../../../../Assets/Icons/SkipForward.png');
