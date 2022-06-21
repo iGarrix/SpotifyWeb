@@ -8,6 +8,7 @@ const icon_search = require('../../../Assets/Icons/Search.png');
 const icon_music = require('../../../Assets/Icons/Music.png');
 const icon_library = require('../../../Assets/Icons/Library.png');
 const icon_playlist = require('../../../Assets/Icons/Playlist.png');
+const icon_history = require('../../../Assets/Icons/HistoryWhite.png');
 export const SideBar : React.FC = () => {
 
     const nav = useNavigate();
@@ -22,6 +23,7 @@ export const SideBar : React.FC = () => {
                 <SideBarItem text="Home" isSelect={currentItem === "/"} icon={icon_home} onClick={() => {setCurrentItem("/"); nav(""); }} />
                 <SideBarItem text="Search" isSelect={currentItem === "/search"} icon={icon_search} onClick={() => {setCurrentItem("/search"); nav("search")}} />
                 <SideBarItem text="Genres" isSelect={currentItem === "/genres"} icon={icon_music} onClick={() => {setCurrentItem("/genres"); nav("genres")}} />
+                <SideBarItem text="History" isSelect={currentItem === "/history"} icon={icon_history} onClick={() => {setCurrentItem("/history"); nav("history")}} />
                 <div className="py-3">
                     <hr className="border-dark-100" />
                 </div>

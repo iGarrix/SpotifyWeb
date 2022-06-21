@@ -9,6 +9,7 @@ const inialState: IPlayingStateState = {
   error: "",
   prevPage: null,
   nextPage: null,
+  history: null
 };
 
 export const playingReducer = (
@@ -50,6 +51,14 @@ export const playingReducer = (
         error: "",
       };
     }
+    case PlayingActionTypes.INITHISTORY: {
+      return {
+        ...state,
+        history: action.payload,
+        loading: false,
+        error: "",
+      };
+    }
     case PlayingActionTypes.INITSELECTALBUMS_WAITING: {
       return {
         ...state,
@@ -82,6 +91,12 @@ export const playingReducer = (
       return {
         ...state,
         queue: null,
+      };
+    }
+    case PlayingActionTypes.CLEARHISTORY: {
+      return {
+        ...state,
+        history: null,
       };
     }
 

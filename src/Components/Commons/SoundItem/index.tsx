@@ -1,8 +1,11 @@
 import { faEllipsisVertical, faFloppyDisk, faHeart, faPause, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AddToQueue } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
+import { useTypedSelector } from "../../../Hooks/useTypedSelector";
+import { IQueue } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { StorageVariables } from "../../../types";
 import { SoundOptionModal } from "../Modals/SoundOptionModal";
 
 import "./style.scss";
@@ -14,8 +17,10 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
 
     const { initQueue } = useActions();
 
-    const addtoqueue = async () => {
-        const response = AddToQueue(item);
+    const play = useTypedSelector(state => state.playingReducer.queue?.isPlay);
+
+    const addtoqueue = async (isPlay: any) => {
+        const response = AddToQueue(item, isPlay);
         if (response) {
             await initQueue(response);
         }
@@ -40,7 +45,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 <h1 className="text-thin">{item.track?.duration.replace(",", ":").substring(0, 4)}</h1>
                 <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all`} icon={faHeart} />
                 <SoundOptionModal options={[{
-                    title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: addtoqueue
+                    title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => {addtoqueue(play) }
                 }, 
                 {title: "Save", icon: <FontAwesomeIcon icon={faFloppyDisk} />, onClick: save}]} 
                 trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all" icon={faEllipsisVertical} />} />

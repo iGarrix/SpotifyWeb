@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 import {IGetTracksRequest, IGetTracksResponse, IQueue, PlayingAction, PlayingActionTypes } from "./types";
-import { IPagableResponse } from "../../../types";
+import { IHistory, IPagableResponse } from "../../../types";
 
 
 
@@ -20,9 +20,21 @@ export const initQueue = (data: IQueue) => {
     };
 };
 
+export const initHistory = (data: IHistory) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+      dispatch({ type: PlayingActionTypes.INITHISTORY, payload: data });
+  };
+};
+
 export const clearQueue = () => {
   return async (dispatch: Dispatch<PlayingAction>) => {
       dispatch({ type: PlayingActionTypes.CLEARQUEUE });
+  };
+};
+
+export const clearHistory = () => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+      dispatch({ type: PlayingActionTypes.CLEARHISTORY });
   };
 };
 

@@ -24,6 +24,15 @@ export const ListeningAlbum: React.FC = () => {
     const { initSelectAlbum, initQueue, getTracks } = useActions();
     const nav = useNavigate();
 
+    const scrollHadler = async () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            if (playingReducer.nextPage && !playingReducer.loading) {
+                await FetchNext();
+            }
+        }
+    }
+
+
     useEffect(() => {
         const work = async () => {
             const selectedAlbum = localStorage.getItem(StorageVariables.Album);
@@ -41,17 +50,29 @@ export const ListeningAlbum: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (page: any) => {
             if (id && !playingReducer.tracks) {
                 const rq: IGetTracksRequest = {
                     albomId: id,
-                    page: 1,
+                    page: page,
                 }
                 await getTracks(rq);
             }
         }
-        fetchData();
+        fetchData(1);
     }, []);
+
+    useEffect(() => {
+        const listener = () => {
+            document.addEventListener("scroll", scrollHadler);
+        }
+        listener();
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
+        }
+
+    }, [playingReducer.nextPage && playingReducer.loading])
 
     const FetchNext = async () => {
         if (playingReducer.tracks && playingReducer.nextPage && id) {
@@ -96,14 +117,8 @@ export const ListeningAlbum: React.FC = () => {
             <div className="w-full h-full grid grid-cols-5 gap-12">
                 <div className="flex justify-end col-span-2">
                     <div className="flex flex-col fixed">
-                        {playingReducer.loading || !playingReducer.album ?
-                            <div className="h-96 w-96 object-cover rounded-xl bg-gray-700 animate-pulse" >
-
-                            </div>
-                            :
-                            <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
-                                className="h-96 w-96 object-cover rounded-xl bg-cover" />
-                        }
+                        <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
+                            className="h-96 w-96 object-cover rounded-xl bg-cover" />
                         <div className="py-3 flex items-center justify-between w-full">
                             <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
                                 <img alt="icon" className="w-[18px]" src={icon_shuffle} />
@@ -133,41 +148,26 @@ export const ListeningAlbum: React.FC = () => {
                 </div>
                 <div className="flex justify-start w-full col-span-3 mb-32 z-10">
                     <div className="flex flex-col gap-4 w-full">
-                        {
-                            playingReducer.loading ?
-                                <div className="flex flex-col gap-1">
-                                    <h1 className="font-medium font-['Lexend'] text-4xl h-8 rounded-xl bg-gray-700 w-60"></h1>
-                                    <p className="font-thin bg-gray-700 w-48 h-4 rounded-xl"></p>
-                                </div>
-                                :
-                                <div className="flex flex-col gap-1">
-                                    <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
-                                    <p className="font-thin">{playingReducer.album?.albomDto?.description}</p>
-                                </div>
-
-                        }
-                        <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
-                            {playingReducer.loading ?
-                                <div className="flex flex-col gap-4">
-                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div>
-                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div>
-                                    <div className="w-full h-10 object-cover rounded-xl bg-gray-500 animate-pulse"></div>
-                                </div>
-                                :
-                                <div className="flex flex-col gap-[18px] h-full">
-                                    {
-                                        playingReducer.tracks?.map((item) => {
-                                            return (
-                                                <SoundItem key={Guid.create().toString()} item={item}
-                                                    isLiked={true}
-                                                    isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                                    onClick={() => { onSelectTrack(item) }} />
-                                            )
-                                        })
-                                    }
-                                </div>
+                        <div className="flex flex-col gap-1">
+                            <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
+                            {
+                                playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
+                                <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {(new Date().getDate() - new Date(playingReducer.album?.albomDto?.releasealbom).getDate())} days ago</p>
                             }
-
+                        </div>
+                        <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
+                            <div className="flex flex-col gap-[18px] h-full">
+                                {
+                                    playingReducer.tracks?.map((item) => {
+                                        return (
+                                            <SoundItem key={Guid.create().toString()} item={item}
+                                                isLiked={true}
+                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                                onClick={() => { onSelectTrack(item) }} />
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

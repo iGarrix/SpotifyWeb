@@ -25,6 +25,10 @@ export const LayStartup: React.FC = () => {
   const nav = useNavigate();
   return (
     <div className="grid grid-cols-8 w-full nin-h-screen">
+      {
+        rx.loading &&
+        <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
+      }
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>

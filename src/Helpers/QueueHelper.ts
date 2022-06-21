@@ -27,7 +27,7 @@ export const SetPlayingTrack = (item: ITrackResponse | null) => {
     return null;
 }
 
-export const AddToQueue = (item: ITrackResponse | null) => {
+export const AddToQueue = (item: ITrackResponse | null, isPlay: boolean | any) => {
     if (item) {
         const storageQueue = localStorage.getItem(StorageVariables.Queue);
         if (storageQueue) {
@@ -35,17 +35,17 @@ export const AddToQueue = (item: ITrackResponse | null) => {
             const index = queue.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId);
             if (index >= 0) {
                 const newQueue: IQueue = {
-                    soundobjs: [(JSON.parse(storageQueue) as IQueue).soundobjs[0], item, ...(JSON.parse(storageQueue) as IQueue).soundobjs.filter(f => f.track?.returnId !== item.track?.returnId)],
-                    isPlay: false,
+                    soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs],
+                    isPlay,
                 };
                 localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
                 return newQueue;
             }
-            const newQueue: IQueue = { soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs, item], isPlay: false };
+            const newQueue: IQueue = { soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs, item], isPlay };
             localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
             return newQueue;
         }
-        const newQueue: IQueue = { soundobjs: [item], isPlay: false };
+        const newQueue: IQueue = { soundobjs: [item], isPlay };
         localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
         return newQueue;
     }
@@ -76,6 +76,37 @@ export const AddToHistory = (item: ITrackResponse | null) => {
         };
         localStorage.setItem(StorageVariables.History, JSON.stringify(newHistory));
         return newHistory;
+    }
+    return null;
+}
+
+export const RemoveWithHistory = (trackId : string) => {
+    if (trackId) {
+        const storageHistory = localStorage.getItem(StorageVariables.History);
+        if (storageHistory) {     
+            const newHistory: IHistory = {
+                soundobjs: [...(JSON.parse(storageHistory) as IHistory).soundobjs.filter(f => f.track?.returnId !== trackId)]
+            };
+            localStorage.setItem(StorageVariables.History, JSON.stringify(newHistory));
+            return newHistory;
+        }
+        return null;
+    }
+    return null;
+}
+
+export const RemoveWithQueue = (trackId : string, isPlay: boolean) => {
+    if (trackId) {
+        const storageQueue = localStorage.getItem(StorageVariables.Queue);
+        if (storageQueue) {     
+            const newQueue: IQueue = {
+                soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs.filter(f => f.track?.returnId !== trackId)],
+                isPlay,
+            };
+            localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
+            return newQueue;
+        }
+        return null;
     }
     return null;
 }
