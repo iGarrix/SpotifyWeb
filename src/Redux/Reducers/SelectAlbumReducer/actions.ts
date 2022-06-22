@@ -22,6 +22,7 @@ export const initQueue = (data: IQueue) => {
 
 export const initHistory = (data: IHistory) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
+    dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       dispatch({ type: PlayingActionTypes.INITHISTORY, payload: data });
   };
 };

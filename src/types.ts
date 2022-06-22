@@ -64,3 +64,5 @@ export interface IRefreshModel {
   accessToken: string,
   refreshToken: string,
 }
+
+export const TempTake = 10;

@@ -15,6 +15,7 @@ export const LayStartup: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
 
   const rx = useTypedSelector(state => state.playingReducer);
+  const load = useTypedSelector(state => state);
 
   useEffect(() => {
     if (rx.queue) {
@@ -26,13 +27,13 @@ export const LayStartup: React.FC = () => {
   return (
     <div className="grid grid-cols-8 w-full nin-h-screen">
       {
-        rx.loading &&
+        load.mySingleReducer.loading || load.myAlbumsReducer.loading || load.playingReducer.loading &&
         <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
       }
       <div className="col-span-1 w-full h-full">
         <SideBar />
       </div>
-      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-32" : ""}`}>
+      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-[130px]" : ""}`}>
         <Header />
         <Outlet />
       </div>

@@ -1,4 +1,5 @@
 import { IPagableResponse } from "../../../types";
+import { ITrackResponse } from "../SelectAlbumReducer/types";
 
 export enum MySingleActionTypes {
   INITMYSINGLE = "INITMYSINGLE",
@@ -25,7 +26,7 @@ export interface IPagableMySingleItem {
 }
 
 export interface IMySingleStateState {
-  singles: IPagableMySingleItem[] | null;
+  singles: ITrackResponse[] | null;
   prevPage: number | null,
   nextPage: number | null,
   loading: boolean;

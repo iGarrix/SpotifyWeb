@@ -35,13 +35,7 @@ export const Welcome: React.FC = () => {
           <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer" 
             onClick={onPause} 
             style={{ backgroundImage: `url(${bg})` }}> 
-            { 
-              playingReducer.queue?.isPlay ? 
-                <img alt="icon" className="w-[30px] -translate-x-[0.5px]" src={icon_pause} /> 
-                : 
-                <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} /> 
- 
-            } 
+            <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} />
           </div> 
         </div> 
       </div> 

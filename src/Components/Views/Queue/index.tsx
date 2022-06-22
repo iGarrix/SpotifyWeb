@@ -11,13 +11,16 @@ export const Queue: React.FC = () => {
 
     let rx = useTypedSelector(state => state.playingReducer);
 
-    const {initQueue} = useActions();
+    const {initQueue, clearQueue} = useActions();
 
     const RmWithQueue = (id: any, isPlay: boolean | any) => {
         if (id) {
             var response = RemoveWithQueue(id, isPlay);
             if (response) {
                 initQueue(response);
+            }
+            else {
+                clearQueue();
             }
         }
     }
@@ -30,6 +33,13 @@ export const Queue: React.FC = () => {
                         <h1 className="font-semibold text-2xl">Selected track</h1>
                         <SoundHistoryItem options={[{
                             title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
+                        },
+                        {
+                            title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { 
+                                if (rx && rx.queue) {                 
+                                    RmWithQueue(rx.queue.soundobjs[0].track?.returnId, rx.queue?.isPlay) 
+                                }
+                            }
                         }]} track={rx.queue.soundobjs[0].track} trackCreators={rx.queue.soundobjs[0].trackCreators} onClick={() => { }} />
                         {
                             rx.queue.soundobjs.length === 1 ?

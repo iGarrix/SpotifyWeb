@@ -29,7 +29,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
     }
 
     return (
-        <div className={`flex items-center justify-between rounded-[18px] px-4 py-[12px] bg-no-repeat ${isPlay ? `bg_select_sound` : "bg-dark-100"}`}>
+        <div className={`flex items-center justify-between rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound` : "bg-dark-100"}`}>
             <div className="flex gap-6 items-center">
                 {
                     isPlay ?

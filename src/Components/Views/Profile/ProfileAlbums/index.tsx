@@ -54,7 +54,7 @@ export const ProfileAlbums : React.FC = () => {
 
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
             {
                 rx.loading ?
                 <QuadraticLoader isVisisble={true} />

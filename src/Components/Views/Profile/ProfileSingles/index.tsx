@@ -1,38 +1,44 @@
 import { faArrowDown, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { Guid } from "guid-typescript";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest, IPagableMySingleItem } from "../../../../Redux/Reducers/MySingleReducer/types";
+import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
+import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
-export const ProfileSingles : React.FC = () => {
+export const ProfileSingles: React.FC = () => {
 
     const nav = useNavigate();
 
-    const { addMySingle } = useActions();
+    const { getMySingle, addMySingle, initQueue } = useActions();
 
     const rx = useTypedSelector(state => state.mySingleReducer);
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
     const user = useTypedSelector(state => state.userReducer.profile);
+    const playingReducer = useTypedSelector(state => state.playingReducer);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {      
-    //         if (user && !singles && rx.error !== "List empty") {           
-    //             const rq: IGetAllMySingleRequest = {
-    //                 email: user.email,
-    //                 page: 1
-    //             }
-    //             await getMySingle(rq);       
-    //         }     
-    //     }
-    //     fetchData();
-    // }, [user, singles]);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user && !singles && rx.error !== "List empty") {
+                const rq: IGetAllMySingleRequest = {
+                    email: user.email,
+                    page: 1
+                }
+                await getMySingle(rq);
+            }
+        }
+        fetchData();
+
+    }, [user, singles]);
 
     const FetchNext = async () => {
-        if (rx.singles && rx.nextPage && user) {       
+        if (rx.singles && rx.nextPage && user) {
             const rq: IGetAllMySingleRequest = {
                 email: user?.email,
                 page: rx.nextPage,
@@ -41,54 +47,49 @@ export const ProfileSingles : React.FC = () => {
         }
     }
 
-    // const onSelectSingle = (item: IPagableMySingleItem | null) => {
-    //     if (item) {          
-    //         localStorage.setItem("selectedSingle", JSON.stringify(item));
-    //         nav("/single/" + item?.albomDto?.returnId);
-    //     }
-    // }
+    const onSelectTrack = (item: ITrackResponse | null) => {
+        const response = SetPlayingTrack(item);
+        if (response) {
+            initQueue(response);
+            AddToHistory(item);
+        }
+    }
 
     return (
         <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
             {
                 rx.loading ?
-                <QuadraticLoader isVisisble={true} />
-                :
-                singles && rx.error.length === 0 ?
-                <div className="w-full flex flex-col items-center gap-20">
-                        <div className="grid grid-cols-4 gap-16">
-                            {/* {
+                    <QuadraticLoader isVisisble={true} />
+                    :
+                    singles && rx.error.length === 0 ?
+                        <div className="w-full h-full flex flex-col gap-[18px] px-[330px]">
+                            {
                                 singles.map(item => {
                                     return (
-                                        <SingleItem key={Guid.create().toString()} onClick={() => {onSelectSingle(item); } } name={item.albomDto?.name} title={`Single`} imageSrc={item.albomDto?.image} />
+                                        <SoundItem key={Guid.create().toString()} 
+                                        onClick={() => { onSelectTrack(item) }}
+                                        isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false} 
+                                        isLiked={false} item={item}
+                                        />
                                     )
                                 })
-                            }   */}
+                            }
                         </div>
-                        {
-                            rx.nextPage ?
-                            <div className="flex w-full justify-end py-5 px-64">
-                                <button onClick={FetchNext}><FontAwesomeIcon className="text-2xl bg-white text-black rounded-full px-4 py-3" icon={faArrowDown} /></button>
+                        :
+                        <>
+                            <FontAwesomeIcon className="text-7xl font-medium" icon={faMusic} />
+                            <div className="flex flex-col items-center gap-8">
+                                <div className="flex flex-col gap-3 items-center">
+                                    <h1 className="font-medium text-3xl">Create you first single song</h1>
+                                    <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
+                                </div>
+                                <div>
+                                    <DefaultButton onClick={() => { console.log("gg") }} text={"Upload you first single song"} />
+                                </div>
                             </div>
-                            :
-                            null
-                        }
-                </div>
-                :
-                <>
-                    <FontAwesomeIcon className="text-7xl font-medium" icon={faMusic}  />
-                    <div className="flex flex-col items-center gap-8">
-                        <div className="flex flex-col gap-3 items-center">
-                            <h1 className="font-medium text-3xl">Create you first single song</h1>
-                            <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
-                        </div>
-                        <div>
-                            <DefaultButton onClick={() => { console.log("gg") } } text={"Upload you first single song"}/>
-                        </div>
-                    </div>
-                </>
+                        </>
             }
-            
+
         </div>
     )
 }

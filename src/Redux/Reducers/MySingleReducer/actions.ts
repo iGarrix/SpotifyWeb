@@ -3,15 +3,16 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { IGetAllMySingleRequest, MySingleAction, MySingleActionTypes, ISingle } from "./types";
+import { ITrackResponse, PlayingAction, PlayingActionTypes } from "../SelectAlbumReducer/types";
+import { IGetAllMySingleRequest, MySingleAction, MySingleActionTypes } from "./types";
 
 export const getMySingle = (data: IGetAllMySingleRequest) => {
   return async (dispatch: Dispatch<MySingleAction>) => {
     try {
       dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      const response = await http.get<IPagableResponse<ISingle>>(
-        `api/Albom/GetAllByCreator?email=${data.email}&page=${data.page}&isSingle=true`,
+      const response = await http.get<IPagableResponse<ITrackResponse>>(
+        `api/Track/GetSingles?userEmail=${data.email}&page=${data.page}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: MySingleActionTypes.INITMYSINGLE, payload: response.data });
@@ -38,8 +39,8 @@ export const addMySingle = (data: IGetAllMySingleRequest) => {
     try {
       dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      const response = await http.get<IPagableResponse<ISingle>>(
-        `api/Albom/GetAllByCreator?email=${data.email}&page=${data.page}&isSingle=true`,
+      const response = await http.get<IPagableResponse<ITrackResponse>>(
+        `api/Track/GetSingles?userEmail=${data.email}&page=${data.page}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: MySingleActionTypes.ADDMYSINGLE, payload: response.data });

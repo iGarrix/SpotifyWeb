@@ -103,10 +103,16 @@ export const RemoveWithQueue = (trackId : string, isPlay: boolean) => {
                 soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs.filter(f => f.track?.returnId !== trackId)],
                 isPlay,
             };
+            if (newQueue.soundobjs.length === 0) {
+                localStorage.removeItem(StorageVariables.Queue);
+                return null
+            }        
             localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
             return newQueue;
         }
+        localStorage.removeItem(StorageVariables.Queue);
         return null;
     }
+    localStorage.removeItem(StorageVariables.Queue);
     return null;
 }

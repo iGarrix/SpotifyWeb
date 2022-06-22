@@ -98,15 +98,16 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <div className="overflow-x-hidden text-white flex flex-col">
+    <div className="overflow-x-hidden text-white flex flex-col h-full">
       {
         user && openModal ?
           <FullScreenModal visible center>
             <RenameBioModal onSave={onSaveChanges} onClose={onCloseModal} />
           </FullScreenModal> : null
       }
-      <div className="w-full h-full flex bg-cover bg-no-repeat object-cover bg-fixed" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
-        <div className="flex flex-col w-full px-20 pt-16">
+      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
+        <div className="flex flex-col w-full px-20 pt-16 z-[2]">
           <div className="flex gap-6 w-full">
             {
               user?.avatar.length !== 0 ? ImageSrc !== "" ? 
@@ -132,12 +133,11 @@ export const Profile: React.FC = () => {
               <p className="font-medium text-lg">{user?.emojie}</p>
             </div>
           </div>
-          <div className="flex items-end justify-end py-6">
+          <div className="flex items-end justify-end pb-6">
               <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
               <ProfileButton text={
                 <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"><img alt="crop" src={icon_crop} /> <h1 className="text-lg">Change image</h1></div></label>     
-              } onClick={() => {}} isSelect={true} />
-              
+              } onClick={() => {}} isSelect={true} />       
           </div>
         </div>
       </div>
