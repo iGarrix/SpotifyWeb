@@ -33,8 +33,17 @@ export const Profile: React.FC = () => {
         setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
         user.verify === VerifyType.artist ? <FontAwesomeIcon icon={faCompactDisc} width={20} height={20} /> :
         user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
-        setBackgroundSrc(user.background.includes("http") ? user.background
-        : user.background.length !== 0 ? baseUrl + "Images/Users/" + user.background : 'https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
+        if (user.background && user.background.length !== 0) {
+            if (user.background.includes("http")) {
+              setBackgroundSrc(user.background);
+            }
+            else {
+              setBackgroundSrc(baseUrl + "Images/Users/" + user.background);
+            }
+        }
+        else {
+          setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
+        }
     }
   }, [user]);
 

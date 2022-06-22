@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
     }, [user]);
         
     return (
-        <div className="py-2 px-10 bg-dark-200 flex justify-end overflow-x-hidden sticky top-0 z-[1000]">
+        <div className="py-2 px-10 bg-dark-200 flex justify-end overflow-x-hidden sticky top-0 z-[11000]">
             <div className="flex gap-7 items-center">
                 {
                     user ?
@@ -43,7 +43,9 @@ export const Header: React.FC = () => {
                                 </div>} />
                             </div> :
                             <div className="flex items-center gap-6">
-                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover" style={{backgroundImage: `url('${bg}')`}}>
+                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer" 
+                                onClick={() => {nav('/upload')}}
+                                style={{backgroundImage: `url('${bg}')`}}>
                                     <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
                                 </div>
                                 <FixedModal trigger={<div className="bg-green-600 w-12 h-12 rounded-lg px-3 py-1 cursor-pointer flex justify-center items-center">
