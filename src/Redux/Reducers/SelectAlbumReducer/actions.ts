@@ -20,6 +20,12 @@ export const initQueue = (data: IQueue) => {
     };
 };
 
+export const setPlayingTrack = (play: boolean) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+      dispatch({ type: PlayingActionTypes.SETPLAYING, payload: play });
+  };
+};
+
 export const initHistory = (data: IHistory) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });

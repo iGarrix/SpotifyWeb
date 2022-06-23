@@ -65,6 +65,16 @@ export const playingReducer = (
         loading: action.payload,
       };
     }
+    case PlayingActionTypes.SETPLAYING: {
+      let queue = state.queue;
+      if (queue) {   
+        queue.isPlay = action.payload;
+      }
+      return {
+        ...state,
+        queue: queue,
+      };
+    }
     case PlayingActionTypes.INITSELECTALBUMS_ERROR: {
       return {
         ...state,

@@ -1,0 +1,15 @@
+.slider {
+    @apply active:cursor-pointer rounded-[0.5rem] h-[6px] w-full;
+    background: linear-gradient(180deg, #74AAFE -91.31%, #0048bd 42.86%, #B1D0FF 202.24%);
+
+    outline: none;
+    
+    &::-moz-range-thumb {
+        //@apply border-[0.4rem] border-white bg-dark-100 outline-0 rounded-full w-[10px] h-[10px];
+        @apply bg-white border-0 outline-0 rounded-full w-[9px] h-[9px];
+    }
+    
+    &::-webkit-slider-thumb {
+       @apply bg-primary-100;
+    }
+}

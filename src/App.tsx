@@ -25,12 +25,13 @@ import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute"
 import { StudioIntro } from "./Components/IntroView/StudioIntro";
 import { UploadIntro } from "./Components/IntroView/UploadIntro";
 import { History } from "./Components/Views/History";
+import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 
 
 function App() {
   const [isDark, setDark] = useState(false);
 
-  const {initQueue} = useActions();
+  const { initQueue } = useActions();
 
   const user = useTypedSelector(state => state.userReducer.profile);
 
@@ -50,7 +51,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller bg-gradient-to-b from-dark-200/90 to-dark-200 ${isDark ? "dark" : ""
+      className={`w-full min-h-screen flex scroller bg-gradient-to-b from-dark-200/80 to-dark-200 ${isDark ? "dark" : ""
         }`}
     >
       <Routes>
@@ -67,7 +68,7 @@ function App() {
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
-          </Route>   
+          </Route>
 
           <Route path="profile" element={<LayProfile />}>
             <Route path="" element={<Profile />}>
@@ -78,13 +79,17 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="s&a" element={<AuthorizateRoute user={user}><Outlet/></AuthorizateRoute>}>
+        <Route path="s&a" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route index element={<StudioIntro />} />
           <Route path="creativestudio" element={<div>studio</div>} />
-          <Route path="analytics" element={<div>analytics</div>} />
+          <Route path="analytics" element={<LayAnalytics />}>
+            <Route index element={<Welcome />} />
+            <Route path="audience" element={<Welcome />} />
+            <Route path="research" element={<Welcome />} />
+          </Route>
         </Route>
 
-        <Route path="upload" element={<AuthorizateRoute user={user}><Outlet/></AuthorizateRoute>}>
+        <Route path="upload" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route index element={<UploadIntro />} />
           <Route path="album" element={<div>album</div>} />
           <Route path="single" element={<div>single</div>} />

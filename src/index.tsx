@@ -9,10 +9,15 @@ import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 import setupInterceptors from "./setupInterceptors";
+import { StorageVariables } from "./types";
 
 const theme = localStorage.getItem("theme");
 if (theme === null || theme === undefined) {
   localStorage.setItem("theme", "light");
+}
+const volume = localStorage.getItem(StorageVariables.Volume);
+if (!volume) {
+  localStorage.setItem(StorageVariables.Volume, "100");
 }
 
 setupInterceptors();

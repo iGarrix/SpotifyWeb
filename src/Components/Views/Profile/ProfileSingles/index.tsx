@@ -23,9 +23,19 @@ export const ProfileSingles: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const playingReducer = useTypedSelector(state => state.playingReducer);
 
+    const scrollHadler = async () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            if (rx.nextPage && !rx.loading) {
+                const top = document.documentElement.scrollTop;
+                await FetchNext();
+                document.documentElement.scrollTop = top;
+            }
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
-            if (user && !singles && rx.error !== "List empty") {
+            if (user) {
                 const rq: IGetAllMySingleRequest = {
                     email: user.email,
                     page: 1
@@ -35,7 +45,19 @@ export const ProfileSingles: React.FC = () => {
         }
         fetchData();
 
-    }, [user, singles]);
+    }, [user]);
+
+    useEffect(() => {
+        const listener = () => {
+            document.addEventListener("scroll", scrollHadler);
+        }
+        listener();
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
+        }
+
+    }, [rx.nextPage && rx.loading])
 
     const FetchNext = async () => {
         if (rx.singles && rx.nextPage && user) {
@@ -84,7 +106,7 @@ export const ProfileSingles: React.FC = () => {
                                     <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
                                 </div>
                                 <div>
-                                    <DefaultButton onClick={() => { console.log("gg") }} text={"Upload you first single song"} />
+                                    <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single song"} />
                                 </div>
                             </div>
                         </>

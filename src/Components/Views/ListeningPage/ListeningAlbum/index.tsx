@@ -87,6 +87,7 @@ export const ListeningAlbum: React.FC = () => {
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
         if (response) {
+            response.isPlay = true;
             initQueue(response);
             AddToHistory(item);
         }
@@ -110,11 +111,11 @@ export const ListeningAlbum: React.FC = () => {
         <div className="w-full h-full pt-[7%] px-[15%] text-white relative">
             {
                 playingReducer.album ?
-                    <img alt="bg" src={`${baseUrl}Images/AlbomTemplates/${playingReducer.album?.albomDto?.templateimage}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -1 }} />
+                    <img alt="bg" src={`${baseUrl}Images/AlbomTemplates/${playingReducer.album?.albomDto?.templateimage}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} />
                     :
                     null
             }
-            <div className="w-full h-full grid grid-cols-5 gap-12">
+            <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
                 <div className="flex justify-end col-span-2">
                     <div className="flex flex-col fixed">
                         <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}

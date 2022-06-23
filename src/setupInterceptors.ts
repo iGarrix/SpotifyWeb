@@ -37,8 +37,8 @@ const setup = () => {
                         }
                     } catch (_error) {
                         if (axios.isAxiosError(_error)) {
-                            const serverError = _error as AxiosError<any>;
-                            if (serverError) {     
+                            const serverError = _error as AxiosError<any>;    
+                            if (serverError) {
                                 ClearRedux(dispatch);
                                 Navigate({to: "/authorizate", replace: true});
                             }
@@ -51,6 +51,7 @@ const setup = () => {
                     }
                 }
             }
+
             return Promise.reject(err);
         }
     );

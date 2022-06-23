@@ -1,5 +1,6 @@
 import { faCheck, faCompactDisc, faEllipsisVertical, faFloppyDisk, faPlay, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import React from "react";
 import { baseUrl, IUser, VerifyType } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
@@ -23,7 +24,13 @@ export const SoundHistoryItem : React.FC<ISoundHistoryItem> = ({track, trackCrea
                         trackCreators[0].verify === VerifyType.artist ? faCompactDisc : faUser : faUser}/></p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-gray-500 font-medium">Duration {track?.duration.replace(",", ":").substring(0, 4)}</p>
+                        <div className="text-gray-500 font-medium flex gap-1">Duration 
+                            {
+                                track &&
+                                <p>{moment.utc(Number.parseFloat(track?.duration) * 1000).format("mm:ss")}</p>
+                                
+                            }      
+                        </div>
                         {
                             track?.create &&
                             <p className="text-gray-500 font-medium">realised {(new Date().getDate() - new Date(track.create).getDate())} days ago</p>
