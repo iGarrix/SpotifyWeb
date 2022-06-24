@@ -15,7 +15,4 @@ export function ClearRedux (dispatch: Dispatch<any>) {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshtoken");
     localStorage.removeItem("expiredin");
-    // localStorage.removeItem(StorageVariables.Queue);
-    // localStorage.removeItem(StorageVariables.Track);
-    // localStorage.removeItem(StorageVariables.Album);
 };

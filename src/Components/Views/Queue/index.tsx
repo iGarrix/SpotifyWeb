@@ -1,10 +1,12 @@
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
-import React from "react"
+import React, { useEffect } from "react"
 import { RemoveWithQueue } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
+import { IQueue } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const Queue: React.FC = () => {
@@ -12,6 +14,8 @@ export const Queue: React.FC = () => {
     let rx = useTypedSelector(state => state.playingReducer);
 
     const {initQueue, clearQueue} = useActions();
+
+    let page = TempTake;
 
     const RmWithQueue = (id: any, isPlay: boolean | any) => {
         if (id) {
@@ -25,10 +29,39 @@ export const Queue: React.FC = () => {
         }
     }
 
+    const scrollHadler = () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            const storage_queue = localStorage.getItem(StorageVariables.Queue);
+            if (storage_queue) {
+                let stor_queue = JSON.parse(storage_queue) as IQueue;
+                const size = stor_queue.soundobjs.length;
+                page += TempTake;
+                stor_queue.soundobjs.splice(page, size);
+                initQueue(stor_queue);
+            }
+        }
+    }
+
+    useEffect(() => {
+        const storage_queue = localStorage.getItem(StorageVariables.Queue);
+        if (storage_queue) {
+            let stor_queue = JSON.parse(storage_queue) as IQueue;
+            const size = stor_queue.soundobjs.length;
+            stor_queue.soundobjs.splice(TempTake, size);
+            initQueue(stor_queue);
+        }
+
+        document.addEventListener("scroll", scrollHadler);
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
+        }
+    }, []);
+
     return (
         <div className="w-full flex flex-col gap-6 items-start text-white px-[3%] py-[2%]">
             {
-                rx && rx.queue ?
+                rx && rx.queue && rx.queue.soundobjs.length > 0 ?
                     <div className="flex flex-col gap-6">
                         <h1 className="font-semibold text-2xl">Selected track</h1>
                         <SoundHistoryItem options={[{

@@ -31,7 +31,9 @@ import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 function App() {
   const [isDark, setDark] = useState(false);
 
-  const { initQueue } = useActions();
+  //const { initQueue } = useActions();
+
+  document.documentElement.scrollTo(0, 0);
 
   const user = useTypedSelector(state => state.userReducer.profile);
 
@@ -44,7 +46,7 @@ function App() {
           queue.isPlay = false;
           localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
         }
-        initQueue(queue);
+        //initQueue(queue);
       }
     }
   }, []);
