@@ -1,6 +1,6 @@
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useTransition } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -85,10 +85,10 @@ export const PlayingFooter: React.FC = () => {
     }, [currTime, duration]);
 
 
-    const SeekChange = (newValue: any) => {
+    const SeekChange = (newValue: any) => {       
         setTimeout(() => {
-            audio.current.currentTime = newValue;
             setSeekTime(newValue);
+            audio.current.currentTime = newValue;
         }, 100);
     };
 
@@ -106,14 +106,14 @@ export const PlayingFooter: React.FC = () => {
         }
     }
 
-    const ChangeVolume = (e : any) => {
+    const ChangeVolume = (e: any) => {
         setVolume(e);
         audio.current.volume = e / 100;
         localStorage.setItem(StorageVariables.Volume, `${e}`)
     }
 
     const onMute = () => {
-        if (volume > 0) {   
+        if (volume > 0) {
             setVolume(0);
             audio.current.volume = 0 / 100;
         }
@@ -121,7 +121,7 @@ export const PlayingFooter: React.FC = () => {
             const vol = localStorage.getItem(StorageVariables.Volume);
             if (vol) {
                 setVolume(Number.parseInt(vol));
-                audio.current.volume = Number.parseInt(vol) / 100;           
+                audio.current.volume = Number.parseInt(vol) / 100;
             }
         }
     }
@@ -183,7 +183,8 @@ export const PlayingFooter: React.FC = () => {
                                     <div className="col-span-10 flex items-center">
                                         {
                                             !isNaN(seekTime) &&
-                                            <Slider min={0} max={Number.parseFloat(duration.toFixed(0))} value={seekTime} onChange={(e: any) => { SeekChange(e.target.value) }} />
+                                            <Slider min={0} max={Number.parseFloat(duration.toFixed(0))} value={seekTime}                                          
+                                            onChange={(e: any) => { SeekChange(e.target.value) }} />
                                         }
                                     </div>
                                     <div className="col-span-1 flex items-center">
@@ -197,13 +198,13 @@ export const PlayingFooter: React.FC = () => {
                             <div className="flex items-center gap-2">
                                 {
                                     volume > 60 ?
-                                    <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volfull} onClick={() => {onMute()}} />
-                                    :  volume > 40 && volume <= 60 ?
-                                    <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmedium} onClick={() => {onMute()}} />
-                                    : volume > 0 && volume <= 40 ?
-                                    <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_vollow} onClick={() => {onMute()}} />
-                                    :
-                                    <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmute} onClick={() => {onMute()}} />
+                                        <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volfull} onClick={() => { onMute() }} />
+                                        : volume > 40 && volume <= 60 ?
+                                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmedium} onClick={() => { onMute() }} />
+                                            : volume > 0 && volume <= 40 ?
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_vollow} onClick={() => { onMute() }} />
+                                                :
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmute} onClick={() => { onMute() }} />
 
                                 }
                                 <Slider min={0} max={100} value={volume} onChange={(e: any) => { ChangeVolume(e.target.value) }} />
