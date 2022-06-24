@@ -87,7 +87,7 @@ export const ListeningAlbum: React.FC = () => {
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
         if (response) {
-            response.isPlay = true;
+            //response.isPlay = true;
             initQueue(response);
             AddToHistory(item);
         }
