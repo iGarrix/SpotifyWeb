@@ -18,7 +18,7 @@ import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 import { IQueue } from "./Redux/Reducers/SelectAlbumReducer/types";
-import { StorageVariables } from "./types";
+import { StorageVariables, TempTake } from "./types";
 import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
@@ -26,29 +26,42 @@ import { StudioIntro } from "./Components/IntroView/StudioIntro";
 import { UploadIntro } from "./Components/IntroView/UploadIntro";
 import { History } from "./Components/Views/History";
 import { LayAnalytics } from "./Components/Layout/LayAnalytics";
+import { OverviewProfile } from "./Components/Views/OverViewProfile";
 
 
 function App() {
   const [isDark, setDark] = useState(false);
 
-  //const { initQueue } = useActions();
+  const { initQueue, setPlayingTrack } = useActions();
 
   document.documentElement.scrollTo(0, 0);
 
   const user = useTypedSelector(state => state.userReducer.profile);
 
   useEffect(() => {
-    const queueStorage = localStorage.getItem(StorageVariables.Queue);
-    if (queueStorage) {
-      let queue: IQueue = (JSON.parse(queueStorage) as IQueue);
-      if (queue) {
-        if (queue.isPlay === true) {
-          queue.isPlay = false;
-          localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+    // const queueStorage = localStorage.getItem(StorageVariables.Queue);
+    // if (queueStorage) {
+    //   let queue: IQueue = (JSON.parse(queueStorage) as IQueue);
+    //   if (queue) {
+    //     if (queue.isPlay === true) {
+    //       queue.isPlay = false;
+    //       localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+    //     }
+    //     initQueue(queue);
+    //   }
+    // }
+
+    const storage_queue = localStorage.getItem(StorageVariables.Queue);
+        if (storage_queue) {
+            let stor_queue = JSON.parse(storage_queue) as IQueue;
+            const size = stor_queue.soundobjs.length;
+            if (stor_queue.isPlay === true) {
+              stor_queue.isPlay = false;
+              localStorage.setItem(StorageVariables.Queue, JSON.stringify(stor_queue));
+            }
+            stor_queue.soundobjs?.splice(TempTake, size);
+            initQueue(stor_queue);
         }
-        //initQueue(queue);
-      }
-    }
   }, []);
 
   return (
@@ -70,6 +83,10 @@ function App() {
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
+          </Route>
+
+          <Route path="overview" element={<Outlet />}>
+            <Route path=":nickname" element={<OverviewProfile />} />
           </Route>
 
           <Route path="profile" element={<LayProfile />}>

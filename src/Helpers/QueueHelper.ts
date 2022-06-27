@@ -52,6 +52,20 @@ export const AddToQueue = (item: ITrackResponse | null, isPlay: boolean | any) =
     return null;
 }
 
+export const NextTrackInQeueue = () => {
+    const storageQueue = localStorage.getItem(StorageVariables.Queue);
+        if (storageQueue) {
+            let queue : IQueue = JSON.parse(storageQueue) as IQueue;
+            if (queue.soundobjs.length > 1) {
+                queue.soundobjs.shift();        
+                localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                return queue;
+            }
+            localStorage.removeItem(StorageVariables.Queue);
+            return null
+        }
+}
+
 export const AddToHistory = (item: ITrackResponse | null) => {
     if (item) {
         const storageHistory = localStorage.getItem(StorageVariables.History);

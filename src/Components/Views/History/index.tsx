@@ -37,6 +37,8 @@ export const History: React.FC = () => {
             stor_history.soundobjs.splice(TempTake, size);
             initHistory(stor_history);
         }
+        document.documentElement.scrollTo(0, 0);
+
         document.addEventListener("scroll", scrollHadler);
 
         return function () {

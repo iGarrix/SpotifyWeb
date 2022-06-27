@@ -2,9 +2,10 @@ import { icon } from "@fortawesome/fontawesome-svg-core";
 import moment from "moment";
 import React, { useEffect, useRef, useState, useTransition } from "react";
 import { useNavigate } from "react-router-dom";
+import { NextTrackInQeueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IQueue } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { baseUrl, StorageVariables } from "../../../../types";
 import { Slider } from "../../Slider";
 
@@ -25,24 +26,11 @@ const icon_pause = require('../../../../Assets/Icons/Pause.png');
 
 export const PlayingFooter: React.FC = () => {
 
+    const { setPlayingTrack, initQueue } = useActions();
+
     const rx = useTypedSelector(state => state.playingReducer.queue);
+    //const [rx, setRx] = useState(useTypedSelector(state => state.playingReducer.queue))
     const nav = useNavigate();
-    const audio = useRef<any>(null);
-
-    const [isPlay, setPlay] = useState(false);
-    const [currTime, setCurrTime] = useState(0);
-    const [seekTime, setSeekTime] = useState(161);
-    const [duration, setDuration] = useState(0);
-    const [volume, setVolume] = useState(() => {
-        const vol = localStorage.getItem(StorageVariables.Volume);
-        if (vol) {
-            return Number.parseInt(vol);
-        }
-        return 100;
-    });
-
-    const { setPlayingTrack } = useActions();
-
     const onNav = (path: string) => {
         if (window.location.pathname !== "/" + path) {
             nav(path);
@@ -52,77 +40,196 @@ export const PlayingFooter: React.FC = () => {
         }
     }
 
-    useEffect(() => {
-        isPlay
-            ? audio.current?.play().then(() => { }).catch((e: any) => { audio.current.pause(); })
-            : audio.current?.pause();
-        audio.current.volume = volume / 100;
-        audio.current.onloadeddata = () => {
-            if (audio.current != null)
-                setDuration(audio.current.duration)
-        };
+    const audioPlayer = useRef<any>(null);
 
-        setInterval(() => {
-            if (audio.current !== null)
-                setCurrTime(audio.current.currentTime);
-        })
-    }, []);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isRepeat, setRepeat] = useState(false);
+    const [volume, setVolume] = useState(() => {
+        const vol = localStorage.getItem(StorageVariables.Volume);
+        if (vol) {
+            return Number.parseInt(vol);
+        }
+        return 100;
+    });
+
+
+    const [elapsed, setElapsed] = useState(0);
+    const [duration, setDuration] = useState(0);
+
+    const eventTimeUpdate = (e : any) => {
+        if (isPlaying) {
+            const _duration = Math.floor(audioPlayer?.current?.duration);
+            const _elapsed = Math.floor(audioPlayer?.current?.currentTime);
+            setDuration(_duration);
+            setElapsed(_elapsed);
+            // if (_elapsed === _duration) {
+            //     //ElapseChange(0);
+            //     //audioPlayer.current.currentTime = 0;
+            //     //audioPlayer.current.pause();
+            //     // if (!isRepeat) {
+            //     //     audioPlayer.current.pause();          
+            //     //     togglePlay(false);          
+            //     // }
+    
+            //     // const newQueue = NextTrackInQeueue();
+            //     // if (newQueue) {              
+            //     //     //initQueue(newQueue);
+            //     //     setRx(newQueue);
+            //     // }
+    
+            // }
+            // else {
+            //     setDuration(_duration);
+            //     setElapsed(_elapsed);
+            // }           
+        }
+        else {
+            togglePlay(false);
+        }
+    }
+
+    const eventSeeking = (e: any) => {
+        if (audioPlayer.current) {       
+            audioPlayer.current.pause();
+        }
+    }
+
+    const eventSeeked = (e: any) => {
+        setTimeout(() => {
+            if (audioPlayer.current) {       
+                audioPlayer.current.play();
+            }
+        }, 100)
+    }
+    const eventEnded = (e: any) => {
+        ElapseChange(0);
+        if (audioPlayer.current) {            
+            audioPlayer.current.currentTime = 0;
+            if (!isRepeat) {               
+                togglePlay(false);
+                let newQueue = NextTrackInQeueue();
+                if (newQueue) {       
+                    newQueue.isPlay = true;      
+                    initQueue(newQueue);
+                    if (rx && rx.soundobjs) {
+                        audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
+                    }
+                }        
+            }
+        }
+    }
+
+    useEffect(() => {
+
+        if (audioPlayer.current) {                
+            isPlaying ? audioPlayer.current?.play().then(() => { }).catch((e: any) => { audioPlayer.current.pause(); })
+                    : audioPlayer.current?.pause();
+           audioPlayer.current.volume = volume / 100;
+           audioPlayer.current.onloadeddata = () => {
+           if (audioPlayer.current != null)
+               setDuration(audioPlayer.current.duration)
+           };
+        }
+
+        audioPlayer.current.addEventListener('timeupdate', eventTimeUpdate);
+        audioPlayer.current.addEventListener('seeking', eventSeeking);
+        audioPlayer.current.addEventListener('seeked', eventSeeked);
+        audioPlayer.current.addEventListener('ended', eventEnded);
+        return function() {
+            audioPlayer.current.removeEventListener('timeupdate', eventTimeUpdate);
+            audioPlayer.current.removeEventListener('seeking', eventSeeking);
+            audioPlayer.current.addEventListener('seeked', eventSeeked);
+            audioPlayer.current.removeEventListener('ended', eventEnded);
+        }
+
+    }, [isPlaying, rx, isRepeat]);
 
     useEffect(() => {
         if (rx) {
-            Playing(rx.isPlay);
+            togglePlay(rx.isPlay);
         }
     }, [rx]);
 
-    useEffect(() => {
-        if (currTime < duration) {
-            setSeekTime(currTime)
+    const togglePlay = (play: boolean) => {
+        if (audioPlayer.current) {              
+            setIsPlaying(play)
+            play ? audioPlayer.current?.play().then(() => { }).catch((e : any) => { audioPlayer.current.currentTime = 0; audioPlayer.current.pause(); })
+            : audioPlayer.current?.pause();
+            let storage_queue = localStorage.getItem(StorageVariables.Queue);
+            if (storage_queue) {
+                let queue = JSON.parse(storage_queue) as IQueue;
+                queue.isPlay = play;
+                localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                setPlayingTrack(play);
+            }
         }
-        else {
-            Playing(false);
-            audio.current.currentTime = 0;
+    }
+
+    const toggleForward = () => {
+        if (rx && rx.soundobjs.length > 1) {
+            let newQueue = NextTrackInQeueue();
+            if (newQueue) {       
+                newQueue.isPlay = true;      
+                initQueue(newQueue);
+                if (rx && rx.soundobjs) {
+                    if (audioPlayer.current) {       
+                        audioPlayer.current.currentTime = 0;
+                        audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
+                    }
+                }
+            } 
         }
-    }, [currTime, duration]);
+    }
 
+    const toggleBackward = () => {
+        if (audioPlayer.current) {            
+            audioPlayer.current.currentTime -= 10;
+        }
+    }
 
-    const SeekChange = (newValue: any) => {       
-        setTimeout(() => {
-            setSeekTime(newValue);
-            audio.current.currentTime = newValue;
-        }, 100);
-    };
-
-    const Playing = (play: boolean) => {
-        setPlay(play);
-        play
-            ? audio.current?.play().then(() => { }).catch((e: any) => { audio.current.pause(); audio.current.currentTime = 0; })
-            : audio.current?.pause();
-        let storage_queue = localStorage.getItem(StorageVariables.Queue);
-        if (storage_queue) {
-            let queue = JSON.parse(storage_queue) as IQueue;
-            queue.isPlay = play;
-            localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-            setPlayingTrack(play);
+    const onMute = () => {
+        if (audioPlayer.current) {              
+            if (volume > 0) {
+                setVolume(0);
+                audioPlayer.current.volume = 0 / 100;
+                audioPlayer.current.muted = true;
+            }
+            else {
+                const vol = localStorage.getItem(StorageVariables.Volume);
+                if (vol) {
+                    setVolume(Number.parseInt(vol));
+                    audioPlayer.current.volume = Number.parseInt(vol) / 100;
+                    audioPlayer.current.muted = false;
+                }
+            }
         }
     }
 
     const ChangeVolume = (e: any) => {
-        setVolume(e);
-        audio.current.volume = e / 100;
-        localStorage.setItem(StorageVariables.Volume, `${e}`)
+        if (audioPlayer.current) {               
+            setVolume(e);
+            audioPlayer.current.volume = e / 100;
+            localStorage.setItem(StorageVariables.Volume, `${e}`)
+        }
     }
 
-    const onMute = () => {
-        if (volume > 0) {
-            setVolume(0);
-            audio.current.volume = 0 / 100;
-        }
-        else {
-            const vol = localStorage.getItem(StorageVariables.Volume);
-            if (vol) {
-                setVolume(Number.parseInt(vol));
-                audio.current.volume = Number.parseInt(vol) / 100;
-            }
+    const ElapseChange = (newValue: any) => {  
+        if (audioPlayer.current) {            
+            setElapsed(newValue);
+            audioPlayer.current.currentTime = newValue;
+        }     
+    };
+
+    const onKeyPress = (e: any) => {
+        switch (e.code) {
+            case "ArrowLeft":
+                toggleBackward();
+                break;
+            case "ArrowRight":
+                toggleForward();
+                break;
+            default:
+                break;
         }
     }
 
@@ -131,45 +238,46 @@ export const PlayingFooter: React.FC = () => {
             {
                 rx && rx.soundobjs && rx.soundobjs[0].trackCreators ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-full bg-dark-200 backdrop-blur-[32px] blur-[32px]"></div>
-                        <div className="flex items-end pb-4 px-10 py-2 z-10 col-span-2">
-                            <div className="flex items-center gap-3">
+                        <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image}')`}}></div>
+                        <div className="absolute top-0 left-0 w-full h-full bg-dark-200/30 z-[-1]"></div>
+                        <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
+                            <div className="flex items-center gap-3 overflow-hidden">
 
-                                <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat"
+                                <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"
                                     src={baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image} />
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
                                         <h1 className="font-semibold">{rx.soundobjs[0].trackCreators[0].username} {rx.soundobjs[0].trackCreators.length > 1 ? " ..." : ""}</h1>
                                         <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share} />
                                     </div>
-                                    <p className="text-gray-400">{rx.soundobjs[0].track?.name}</p>
+                                    <p className="text-gray-300">{rx.soundobjs[0].track?.name.substring(0, 30)}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
-                            <audio crossOrigin="anonymous" ref={audio} src={baseUrl + "TrackStorage/Tracks/" + rx?.soundobjs[0].track?.tracknameid} preload={"metadata"} />
+                            <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
                                 <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white">
                                     <img alt="icon" className="w-[16px]" src={icon_shuffle} />
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white">
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white active:bg-blue-500" onClick={toggleBackward}>
                                     <img alt="icon" className="w-[11px]" src={icon_skip_forward} />
                                 </div>
                                 <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[40px] h-[40px] rounded-full cursor-pointer"
-                                    onClick={() => { Playing(!isPlay) }}
+                                    onClick={() => {togglePlay(!isPlaying)}}
                                     style={{ backgroundImage: `url(${bg})` }}>
                                     {
-                                        isPlay ?
+                                        isPlaying ?
                                             <img alt="icon" className="w-[22px]" src={icon_pause} />
                                             :
                                             <img alt="icon" className="w-[22px]" src={icon_play} />
 
                                     }
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white">
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white active:bg-blue-500" onClick={toggleForward}>
                                     <img alt="icon" className="w-[11px]" src={icon_skip_next} />
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white">
+                                <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all ${isRepeat ? "bg-blue-500" : "bg-white"}`} onClick={() => {setRepeat(!isRepeat)}}>
                                     <img alt="icon" className="w-[16px]" src={icon_repeat} />
                                 </div>
                             </div>
@@ -178,17 +286,18 @@ export const PlayingFooter: React.FC = () => {
 
                                 <div className="grid grid-cols-12 w-full gap-2 items-center">
                                     <div className="col-span-1 flex items-center justify-end">
-                                        <h1 className="text-thin text-[12px]">{moment.utc(currTime * 1000).format("mm:ss")}</h1>
+                                        <h1 className="text-thin text-[12px]">{moment.utc(elapsed * 1000).format("mm:ss")}</h1>
                                     </div>
                                     <div className="col-span-10 flex items-center">
                                         {
-                                            !isNaN(seekTime) &&
-                                            <Slider min={0} max={Number.parseFloat(duration.toFixed(0))} value={seekTime}                                          
-                                            onChange={(e: any) => { SeekChange(e.target.value) }} />
+                                            !isNaN(elapsed) && !isNaN(duration) &&
+                                            <Slider min={0} max={duration} value={elapsed}   
+                                            onKeyPress={onKeyPress}                                      
+                                            onChange={(e: any) => { ElapseChange(e.target.value) }} />
                                         }
                                     </div>
                                     <div className="col-span-1 flex items-center">
-                                        <h1 className="text-thin con-span-1 text-[12px]">{moment.utc(Number.parseFloat(rx.soundobjs[0].track.duration) * 1000).format("mm:ss")}</h1>
+                                        <h1 className="text-thin con-span-1 text-[12px]">{moment.utc(duration * 1000).format("mm:ss")}</h1>
                                     </div>
                                 </div>
                             }
