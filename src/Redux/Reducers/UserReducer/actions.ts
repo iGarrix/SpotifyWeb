@@ -4,11 +4,14 @@ import {
   IAuthResponse,
   IChangeAvatarRequest,
   IExternalRequest,
+  IForgotNewPasswordRequest,
   IInitGet,
   ILoginByEmailRequest,
   ILoginByNicknameRequest,
   IRegisterRequest,
+  ISendVerifyCodeByForgotRequest,
   IUpdatePersonalData,
+  IVerifyCodeByForgotRequest,
   UserAction,
   UserActionTypes,
 } from "./types";
@@ -16,7 +19,7 @@ import {
 import jwt_decode from "jwt-decode";
 
 import http, { AuthorizateHeader } from "../../../axios_creator";
-import {DeviceType, IUser } from "../../../types";
+import {DeviceType, IUser, StorageVariables } from "../../../types";
 import { ClearRedux } from "../../GlobalReduxFunc";
 
 export const registerUser = (data: IRegisterRequest) => {
@@ -151,7 +154,7 @@ export const getByUserEmail = (email: string) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const response = await http.get<IUser>(
-        "api/Profile/getByUserEmail?email=" + email
+        "api/Profile/getByEmail?email=" + email
       );
       dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
 
@@ -159,6 +162,112 @@ export const getByUserEmail = (email: string) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const CheckUserByEmail = (email: string) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const response = await http.get<IUser>(
+        "api/Profile/getByEmail?email=" + email
+      );
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+      dispatch({ type: UserActionTypes.INITUSER_ERROR, payload: "" });
+      localStorage.setItem(StorageVariables.ForgotUser, response.data.email);
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        localStorage.setItem(StorageVariables.ForgotUser, serverError.response?.data);
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const VerifyCodeForgot = (data: IVerifyCodeByForgotRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const response = await http.post<boolean>(
+        "api/Profile/VerifySendForgotCode", data
+      );
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+      dispatch({ type: UserActionTypes.INITUSER_ERROR, payload: "" });
+      if(response.data){
+        localStorage.setItem(StorageVariables.VerifyResponse, "true");
+      }
+      else{
+        localStorage.setItem(StorageVariables.VerifyResponse, "false");
+      }
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const SendCodeForgot = (data: ISendVerifyCodeByForgotRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      const response = await http.post<boolean>(
+        "api/Profile/ForgotPassword", data
+      );
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateRecoveryPasswordUser = (data: IForgotNewPasswordRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/RecoveryNewPassword",
+        data, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
           payload: serverError.response?.data,

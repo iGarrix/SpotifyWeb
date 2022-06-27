@@ -25,6 +25,9 @@ import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute"
 import { StudioIntro } from "./Components/IntroView/StudioIntro";
 import { UploadIntro } from "./Components/IntroView/UploadIntro";
 import { History } from "./Components/Views/History";
+import { PasswordSendEmail } from "./Components/Views/Auth/ForgotPassword/SendEmail";
+import { PasswordVerifyCode } from "./Components/Views/Auth/ForgotPassword/VerifyCode";
+import { NewPasswordChange } from "./Components/Views/Auth/ForgotPassword/NewPasswordChange";
 
 
 function App() {
@@ -93,6 +96,9 @@ function App() {
         <Route path="authorizate" element={<LayAuth />}>
           <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="passwordSendEmail" element={<PasswordSendEmail />} />
+          <Route path="passwordVerifyCode" element={<PasswordVerifyCode />} />
+          <Route path="newPasswordChange" element={<NewPasswordChange />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

@@ -66,7 +66,9 @@ export const Login: React.FC = () => {
     }
   };
 
- 
+  const onForgotSubmit =  () => {
+      nav("passwordSendEmail");
+  };
 
   const responseGoogle = async (response: any) => {
     var request: IExternalRequest = {
@@ -124,12 +126,12 @@ export const Login: React.FC = () => {
               </Formik>
               <div className="flex justify-between">
                 <CustomCheckbox value={remember} text="Remember me" onCheck={() => { setRemember(!remember) }} />
-                <button onClick={() => { console.log("first") }}>Forgot password</button>
+                <button onClick={onForgotSubmit}>Forgot password</button>
               </div>
               <div className="flex justify-center gap-3">
                 <div className="flex flex-col gap-5 w-full">
                   <hr className="w-full" />
-                  <button onClick={() => { nav("/authorizate/register") }}>Don't have an account</button>
+                  <button onClick={() => { nav("register") }}>Don't have an account</button>
                 </div>
               </div>
             </div>

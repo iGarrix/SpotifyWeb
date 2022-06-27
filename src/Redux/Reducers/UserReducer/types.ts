@@ -50,6 +50,26 @@ export const nicknameLoginValidate = Yup.object({
     .required("Password is required"),
 });
 
+export const emailForgotValidate = Yup.object({
+  email: Yup.string().email("Email is invalid").required("Email is required"),
+});
+
+export const newPasswordChangeValidate = Yup.object({
+  newPassword: Yup.string()
+    .min(
+      MinPasswordLenght,
+      `Password must be at least ${MinPasswordLenght} charaters`
+    )
+    .required("Password is required"),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword"), null], "Password must match")
+    .required("Confirm password is required"),
+});
+
+export const verifyCodeForgotValidate = Yup.object({
+  code: Yup.string().required("Code is required").length(4, "Code is not valid"),
+});
+
 export interface IUserState {
   profile: IUser | null;
   loading: boolean;
@@ -162,3 +182,30 @@ export type UserAction =
   | InitUserWaitAction
   | InitUserErrorAction
   | InitUserClearAction;
+
+  export interface IForgotByEmailForm {
+    email: string;
+  }
+
+  export interface IForgotNewPasswordForm {
+    newPassword: string;
+    confirmPassword: string;
+  }
+  
+  export interface IForgotNewPasswordRequest {
+    findEmail: string;
+    newPassword: string;
+    device: string;
+  }
+
+  export interface IVerifyCodeByForgotForm {
+    code: string;
+  }
+
+  export interface IVerifyCodeByForgotRequest {
+    email: string;
+    code: number;
+  }
+  export interface ISendVerifyCodeByForgotRequest {
+    emailClient: string;
+  }
