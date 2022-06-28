@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { IUser, MinPasswordLenght } from "../../../types";
+import { DeviceType, IUser, MinPasswordLenght, minYears } from "../../../types";
 
 export enum UserActionTypes {
   INITUSER = "INITUSER",
@@ -69,6 +69,46 @@ export const newPasswordChangeValidate = Yup.object({
 
 export const verifyCodeForgotValidate = Yup.object({
   code: Yup.string().required("Code is required").length(4, "Code is not valid"),
+});
+
+export const changeDataAccountValidate = Yup.object({
+  name: Yup.string().required("Name is required"),
+  surname: Yup.string().required("Surname is required"),
+  username: Yup.string().required("Nickname is required"),
+});
+
+export const changeOtherDataAccountValidate = Yup.object({
+  date: Yup.number().required("Day is required").min(1, "Invalid Day").max(31, "Invalid Day"),
+  month: Yup.number().required("Month is required").min(1, "Invalid Month").max(12, "Invalid Month"),
+  years: Yup.number().required("Years is required").min(1970, "Invalid Years").max(new Date().getFullYear() - minYears, `From ${minYears} years old`),
+  gender: Yup.string().required("Gender is equired"),
+  country: Yup.string().required("Country is equired"),
+});
+
+export const changeEmailAccountValidate = Yup.object({
+  email: Yup.string().email("Email is invalid").required("Email is required"),
+});
+
+export const changePasswordAccountValidate = Yup.object({
+  oldPassword: Yup.string()
+    .min(
+      MinPasswordLenght,
+      `Old password must be at least ${MinPasswordLenght} charaters`
+    )
+    .required("Old password is required"),
+  password: Yup.string()
+    .min(
+      MinPasswordLenght,
+      `Password must be at least ${MinPasswordLenght} charaters`
+    )
+    .required("Password is required"),
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Password must match")
+    .required("Confirm password is required"),
+});
+
+export const changeEmojieAccountValidate = Yup.object({
+  emojie: Yup.string().required("Emojie is required").min(5, "Emojie not valid").max(20, "Emojie overflowed 20 symbols"),
 });
 
 export interface IUserState {
@@ -216,3 +256,68 @@ export type UserAction =
   export interface ISendVerifyCodeByForgotRequest {
     emailClient: string;
   }
+
+export interface IChangeEmojieForm {
+  emojie: string,
+}
+
+export interface IChangeEmojieRequest {
+  findEmail: string,
+  newEmojie: string,
+  device: DeviceType.desktop,
+}
+
+export interface IChangeDataAccountForm {
+  name: string,
+  surname: string,
+  username: string,
+}
+
+export interface IChangeDataAccountRequest {
+  findEmail: string,
+  newUserName: string,
+  device: DeviceType.desktop,
+}
+
+export interface IChangeOtherDataAccountForm {
+  date: string,
+  month: string,
+  years: string,
+  gender: string,
+  country: string,
+}
+
+export interface IChangePhoneAccountRequest {
+  findEmail: string,
+  newPhone: string,
+  device: DeviceType.desktop,
+}
+
+export interface IChangeEmailAccountForm {
+  email: string,
+}
+
+export interface IChangeEmailAccountRequest {
+  findEmail: string,
+  newEmail: string,
+  device: DeviceType.desktop,
+}
+
+export interface IChangePasswordAccountForm {
+  oldPassword: string,
+  password: string,
+  passwordConfirm: string,
+}
+
+export interface IChangePasswordAccountRequest {
+  findEmail: string,
+  oldPassword: string,
+  newPassword: string,
+  device: DeviceType.desktop,
+}
+
+export interface IVerifiedAccountRequest {
+  findEmail: string,
+  status: string,
+  device: DeviceType.desktop,
+}

@@ -129,7 +129,7 @@ export const Profile: React.FC = () => {
               <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
                 <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
               </h1>
-              <p className="font-medium flex gap-1 items-center">{user?.username} {verifyImage}</p>
+              <p className="font-medium flex gap-1 items-start">{user?.username} {verifyImage}</p>
               <p className="font-medium text-lg">{user?.emojie}</p>
             </div>
           </div>

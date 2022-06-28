@@ -31,6 +31,11 @@ import { NewPasswordChange } from "./Components/Views/Auth/ForgotPassword/NewPas
 import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 import { OverviewProfile } from "./Components/Views/OverViewProfile";
 import { LayAccountSettings } from "./Components/Layout/LayAccountSettings";
+import { PersonalData } from "./Components/Views/AccountSettings/PersonalData";
+import { VerifyAccount } from "./Components/Views/AccountSettings/VerifyAccount";
+import { RequirementsArtist } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsArtist";
+import { RequirementsVerified } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsVerified";
+import { RequirementsDefault } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsDefault";
 
 
 function App() {
@@ -104,11 +109,15 @@ function App() {
 
         <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route path="" element={<LayAccountSettings />}>
-            <Route index element={<div>pd user</div>} />
+            <Route index element={<PersonalData />} />
             <Route path="verifyemail" element={<div>verifyemail</div>} />
             <Route path="verifyphone" element={<div>verifyphone</div>} />
             <Route path="sendappelation" element={<div>sendappela</div>} />
-            <Route path="verifyaccount" element={<div>verify account</div>} />
+            <Route path="verifyaccount" element={<VerifyAccount />}>
+              <Route index element={<RequirementsDefault />} />
+              <Route path="artist" element={<RequirementsArtist />} />
+              <Route path="verified" element={<RequirementsVerified />} />
+            </Route>
             <Route path="notification" element={<div>notification</div>} />
             <Route path="deleteaccount" element={<div>delete account</div>} />
           </Route>

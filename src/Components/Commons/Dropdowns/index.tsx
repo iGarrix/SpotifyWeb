@@ -3,6 +3,7 @@ import React from "react";
 import { FormikDefaultDropdownProps } from "./types";
 
 export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
+  value,
   label,
   options,
   title,
@@ -13,12 +14,12 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="h-5">
-        <ErrorMessage component="h1" name={field.name} className="error text-black font-medium" />
+        <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
       </div>
-      <select
+      <select defaultValue={value}
         className="outline-0 border-4 rounded-xl py-3 px-5 pr-20 w-full text-black autofill:bg-white"
-        {...field}
-        {...props}
+        onChange={field.onChange}
+        name={field.name}
       >
         <option value="" disabled className="text-black">
           {title}

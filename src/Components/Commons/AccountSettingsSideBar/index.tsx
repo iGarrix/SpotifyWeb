@@ -25,14 +25,14 @@ export const AccountSettingsSideBar : React.FC = () => {
             <div className="flex flex-col h-full z-10">
                 <SettingsBarItem text="Update personal data" isSelect={currentItem === "/accountsettings"} icon={icon_pdaccount} 
                 onClick={() => { setCurrentItem("/accountsettings"); nav(""); }} />
+                <SettingsBarItem text="Verify account" isSelect={currentItem === "/accountsettings/verifyaccount"} icon={icon_protected} 
+                onClick={() => { setCurrentItem("/accountsettings/verifyaccount"); nav("verifyaccount") }} />
                 <SettingsBarItem text="Verify email" isSelect={currentItem === "/accountsettings/verifyemail"} icon={icon_verifyemail} 
                 onClick={() => { setCurrentItem("/accountsettings/verifyemail"); nav("verifyemail") }} />
                 <SettingsBarItem text="Verify phone" isSelect={currentItem === "/accountsettings/verifyphone"} icon={icon_verifyphone} 
                 onClick={() => { setCurrentItem("/accountsettingsverifyphone"); nav("verifyphone") }} />
                 <SettingsBarItem text="Send appelation" isSelect={currentItem === "/accountsettings/sendappelation"} icon={icon_sendappelation}
                  onClick={() => { setCurrentItem("/accountsettings/sendappelation"); nav("sendappelation") }} />
-                <SettingsBarItem text="Verify account" isSelect={currentItem === "/accountsettings/verifyaccount"} icon={icon_protected} 
-                onClick={() => { setCurrentItem("/accountsettings/verifyaccount"); nav("verifyaccount") }} />
                 <SettingsBarItem text="Notification" isSelect={currentItem === "/accountsettings/notification"} icon={icon_notify} 
                 onClick={() => { setCurrentItem("/accountsettings/notification"); nav("notification") }} />
                 <SettingsBarItem text="Delete account" isSelect={currentItem === "/accountsettings/deleteaccount"} icon={icon_trash} 
