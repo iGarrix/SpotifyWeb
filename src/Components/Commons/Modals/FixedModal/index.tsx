@@ -83,7 +83,7 @@ export const FixedModal: React.FC<IFixedModal> = ({trigger}) => {
                 </div>
                 <DropdownButtonItem text="Notification" notifications={notificate} icon={<img alt="icon" src={icon_notifications} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("/notifications");}} />
                 <DropdownButtonItem text="Creative Studio" icon={<img alt="icon" src={icon_studio} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("/s&a"); }} />
-                <DropdownButtonItem text="Account Manage" icon={<img alt="icon" src={icon_settings} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("/settings") }} />
+                <DropdownButtonItem text="Account Manage" icon={<img alt="icon" src={icon_settings} className="w-[20px] h-[20px]" />} onClick={() => { onNavigateClick("/accountsettings") }} />
                 <DropdownButtonItem text="Log out" isDanger={true} icon={<img alt="icon" src={icon_logout} className="w-[20px] h-[20px]" />} onClick={() => { LogoutUser(); nav("/"); }} />
             </div>
         </div>

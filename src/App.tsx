@@ -30,6 +30,7 @@ import { PasswordVerifyCode } from "./Components/Views/Auth/ForgotPassword/Verif
 import { NewPasswordChange } from "./Components/Views/Auth/ForgotPassword/NewPasswordChange";
 import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 import { OverviewProfile } from "./Components/Views/OverViewProfile";
+import { LayAccountSettings } from "./Components/Layout/LayAccountSettings";
 
 
 function App() {
@@ -98,6 +99,18 @@ function App() {
               <Route path="playlists" element={<ProfilePlaylists />} />
               <Route path="albums" element={<ProfileAlbums />} />
             </Route>
+          </Route>
+        </Route>
+
+        <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+          <Route path="" element={<LayAccountSettings />}>
+            <Route index element={<div>pd user</div>} />
+            <Route path="verifyemail" element={<div>verifyemail</div>} />
+            <Route path="verifyphone" element={<div>verifyphone</div>} />
+            <Route path="sendappelation" element={<div>sendappela</div>} />
+            <Route path="verifyaccount" element={<div>verify account</div>} />
+            <Route path="notification" element={<div>notification</div>} />
+            <Route path="deleteaccount" element={<div>delete account</div>} />
           </Route>
         </Route>
 
