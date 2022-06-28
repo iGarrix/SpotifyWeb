@@ -21,9 +21,19 @@ export const ProfileAlbums : React.FC = () => {
     const albums = useTypedSelector(state => state.myAlbumsReducer.albums);
     const user = useTypedSelector(state => state.userReducer.profile);
 
+    const scrollHadler = async () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            if (rx.nextPage && !rx.loading) {
+                const top = document.documentElement.scrollTop;
+                await FetchNext();
+                document.documentElement.scrollTop = top;
+            }
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {      
-            if (user && !albums && rx.error !== "List empty") {           
+            if (user) {           
                 const rq: IGetAllMyAlbumRequest = {
                     email: user.email,
                     page: 1
@@ -32,7 +42,19 @@ export const ProfileAlbums : React.FC = () => {
             }     
         }
         fetchData();
-    }, [user, albums]);
+    }, [user]);
+
+    useEffect(() => {
+        const listener = () => {
+            document.addEventListener("scroll", scrollHadler);
+        }
+        listener();
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
+        }
+
+    }, [rx.nextPage && rx.loading])
 
     const FetchNext = async () => {
         if (rx.albums && rx.nextPage && user) {       
@@ -54,7 +76,7 @@ export const ProfileAlbums : React.FC = () => {
 
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
             {
                 rx.loading ?
                 <QuadraticLoader isVisisble={true} />
@@ -70,14 +92,6 @@ export const ProfileAlbums : React.FC = () => {
                                 })
                             }  
                         </div>
-                        {
-                            rx.nextPage ?
-                            <div className="flex w-full justify-end py-5 px-64">
-                                <button onClick={FetchNext}><FontAwesomeIcon className="text-2xl bg-white text-black rounded-full px-4 py-3" icon={faArrowDown} /></button>
-                            </div>
-                            :
-                            null
-                        }
                 </div>
                 :
                 <>
@@ -88,7 +102,7 @@ export const ProfileAlbums : React.FC = () => {
                             <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
                         </div>
                         <div>
-                            <DefaultButton onClick={() => { } } text={"Create you first album"}/>
+                            <DefaultButton onClick={() => { nav("/upload") } } text={"Create you first album"}/>
                         </div>
                     </div>
                 </>

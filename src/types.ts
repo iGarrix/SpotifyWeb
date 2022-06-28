@@ -23,6 +23,7 @@ export enum StorageVariables {
   Track = "selectTrack",
   ForgotUser = "ForgotUser",
   VerifyResponse = "VerifyResponse",
+  Volume = "vol",
   //Single = "selectSingle"
 }
 
@@ -66,3 +67,5 @@ export interface IRefreshModel {
   accessToken: string,
   refreshToken: string,
 }
+
+export const TempTake = 10;

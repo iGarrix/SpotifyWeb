@@ -1,24 +1,48 @@
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RemoveWithHistory } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl, IHistory, StorageVariables } from "../../../types";
+import { IHistory, StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const History: React.FC = () => {
 
-    const {initHistory} = useActions();
+    const { initHistory } = useActions();
 
     let rx = useTypedSelector(state => state.playingReducer);
+    
+    let page = TempTake;
 
+    const scrollHadler = () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            const storage_history = localStorage.getItem(StorageVariables.History);
+            if (storage_history) {
+                let stor_history = JSON.parse(storage_history) as IHistory;
+                const size = stor_history.soundobjs.length;
+                page += TempTake;
+                stor_history.soundobjs.splice(page, size);
+                initHistory(stor_history);
+            }
+        }
+    }
 
     useEffect(() => {
         const storage_history = localStorage.getItem(StorageVariables.History);
         if (storage_history) {
-            initHistory(JSON.parse(storage_history) as IHistory);
+            let stor_history = JSON.parse(storage_history) as IHistory;
+            const size = stor_history.soundobjs.length;
+            stor_history.soundobjs.splice(TempTake, size);
+            initHistory(stor_history);
+        }
+        document.documentElement.scrollTo(0, 0);
+
+        document.addEventListener("scroll", scrollHadler);
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
         }
     }, []);
 
@@ -33,21 +57,21 @@ export const History: React.FC = () => {
 
     return (
         <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-white bg-no-repeat h-full">
-            { rx && rx.history && rx.history.soundobjs.length > 0 ?
+            {rx && rx.history && rx.history.soundobjs.length > 0 ?
                 <div className="flex flex-col gap-8">
                     <h1 className="font-semibold text-2xl">Listening history</h1>
                     <div className="flex flex-col gap-10">
                         {
-                            rx.history.soundobjs.map((item : ITrackResponse, index: number) => {
+                            rx.history.soundobjs?.map((item: ITrackResponse, index: number) => {
                                 return (
                                     <div key={index} className="grid grid-cols-12">
                                         <div className="col-span-12">
                                             <SoundHistoryItem options={[{
-                                                    title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
-                                                },{
-                                                    title: "Remove", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RemovingItemWithHistory(item.track?.returnId) }
-                                                }]} track={item.track} trackCreators={item.trackCreators} onClick={() => {
-                                                
+                                                title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
+                                            }, {
+                                                title: "Remove", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RemovingItemWithHistory(item.track?.returnId) }
+                                            }]} track={item.track} trackCreators={item.trackCreators} onClick={() => {
+
                                             }} />
                                         </div>
                                     </div>

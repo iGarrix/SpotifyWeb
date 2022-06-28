@@ -8,6 +8,7 @@ export enum PlayingActionTypes {
     INITSELECTALBUMS_CLEAR = "INITSELECTALBUMS_CLEAR",
     INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
     INITQUEUE = "INITQUEUE",
+    SETPLAYING = "SETPLAYING",
     CLEARQUEUE = "CLEARQUEUE",
     INITHISTORY = "INITHISTORY",
     CLEARHISTORY = "CLEARHISTORY",
@@ -91,6 +92,10 @@ export interface InitHistoryAction {
 export interface ClearHistoryAction {
     type: PlayingActionTypes.CLEARHISTORY;
 }
+export interface SetPlayingAction {
+    type: PlayingActionTypes.SETPLAYING;
+    payload: boolean,
+}
 
 export type PlayingAction =
 InitPlayingAction |
@@ -102,4 +107,5 @@ InitPlayingClearAction |
 ClearQueueAction |
 ClearTracksAction |
 InitHistoryAction |
-ClearHistoryAction;
+ClearHistoryAction | 
+SetPlayingAction;

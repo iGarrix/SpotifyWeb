@@ -1,6 +1,9 @@
 import { faCheck, faCompactDisc, faEllipsisVertical, faFloppyDisk, faPlay, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Guid } from "guid-typescript";
+import moment from "moment";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { baseUrl, IUser, VerifyType } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
@@ -10,6 +13,9 @@ import { ISoundHistoryItem } from "./types";
 
 
 export const SoundHistoryItem : React.FC<ISoundHistoryItem> = ({track, trackCreators, options, onClick}) => {
+
+    const nav = useNavigate();
+
     return (
         <div className="flex gap-20 cursor-pointer soundhistory" onClick={onClick}>
             <div className="flex gap-4">
@@ -18,15 +24,29 @@ export const SoundHistoryItem : React.FC<ISoundHistoryItem> = ({track, trackCrea
                 <div className="flex flex-col justify-between">
                     <div className="flex flex-col">
                         <h1 className="text-xl">{track?.name}</h1>
-                        <p className="text-gray-500 font-medium flex gap-2 items-center">{trackCreators ? trackCreators.map(i => i.username).join(', ') : "Unknown"}
+                        <p className="text-gray-500 font-medium flex gap-2 items-center">
+                            {
+                                trackCreators?.map(i => i.username).map((i : any, index: number) => {
+                                    return (
+                                        <span key={Guid.create().toString()}
+                                        className="cursor-pointer hover:text-blue-400" onClick={() => {nav("/overview/" + i, {replace: true})}}>{i}{trackCreators?.length && index < trackCreators.length - 1 ? ", " : " "}</span>
+                                    )
+                                })
+                            }
                         <FontAwesomeIcon className="w-[16px] h-[16px] flex items-center text-primary-100 -translate-y-[12%]" icon={trackCreators ? trackCreators[0].verify === VerifyType.verify ? faCheck :
                         trackCreators[0].verify === VerifyType.artist ? faCompactDisc : faUser : faUser}/></p>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-gray-500 font-medium">Duration {track?.duration.replace(",", ":").substring(0, 4)}</p>
+                        <div className="text-gray-500 font-medium flex gap-1">Duration 
+                            {
+                                track &&
+                                <p>{moment.utc(Number.parseFloat(track?.duration) * 1000).format("mm:ss")}</p>
+                                
+                            }      
+                        </div>
                         {
                             track?.create &&
-                            <p className="text-gray-500 font-medium">realised {(new Date().getDate() - new Date(track.create).getDate())} days ago</p>
+                            <p className="text-gray-500 font-medium whitespace-nowrap">realised {(new Date().getDate() - new Date(track.create).getDate())} days ago</p>
                         }
                     </div>
                 </div>

@@ -40,25 +40,25 @@ export const SoundOptionModal: React.FC<ISoundOptionModal> = ({trigger, options}
 
     return (
         <div className="relative flex flex-col">
-            <div onClick={() => {setOpen(!isOpen)}}>
-                {trigger}
-            </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-dark-100/80 absolute top-[100%] right-0 flex flex-col text-white bg-dark-200 rounded-sm overflow-hidden z-[50]" 
-            : "hidden"}`}>
-                <div className="flex flex-col">
-                    {
-                        options?.map(item => {
-                            return (
-                                <button key={Guid.create().toString()} className={`w-full h-full py-2 text-white px-4 gap-2 items-center transition-all select-none hover:bg-primary-100 flex`} onClick={() => {Addqueue(item)}}>
-                                    {item.icon}
-                                    <p className="text-[1.05rem] whitespace-nowrap">{item.title}</p>           
-                                </button>
-                            )
-                        })
-                    }
-                    
+                <div onClick={() => {setOpen(!isOpen)}}>
+                    {trigger}
+                </div>
+                <div ref={fixeddropdown} className={`${isOpen ? "border-dark-100/80 absolute top-[100%] right-0 flex flex-col text-white bg-dark-200 rounded-sm overflow-hidden z-[50]"
+                : "hidden"}`}>
+                    <div className="flex flex-col">
+                        {
+                            options?.map(item => {
+                                return (
+                                    <button key={Guid.create().toString()} className={`w-full h-full py-2 text-white px-4 gap-2 items-center transition-all select-none hover:bg-primary-100 flex`} onClick={() => {Addqueue(item)}}>
+                                        {item.icon}
+                                        <p className="text-[1.05rem] whitespace-nowrap">{item.title}</p>
+                                    </button>
+                                )
+                            })
+                        }
+            
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }

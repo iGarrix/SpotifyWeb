@@ -3,6 +3,7 @@ import { IUser, MinPasswordLenght } from "../../../types";
 
 export enum UserActionTypes {
   INITUSER = "INITUSER",
+  INITOVERWIEVER = "INITOVERWIEVER",
   INITUSER_WAITING = "INITUSER_WAITING",
   INITUSER_ERROR = "INITUSER_ERROR",
   INITUSER_CLEAR = "INITUSER_CLEAR",
@@ -72,6 +73,7 @@ export const verifyCodeForgotValidate = Yup.object({
 
 export interface IUserState {
   profile: IUser | null;
+  overviewer: IUser | null,
   loading: boolean;
   error: string;
 }
@@ -165,6 +167,10 @@ export interface InitUserAction {
   type: UserActionTypes.INITUSER;
   payload: IUser | null;
 }
+export interface InitOverviewerAction {
+  type: UserActionTypes.INITOVERWIEVER;
+  payload: IUser | null;
+}
 export interface InitUserWaitAction {
   type: UserActionTypes.INITUSER_WAITING;
   payload: boolean;
@@ -179,6 +185,7 @@ export interface InitUserClearAction {
 
 export type UserAction =
   | InitUserAction
+  | InitOverviewerAction
   | InitUserWaitAction
   | InitUserErrorAction
   | InitUserClearAction;

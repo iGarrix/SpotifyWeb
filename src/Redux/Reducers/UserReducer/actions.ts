@@ -280,6 +280,69 @@ export const updateRecoveryPasswordUser = (data: IForgotNewPasswordRequest) => {
   };
 };
 
+export const getOverwiever = (nickname: string) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const response = await http.get<IUser>(
+        "api/Profile/GetByUserName?username=" + nickname
+      );
+      dispatch({ type: UserActionTypes.INITOVERWIEVER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  }
+};
+
+// export const updateRecoveryPasswordUser = (data: IForgotNewPasswordRequest) => {
+// export const getOverwiever = (nickname: string) => {
+//   return async (dispatch: Dispatch<UserAction>) => {
+//     try {
+//       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+//       const token = localStorage.getItem("token");
+//       const response = await http.put<IUser>(
+//         "api/Profile/RecoveryNewPassword",
+//         data, AuthorizateHeader(token)
+//       );
+//       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+//       const response = await http.get<IUser>(
+//         "api/Profile/GetByUserName?username=" + nickname, AuthorizateHeader(token)
+//       );
+//       dispatch({ type: UserActionTypes.INITOVERWIEVER, payload: response.data });
+
+//       return Promise.resolve();
+//     } catch (error) {
+//       if (axios.isAxiosError(error)) {
+//         const serverError = error as AxiosError<any>;
+//         dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+//         dispatch({
+//           type: UserActionTypes.INITUSER_ERROR,
+//           payload: serverError.response?.data,
+//         });
+//         if (serverError && serverError.response) {
+//           return Promise.reject(serverError.response.data);
+//         }
+//       }
+//     }
+//   };
+// };
+
+
+
+
+
 export const updatePDUser = (data: IUpdatePersonalData) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {

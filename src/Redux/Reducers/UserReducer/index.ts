@@ -3,6 +3,7 @@ import { IUserState, UserAction, UserActionTypes } from "./types";
 
 const inialState: IUserState = {
   profile: null,
+  overviewer: null,
   loading: false,
   error: "",
 };
@@ -16,6 +17,14 @@ export const userReducer = (
       return {
         ...state,
         profile: action.payload,
+        loading: false,
+        error: "",
+      };
+    }
+    case UserActionTypes.INITOVERWIEVER: {
+      return {
+        ...state,
+        overviewer: action.payload,
         loading: false,
         error: "",
       };
