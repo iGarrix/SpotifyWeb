@@ -141,7 +141,7 @@ export const Profile: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="h-full w-full flex flex-col items-center mt-5">
+      <div className={`h-full w-full flex flex-col items-center mt-5`}>
           <div className="bg-dark-100/100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
               <ProfileButton text="My singles" isSelect={currentItem === "/profile"}  onClick={() => {onCurrentItem("/profile")}}/>
               <ProfileButton text="My Playlists" isSelect={currentItem === "/profile/playlists"}  onClick={() => {onCurrentItem("/profile/playlists")}}/>

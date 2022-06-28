@@ -40,7 +40,7 @@ export const PlayingFooter: React.FC = () => {
         }
     }
 
-    const audioPlayer = useRef<any>(null);
+    const audioPlayer = useRef<any>();
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRepeat, setRepeat] = useState(false);
@@ -129,17 +129,22 @@ export const PlayingFooter: React.FC = () => {
            if (audioPlayer.current != null)
                setDuration(audioPlayer.current.duration)
            };
+
+           audioPlayer.current.addEventListener('timeupdate', eventTimeUpdate);
+           audioPlayer.current.addEventListener('seeking', eventSeeking);
+           audioPlayer.current.addEventListener('seeked', eventSeeked);
+           audioPlayer.current.addEventListener('ended', eventEnded);
+           audioPlayer.current.addEventListener('keyup', onKeyPress);
         }
 
-        audioPlayer.current.addEventListener('timeupdate', eventTimeUpdate);
-        audioPlayer.current.addEventListener('seeking', eventSeeking);
-        audioPlayer.current.addEventListener('seeked', eventSeeked);
-        audioPlayer.current.addEventListener('ended', eventEnded);
         return function() {
-            audioPlayer.current.removeEventListener('timeupdate', eventTimeUpdate);
-            audioPlayer.current.removeEventListener('seeking', eventSeeking);
-            audioPlayer.current.addEventListener('seeked', eventSeeked);
-            audioPlayer.current.removeEventListener('ended', eventEnded);
+            if (audioPlayer.current) {
+                audioPlayer.current.removeEventListener('timeupdate', eventTimeUpdate);
+                audioPlayer.current.removeEventListener('seeking', eventSeeking);
+                audioPlayer.current.removeEventListener('seeked', eventSeeked);
+                audioPlayer.current.removeEventListener('ended', eventEnded);
+                audioPlayer.current.removeEventListener('keydown', onKeyPress);
+            }
         }
 
     }, [isPlaying, rx, isRepeat]);
@@ -221,15 +226,17 @@ export const PlayingFooter: React.FC = () => {
     };
 
     const onKeyPress = (e: any) => {
-        switch (e.code) {
-            case "ArrowLeft":
-                toggleBackward();
-                break;
-            case "ArrowRight":
-                toggleForward();
-                break;
-            default:
-                break;
+        if (audioPlayer.current) {      
+            switch (e.code) {
+                case "ArrowLeft":
+                    audioPlayer.current.currentTime -= 4;
+                    break;
+                case "ArrowRight":
+                    audioPlayer.current.currentTime += 4;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
