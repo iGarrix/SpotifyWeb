@@ -7,6 +7,7 @@ import { StorageVariables } from "../../../../../types";
 import { IVerifyCodeByForgotForm, IVerifyCodeByForgotRequest, verifyCodeForgotValidate } from "../../../../../Redux/Reducers/UserReducer/types";
 import { Form, Formik } from "formik";
 import { useActions } from "../../../../../Hooks/useActions";
+import { Helmet } from "react-helmet";
 
 
 export const PasswordVerifyCode: React.FC = () => {
@@ -44,6 +45,9 @@ export const PasswordVerifyCode: React.FC = () => {
 
     return (
         <div className="w-full h-full">
+            <Helmet>
+                <title>Soundwave | Step 2 - Verify Code</title>
+            </Helmet>
             <Formik
                 initialValues={initialValues}
                 validationSchema={verifyCodeForgotValidate}

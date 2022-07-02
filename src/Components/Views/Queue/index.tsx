@@ -2,6 +2,7 @@ import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react"
+import { Helmet } from "react-helmet";
 import { RemoveWithQueue } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -13,7 +14,7 @@ export const Queue: React.FC = () => {
 
     let rx = useTypedSelector(state => state.playingReducer);
 
-    const {initQueue, clearQueue} = useActions();
+    const { initQueue, clearQueue } = useActions();
 
     let page = TempTake;
 
@@ -54,6 +55,9 @@ export const Queue: React.FC = () => {
 
     return (
         <div className="w-full flex flex-col gap-6 items-start text-white px-[3%] py-[2%]">
+            <Helmet>
+                <title>Soundwave | Playing Queue</title>
+            </Helmet>
             {
                 rx && rx.queue && rx.queue.soundobjs && rx.queue.soundobjs.length > 0 ?
                     <div className="flex flex-col gap-6">
@@ -65,9 +69,9 @@ export const Queue: React.FC = () => {
                                     title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
                                 },
                                 {
-                                    title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { 
-                                        if (rx && rx.queue && rx.queue.soundobjs ) {                 
-                                            RmWithQueue(rx.queue.soundobjs[0].track?.returnId, rx.queue?.isPlay) 
+                                    title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => {
+                                        if (rx && rx.queue && rx.queue.soundobjs) {
+                                            RmWithQueue(rx.queue.soundobjs[0].track?.returnId, rx.queue?.isPlay)
                                         }
                                     }
                                 }]} track={rx.queue.soundobjs[0].track} trackCreators={rx.queue.soundobjs[0].trackCreators} onClick={() => { }} />
@@ -82,12 +86,12 @@ export const Queue: React.FC = () => {
                                                     rx.queue.soundobjs.filter(f => f.track?.returnId !== rx.queue?.soundobjs[0].track?.returnId).map(item => {
                                                         return (
                                                             <SoundHistoryItem key={Guid.create().toString()}
-                                                            options={[{
-                                                                title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
-                                                            }, {
-                                                                title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
-                                                            }]}
-                                                            track={item.track} trackCreators={item.trackCreators} onClick={() => { }} />
+                                                                options={[{
+                                                                    title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
+                                                                }, {
+                                                                    title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
+                                                                }]}
+                                                                track={item.track} trackCreators={item.trackCreators} onClick={() => { }} />
                                                         )
                                                     })
                                                 }

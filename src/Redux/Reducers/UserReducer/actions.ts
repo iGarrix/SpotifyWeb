@@ -4,14 +4,21 @@ import {
   IAuthResponse,
   IChangeAvatarRequest,
   IDeleteProfileRequest,
+  IChangeDataAccountRequest,
+  IChangeEmailAccountRequest,
+  IChangeEmojieRequest,
+  IChangePasswordAccountRequest,
+  IChangePhoneAccountRequest,
   IExternalRequest,
   IForgotNewPasswordRequest,
   IInitGet,
   ILoginByEmailRequest,
   ILoginByNicknameRequest,
   IRegisterRequest,
+  ISendAppelationRequest,
   ISendVerifyCodeByForgotRequest,
   IUpdatePersonalData,
+  IVerifiedAccountRequest,
   IVerifyCodeByForgotRequest,
   IVerifyEmailRequest,
   UserAction,
@@ -336,39 +343,6 @@ export const getOverwiever = (nickname: string) => {
   }
 };
 
-// export const updateRecoveryPasswordUser = (data: IForgotNewPasswordRequest) => {
-// export const getOverwiever = (nickname: string) => {
-//   return async (dispatch: Dispatch<UserAction>) => {
-//     try {
-//       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
-//       const token = localStorage.getItem("token");
-//       const response = await http.put<IUser>(
-//         "api/Profile/RecoveryNewPassword",
-//         data, AuthorizateHeader(token)
-//       );
-//       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
-//       const response = await http.get<IUser>(
-//         "api/Profile/GetByUserName?username=" + nickname, AuthorizateHeader(token)
-//       );
-//       dispatch({ type: UserActionTypes.INITOVERWIEVER, payload: response.data });
-
-//       return Promise.resolve();
-//     } catch (error) {
-//       if (axios.isAxiosError(error)) {
-//         const serverError = error as AxiosError<any>;
-//         dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
-//         dispatch({
-//           type: UserActionTypes.INITUSER_ERROR,
-//           payload: serverError.response?.data,
-//         });
-//         if (serverError && serverError.response) {
-//           return Promise.reject(serverError.response.data);
-//         }
-//       }
-//     }
-//   };
-// };
-
 export const updatePDUser = (data: IUpdatePersonalData) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
@@ -406,7 +380,6 @@ export const updateAvatarUser = (data: IChangeAvatarRequest) => {
       form.append("FindEmail", data.findEmail);
       form.append("NewAvatar", data.newAvatar);
       form.append("Device", DeviceType.desktop);
-      console.log(form);
       const response = await http.put<IUser>(
         "api/Profile/UpdateAvatar",
         form, AuthorizateHeader(token)
@@ -448,6 +421,201 @@ export const updateBackgroundUser = (data: IChangeAvatarRequest) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateEmojieUser = (data: IChangeEmojieRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdateEmojie",
+        data, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateNicknameUser = (data: IChangeDataAccountRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdateUsername",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updatePhoneUser = (data: IChangePhoneAccountRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdatePhone",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateEmailUser = (data: IChangeEmailAccountRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdateEmail",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updatePasswordUser = (data: IChangePasswordAccountRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/UpdatePassword",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const verifiedUser = (data: IVerifiedAccountRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IUser>(
+        "api/Profile/VerifyProfile",
+        data, AuthorizateHeader(token)
+      );
+
+      dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const appelate = (data: ISendAppelationRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.post<any>(
+        "api/Appelation/Appelate",
+        data, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
           payload: serverError.response?.data,

@@ -2,6 +2,7 @@ import { faArrowDown, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -46,6 +47,9 @@ export const ProfilePlaylists: React.FC = () => {
 
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
+            <Helmet>
+                <title>Soundwave | My Playlist</title>
+            </Helmet>
             {
                 rx.loading ?
                     <QuadraticLoader isVisisble={true} />

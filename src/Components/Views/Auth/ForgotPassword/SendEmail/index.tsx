@@ -7,6 +7,7 @@ import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
 import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInput";
 import { DeviceType } from "../../../../../types";
 import { useActions } from "../../../../../Hooks/useActions";
+import { Helmet } from "react-helmet";
 
 export const PasswordSendEmail: React.FC = () => {
     const {CheckUserByEmail, SendCodeForgot} = useActions();
@@ -31,6 +32,9 @@ export const PasswordSendEmail: React.FC = () => {
 
     return (
         <div className="w-full h-full">
+            <Helmet>
+                <title>Soundwave | Step 1 - Send Code</title>
+            </Helmet>
             <Formik
                 initialValues={initialValues}
                 validationSchema={emailForgotValidate}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -29,7 +30,7 @@ export const Register: React.FC = () => {
 
   const load = useTypedSelector((state) => state.userReducer.loading);
   const error = useTypedSelector((state) => state.userReducer.error);
-  const phone : any = localStorage.getItem("tempphone");
+  const phone: any = localStorage.getItem("tempphone");
 
   const [localError, setLocalError] = useState("");
 
@@ -107,125 +108,128 @@ export const Register: React.FC = () => {
 
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 flex justify-center items-center relative">
-      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">     
-        <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[15] row-[span_9/span_30] bg-no-repeat bg-cover" style={{backgroundImage: `url(${background1})`}}></div>
+      <Helmet>
+        <title>Soundwave | Register</title>
+      </Helmet>
+      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">
+        <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[15] row-[span_9/span_30] bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background1})` }}></div>
       </div>
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">
         <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-[span_10/span_10]">
           <img alt="logo" className="w-[260px]" src={logo} />
         </div>
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[11] row-[span_9/span_27] bg-no-repeat bg-cover"
-        style={{backgroundImage: `url(${background2})`}}></div>
-        </div>
-        <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
-          <div className="absolute w-full h-full rounded-xl p-2 opacity-98 bg-gradient-to-r from-blue-600 to-blue-400"></div>
-          <div className="z-10 flex flex-col gap-6">
-            {
-              localError !== "" ?
-                <div className="flex flex-col gap-3 items-center">
-                  <div className="text-black text-xl flex items-center gap-2">
-                    <FontAwesomeIcon icon={faTriangleExclamation} />
-                    <h1 className="font-semibold">{localError}</h1>
-                  </div>
-                </div> : null
-            }
-            <Formik
-              initialValues={initialValues}
-              validationSchema={registerValidate}
-              onSubmit={onHandleSubmit}>
-              <Form>
-                <div className="flex flex-col gap-6">
-                  <SignUpSteps selectedIndex={step} children={[
-                      {
-                        title: "Step 1",
-                        description: "Enter email and phone",
-                        index: 1,
-                        children: <>
-                          <FormikDefaultInput label="email" name="email" type="email" />
-                          <DefaultPhoneInput label="phone" name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) } } error={"Phone is required"} />
-                        </>
-                      },
-                      {
-                        title: "Step 2",
-                        description: "Enter NS and nickname",
-                        index: 2,
-                        children: <>
-                          <FormikDefaultInput label="name" name="name" type="text" />
-                          <FormikDefaultInput label="surname" name="surname" type="text" />
-                        </>
-                      },
-                      {
-                        title: "Step 3",
-                        description: "Select your country and gender",
-                        index: 3,
-                        children: <>
-                          <FormikDefaultDropdown
-                            title="Select your country"
-                            label="country"
-                            name="country"
-                            options={["Ukraine", "USA", "Other"]}
-                          />
-                          <FormikDefaultDropdown
-                            title="Select your gender"
-                            label="gender"
-                            name="gender"
-                            options={["Male", "Female", "Other"]}
-                          />
-                        </>
-                      },
-                      {
-                        title: "Step 4",
-                        description: "Enter your nickname",
-                        index: 4,
-                        children: <>
-                          <FormikDefaultInput label="username" name="username" type="text" />
-                          <FormikDefaultInput label="age" name="age" type="text" />
-                        </>
-                      },
-                      {
-                        title: "Step 5",
-                        description: "Enter your password and confirm password",
-                        index: 5,
-                        children: <>
-                          <FormikDefaultInput
-                            label="password"
-                            name="password"
-                            type="password"
-                          />
-                          <FormikDefaultInput
-                            label="passwordConfirm"
-                            name="passwordConfirm"
-                            type="password"
-                          />
-                        </>
-                      },
-                    ]} />
-                  <div className="flex items-center justify-between w-full py-2 px-40">
-                    <button type="button" onClick={onPrevious}>
-                      <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
-                    </button>
-                    <GoogleLogin
-                      clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
-                      onSuccess={responseGoogle}
-                      onFailure={responseError}
-                      theme="dark"
-                      render={props => (<button onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-3xl" icon={faGoogle} /></button>)}
-                      cookiePolicy={'single_host_origin'}></GoogleLogin>
-                    {
-                      step < 5 ?
-                        <button type="button" onClick={onNext}>
-                          <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} />
-                        </button>
-                        :
-                        step > 0 ?
-                        <button type="submit"><FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowCircleRight} /></button> : null
-                    }
-                  </div>
+          style={{ backgroundImage: `url(${background2})` }}></div>
+      </div>
+      <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
+        <div className="absolute w-full h-full rounded-xl p-2 opacity-98 bg-gradient-to-r from-blue-600 to-blue-400"></div>
+        <div className="z-10 flex flex-col gap-6">
+          {
+            localError !== "" ?
+              <div className="flex flex-col gap-3 items-center">
+                <div className="text-black text-xl flex items-center gap-2">
+                  <FontAwesomeIcon icon={faTriangleExclamation} />
+                  <h1 className="font-semibold">{localError}</h1>
                 </div>
-              </Form>
-            </Formik>
-          </div>
+              </div> : null
+          }
+          <Formik
+            initialValues={initialValues}
+            validationSchema={registerValidate}
+            onSubmit={onHandleSubmit}>
+            <Form>
+              <div className="flex flex-col gap-6">
+                <SignUpSteps selectedIndex={step} children={[
+                  {
+                    title: "Step 1",
+                    description: "Enter email and phone",
+                    index: 1,
+                    children: <>
+                      <FormikDefaultInput label="email" name="email" type="email" />
+                      <DefaultPhoneInput label="phone" name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) }} error={"Phone is required"} />
+                    </>
+                  },
+                  {
+                    title: "Step 2",
+                    description: "Enter NS and nickname",
+                    index: 2,
+                    children: <>
+                      <FormikDefaultInput label="name" name="name" type="text" />
+                      <FormikDefaultInput label="surname" name="surname" type="text" />
+                    </>
+                  },
+                  {
+                    title: "Step 3",
+                    description: "Select your country and gender",
+                    index: 3,
+                    children: <>
+                      <FormikDefaultDropdown
+                        title="Select your country"
+                        label="country"
+                        name="country"
+                        options={["Ukraine", "USA", "Other"]}
+                      />
+                      <FormikDefaultDropdown
+                        title="Select your gender"
+                        label="gender"
+                        name="gender"
+                        options={["Male", "Female", "Other"]}
+                      />
+                    </>
+                  },
+                  {
+                    title: "Step 4",
+                    description: "Enter your nickname",
+                    index: 4,
+                    children: <>
+                      <FormikDefaultInput label="username" name="username" type="text" />
+                      <FormikDefaultInput label="age" name="age" type="text" />
+                    </>
+                  },
+                  {
+                    title: "Step 5",
+                    description: "Enter your password and confirm password",
+                    index: 5,
+                    children: <>
+                      <FormikDefaultInput
+                        label="password"
+                        name="password"
+                        type="password"
+                      />
+                      <FormikDefaultInput
+                        label="passwordConfirm"
+                        name="passwordConfirm"
+                        type="password"
+                      />
+                    </>
+                  },
+                ]} />
+                <div className="flex items-center justify-between w-full py-2 px-40">
+                  <button type="button" onClick={onPrevious}>
+                    <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
+                  </button>
+                  <GoogleLogin
+                    clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
+                    onSuccess={responseGoogle}
+                    onFailure={responseError}
+                    theme="dark"
+                    render={props => (<button onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-3xl" icon={faGoogle} /></button>)}
+                    cookiePolicy={'single_host_origin'}></GoogleLogin>
+                  {
+                    step < 5 ?
+                      <button type="button" onClick={onNext}>
+                        <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} />
+                      </button>
+                      :
+                      step > 0 ?
+                        <button type="submit"><FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowCircleRight} /></button> : null
+                  }
+                </div>
+              </div>
+            </Form>
+          </Formik>
         </div>
+      </div>
     </div>
   );
 };

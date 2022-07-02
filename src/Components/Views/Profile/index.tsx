@@ -1,6 +1,7 @@
 import { faCheck, faCompactDisc, faImage, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -24,26 +25,26 @@ export const Profile: React.FC = () => {
   const [BackgroundSrc, setBackgroundSrc] = useState("");
   const [verifyImage, setVerifyImage] = useState<any>();
 
-  const {updateAvatarUser, updateBackgroundUser} = useActions();
+  const { updateAvatarUser, updateBackgroundUser } = useActions();
 
   useEffect(() => {
     if (user != null) {
       setImageSrc(user.avatar.includes("http") ? user.avatar
         : baseUrl + "Images/Users/" + user.avatar);
-        setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
+      setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
         user.verify === VerifyType.artist ? <FontAwesomeIcon icon={faCompactDisc} width={20} height={20} /> :
-        user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
-        if (user.background && user.background.length !== 0) {
-            if (user.background.includes("http")) {
-              setBackgroundSrc(user.background);
-            }
-            else {
-              setBackgroundSrc(baseUrl + "Images/Users/" + user.background);
-            }
+          user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
+      if (user.background && user.background.length !== 0) {
+        if (user.background.includes("http")) {
+          setBackgroundSrc(user.background);
         }
         else {
-          setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
+          setBackgroundSrc(baseUrl + "Images/Users/" + user.background);
         }
+      }
+      else {
+        setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
+      }
     }
   }, [user]);
 
@@ -65,40 +66,43 @@ export const Profile: React.FC = () => {
     nav(path);
   }
 
-  const onChangeAvatar = async (e : any) => {
+  const onChangeAvatar = async (e: any) => {
     try {
       const file = e.target.files[0];
-      if (user && file) {   
-        const request : IChangeAvatarRequest = {
+      if (user && file) {
+        const request: IChangeAvatarRequest = {
           findEmail: user?.email,
           newAvatar: file
         }
         await updateAvatarUser(request);
       }
-      
+
     } catch (error) {
-      
+
     }
   }
 
-  const onChangeBackground = async (e : any) => {
+  const onChangeBackground = async (e: any) => {
     try {
       const file = e.target.files[0];
-      if (user && file) {   
-        const request : IChangeAvatarRequest = {
+      if (user && file) {
+        const request: IChangeAvatarRequest = {
           findEmail: user?.email,
           newAvatar: file
         }
         await updateBackgroundUser(request);
       }
-      
+
     } catch (error) {
-      
+
     }
   }
 
   return (
     <div className="overflow-x-hidden text-white flex flex-col h-full">
+      <Helmet>
+        <title>Soundwave | My account</title>
+      </Helmet>
       {
         user && openModal ?
           <FullScreenModal visible center>
@@ -110,14 +114,14 @@ export const Profile: React.FC = () => {
         <div className="flex flex-col w-full px-20 pt-16 z-[2]">
           <div className="flex gap-6 w-full">
             {
-              user?.avatar.length !== 0 ? ImageSrc !== "" ? 
-              <div className="w-48 h-48 relative overflow-hidden rounded-xl">
-                <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
-                <input type="file" id="file" accept="image/*" onChange={onChangeAvatar} className="hidden" /> 
-                  <label htmlFor="file"><FontAwesomeIcon className="text-6xl cursor-pointer" icon={faImage} /> </label>
-                </div>
-                <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all object-cover w-full h-full" />
-              </div> :
+              user?.avatar.length !== 0 ? ImageSrc !== "" ?
+                <div className="w-48 h-48 relative overflow-hidden rounded-xl">
+                  <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
+                    <input type="file" id="file" accept="image/*" onChange={onChangeAvatar} className="hidden" />
+                    <label htmlFor="file"><FontAwesomeIcon className="text-6xl cursor-pointer" icon={faImage} /> </label>
+                  </div>
+                  <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all object-cover w-full h-full" />
+                </div> :
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
                 </div>
                 :
@@ -129,25 +133,25 @@ export const Profile: React.FC = () => {
               <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
                 <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
               </h1>
-              <p className="font-medium flex gap-1 items-center">{user?.username} {verifyImage}</p>
+              <p className="font-medium flex gap-1 items-start">{user?.username} {verifyImage}</p>
               <p className="font-medium text-lg">{user?.emojie}</p>
             </div>
           </div>
           <div className="flex items-end justify-end pb-6">
-              <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
-              <ProfileButton text={
-                <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"><img alt="crop" src={icon_crop} /> <h1 className="text-lg">Change image</h1></div></label>     
-              } onClick={() => {}} isSelect={true} />       
+            <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
+            <ProfileButton text={
+              <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"><img alt="crop" src={icon_crop} /> <h1 className="text-lg">Change image</h1></div></label>
+            } onClick={() => { }} isSelect={true} />
           </div>
         </div>
       </div>
       <div className={`h-full w-full flex flex-col items-center mt-5`}>
-          <div className="bg-dark-100/100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
-              <ProfileButton text="My singles" isSelect={currentItem === "/profile"}  onClick={() => {onCurrentItem("/profile")}}/>
-              <ProfileButton text="My Playlists" isSelect={currentItem === "/profile/playlists"}  onClick={() => {onCurrentItem("/profile/playlists")}}/>
-              <ProfileButton text="My albums" isSelect={currentItem === "/profile/albums"}  onClick={() => {onCurrentItem("/profile/albums")}}/>
-          </div>
-          <Outlet />
+        <div className="bg-dark-100/100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
+          <ProfileButton text="My singles" isSelect={currentItem === "/profile"} onClick={() => { onCurrentItem("/profile") }} />
+          <ProfileButton text="My Playlists" isSelect={currentItem === "/profile/playlists"} onClick={() => { onCurrentItem("/profile/playlists") }} />
+          <ProfileButton text="My albums" isSelect={currentItem === "/profile/albums"} onClick={() => { onCurrentItem("/profile/albums") }} />
+        </div>
+        <Outlet />
       </div>
     </div>
   );
