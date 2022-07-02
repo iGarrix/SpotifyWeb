@@ -71,6 +71,15 @@ export const verifyCodeForgotValidate = Yup.object({
   code: Yup.string().required("Code is required").length(4, "Code is not valid"),
 });
 
+export const DeleteProfileValidate = Yup.object({
+  password: Yup.string()
+    .min(
+      MinPasswordLenght,
+      `Password must be at least ${MinPasswordLenght} charaters`
+    )
+    .required("Password is required"),
+});
+
 export interface IUserState {
   profile: IUser | null;
   overviewer: IUser | null,
@@ -221,4 +230,13 @@ export type UserAction =
     findEmail: string;
     verify: boolean;
     device: string;
+  }
+
+  export interface IDeleteProfileForm {
+    password: string;
+  }
+
+  export interface IDeleteProfileRequest {
+    findEmail: string;
+    password: string;
   }

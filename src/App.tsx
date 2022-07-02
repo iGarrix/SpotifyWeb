@@ -33,6 +33,7 @@ import { OverviewProfile } from "./Components/Views/OverViewProfile";
 import { LayAccountSettings } from "./Components/Layout/LayAccountSettings";
 import { VerifyEmail } from "./Components/Views/AccountSettings/VerifyEmail/SendCode";
 import { VerifyCodEmail } from "./Components/Views/AccountSettings/VerifyEmail/VerifyCode";
+import { DeleteProfile } from "./Components/Views/AccountSettings/DeleteProfile";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -111,7 +112,7 @@ function App() {
             <Route path="sendappelation" element={<div>sendappela</div>} />
             <Route path="verifyaccount" element={<div>verify account</div>} />
             <Route path="notification" element={<div>notification</div>} />
-            <Route path="deleteaccount" element={<div>delete account</div>} />
+            <Route path="deleteaccount" element={<DeleteProfile />} />
           </Route>
         </Route>
 

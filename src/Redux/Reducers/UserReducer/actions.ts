@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import {
   IAuthResponse,
   IChangeAvatarRequest,
+  IDeleteProfileRequest,
   IExternalRequest,
   IForgotNewPasswordRequest,
   IInitGet,
@@ -368,10 +369,6 @@ export const getOverwiever = (nickname: string) => {
 //   };
 // };
 
-
-
-
-
 export const updatePDUser = (data: IUpdatePersonalData) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
@@ -441,7 +438,6 @@ export const updateBackgroundUser = (data: IChangeAvatarRequest) => {
       form.append("FindEmail", data.findEmail);
       form.append("NewAvatar", data.newAvatar);
       form.append("Device", DeviceType.desktop);
-      console.log(form);
       const response = await http.put<IUser>(
         "api/Profile/BackgroundUpdate",
         form, AuthorizateHeader(token)
@@ -494,4 +490,35 @@ export const InitUser = async (
       }
     }
   }
+};
+
+export const DeleteProfile = (data: IDeleteProfileRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.delete<String>(
+        "api/Profile/DeleteProfile", {
+          headers: AuthorizateHeader(token).headers,
+          data: data
+        }
+      );
+      dispatch({ type: UserActionTypes.INITUSER_CLEAR });
+      LogoutUser();
+      return Promise.resolve();
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
 };
