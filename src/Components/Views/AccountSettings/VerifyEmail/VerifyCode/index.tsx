@@ -1,13 +1,9 @@
-import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { boolean } from "yup";
 import { useActions } from "../../../../../Hooks/useActions";
-import { IVerifyCodeByForgotForm, IVerifyCodeByForgotRequest, IVerifyEmailRequest, verifyCodeForgotValidate } from "../../../../../Redux/Reducers/UserReducer/types";
+import { IVerifyCodeByForgotRequest, IVerifyEmailRequest } from "../../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType, StorageVariables } from "../../../../../types";
-import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
-import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
-import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInput";
+import PinInput from 'react-pin-input';
 
 
 
@@ -18,17 +14,13 @@ export const VerifyCodEmail: React.FC = () => {
     const nav = useNavigate();
     const [error, setError] = useState("");
 
-    const initialValues: IVerifyCodeByForgotForm = {
-        code: ""
-    };
-
-    const onHandleSubmit = async (values: IVerifyCodeByForgotForm) => {
+    const onHandleSubmit = async (code : string) => {
         try {
             const email = localStorage.getItem(StorageVariables.ForgotUser);
             if (email) {
                 var request: IVerifyCodeByForgotRequest = {
                     email: email,
-                    code: Number.parseInt(values.code),
+                    code: Number.parseInt(code),
                 };
                 await VerifyCodeForgot(request);
                 const result = localStorage.getItem(StorageVariables.VerifyResponse);
@@ -64,31 +56,33 @@ export const VerifyCodEmail: React.FC = () => {
                             <h1 className="text-3xl font-bold">Verify Email</h1>
                         </div>
                         <div className="flex justify-center">
-                            <h2>Please enter the 4 digit code sent to <br/> {localStorage.getItem(StorageVariables.ForgotUser)}</h2>
+                            <h2 className="text-center">Please enter the 4 digit code sent to <br /> {localStorage.getItem(StorageVariables.ForgotUser)}</h2>
                         </div>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={verifyCodeForgotValidate}
-                            onSubmit={onHandleSubmit}>
-                            <Form>
-                                <div className="flex flex-col">
-                                    <div className="flex flex-col gap-3 items-center">
-                                        <div className="mt-4">
-                                            <h1 className="text-black font-semibold text-lg">{error}</h1>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col w-full items-center">
-                                        <FormikDefaultInput label="code" name="code" type="text" />
-                                    </div>
-                                    <div className="flex flex-col w-full items-center mt-4">
-                                        <h1>Resent code</h1>
-                                    </div>
-                                    <div className="flex justify-center w-full mt-7">
-                                        <ProfileButton text="" onClick={() => { } } isSelect={true} />
+                        <div className="flex flex-col">
+                            {
+                                error &&
+                                <div className="flex flex-col gap-3 items-center">
+                                    <div className="my-4 rounded-xl bg-red-500/60 py-3 px-4">
+                                        <h1 className="text-white font-semibold text-lg">{error}</h1>
                                     </div>
                                 </div>
-                            </Form>
-                        </Formik>
+                            }
+                            <div className="flex flex-col w-full items-center">
+                                <PinInput
+                                    length={4}
+                                    initialValue=""
+                                    onChange={(value, index) => { }}
+                                    type="numeric"
+                                    inputMode="number"
+                                    style={{ padding: '5px' }}
+                                    inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343` , borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                    onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                                    autoSelect={true}
+                                    
+                                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

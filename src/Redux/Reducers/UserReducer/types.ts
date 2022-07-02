@@ -52,7 +52,7 @@ export const nicknameLoginValidate = Yup.object({
 });
 
 export const emailForgotValidate = Yup.object({
-  email: Yup.string().email("Email is invalid").required("Email is required"),
+  email: Yup.string(),
 });
 
 export const newPasswordChangeValidate = Yup.object({

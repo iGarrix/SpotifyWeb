@@ -675,7 +675,6 @@ export const DeleteProfile = (data: IDeleteProfileRequest) => {
       LogoutUser();
       return Promise.resolve();
     } catch (error) {
-      console.log(error);
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
         dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });

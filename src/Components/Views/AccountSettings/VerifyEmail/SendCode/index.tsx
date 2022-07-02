@@ -8,6 +8,7 @@ import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInpu
 import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 import { StorageVariables } from "../../../../../types";
+import { FieldSettings } from "../../../../Commons/Inputs/FieldSettings";
 
 
 export const VerifyEmail: React.FC = () => {
@@ -17,18 +18,20 @@ export const VerifyEmail: React.FC = () => {
     const error = useTypedSelector((state) => state.userReducer.error);
 
     const initialValues: IForgotByEmailForm = {
-        email: ""
+        email: user ? user.email : "",
     };
 
     const onHandleSubmit = async (values: IForgotByEmailForm) => {
-        try {
-            var request: ISendVerifyCodeByForgotRequest = {
-                emailClient: values.email
-            };
-            await CheckUserByEmail(values.email);
-            await SendCodeForgot(request);
-            nav("/accountsettings/verifycodeemail");
-        } catch (error) {
+        if (user) {
+            try {
+                var request: ISendVerifyCodeByForgotRequest = {
+                    emailClient: user.email
+                };
+                await CheckUserByEmail(user.email);
+                await SendCodeForgot(request);
+                nav("/accountsettings/verifycodeemail");
+            } catch (error) {
+            }
         }
     };
 
@@ -40,7 +43,7 @@ export const VerifyEmail: React.FC = () => {
                         <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
                     </div>
                 </div>
-                <div className="flex justify-start items-center w-full col-span-3">
+                <div className="flex justify-start items-center w-full col-span-3   ">
                     <div className="flex flex-col gap-4 w-[80%]">
                         <div className="flex justify-center">
                             <h1 className="text-3xl font-bold">Verify Email</h1>
@@ -48,19 +51,22 @@ export const VerifyEmail: React.FC = () => {
                         <div className="flex justify-center">
                             <h2>We will send a code to your mail for verification</h2>
                         </div>
-                        {user?.emailconfirm ? <div className="flex items-center justify-center"><h1>Email Verify</h1></div> : <Formik
+                        {user?.emailconfirm ? <div className="flex items-center justify-center"><h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : <Formik
                             initialValues={initialValues}
                             validationSchema={emailForgotValidate}
                             onSubmit={onHandleSubmit}>
                             <Form>
-                                <div className="flex flex-col">
-                                    <div className="flex flex-col gap-3 items-center">
-                                        <div className="mt-4">
-                                            <h1 className="text-black font-semibold text-lg">{error}</h1>
+                                <div className="flex flex-col w-full">
+                                    {
+                                        error &&
+                                        <div className="flex flex-col gap-3 items-center">
+                                            <div className="my-4 rounded-xl bg-red-500/60 py-3 px-4">
+                                                <h1 className="text-white font-semibold text-lg">{error}</h1>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col w-[80%] items-center">
-                                        <FormikDefaultInput label="email" name="email" type="email" />
+                                    }
+                                    <div className="flex justify-center w-full items-center">
+                                        <FieldSettings placeholder="Email" name="email" disable value={user?.email} type="email" onSumbit={() => {}} />
                                     </div>
                                     <div className="flex justify-end w-[80%] mt-7">
                                         <ProfileButton text="Send verify code" onClick={() => { } } isSelect={true} />

@@ -2,7 +2,7 @@ import React from "react";
 import { FormikSettingsInputProps } from "./types";
 import { ErrorMessage, useField } from "formik";
 
-export const FormikSettingsInput : React.FC<FormikSettingsInputProps> = ({
+export const FormikSettingsInputs : React.FC<FormikSettingsInputProps> = ({
     label,
     type,
     ...props

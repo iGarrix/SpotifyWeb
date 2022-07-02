@@ -29,8 +29,6 @@ export const AccountSettingsSideBar : React.FC = () => {
                 onClick={() => { setCurrentItem("/accountsettings/verifyaccount"); nav("verifyaccount") }} />
                 <SettingsBarItem text="Verify email" isSelect={currentItem === "/accountsettings/verifyemail"} icon={icon_verifyemail} 
                 onClick={() => { setCurrentItem("/accountsettings/verifyemail"); nav("verifyemail") }} />
-                <SettingsBarItem text="Verify phone" isSelect={currentItem === "/accountsettings/verifyphone"} icon={icon_verifyphone} 
-                onClick={() => { setCurrentItem("/accountsettingsverifyphone"); nav("verifyphone") }} />
                 <SettingsBarItem text="Send appelation" isSelect={currentItem === "/accountsettings/sendappelation"} icon={icon_sendappelation}
                  onClick={() => { setCurrentItem("/accountsettings/sendappelation"); nav("sendappelation") }} />
                 <SettingsBarItem text="Notification" isSelect={currentItem === "/accountsettings/notification"} icon={icon_notify} 
