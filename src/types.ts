@@ -35,6 +35,7 @@ export interface IUser {
   email: string;
   phone: number;
   emailconfirm: boolean;
+  phonenumberconfirmed: boolean;
   create: Date;
   name: string;
   surname: string;

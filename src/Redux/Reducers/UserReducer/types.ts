@@ -216,3 +216,9 @@ export type UserAction =
   export interface ISendVerifyCodeByForgotRequest {
     emailClient: string;
   }
+  
+  export interface IVerifyEmailRequest {
+    findEmail: string;
+    verify: boolean;
+    device: string;
+  }

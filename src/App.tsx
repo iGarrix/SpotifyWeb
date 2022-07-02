@@ -31,7 +31,8 @@ import { NewPasswordChange } from "./Components/Views/Auth/ForgotPassword/NewPas
 import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 import { OverviewProfile } from "./Components/Views/OverViewProfile";
 import { LayAccountSettings } from "./Components/Layout/LayAccountSettings";
-
+import { VerifyEmail } from "./Components/Views/AccountSettings/VerifyEmail/SendCode";
+import { VerifyCodEmail } from "./Components/Views/AccountSettings/VerifyEmail/VerifyCode";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -105,8 +106,8 @@ function App() {
         <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route path="" element={<LayAccountSettings />}>
             <Route index element={<div>pd user</div>} />
-            <Route path="verifyemail" element={<div>verifyemail</div>} />
-            <Route path="verifyphone" element={<div>verifyphone</div>} />
+            <Route path="verifyemail" element={<VerifyEmail/>} />
+            <Route path="verifycodeemail" element={<VerifyCodEmail/>} />
             <Route path="sendappelation" element={<div>sendappela</div>} />
             <Route path="verifyaccount" element={<div>verify account</div>} />
             <Route path="notification" element={<div>notification</div>} />
