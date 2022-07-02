@@ -1,10 +1,9 @@
 import React from "react";
-import { FormikSettingsInputProps } from "./types";
 import { ErrorMessage, useField } from "formik";
+import { FormikTextAreaProps } from "./types";
 
-export const FormikSettingsInput : React.FC<FormikSettingsInputProps> = ({
+export const FormikTextArea : React.FC<FormikTextAreaProps> = ({
     label,
-    type,
     ...props
   }) => {
     const [field] = useField(props);
@@ -13,9 +12,9 @@ export const FormikSettingsInput : React.FC<FormikSettingsInputProps> = ({
         <div className="h-5">
             <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
         </div>
-        <input type={type}
+        <textarea
             placeholder={label}
-            className={`outline-0 border-2 rounded-xl py-3 px-5 text-dark-200 autofill:bg-white`}
+            className={`outline-0 border-0 rounded-xl py-3 px-5 min-h-[400px] text-white bg-dark-200/60 autofill:bg-white`}
             onChange={field.onChange}
             name={field.name}
         />

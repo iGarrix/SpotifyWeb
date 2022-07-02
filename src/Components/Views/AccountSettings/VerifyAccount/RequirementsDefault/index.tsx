@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { VerifyType } from "../../../../../types";
 
@@ -8,6 +9,9 @@ export const RequirementsDefault = () => {
 
     return (
         <div className="flex flex-col py-5 items-center justify-center bg-green-500 rounded-xl">
+            <Helmet>
+                <title>Soundwave | Your verified plan</title>
+            </Helmet>
             {
                 user?.verify === VerifyType.verify ?
                 <h1 className="text-center text-lg">Your profile is currently registered as verified account</h1>

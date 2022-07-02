@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { fillingUser, monthDiff } from "../../../../../types";
 
@@ -7,6 +8,9 @@ export const RequirementsVerified = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     return (
         <div className="flex flex-col gap-[15px]">
+            <Helmet>
+                <title>Soundwave | Verified plan</title>
+            </Helmet>
             <h1 className="font-medium text-lg">Requirements</h1>
             <div className="grid grid-cols-2 w-full bg-dark-200/60">
                 <div className="flex justify-center border-b-[1px] border-white">
@@ -17,7 +21,7 @@ export const RequirementsVerified = () => {
                 </div>
                 <div className="flex flex-col pl-[10%] py-[3%]">
                     <div className="py-[3%] flex items-center gap-2">
-                        <p className="text-lg text-red-500">You need to verify phone</p>
+                        <p className={`text-lg ${user?.emailconfirm ? "text-green-500" : "text-red-500"}`}>You need to verify email</p>
                     </div>
                     <div className="py-[3%] flex items-center gap-2">
                         <p className="text-lg text-green-500">You don't have to be blocked account</p>

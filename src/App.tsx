@@ -36,6 +36,11 @@ import { VerifyAccount } from "./Components/Views/AccountSettings/VerifyAccount"
 import { RequirementsArtist } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsArtist";
 import { RequirementsVerified } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsVerified";
 import { RequirementsDefault } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsDefault";
+import { SendAppelation } from "./Components/Views/AccountSettings/SendAppelation";
+import { Notifications } from "./Components/Views/AccountSettings/Notifications";
+import { LogsInAccount } from "./Components/Views/AccountSettings/Notifications/LogsInAccount";
+import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications/ActionsAccount";
+import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
 
 
 function App() {
@@ -112,13 +117,17 @@ function App() {
             <Route index element={<PersonalData />} />
             <Route path="verifyemail" element={<div>verifyemail</div>} />
             <Route path="verifyphone" element={<div>verifyphone</div>} />
-            <Route path="sendappelation" element={<div>sendappela</div>} />
+            <Route path="sendappelation" element={<SendAppelation />} />
             <Route path="verifyaccount" element={<VerifyAccount />}>
               <Route index element={<RequirementsDefault />} />
               <Route path="artist" element={<RequirementsArtist />} />
               <Route path="verified" element={<RequirementsVerified />} />
             </Route>
-            <Route path="notification" element={<div>notification</div>} />
+            <Route path="notification" element={<Notifications />}>
+              <Route index element={<LogsInAccount />} />
+              <Route path="actions" element={<ActionsAccount />} />
+              <Route path="appeal" element={<AppelationLogs />} />
+            </Route>
             <Route path="deleteaccount" element={<div>delete account</div>} />
           </Route>
         </Route>

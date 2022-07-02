@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
 
@@ -16,6 +17,9 @@ export const StudioIntro: React.FC = () => {
 
     return (
         <div className="overflow-hidden w-screen h-screen text-white flex justify-center items-center bg-black relative">
+            <Helmet>
+                <title>Soundwave | S&A</title>
+            </Helmet>
             <div className="absolute top-0 w-screen h-1 rounded-br-lg rounded-bl-lg animate-pulse bg-blue-500 z-[10]"></div>
             <div className="absolute top-0 w-screen h-screen bg-no-repeat bg-cover object-cover opacity-10" style={{backgroundImage: `url('${bg}')`}}></div>
             <div className="flex flex-col items-center gap-4 z-[10]">

@@ -20,6 +20,7 @@ import "./styles.scss";
 import { CustomCheckbox } from "../../../Commons/Checkboxs/CustomCheckbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { Helmet } from "react-helmet";
 
 const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
@@ -62,12 +63,12 @@ export const Login: React.FC = () => {
       await loginByEmailUser(request);
       nav("/profile");
     } catch (error) {
-      
+
     }
   };
 
-  const onForgotSubmit =  () => {
-      nav("passwordSendEmail");
+  const onForgotSubmit = () => {
+    nav("passwordSendEmail");
   };
 
   const responseGoogle = async (response: any) => {
@@ -85,19 +86,22 @@ export const Login: React.FC = () => {
 
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
+      <Helmet>
+        <title>Soundwave | Authorizate</title>
+      </Helmet>
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
         <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-span-6">
           <img alt="logo" className="w-[270px]" src={logo} />
         </div>
-        <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[7] row-[span_9/span_24] bg-no-repeat bg-cover" style={{backgroundImage: `url(${background2})`}}></div>
+        <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[7] row-[span_9/span_24] bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background2})` }}></div>
       </div>
       <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[12] row-[span_9/span_24] bg-no-repeat bg-cover"
-        style={{backgroundImage: `url(${background1})`}}></div>
+          style={{ backgroundImage: `url(${background1})` }}></div>
       </div>
       <div className="col-span-4 col-start-5 z-10 relative">
         <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white col-span-4 col-start-5 relative overflow-hidden">
-          <div className="absolute w-[300%] h-[300%] blur-[20px] rounded-xl p-2 opacity-98 bg-no-repeat bg-cover -translate-x-[25%] translate-y-[10%]" style={{backgroundImage: `url(${background1})`}}></div>
+          <div className="absolute w-[300%] h-[300%] blur-[20px] rounded-xl p-2 opacity-98 bg-no-repeat bg-cover -translate-x-[25%] translate-y-[10%]" style={{ backgroundImage: `url(${background1})` }}></div>
           <div className="w-full flex flex-col px-32 z-20">
             <h1 className="font-bold text-3xl z-10 text-center">Log in</h1>
             <div className="z-10 flex flex-col gap-6">
@@ -120,7 +124,7 @@ export const Login: React.FC = () => {
                         type="password"
                       />
                     </div>
-                    <DefaultButton text="Login" onClick={() => {}} />
+                    <DefaultButton text="Login" onClick={() => { }} />
                   </div>
                 </Form>
               </Formik>
@@ -140,13 +144,13 @@ export const Login: React.FC = () => {
         </div>
         <div className="absolute w-full flex justify-center px-12">
           <div className="border-4 border-t-0 rounded-br-xl rounded-bl-xl w-full py-3 flex justify-center">
-          <GoogleLogin
-            clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
-            onSuccess={responseGoogle}
-            onFailure={responseError}
-            theme="dark"                   
-            render={props => (<button className="flex items-center gap-3 text-lg text-white font-medium" onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-white text-3xl" icon={faGoogle}/>Sign in with google</button>)}           
-            cookiePolicy={'single_host_origin'}></GoogleLogin>
+            <GoogleLogin
+              clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseError}
+              theme="dark"
+              render={props => (<button className="flex items-center gap-3 text-lg text-white font-medium" onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-white text-3xl" icon={faGoogle} />Sign in with google</button>)}
+              cookiePolicy={'single_host_origin'}></GoogleLogin>
           </div>
         </div>
       </div>

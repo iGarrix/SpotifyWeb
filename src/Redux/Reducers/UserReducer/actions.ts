@@ -14,6 +14,7 @@ import {
   ILoginByEmailRequest,
   ILoginByNicknameRequest,
   IRegisterRequest,
+  ISendAppelationRequest,
   ISendVerifyCodeByForgotRequest,
   IUpdatePersonalData,
   IVerifiedAccountRequest,
@@ -557,6 +558,34 @@ export const verifiedUser = (data: IVerifiedAccountRequest) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const appelate = (data: ISendAppelationRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.post<any>(
+        "api/Appelation/Appelate",
+        data, AuthorizateHeader(token)
+      );
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
           payload: serverError.response?.data,

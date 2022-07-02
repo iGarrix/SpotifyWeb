@@ -1,6 +1,7 @@
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { RemoveWithHistory } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -13,7 +14,7 @@ export const History: React.FC = () => {
     const { initHistory } = useActions();
 
     let rx = useTypedSelector(state => state.playingReducer);
-    
+
     let page = TempTake;
 
     const scrollHadler = () => {
@@ -57,6 +58,9 @@ export const History: React.FC = () => {
 
     return (
         <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-white bg-no-repeat h-full">
+            <Helmet>
+                <title>Soundwave | Your history</title>
+            </Helmet>
             {rx && rx.history && rx.history.soundobjs.length > 0 ?
                 <div className="flex flex-col gap-8">
                     <h1 className="font-semibold text-2xl">Listening history</h1>

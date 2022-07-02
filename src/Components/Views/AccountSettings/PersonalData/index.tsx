@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../../Hooks/useActions';
 import { useTypedSelector } from '../../../../Hooks/useTypedSelector';
@@ -178,6 +179,9 @@ export const PersonalData: React.FC = () => {
 
     return (
         <>
+        <Helmet>
+                <title>Soundwave | Personal Data</title>
+            </Helmet>
             {
                 user ?
                     <div className="flex flex-col items-center h-full py-[50px] px-[25%] gap-[40px] text-white">

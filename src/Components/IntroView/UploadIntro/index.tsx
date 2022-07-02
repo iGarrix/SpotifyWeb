@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
 
@@ -14,6 +15,9 @@ export const UploadIntro: React.FC = () => {
 
     return (
         <div className="overflow-hidden w-screen h-screen text-white flex justify-center items-center bg-black relative">
+            <Helmet>
+                <title>Soundwave | Uploading</title>
+            </Helmet>
             <div className="absolute top-0 w-screen h-1 rounded-br-lg rounded-bl-lg animate-pulse bg-blue-500 z-[10]"></div>
             <div className="absolute top-0 w-screen h-screen bg-no-repeat bg-cover object-cover opacity-10" style={{backgroundImage: `url('${bg}')`}}></div>
 

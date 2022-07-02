@@ -7,6 +7,7 @@ import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInpu
 import { DeviceType, StorageVariables } from "../../../../../types";
 import { IForgotNewPasswordForm, IForgotNewPasswordRequest, newPasswordChangeValidate } from "../../../../../Redux/Reducers/UserReducer/types";
 import { useActions } from "../../../../../Hooks/useActions";
+import { Helmet } from "react-helmet";
 
 export const NewPasswordChange: React.FC = () => {
     const {updateRecoveryPasswordUser} = useActions();
@@ -38,6 +39,9 @@ export const NewPasswordChange: React.FC = () => {
 
     return (
         <div className="w-full h-full">
+            <Helmet>
+                <title>Soundwave | Step 3 - New Password</title>
+            </Helmet>
             <Formik
                 initialValues={initialValues}
                 validationSchema={newPasswordChangeValidate}

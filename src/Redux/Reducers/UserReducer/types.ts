@@ -88,6 +88,9 @@ export const changeOtherDataAccountValidate = Yup.object({
 export const changeEmailAccountValidate = Yup.object({
   email: Yup.string().email("Email is invalid").required("Email is required"),
 });
+export const appelationMessageValidate = Yup.object({
+  message: Yup.string().required("Message is required").min(20, "The message must be longer than 20 characters").max(300, "The message must be less than 300 characters long"),
+});
 
 export const changePasswordAccountValidate = Yup.object({
   oldPassword: Yup.string()
@@ -320,4 +323,13 @@ export interface IVerifiedAccountRequest {
   findEmail: string,
   status: string,
   device: DeviceType.desktop,
+}
+
+export interface ISendAppelationForm {
+  message: string,
+}
+
+export interface ISendAppelationRequest {
+  Message: string,
+  FindEmail: string,
 }

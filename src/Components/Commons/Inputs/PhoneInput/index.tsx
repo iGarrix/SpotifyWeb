@@ -4,6 +4,8 @@ import PhoneInput from 'react-phone-number-input'
 import { PhoneInputProps } from "./types";
   
 
+import "./style.scss";
+
 export const DefaultPhoneInput : React.FC<PhoneInputProps> = ({
     label,
     name,
@@ -41,7 +43,7 @@ export const DefaultPhoneInput : React.FC<PhoneInputProps> = ({
         onChange={onLocalChange}
         name={name}
         value={value}
-        className="text-black font-medium font-['Overpass'] bg-dark-100/60 outline-0 py-3 px-5 rounded-xl focus:outline-0"
+        className="defphone"
         placeholder="Enter phone number"/>
     </div>
     )
