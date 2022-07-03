@@ -18,7 +18,7 @@ export const Notifications : React.FC = () => {
                 <div className="bg-dark-100 flex justify-center rounded-md items-center py-3">
                     <div className="flex gap-6 items-center">
                         <h2 className="text-xl">You do not have a verified account</h2>
-                        <ProfileButton text={"Verify now"} isSelect={true} onClick={() => {nav("../sendappelation", {replace: true})}} />
+                        <ProfileButton text={"Verify now"} isSelect={true} onClick={() => {nav("../verifyaccount")}} />
                     </div>
                 </div>
              }

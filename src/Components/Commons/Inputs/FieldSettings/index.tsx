@@ -1,23 +1,24 @@
 import { ErrorMessage, useField } from "formik";
 import React from "react";
-import { IFieldSettings } from "./types";
+import { IFormikField } from "./types";
 
 
-export const FieldSettings: React.FC<IFieldSettings> = ({ placeholder, value, type, onSumbit, isOutline, ...props }) => {
+export const FormikField: React.FC<IFormikField> = ({ placeholder, value, type, onSumbit, isOutline, ...props }) => {
 
     const [field] = useField(props);
     return (
         <div className="flex flex-col gap-1">
-            <div className="h-5 flex gap-4">
-            <p className="text-white font-medium">{placeholder}</p>
-                <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
+            <div className="flex gap-2 flex-wrap">
+                <p className="text-white font-medium">{placeholder}</p>
+                <ErrorMessage component="p" name={field.name} render={(errorMessage: string) => {
+                    return <p className="text-red-500 font-medium">{errorMessage}</p>;
+                }} />
             </div>
-            <input placeholder={placeholder} disabled={props.disable} type={type} defaultValue={value} onSubmit={(e: any) => {onSumbit(e)}}     
+            <input placeholder={placeholder} disabled={props.disable} type={type} defaultValue={value} onSubmit={onSumbit}     
                 onChange={field.onChange}
                 name={field.name}
-                className={`text-white rounded-lg py-2 px-4 w-auto outline-none border-0 bg-dark-100/60
-                shadow-xl ${isOutline ? "border-[1px] border-white" : ""}`} />
-            
+                className={`text-white rounded-lg py-2.5 px-4 outline-none border-0 bg-dark-200/50
+                shadow-xl ${isOutline ? "border-[1px] border-white" : ""} ${props.className}`} />          
         </div>
     )
 }

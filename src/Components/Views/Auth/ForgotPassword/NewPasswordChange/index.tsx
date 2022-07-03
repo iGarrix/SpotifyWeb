@@ -2,13 +2,11 @@ import React from "react";
 import { Form, Formik } from "formik";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
-import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
-import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInput";
 import { DeviceType, StorageVariables } from "../../../../../types";
 import { IForgotNewPasswordForm, IForgotNewPasswordRequest, newPasswordChangeValidate } from "../../../../../Redux/Reducers/UserReducer/types";
 import { useActions } from "../../../../../Hooks/useActions";
 import { Helmet } from "react-helmet";
-import { FieldSettings } from "../../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 
 export const NewPasswordChange: React.FC = () => {
@@ -58,8 +56,8 @@ export const NewPasswordChange: React.FC = () => {
                             </div>
                         }
                         <div className="flex flex-col gap-4">
-                            <FieldSettings placeholder="newPassword" name="newPassword" type="password" onSumbit={() => {}} />
-                            <FieldSettings placeholder="confirmPassword" name="confirmPassword" type="password" onSumbit={() => {}} />
+                            <FormikField placeholder="newPassword" name="newPassword" type="password" onSumbit={() => {}} />
+                            <FormikField placeholder="confirmPassword" name="confirmPassword" type="password" onSumbit={() => {}} />
                         </div>
                         <ProfileButton isSelect text="Change password" onClick={() => { }} />
                     </div>

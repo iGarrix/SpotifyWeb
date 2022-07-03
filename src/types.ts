@@ -81,6 +81,14 @@ export function monthDiff(d1: Date, d2: Date) {
   return months <= 0 ? 0 : months;
 }
 
+export function dayDiff(d1: Date, d2: Date) {
+  var day;
+  day = (d1.getFullYear() - d2.getFullYear()) * 12;
+  day += d1.getDay();
+  day -= d2.getDay();
+  return day <= 0 ? 0 : day;
+}
+
 export function fillingUser(user : IUser | null) {
   if (user) {
       if (user.avatar.length !== 0 && user.background && user.avatar && user.background.length !== 0

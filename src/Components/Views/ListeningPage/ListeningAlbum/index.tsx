@@ -5,7 +5,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl, StorageVariables } from "../../../../types";
+import { baseUrl, dayDiff, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 const bg = require('../../../../Assets/Background2.png');
@@ -149,7 +149,7 @@ export const ListeningAlbum: React.FC = () => {
                             <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
                             {
                                 playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {(new Date().getDate() - new Date(playingReducer.album?.albomDto?.releasealbom).getDate())} days ago</p>
+                                <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {dayDiff(new Date(), new Date(playingReducer.album?.albomDto?.releasealbom))} days ago</p>
                             }
                         </div>
                         <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">

@@ -1,10 +1,10 @@
-import { faCheck, faCompactDisc, faEllipsisVertical, faFloppyDisk, faPlay, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCompactDisc, faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { baseUrl, IUser, VerifyType } from "../../../../types";
+import { baseUrl, dayDiff, VerifyType } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
 import "./style.scss";
@@ -46,7 +46,7 @@ export const SoundHistoryItem : React.FC<ISoundHistoryItem> = ({track, trackCrea
                         </div>
                         {
                             track?.create &&
-                            <p className="text-gray-500 font-medium whitespace-nowrap">realised {(new Date().getDate() - new Date(track.create).getDate())} days ago</p>
+                            <p className="text-gray-500 font-medium whitespace-nowrap">realised {dayDiff(new Date(), new Date(track.create))} days ago</p>
                         }
                     </div>
                 </div>

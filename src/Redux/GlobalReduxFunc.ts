@@ -1,5 +1,4 @@
 import { Dispatch } from "redux";
-import { StorageVariables } from "../types";
 import { MyAlbumActionTypes } from "./Reducers/MyAlbumReducer/types";
 import { MyPlaylistActionTypes } from "./Reducers/MyPlaylistReducer/types";
 import { MySingleActionTypes } from "./Reducers/MySingleReducer/types";

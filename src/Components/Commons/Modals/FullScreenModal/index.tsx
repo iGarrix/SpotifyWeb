@@ -8,7 +8,7 @@ export interface IFullScreenModal {
 
 export const FullScreenModal : React.FC<IFullScreenModal> = ({center, children, visible = false}) => {
     return (
-        <div className={`${visible ? "fixed top-0 left-0 h-screen w-screen overflow-x-hidden bg-black/70" : "hidden"}`} style={{zIndex: '400'}}>
+        <div className={`${visible ? "fixed top-0 left-0 h-screen w-screen overflow-x-hidden bg-dark-200/60" : "hidden"}`} style={{zIndex: '400'}}>
             <div className={`w-full h-full flex ${center ? "justify-center items-center" : ""}`}>
                 {children}
             </div>

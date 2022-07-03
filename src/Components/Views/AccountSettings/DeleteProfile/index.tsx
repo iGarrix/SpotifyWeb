@@ -1,19 +1,21 @@
+import { faClose, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { DeleteProfileValidate, IDeleteProfileForm, IDeleteProfileRequest } from "../../../../Redux/Reducers/UserReducer/types";
-import { StorageVariables } from "../../../../types";
 import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
-import { FormikDefaultInput } from "../../../Commons/Inputs/FormikDefaultInput";
+import { FormikField } from "../../../Commons/Inputs/FieldSettings";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 
 export const DeleteProfile: React.FC = () => {
     const user = useTypedSelector((state) => state.userReducer.profile);
+    const error = useTypedSelector((state) => state.userReducer.error);
     const { DeleteProfile } = useActions();
     const nav = useNavigate();
-    const [error, setError] = useState("");
     const [openModal, setOpenModal] = useState(false);
 
     const initialValues: IDeleteProfileForm = {
@@ -37,6 +39,9 @@ export const DeleteProfile: React.FC = () => {
 
     return (
         <div className="w-full h-full px-[5%] py-[50px] text-white">
+            <Helmet>
+                <title>Soundwave | Delete Account</title>
+            </Helmet>
             <div className="flex justify-start items-center w-full">
                 <div className="flex flex-col gap-4 w-auto">
                     <div className="flex">
@@ -49,27 +54,32 @@ export const DeleteProfile: React.FC = () => {
                 </div>
             </div>
             <FullScreenModal visible={openModal}>
-                            <Formik
-                                initialValues={initialValues}
-                                validationSchema={DeleteProfileValidate}
-                                onSubmit={onHandleSubmit}>
-                                <Form>
-                                    <div className="flex justify-center items-center w-screen h-full flex-col">
-                                        <div className="flex flex-col gap-3 items-center">
-                                            <div className="mt-4">
-                                                <h1 className="text-black font-semibold text-lg">{error}</h1>
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col w-full items-center">
-                                            <FormikDefaultInput label="password" name="password" type="password" />
-                                        </div>
-                                        <div className="flex justify-center w-full mt-7">
-                                            <ProfileButton text="submit" onClick={() => {  }} isSelect={true} />
-                                        </div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={DeleteProfileValidate}
+                    onSubmit={onHandleSubmit}>
+                    <Form>
+                        <div className="flex w-screen h-full justify-center items-center">
+                            <div className="rounded-md py-8 flex flex-col items-center justify-center gap-6">
+                                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-white font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
+                                <h1 className="text-3xl font-medium font-['Lexend']">Delete account</h1>
+                                {
+                                    error && error.length !== 0 ?
+                                        <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null
+                                }
+                                <div className="flex justify-center items-center flex-col px-20">
+                                    <div className="flex flex-col w-full items-center">
+                                        <FormikField placeholder="Password" name="password" type="password" onSumbit={() => { }} />
                                     </div>
-                                </Form>
-                            </Formik>
-                        </FullScreenModal>
+                                    <div className="flex justify-center w-full mt-7">
+                                        <ProfileButton text="Delete" onClick={() => { }} isSelect={true} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Form>
+                </Formik>
+            </FullScreenModal>
         </div>
     );
 };

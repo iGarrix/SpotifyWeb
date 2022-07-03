@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { Helmet } from "react-helmet";
-import { FieldSettings } from "../../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 
 export const PasswordSendEmail: React.FC = () => {
@@ -49,7 +49,7 @@ export const PasswordSendEmail: React.FC = () => {
                             </div>
                         }
                         <div className="flex flex-col gap-2">
-                            <FieldSettings placeholder="Email" name="email" type="email" onSumbit={() => {}} />
+                            <FormikField placeholder="Email" name="email" type="email" onSumbit={() => {}} />
                         </div>
                         <ProfileButton isSelect text="Send verify code" onClick={() => { }} />
                     </div>

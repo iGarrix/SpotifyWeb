@@ -1,9 +1,10 @@
-export interface IFieldSettings {
+export interface IFormikField {
     name: string;
     placeholder: string,
     value?: string,
     isOutline?: boolean,
     disable?: boolean,
     type?: "text" | "password" | "email" | "number",
-    onSumbit: (e: any) => void,
+    className?: string,
+    onSumbit?: (e: any) => void,
 }

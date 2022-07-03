@@ -17,16 +17,16 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
         <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
       </div>
       <select defaultValue={value}
-        className="outline-0 border-4 rounded-xl py-3 px-5 pr-20 w-full text-black autofill:bg-white"
+        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-white bg-dark-200/60"
         onChange={field.onChange}
         name={field.name}
       >
-        <option value="" disabled className="text-black">
+        <option value="" disabled className="text-white">
           {title}
         </option>
         {options.map((item) => {
           return (
-            <option key={item} value={item} className="text-black">
+            <option key={item} value={item} className="text-white">
               {item}
             </option>
           );

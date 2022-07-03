@@ -15,8 +15,9 @@ import {
   registerValidate,
 } from "../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType } from "../../../../types";
+import { DefaultSettingsDropdown } from "../../../Commons/DefaultSettingsDropdown";
 import { FormikDefaultDropdown } from "../../../Commons/Dropdowns";
-import { FormikDefaultInput } from "../../../Commons/Inputs/FormikDefaultInput";
+import { FormikField } from "../../../Commons/Inputs/FieldSettings";
 import { DefaultPhoneInput } from "../../../Commons/Inputs/PhoneInput";
 import { SignUpSteps } from "../../../Commons/Steps/SignUpSteps";
 
@@ -121,7 +122,7 @@ export const Register: React.FC = () => {
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[11] row-[span_9/span_27] bg-no-repeat bg-cover"
           style={{ backgroundImage: `url(${background2})` }}></div>
       </div>
-      <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
+      <div className="flex flex-col h-full justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
         <div className="absolute w-full h-full rounded-xl p-2 opacity-98 bg-gradient-to-r from-blue-600 to-blue-400"></div>
         <div className="z-10 flex flex-col gap-6">
           {
@@ -145,8 +146,8 @@ export const Register: React.FC = () => {
                     description: "Enter email and phone",
                     index: 1,
                     children: <>
-                      <FormikDefaultInput label="email" name="email" type="email" />
-                      <DefaultPhoneInput label="phone" name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) }} error={"Phone is required"} />
+                      <FormikField placeholder="Email" name="email" type="email" />
+                      <DefaultPhoneInput label="Phone" name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) }} error={"Phone is required"} />
                     </>
                   },
                   {
@@ -154,8 +155,8 @@ export const Register: React.FC = () => {
                     description: "Enter NS and nickname",
                     index: 2,
                     children: <>
-                      <FormikDefaultInput label="name" name="name" type="text" />
-                      <FormikDefaultInput label="surname" name="surname" type="text" />
+                      <FormikField placeholder="Name" name="name" type="text" />
+                      <FormikField placeholder="Surname" name="surname" type="text" />
                     </>
                   },
                   {
@@ -182,8 +183,8 @@ export const Register: React.FC = () => {
                     description: "Enter your nickname",
                     index: 4,
                     children: <>
-                      <FormikDefaultInput label="username" name="username" type="text" />
-                      <FormikDefaultInput label="age" name="age" type="text" />
+                      <FormikField placeholder="Username" name="username" type="text" />
+                      <FormikField placeholder="Age" name="age" type="text" />
                     </>
                   },
                   {
@@ -191,13 +192,13 @@ export const Register: React.FC = () => {
                     description: "Enter your password and confirm password",
                     index: 5,
                     children: <>
-                      <FormikDefaultInput
-                        label="password"
+                      <FormikField
+                        placeholder="Password"
                         name="password"
                         type="password"
                       />
-                      <FormikDefaultInput
-                        label="passwordConfirm"
+                      <FormikField
+                        placeholder="Confirm password"
                         name="passwordConfirm"
                         type="password"
                       />

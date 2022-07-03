@@ -4,11 +4,9 @@ import { useActions } from "../../../../../Hooks/useActions";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { emailForgotValidate, IForgotByEmailForm, ISendVerifyCodeByForgotRequest } from "../../../../../Redux/Reducers/UserReducer/types";
-import { FormikDefaultInput } from "../../../../Commons/Inputs/FormikDefaultInput";
-import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
-import { StorageVariables } from "../../../../../types";
-import { FieldSettings } from "../../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
+import { Helmet } from "react-helmet";
 
 
 export const VerifyEmail: React.FC = () => {
@@ -37,6 +35,9 @@ export const VerifyEmail: React.FC = () => {
 
     return (
         <div className="w-full h-full pt-[12%] text-white">
+            <Helmet>
+                <title>Soundwave | Verify Email</title>
+            </Helmet>
             <div className="grid grid-cols-5">
                 <div className="flex col-span-2 justify-end items-center">
                     <div className="flex flex-col">
@@ -66,15 +67,15 @@ export const VerifyEmail: React.FC = () => {
                                         </div>
                                     }
                                     <div className="flex justify-center w-full items-center">
-                                        <FieldSettings placeholder="Email" name="email" disable value={user?.email} type="email" onSumbit={() => {}} />
+                                        <FormikField placeholder="Email" name="email" disable value={user?.email} type="email" onSumbit={() => { }} />
                                     </div>
                                     <div className="flex justify-end w-[80%] mt-7">
-                                        <ProfileButton text="Send verify code" onClick={() => { } } isSelect={true} />
+                                        <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
                                     </div>
                                 </div>
                             </Form>
                         </Formik>}
-                        
+
                     </div>
                 </div>
             </div>

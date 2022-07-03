@@ -11,7 +11,6 @@ import {
   ILoginByEmailRequest,
 } from "../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType } from "../../../../types";
-import { FormikDefaultInput } from "../../../Commons/Inputs/FormikDefaultInput";
 
 import { gapi } from "gapi-script";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
@@ -21,6 +20,7 @@ import { CustomCheckbox } from "../../../Commons/Checkboxs/CustomCheckbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Helmet } from "react-helmet";
+import { FormikField } from "../../../Commons/Inputs/FieldSettings";
 
 const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
@@ -116,10 +116,10 @@ export const Login: React.FC = () => {
                         <h1 className="text-black font-semibold text-lg">{error}</h1>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <FormikDefaultInput label="email" name="email" type="email" />
-                      <FormikDefaultInput
-                        label="password"
+                    <div className="flex flex-col gap-3">
+                      <FormikField placeholder="Email" name="email" type="email" />
+                      <FormikField
+                        placeholder="Password"
                         name="password"
                         type="password"
                       />

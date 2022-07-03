@@ -1,5 +1,5 @@
 .defphone {
-    @apply font-medium font-['Overpass'] bg-dark-100/60 outline-0 py-3 px-5 rounded-xl focus:outline-0;
+    @apply font-medium font-['Overpass'] bg-dark-200/50 outline-0 py-3 px-5 rounded-xl focus:outline-0;
     & input {
         @apply bg-transparent text-white border-0 outline-none shadow-none pl-2;
     }

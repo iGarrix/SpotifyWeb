@@ -9,7 +9,7 @@ import { baseUrl, DeviceType } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
 import { FormikDefaultDropdown } from '../../../Commons/Dropdowns';
-import { FieldSettings } from '../../../Commons/Inputs/FieldSettings';
+import { FormikField } from '../../../Commons/Inputs/FieldSettings';
 import { DefaultPhoneInput } from '../../../Commons/Inputs/PhoneInput';
 
 export const PersonalData: React.FC = () => {
@@ -208,7 +208,7 @@ export const PersonalData: React.FC = () => {
                                                 validationSchema={changeEmojieAccountValidate}
                                                 onSubmit={onChangeEmojieHandle}>
                                                 <Form>
-                                                    <FieldSettings placeholder="Emojie" type="text" value={user.emojie} isOutline onSumbit={() => { }} name={'emojie'} />
+                                                    <FormikField placeholder="Emojie" type="text" value={user.emojie} isOutline onSumbit={() => { }} name={'emojie'} />
                                                 </Form>
                                             </Formik>
                                         </div>
@@ -233,10 +233,10 @@ export const PersonalData: React.FC = () => {
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change data account</h1>
                                         <div className='grid grid-cols-2 gap-[30px]'>
-                                            <FieldSettings placeholder='Name' type="text" value={user.name} onSumbit={() => { }} name={'name'} />
-                                            <FieldSettings placeholder='Surname' type="text" value={user.surname} onSumbit={() => { }} name={'surname'} />
+                                            <FormikField placeholder='Name' type="text" value={user.name} onSumbit={() => { }} name={'name'} />
+                                            <FormikField placeholder='Surname' type="text" value={user.surname} onSumbit={() => { }} name={'surname'} />
                                         </div>
-                                        <FieldSettings placeholder='Nickname' type="text" value={user.username} onSumbit={() => { }} name={'username'} />
+                                        <FormikField placeholder='Nickname' type="text" value={user.username} onSumbit={() => { }} name={'username'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
                                         </div>
@@ -251,9 +251,9 @@ export const PersonalData: React.FC = () => {
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change other data</h1>
                                         <div className='grid grid-cols-3 gap-[30px]'>
-                                            <FieldSettings placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()}  onSumbit={() => { } } name={'date'} />
-                                            <FieldSettings placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { } } name={'month'} />
-                                            <FieldSettings placeholder='Years' type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { } } name={'years'} />
+                                            <FormikField placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()}  onSumbit={() => { } } name={'date'} />
+                                            <FormikField placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { } } name={'month'} />
+                                            <FormikField placeholder='Years' type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { } } name={'years'} />
                                         </div>
                                         <DefaultPhoneInput onChange={(e: any) => { setNumber(e)}} name={'phone'} label={'Phone'} value={number} error={'Invalid phone'} />
                                         <div className='grid grid-cols-2 gap-[30px]'>
@@ -273,7 +273,7 @@ export const PersonalData: React.FC = () => {
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change email</h1>
-                                        <FieldSettings placeholder='Email' type="email" onSumbit={() => { } } value={user.email} name={'email'} />
+                                        <FormikField placeholder='Email' type="email" onSumbit={() => { } } value={user.email} name={'email'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
                                         </div>
@@ -287,9 +287,9 @@ export const PersonalData: React.FC = () => {
                                 <Form>                
                                 <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change password</h1>
-                                        <FieldSettings placeholder='Old password' type='password' onSumbit={() => { } } name={'oldPassword'} />
-                                        <FieldSettings placeholder='New password' type='password' onSumbit={() => { } } name={'password'} />
-                                        <FieldSettings placeholder='Confirm new password' type='password' onSumbit={() => { } } name={'passwordConfirm'} />
+                                        <FormikField placeholder='Old password' type='password' onSumbit={() => { } } name={'oldPassword'} />
+                                        <FormikField placeholder='New password' type='password' onSumbit={() => { } } name={'password'} />
+                                        <FormikField placeholder='Confirm new password' type='password' onSumbit={() => { } } name={'passwordConfirm'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
                                         </div>

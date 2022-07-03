@@ -4,6 +4,7 @@ import { useActions } from "../../../../../Hooks/useActions";
 import { IVerifyCodeByForgotRequest, IVerifyEmailRequest } from "../../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType, StorageVariables } from "../../../../../types";
 import PinInput from 'react-pin-input';
+import { Helmet } from "react-helmet";
 
 
 
@@ -14,7 +15,7 @@ export const VerifyCodEmail: React.FC = () => {
     const nav = useNavigate();
     const [error, setError] = useState("");
 
-    const onHandleSubmit = async (code : string) => {
+    const onHandleSubmit = async (code: string) => {
         try {
             const email = localStorage.getItem(StorageVariables.ForgotUser);
             if (email) {
@@ -44,6 +45,9 @@ export const VerifyCodEmail: React.FC = () => {
 
     return (
         <div className="w-full h-full pt-[12%] text-white">
+            <Helmet>
+                <title>Soundwave | Enter Code</title>
+            </Helmet>
             <div className="grid grid-cols-5">
                 <div className="flex col-span-2 justify-end items-center">
                     <div className="flex flex-col">
@@ -75,10 +79,10 @@ export const VerifyCodEmail: React.FC = () => {
                                     type="numeric"
                                     inputMode="number"
                                     style={{ padding: '5px' }}
-                                    inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343` , borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                    inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
                                     onComplete={async (value, index) => { await onHandleSubmit(value) }}
                                     autoSelect={true}
-                                    
+
                                     regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                                 />
                             </div>

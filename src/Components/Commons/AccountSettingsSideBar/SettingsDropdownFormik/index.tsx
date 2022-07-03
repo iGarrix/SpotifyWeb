@@ -20,7 +20,7 @@ export const SettingsDropdownFormik: React.FC<SettingsDropdownFormikProps> = ({
         <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
       </div> */}
       <select defaultValue={value}
-        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-white bg-dark-100/60 autofill:bg-dark-100/60"
+        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-white bg-dark-200/50 autofill:bg-dark-100/60"
         onChange={field.onChange}
         name={field.name}
       >
