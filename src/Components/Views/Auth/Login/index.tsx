@@ -20,7 +20,7 @@ import { CustomCheckbox } from "../../../Commons/Checkboxs/CustomCheckbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Helmet } from "react-helmet";
-import { FormikField } from "../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../Commons/Inputs/FormikField";
 
 const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
@@ -28,17 +28,13 @@ const background2 = require('../../../../Assets/Background2.png');
 
 export const Login: React.FC = () => {
   const { loginByEmailUser, externalLoginlUser } = useActions();
-
   const nav = useNavigate();
-
   const error = useTypedSelector((state) => state.userReducer.error);
   const [remember, setRemember] = useState(false);
-
   const initialValues: ILoginByEmailForm = {
     email: "",
     password: "",
   };
-
   useEffect(() => {
 
     function start() {
@@ -51,7 +47,6 @@ export const Login: React.FC = () => {
     gapi.load('client:auth2', start);
 
   }, []);
-
   const onHandleSubmit = async (values: ILoginByEmailForm) => {
     try {
       var request: ILoginByEmailRequest = {
@@ -66,11 +61,9 @@ export const Login: React.FC = () => {
 
     }
   };
-
   const onForgotSubmit = () => {
     nav("passwordSendEmail");
   };
-
   const responseGoogle = async (response: any) => {
     var request: IExternalRequest = {
       tokenId: response.tokenId,
@@ -79,11 +72,9 @@ export const Login: React.FC = () => {
     await externalLoginlUser(request);
     nav("/profile");
   }
-
   const responseError = (error: any) => {
-    console.log(error);
+    
   }
-
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
       <Helmet>

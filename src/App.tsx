@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 
 import { Outlet, Route, Routes } from "react-router-dom";
@@ -48,24 +48,13 @@ import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications
 function App() {
   const [isDark, setDark] = useState(false);
 
-  const { initQueue, setPlayingTrack } = useActions();
+  const { initQueue } = useActions();
 
   document.documentElement.scrollTo(0, 0);
 
   const user = useTypedSelector(state => state.userReducer.profile);
 
   useEffect(() => {
-    // const queueStorage = localStorage.getItem(StorageVariables.Queue);
-    // if (queueStorage) {
-    //   let queue: IQueue = (JSON.parse(queueStorage) as IQueue);
-    //   if (queue) {
-    //     if (queue.isPlay === true) {
-    //       queue.isPlay = false;
-    //       localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-    //     }
-    //     initQueue(queue);
-    //   }
-    // }
 
     const storage_queue = localStorage.getItem(StorageVariables.Queue);
         if (storage_queue) {

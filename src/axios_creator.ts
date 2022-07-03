@@ -9,9 +9,6 @@ export default axios.create({
 });
 
 export const AuthorizateHeader = (token : any) => {
-  // headers: {
-  //   Authorization: "Bearer " + localStorage.getItem("token"),
-  // }
   return {
     headers: {
       Authorization: "Bearer " + token

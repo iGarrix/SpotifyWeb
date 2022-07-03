@@ -1,6 +1,5 @@
-
 export interface ICustomCheckbox {
-    value: boolean;
-    text?: string;
-    onCheck: () => void;
-  }
+  value: boolean;
+  text?: string;
+  onCheck: () => void;
+}

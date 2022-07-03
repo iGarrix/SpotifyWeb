@@ -7,11 +7,9 @@ import { IGetNotificationsRequest } from "../../../../../Redux/Reducers/Notifica
 import { NotifyCard } from "../../../../Commons/Cards/NotifyCard";
 
 export const ActionsAccount: React.FC = () => {
-
     const { getActions, addActions } = useActions();
     const reducer = useTypedSelector(state => state.notificationReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
-
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (reducer.nextPage && !reducer.loading) {
@@ -19,8 +17,6 @@ export const ActionsAccount: React.FC = () => {
             }
         }
     }
-
-
     const fetchnext = async () => {
         if (user && reducer.nextPage) {
             const request: IGetNotificationsRequest = {
@@ -30,7 +26,6 @@ export const ActionsAccount: React.FC = () => {
             await addActions(request);
         }
     }
-
     useEffect(() => {
         const work = async (page: number) => {
             if (user) {
@@ -43,7 +38,6 @@ export const ActionsAccount: React.FC = () => {
         }
         work(1);
     }, [user]);
-
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -55,9 +49,6 @@ export const ActionsAccount: React.FC = () => {
         }
 
     }, [reducer.nextPage && reducer.loading])
-
-
-
     return (
         <div className="flex flex-col w-full gap-3">
             <Helmet>

@@ -1,4 +1,4 @@
-import { faCheck, faCompactDisc, faImage, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCompactDisc, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -12,14 +12,10 @@ export const OverviewProfile: React.FC = () => {
   const { nickname } = useParams();
   const user = useTypedSelector(state => state.userReducer);
   const nav = useNavigate();
-
   const [ImageSrc, setImageSrc] = useState("");
   const [BackgroundSrc, setBackgroundSrc] = useState("");
   const [verifyImage, setVerifyImage] = useState<any>();
-
   const { getOverwiever } = useActions();
-
-
   useEffect(() => {
     const func = async () => {
       if (nickname) {
@@ -29,13 +25,11 @@ export const OverviewProfile: React.FC = () => {
 
     func();
   }, []);
-
   useEffect(() => {
     if (user.profile?.username === nickname) {
       nav('/profile')
     }
   }, [user.profile])
-
   useEffect(() => {
     if (user.overviewer != null) {
       setImageSrc(user.overviewer.avatar.includes("http") ? user.overviewer.avatar
@@ -56,7 +50,6 @@ export const OverviewProfile: React.FC = () => {
       }
     }
   }, [user.overviewer])
-
   return (
     <div className="overflow-x-hidden text-white flex flex-col h-full">
       <Helmet>

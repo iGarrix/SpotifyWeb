@@ -1,19 +1,8 @@
 import { Guid } from "guid-typescript";
 import React from "react";
+import { ISignUpStep, ISignUpSteps } from "./types";
 
-export interface ISignUpSteps {
-    children: ISignUpStep[],
-    selectedIndex: number,
-}
-
-export interface ISignUpStep {
-    title: string,
-    description: string,
-    index: number,
-    children: any,
-}
-
-export const SignUpStep : React.FC<ISignUpStep> = ({title, description, children}) => {
+export const SignUpStep: React.FC<ISignUpStep> = ({ title, description, children }) => {
     return (
         <div className="w-full flex flex-col justify-center items-center gap-8">
             <div className="flex flex-col gap-3 w-full items-center">
@@ -27,7 +16,7 @@ export const SignUpStep : React.FC<ISignUpStep> = ({title, description, children
     );
 }
 
-export const SignUpSteps : React.FC<ISignUpSteps> = ({children, selectedIndex}) => {
+export const SignUpSteps: React.FC<ISignUpSteps> = ({ children, selectedIndex }) => {
     return (
         <div>
             {children.filter(f => f.index === selectedIndex).map(item => {

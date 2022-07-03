@@ -5,20 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { emailForgotValidate, IForgotByEmailForm, ISendVerifyCodeByForgotRequest } from "../../../../../Redux/Reducers/UserReducer/types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
-import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
 import { Helmet } from "react-helmet";
-
+import { Field } from "../../../../Commons/Inputs/Field";
 
 export const VerifyEmail: React.FC = () => {
     const { CheckUserByEmail, SendCodeForgot } = useActions();
     const nav = useNavigate();
     const user = useTypedSelector((state) => state.userReducer.profile);
     const error = useTypedSelector((state) => state.userReducer.error);
-
     const initialValues: IForgotByEmailForm = {
         email: user ? user.email : "",
     };
-
     const onHandleSubmit = async (values: IForgotByEmailForm) => {
         if (user) {
             try {
@@ -32,7 +29,6 @@ export const VerifyEmail: React.FC = () => {
             }
         }
     };
-
     return (
         <div className="w-full h-full pt-[12%] text-white">
             <Helmet>
@@ -67,7 +63,7 @@ export const VerifyEmail: React.FC = () => {
                                         </div>
                                     }
                                     <div className="flex justify-center w-full items-center">
-                                        <FormikField placeholder="Email" name="email" disable value={user?.email} type="email" onSumbit={() => { }} />
+                                        <Field placeholder="Email" value={user?.email} onChange={() => { }} />
                                     </div>
                                     <div className="flex justify-end w-[80%] mt-7">
                                         <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
@@ -75,7 +71,6 @@ export const VerifyEmail: React.FC = () => {
                                 </div>
                             </Form>
                         </Formik>}
-
                     </div>
                 </div>
             </div>

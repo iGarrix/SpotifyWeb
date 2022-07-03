@@ -1,19 +1,8 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { IPreviewCardAccount } from "./types";
 
-export interface IPreviewCardAccount {
-    ImageSrc: string,
-    BackgroundSrc: string,
-    title: string,
-    nickname: string,
-    email: string,
-    icon: IconProp,
-    isSelect?: boolean,
-    onSelect?: () => void,
-}
-
-export const PreviewCardAccount: React.FC<IPreviewCardAccount> = ({...props}) => {
+export const PreviewCardAccount: React.FC<IPreviewCardAccount> = ({ ...props }) => {
     return (
         <div className={`flex rounded-xl p-5 gap-4 overflow-hidden transition-all relative cursor-pointer hover:shadow-lg hover:shadow-white ${props.isSelect && "shadow-lg shadow-primary-100"}`} onClick={props.onSelect}>
             <div className="absolute top-0 left-0 w-full h-full z-[-1]">

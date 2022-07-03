@@ -6,27 +6,18 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IUpdatePersonalData } from "../../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType } from "../../../../../types";
 import { Field } from "../../../Inputs/Field";
-import { QuadraticLoader } from "../../../Loaders/QuadraticLoader"
-
-export interface IRenameBioModal {
-    onSave: () => void,
-    onClose: () => void,
-}
+import { IRenameBioModal } from "./types";
 
 export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
-    const loading = useTypedSelector(state => state.userReducer.loading);
-
     const {updatePDUser} = useActions();
-
     useEffect(() => {
         if (error && error !== "") {         
             setEnterError(error);
         }
     }, [error]);
-
     const [enterError, setEnterError] = useState("");
     const onSubmit = async (event: any) => {
         event.preventDefault();
@@ -65,18 +56,15 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
             setEnterError(error);
         }
     }
-
     const onSaveSubmit = () => {
         if (enterError.length === 0) {
             onSave();
         }
     }
-
     const onCloseSubmit = () => {
         setEnterError("");
         onClose();
     }
-
     return (
         <div className="rounded-md py-8 px-20 flex flex-col items-center gap-6">
             <div className="w-full flex justify-end"><FontAwesomeIcon className="text-white font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>

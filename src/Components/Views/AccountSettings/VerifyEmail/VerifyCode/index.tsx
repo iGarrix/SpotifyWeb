@@ -6,15 +6,10 @@ import { DeviceType, StorageVariables } from "../../../../../types";
 import PinInput from 'react-pin-input';
 import { Helmet } from "react-helmet";
 
-
-
 export const VerifyCodEmail: React.FC = () => {
-
     const { VerifyCodeForgot, VerifyEmailUser } = useActions();
-
     const nav = useNavigate();
     const [error, setError] = useState("");
-
     const onHandleSubmit = async (code: string) => {
         try {
             const email = localStorage.getItem(StorageVariables.ForgotUser);
@@ -41,8 +36,6 @@ export const VerifyCodEmail: React.FC = () => {
         } catch (error) {
         }
     };
-
-
     return (
         <div className="w-full h-full pt-[12%] text-white">
             <Helmet>

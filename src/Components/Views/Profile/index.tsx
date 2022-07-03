@@ -17,16 +17,12 @@ const icon_crop = require('../../../Assets/Icons/Crop.png');
 export const Profile: React.FC = () => {
   const user = useTypedSelector((state) => state.userReducer.profile);
   const nav = useNavigate();
-
   const [openModal, setOpenModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(window.location.pathname);
-
   const [ImageSrc, setImageSrc] = useState("");
   const [BackgroundSrc, setBackgroundSrc] = useState("");
   const [verifyImage, setVerifyImage] = useState<any>();
-
   const { updateAvatarUser, updateBackgroundUser } = useActions();
-
   useEffect(() => {
     if (user != null) {
       setImageSrc(user.avatar.includes("http") ? user.avatar
@@ -47,25 +43,19 @@ export const Profile: React.FC = () => {
       }
     }
   }, [user]);
-
-
   const onChangeName = () => {
     setOpenModal(true);
   }
-
-
   const onSaveChanges = () => {
     setOpenModal(false);
   }
   const onCloseModal = () => {
     setOpenModal(false);
   }
-
   const onCurrentItem = (path: string) => {
     setCurrentItem(path);
     nav(path);
   }
-
   const onChangeAvatar = async (e: any) => {
     try {
       const file = e.target.files[0];
@@ -76,12 +66,10 @@ export const Profile: React.FC = () => {
         }
         await updateAvatarUser(request);
       }
-
     } catch (error) {
 
     }
   }
-
   const onChangeBackground = async (e: any) => {
     try {
       const file = e.target.files[0];
@@ -97,7 +85,6 @@ export const Profile: React.FC = () => {
 
     }
   }
-
   return (
     <div className="overflow-x-hidden text-white flex flex-col h-full">
       <Helmet>

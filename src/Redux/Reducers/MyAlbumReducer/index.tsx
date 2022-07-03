@@ -26,12 +26,12 @@ export const myAlbumsReducer = (
     }
     case MyAlbumActionTypes.ADDMYALBUM: {
       let arr = state.albums ? state.albums : [];
-      if (action.payload && arr) {  
-        if (action.payload.pageables) {  
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
             arr.push(e);
           })
-        }   
+        }
       }
       return {
         ...state,

@@ -6,9 +6,7 @@ import { Header } from "../../Commons/Header";
 import { QuadraticLoader } from "../../Commons/Loaders/QuadraticLoader";
 
 export const LayAccountSettings: React.FC = () => {
-
     const loading = useTypedSelector(state => state.userReducer.loading);
-
     return (
         <div className="grid grid-cols-12 w-full nin-h-screen">
             {
@@ -19,12 +17,12 @@ export const LayAccountSettings: React.FC = () => {
                 <AccountSettingsSideBar />
             </div>
             <div className={`col-span-10 w-full h-full flex flex-col relative`}>
-            {
-                loading ?
-                    <div className="w-full h-full absolute top-0 left-0 bg-black/90 flex justify-center items-center z-[10]" style={{ zIndex: 5000 }}>
-                        <QuadraticLoader isVisisble={true} />
-                    </div> : null
-            }
+                {
+                    loading ?
+                        <div className="w-full h-full absolute top-0 left-0 bg-black/90 flex justify-center items-center z-[10]" style={{ zIndex: 5000 }}>
+                            <QuadraticLoader isVisisble={true} />
+                        </div> : null
+                }
                 <Header />
                 <Outlet />
             </div>

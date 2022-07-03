@@ -6,23 +6,21 @@ import { DeviceType, StorageVariables } from "../../../../../types";
 import { IForgotNewPasswordForm, IForgotNewPasswordRequest, newPasswordChangeValidate } from "../../../../../Redux/Reducers/UserReducer/types";
 import { useActions } from "../../../../../Hooks/useActions";
 import { Helmet } from "react-helmet";
-import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../../Commons/Inputs/FormikField";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 
 export const NewPasswordChange: React.FC = () => {
-    const {updateRecoveryPasswordUser} = useActions();
+    const { updateRecoveryPasswordUser } = useActions();
     const nav = useNavigate();
     const error = useTypedSelector((state) => state.userReducer.error);
-
     const initialValues: IForgotNewPasswordForm = {
         newPassword: "",
         confirmPassword: "",
     };
-
     const onHandleSubmit = async (values: IForgotNewPasswordForm) => {
         try {
             const email = localStorage.getItem(StorageVariables.ForgotUser);
-            if(email){
+            if (email) {
                 var request: IForgotNewPasswordRequest = {
                     findEmail: email,
                     newPassword: values.newPassword,
@@ -36,7 +34,6 @@ export const NewPasswordChange: React.FC = () => {
         } catch (error) {
         }
     };
-
     return (
         <div className="w-full h-full text-white flex justify-center items-center">
             <Helmet>
@@ -56,8 +53,8 @@ export const NewPasswordChange: React.FC = () => {
                             </div>
                         }
                         <div className="flex flex-col gap-4">
-                            <FormikField placeholder="newPassword" name="newPassword" type="password" onSumbit={() => {}} />
-                            <FormikField placeholder="confirmPassword" name="confirmPassword" type="password" onSumbit={() => {}} />
+                            <FormikField placeholder="newPassword" name="newPassword" type="password" onSumbit={() => { }} />
+                            <FormikField placeholder="confirmPassword" name="confirmPassword" type="password" onSumbit={() => { }} />
                         </div>
                         <ProfileButton isSelect text="Change password" onClick={() => { }} />
                     </div>

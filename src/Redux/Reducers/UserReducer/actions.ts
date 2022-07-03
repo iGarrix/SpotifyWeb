@@ -28,7 +28,7 @@ import {
 import jwt_decode from "jwt-decode";
 
 import http, { AuthorizateHeader } from "../../../axios_creator";
-import {DeviceType, IUser, StorageVariables } from "../../../types";
+import { DeviceType, IUser, StorageVariables } from "../../../types";
 import { ClearRedux } from "../../GlobalReduxFunc";
 
 export const registerUser = (data: IRegisterRequest) => {
@@ -220,10 +220,10 @@ export const VerifyCodeForgot = (data: IVerifyCodeByForgotRequest) => {
       );
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
       dispatch({ type: UserActionTypes.INITUSER_ERROR, payload: "" });
-      if(response.data){
+      if (response.data) {
         localStorage.setItem(StorageVariables.VerifyResponse, "true");
       }
-      else{
+      else {
         localStorage.setItem(StorageVariables.VerifyResponse, "false");
       }
       return Promise.resolve();
@@ -244,9 +244,9 @@ export const VerifyCodeForgot = (data: IVerifyCodeByForgotRequest) => {
 };
 
 export const SendCodeForgot = (data: ISendVerifyCodeByForgotRequest) => {
-  return async (dispatch: Dispatch<UserAction>) => {
+  return async () => {
     try {
-      const response = await http.post<boolean>(
+      await http.post<boolean>(
         "api/Profile/ForgotPassword", data
       );
       return Promise.resolve();
@@ -266,7 +266,7 @@ export const updateRecoveryPasswordUser = (data: IForgotNewPasswordRequest) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      const response = await http.put<IUser>(
+      await http.put<IUser>(
         "api/Profile/RecoveryNewPassword",
         data, AuthorizateHeader(token)
       );
@@ -605,7 +605,7 @@ export const appelate = (data: ISendAppelationRequest) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      const response = await http.post<any>(
+      await http.post<any>(
         "api/Appelation/Appelate",
         data, AuthorizateHeader(token)
       );
@@ -638,15 +638,15 @@ export const InitUser = async (
   dispatch: Dispatch<UserAction>
 ) => {
   const token = localStorage.getItem("token");
-  if (token) {    
+  if (token) {
     const data = jwt_decode(token) as IInitGet;
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const response = await http.get<IUser>(
         "api/Profile/GetByEmail?email=" + data.email, AuthorizateHeader(token)
-        );
+      );
       dispatch({ type: UserActionTypes.INITUSER, payload: response.data });
-  
+
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -665,11 +665,11 @@ export const DeleteProfile = (data: IDeleteProfileRequest) => {
     try {
       dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      const response = await http.delete<String>(
+      await http.delete<String>(
         "api/Profile/DeleteProfile", {
-          headers: AuthorizateHeader(token).headers,
-          data: data
-        }
+        headers: AuthorizateHeader(token).headers,
+        data: data
+      }
       );
       dispatch({ type: UserActionTypes.INITUSER_CLEAR });
       LogoutUser();

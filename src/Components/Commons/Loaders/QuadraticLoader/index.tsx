@@ -1,9 +1,5 @@
 import React, { Fragment } from "react";
-
-export interface IQuadraticLoader {
-    isVisisble: boolean,
-    visibleIndex?: string,
-}
+import { IQuadraticLoader } from "./types";
 
 export const QuadraticLoader: React.FC<IQuadraticLoader> = ({ isVisisble, visibleIndex }) => {
     return (

@@ -1,11 +1,5 @@
 import React from "react";
-
-export interface IAblumCard {
-    image: string | any,
-    name: string | any,
-    songs: number | string | any,
-    onClick: () => void,
-}
+import { IAblumCard } from "./types";
 
 export const AlbumCard: React.FC<IAblumCard> = ({ name, songs, image, onClick }) => {
     return (

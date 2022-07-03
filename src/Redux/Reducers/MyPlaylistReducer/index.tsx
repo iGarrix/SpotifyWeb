@@ -27,12 +27,12 @@ export const myPlaylistReducer = (
     }
     case MyPlaylistActionTypes.ADDMYPLAYLIST: {
       let arr = state.playlists ? state.playlists : [];
-      if (action.payload && arr) {  
-        if (action.payload.pageables) {  
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
             arr.push(e);
           })
-        }   
+        }
       }
       return {
         ...state,

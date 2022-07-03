@@ -1,6 +1,6 @@
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { RemoveWithHistory } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
@@ -10,13 +10,9 @@ import { IHistory, StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const History: React.FC = () => {
-
     const { initHistory } = useActions();
-
     let rx = useTypedSelector(state => state.playingReducer);
-
     let page = TempTake;
-
     const scrollHadler = () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             const storage_history = localStorage.getItem(StorageVariables.History);
@@ -29,7 +25,6 @@ export const History: React.FC = () => {
             }
         }
     }
-
     useEffect(() => {
         const storage_history = localStorage.getItem(StorageVariables.History);
         if (storage_history) {
@@ -46,7 +41,6 @@ export const History: React.FC = () => {
             document.removeEventListener("scroll", scrollHadler);
         }
     }, []);
-
     const RemovingItemWithHistory = (id: any) => {
         if (id) {
             const response = RemoveWithHistory(id);
@@ -55,7 +49,6 @@ export const History: React.FC = () => {
             }
         }
     }
-
     return (
         <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-white bg-no-repeat h-full">
             <Helmet>

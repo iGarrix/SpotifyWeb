@@ -9,13 +9,12 @@ import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
 import { PreviewCardAccount } from "../../../Commons/Cards/PreviewCardAccount";
 import { DefaultSettingsDropdown } from "../../../Commons/DefaultSettingsDropdown";
 
-export const VerifyAccount : React.FC = () => {
+export const VerifyAccount: React.FC = () => {
 
     const nav = useNavigate();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
-    const {verifiedUser} = useActions();
-
+    const { verifiedUser } = useActions();
     const [ImageSrc, setImageSrc] = useState("");
     const [BackgroundSrc, setBackgroundSrc] = useState("");
     useEffect(() => {
@@ -35,14 +34,12 @@ export const VerifyAccount : React.FC = () => {
             }
         }
     }, [user]);
-
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     const [value, setValue] = useState(VerifyType.artist);
-
     const onVerifySubmit = async () => {
-        try {     
+        try {
             if (value && user) {
-                const request : IVerifiedAccountRequest = {
+                const request: IVerifiedAccountRequest = {
                     findEmail: user.email,
                     status: value,
                     device: DeviceType.desktop
@@ -51,7 +48,7 @@ export const VerifyAccount : React.FC = () => {
                 document.documentElement.scrollTo(0, 0);
             }
         } catch (error) {
-            
+
         }
     }
 
@@ -63,12 +60,12 @@ export const VerifyAccount : React.FC = () => {
                     <h1 className="text-3xl font-bold">Verify your account</h1>
                     <div className="flex flex-col mt-[40px] w-full gap-[20px]">
                         <div className="grid grid-cols-3 w-full gap-10">
-                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Client profile"} 
-                            isSelect={currentItem === "/accountsettings/verifyaccount"} nickname={user.username} email={user.email} icon={faUser} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount"); nav("");}} />
-                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Artist & creator"} 
-                            isSelect={currentItem === "/accountsettings/verifyaccount/artist"} nickname={user.username} email={user.email} icon={faCompactDisc} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount/artist"); nav("artist");}}  />
-                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Verified profile"} 
-                            isSelect={currentItem === "/accountsettings/verifyaccount/verified"} nickname={user.username} email={user.email} icon={faCheck} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount/verified"); nav("verified");}} />
+                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Client profile"}
+                                isSelect={currentItem === "/accountsettings/verifyaccount"} nickname={user.username} email={user.email} icon={faUser} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount"); nav(""); }} />
+                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Artist & creator"}
+                                isSelect={currentItem === "/accountsettings/verifyaccount/artist"} nickname={user.username} email={user.email} icon={faCompactDisc} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount/artist"); nav("artist"); }} />
+                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Verified profile"}
+                                isSelect={currentItem === "/accountsettings/verifyaccount/verified"} nickname={user.username} email={user.email} icon={faCheck} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount/verified"); nav("verified"); }} />
                         </div>
                     </div>
                     <div className="flex flex-col w-full gap-[40px] mt-[50px]">
@@ -79,9 +76,9 @@ export const VerifyAccount : React.FC = () => {
                             </div>
                         }
                         <Outlet />
-                        <DefaultSettingsDropdown title={"Verified type"} value={VerifyType.artist} options={[VerifyType.artist, VerifyType.verify]} onChange={(e: any) => {setValue(e.target.value)}} />
+                        <DefaultSettingsDropdown title={"Verified type"} value={VerifyType.artist} options={[VerifyType.artist, VerifyType.verify]} onChange={(e: any) => { setValue(e.target.value) }} />
                         <div className="flex w-full justify-end">
-                            <ProfileButton onClick={async() => { await onVerifySubmit() } } text={"Verify"} isSelect={true}/>
+                            <ProfileButton onClick={async () => { await onVerifySubmit() }} text={"Verify"} isSelect={true} />
                         </div>
                     </div>
                 </div>

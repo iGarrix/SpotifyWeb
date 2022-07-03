@@ -1,8 +1,8 @@
-import { faEllipsisVertical, faFloppyDisk, faHeart, faPause, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faHeart, faPause, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -12,23 +12,17 @@ import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 import "./style.scss";
 import { ISoundItem } from "./types";
 
-
-
 export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick }) => {
 
     const { initQueue } = useActions();
-
     const nav = useNavigate();
-
     const play = useTypedSelector(state => state.playingReducer.queue?.isPlay);
-
     const addtoqueue = async (isPlay: any) => {
         const response = AddToQueue(item, isPlay);
         if (response) {
             await initQueue(response);
         }
     }
-
     const save = () => {
 
     }
@@ -44,10 +38,10 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 }
                 <h1 className="text-medium">
                     {
-                        item.trackCreators?.map(i => i.username).map((i : any, index: number) => {
+                        item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                             return (
                                 <span key={Guid.create().toString()}
-                                className="cursor-pointer hover:text-blue-400" onClick={() => {nav("/overview/" + i, {replace: true})}}>{i}{item.trackCreators?.length && index < item.trackCreators.length - 1 ? ", " : " "}</span>
+                                    className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: true }) }}>{i}{item.trackCreators?.length && index < item.trackCreators.length - 1 ? ", " : " "}</span>
                             )
                         })
                     }
@@ -61,9 +55,9 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 }
                 <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all" translate-y-[-1px]`} icon={faHeart} />
                 <SoundOptionModal options={[{
-                    title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => {addtoqueue(play) }
-                }]} 
-                trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
+                    title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
+                }]}
+                    trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
             </div>
         </div>
     )

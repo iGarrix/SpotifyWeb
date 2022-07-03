@@ -11,19 +11,14 @@ import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
 import { FormikTextArea } from "../../../Commons/Inputs/FormikTextArea";
 
 export const SendAppelation: React.FC = () => {
-
     const nav = useNavigate();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
-
     const [open, setOpen] = useState(false);
-
     const { appelate } = useActions();
-
     const initialSendAppelationValues: ISendAppelationForm = {
         message: "",
     };
-
     const onSendAppelationHandle = async (values: ISendAppelationForm) => {
         if (user) {
             try {
@@ -38,7 +33,6 @@ export const SendAppelation: React.FC = () => {
             }
         }
     };
-
     return (
         <>
             <Helmet>

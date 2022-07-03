@@ -5,19 +5,16 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { Helmet } from "react-helmet";
-import { FormikField } from "../../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../../Commons/Inputs/FormikField";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 
 export const PasswordSendEmail: React.FC = () => {
-    const {CheckUserByEmail, SendCodeForgot} = useActions();
+    const { CheckUserByEmail, SendCodeForgot } = useActions();
     const nav = useNavigate();
     const error = useTypedSelector((state) => state.userReducer.error);
-    const user = useTypedSelector((state) => state.userReducer.profile);
-
     const initialValues: IForgotByEmailForm = {
         email: "",
     };
-
     const onHandleSubmit = async (values: IForgotByEmailForm) => {
         try {
             var request: ISendVerifyCodeByForgotRequest = {
@@ -29,7 +26,6 @@ export const PasswordSendEmail: React.FC = () => {
         } catch (error) {
         }
     };
-
     return (
         <div className="w-full h-full text-white flex justify-center items-center">
             <Helmet>
@@ -49,7 +45,7 @@ export const PasswordSendEmail: React.FC = () => {
                             </div>
                         }
                         <div className="flex flex-col gap-2">
-                            <FormikField placeholder="Email" name="email" type="email" onSumbit={() => {}} />
+                            <FormikField placeholder="Email" name="email" type="email" onSumbit={() => { }} />
                         </div>
                         <ProfileButton isSelect text="Send verify code" onClick={() => { }} />
                     </div>

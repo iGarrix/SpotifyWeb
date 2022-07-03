@@ -1,10 +1,8 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { fillingUser, monthDiff, VerifyType } from "../../../../../types";
 
 export const RequirementsArtist = () => {
-
     const user = useTypedSelector(state => state.userReducer.profile);
     return (
         <div className="flex flex-col gap-[15px]">
@@ -38,7 +36,7 @@ export const RequirementsArtist = () => {
                 </div>
                 <div className="flex flex-col px-[10%] py-[3%]">
                     <div className="py-[3%] flex items-center gap-2">
-                        <p className={`text-lg ${monthDiff(new Date(), new Date(user ? user.create: "")) >= 6 ? "text-green-500" : "text-red-500"}`}>You must use the service for more than 6 months</p>
+                        <p className={`text-lg ${monthDiff(new Date(), new Date(user ? user.create : "")) >= 6 ? "text-green-500" : "text-red-500"}`}>You must use the service for more than 6 months</p>
                     </div>
                 </div>
             </div>

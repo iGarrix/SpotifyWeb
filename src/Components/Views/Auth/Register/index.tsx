@@ -15,9 +15,8 @@ import {
   registerValidate,
 } from "../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType } from "../../../../types";
-import { DefaultSettingsDropdown } from "../../../Commons/DefaultSettingsDropdown";
 import { FormikDefaultDropdown } from "../../../Commons/Dropdowns";
-import { FormikField } from "../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { DefaultPhoneInput } from "../../../Commons/Inputs/PhoneInput";
 import { SignUpSteps } from "../../../Commons/Steps/SignUpSteps";
 
@@ -28,21 +27,15 @@ const background2 = require('../../../../Assets/Background2.png');
 export const Register: React.FC = () => {
   const { registerUser, externalLoginlUser } = useActions();
   const nav = useNavigate();
-
-  const load = useTypedSelector((state) => state.userReducer.loading);
   const error = useTypedSelector((state) => state.userReducer.error);
   const phone: any = localStorage.getItem("tempphone");
-
   const [localError, setLocalError] = useState("");
-
   useEffect(() => {
     if (error) {
       setLocalError(error);
     }
   }, [error]);
-
   const [step, setStep] = useState(1);
-
   const initialValues: IRegisterForm = {
     username: "",
     email: "",
@@ -55,7 +48,6 @@ export const Register: React.FC = () => {
     country: "",
     age: ""
   };
-
   const onHandleSubmit = async (values: IRegisterForm) => {
     try {
       const storagePhone = localStorage.getItem("tempphone")
@@ -81,7 +73,6 @@ export const Register: React.FC = () => {
       console.error(error);
     }
   };
-
   const responseGoogle = async (response: any) => {
     var request: IExternalRequest = {
       tokenId: response.tokenId,
@@ -90,17 +81,14 @@ export const Register: React.FC = () => {
     await externalLoginlUser(request);
     nav("/profile");
   }
-
   const responseError = (error: any) => {
     console.log(error);
   }
-
   const onNext = () => {
     if (step < 5) {
       setStep(step + 1);
     }
   }
-
   const onPrevious = () => {
     if (step > 1) {
       setStep(step - 1);

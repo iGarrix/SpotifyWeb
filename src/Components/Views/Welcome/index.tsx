@@ -1,24 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
-import { useActions } from "../../../Hooks/useActions";
-import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { AlbumCard } from "../../Commons/Cards/AlbumCard";
 
 const icon_play = require('../../../Assets/Icons/Play.png');
-const icon_pause = require('../../../Assets/Icons/Pause.png');
 const bg = require('../../../Assets/Background2.png');
 
 export const Welcome: React.FC = () => {
-  const nav = useNavigate();
-
-  const { LogoutUser } = useActions();
-  const playingReducer = useTypedSelector(state => state.playingReducer);
-
-  const onPause = () => {
-
-
-  }
 
   return (
     <div className="flex flex-col text-white">
@@ -37,7 +24,7 @@ export const Welcome: React.FC = () => {
           <h1 className="font-semibold font-['Lexend'] text-4xl">Love The Way You Lie</h1>
           <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">Eminem</p>
           <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
-            onClick={onPause}
+            onClick={() => { }}
             style={{ backgroundImage: `url(${bg})` }}>
             <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} />
           </div>

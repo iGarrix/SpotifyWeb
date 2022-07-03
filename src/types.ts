@@ -24,7 +24,6 @@ export enum StorageVariables {
   ForgotUser = "ForgotUser",
   VerifyResponse = "VerifyResponse",
   Volume = "vol",
-  //Single = "selectSingle"
 }
 
 export const MinPasswordLenght = 8;

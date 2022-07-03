@@ -1,4 +1,4 @@
-import { faArrowDown, faMusic } from "@fortawesome/free-solid-svg-icons";
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
@@ -7,23 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IGetAllMySingleRequest, IPagableMySingleItem } from "../../../../Redux/Reducers/MySingleReducer/types";
+import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const ProfileSingles: React.FC = () => {
-
     const nav = useNavigate();
-
     const { getMySingle, addMySingle, initQueue } = useActions();
-
     const rx = useTypedSelector(state => state.mySingleReducer);
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
     const user = useTypedSelector(state => state.userReducer.profile);
     const playingReducer = useTypedSelector(state => state.playingReducer);
-
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -33,7 +29,6 @@ export const ProfileSingles: React.FC = () => {
             }
         }
     }
-
     useEffect(() => {
         const fetchData = async () => {
             if (user) {
@@ -47,7 +42,6 @@ export const ProfileSingles: React.FC = () => {
         fetchData();
 
     }, [user]);
-
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -59,7 +53,6 @@ export const ProfileSingles: React.FC = () => {
         }
 
     }, [rx.nextPage && rx.loading])
-
     const FetchNext = async () => {
         if (rx.singles && rx.nextPage && user) {
             const rq: IGetAllMySingleRequest = {
@@ -69,7 +62,6 @@ export const ProfileSingles: React.FC = () => {
             await addMySingle(rq);
         }
     }
-
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
         if (response) {
@@ -77,7 +69,6 @@ export const ProfileSingles: React.FC = () => {
             AddToHistory(item);
         }
     }
-
     return (
         <div className="w-full h-full flex flex-col justify-center items-center py-8 gap-12 relative">
             <Helmet>
@@ -92,10 +83,10 @@ export const ProfileSingles: React.FC = () => {
                             {
                                 singles.map(item => {
                                     return (
-                                        <SoundItem key={Guid.create().toString()} 
-                                        onClick={() => { onSelectTrack(item) }}
-                                        isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false} 
-                                        isLiked={false} item={item}
+                                        <SoundItem key={Guid.create().toString()}
+                                            onClick={() => { onSelectTrack(item) }}
+                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                            isLiked={false} item={item}
                                         />
                                     )
                                 })

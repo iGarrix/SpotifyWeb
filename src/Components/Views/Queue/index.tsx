@@ -11,13 +11,9 @@ import { StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const Queue: React.FC = () => {
-
     let rx = useTypedSelector(state => state.playingReducer);
-
     const { initQueue, clearQueue } = useActions();
-
     let page = TempTake;
-
     const RmWithQueue = (id: any, isPlay: boolean | any) => {
         if (id) {
             var response = RemoveWithQueue(id, isPlay);
@@ -29,7 +25,6 @@ export const Queue: React.FC = () => {
             }
         }
     }
-
     const scrollHadler = () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             const storage_queue = localStorage.getItem(StorageVariables.Queue);
@@ -42,7 +37,6 @@ export const Queue: React.FC = () => {
             }
         }
     }
-
     useEffect(() => {
         document.documentElement.scrollTo(0, 0);
 
@@ -52,7 +46,6 @@ export const Queue: React.FC = () => {
             document.removeEventListener("scroll", scrollHadler);
         }
     }, []);
-
     return (
         <div className="w-full flex flex-col gap-6 items-start text-white px-[3%] py-[2%]">
             <Helmet>

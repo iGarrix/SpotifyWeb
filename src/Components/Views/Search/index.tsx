@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 
 export const Search: React.FC = (props) => {
     const [search] = useSearchParams();
-
     return (
         <div>
             <Helmet>

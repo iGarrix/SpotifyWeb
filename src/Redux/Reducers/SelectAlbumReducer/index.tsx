@@ -27,22 +27,22 @@ export const playingReducer = (
     }
     case PlayingActionTypes.INITSELECTALBUMTRACKS: {
       let arr = state.tracks ? state.tracks : [];
-      if (action.payload && arr) {  
-        if (action.payload.pageables) {  
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
             arr.push(e);
           })
-        }   
+        }
       }
-        return {
-          ...state,
-          tracks: action.payload ? arr : [],
-          nextPage: action.payload? action.payload.nextPage : null,
-          prevPage: action.payload? action.payload.prevPage : null,
-          loading: false,
-          error: "",
-        };
-      }
+      return {
+        ...state,
+        tracks: action.payload ? arr : [],
+        nextPage: action.payload ? action.payload.nextPage : null,
+        prevPage: action.payload ? action.payload.prevPage : null,
+        loading: false,
+        error: "",
+      };
+    }
     case PlayingActionTypes.INITQUEUE: {
       return {
         ...state,
@@ -67,7 +67,7 @@ export const playingReducer = (
     }
     case PlayingActionTypes.SETPLAYING: {
       let queue = state.queue;
-      if (queue) {   
+      if (queue) {
         queue.isPlay = action.payload;
       }
       return {

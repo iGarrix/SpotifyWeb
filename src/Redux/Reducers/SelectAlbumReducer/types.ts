@@ -30,7 +30,7 @@ export interface ITrackResponse {
 }
 
 export interface IQueue {
-    soundobjs : ITrackResponse[],
+    soundobjs: ITrackResponse[],
     isPlay: boolean,
 }
 
@@ -98,14 +98,14 @@ export interface SetPlayingAction {
 }
 
 export type PlayingAction =
-InitPlayingAction |
-InitPlayingTrackAction |
-InitQueueAction |
-InitPlayingWaitAction |
-InitPlayingErrorAction |
-InitPlayingClearAction |
-ClearQueueAction |
-ClearTracksAction |
-InitHistoryAction |
-ClearHistoryAction | 
-SetPlayingAction;
+    InitPlayingAction |
+    InitPlayingTrackAction |
+    InitQueueAction |
+    InitPlayingWaitAction |
+    InitPlayingErrorAction |
+    InitPlayingClearAction |
+    ClearQueueAction |
+    ClearTracksAction |
+    InitHistoryAction |
+    ClearHistoryAction |
+    SetPlayingAction;

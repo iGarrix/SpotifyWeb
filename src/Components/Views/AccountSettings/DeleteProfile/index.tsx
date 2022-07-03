@@ -8,7 +8,7 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { DeleteProfileValidate, IDeleteProfileForm, IDeleteProfileRequest } from "../../../../Redux/Reducers/UserReducer/types";
 import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
-import { FormikField } from "../../../Commons/Inputs/FieldSettings";
+import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 
 export const DeleteProfile: React.FC = () => {
@@ -17,11 +17,9 @@ export const DeleteProfile: React.FC = () => {
     const { DeleteProfile } = useActions();
     const nav = useNavigate();
     const [openModal, setOpenModal] = useState(false);
-
     const initialValues: IDeleteProfileForm = {
         password: ""
     };
-
     const onHandleSubmit = async (values: IDeleteProfileForm) => {
         try {
             const email = user?.email;
@@ -36,7 +34,6 @@ export const DeleteProfile: React.FC = () => {
         } catch (error) {
         }
     };
-
     return (
         <div className="w-full h-full px-[5%] py-[50px] text-white">
             <Helmet>

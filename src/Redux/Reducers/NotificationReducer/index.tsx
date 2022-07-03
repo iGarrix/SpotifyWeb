@@ -27,12 +27,12 @@ export const notificationReducer = (
     }
     case NotificationActionTypes.ADDNOTIFICATION: {
       let arr = state.notifications ? state.notifications : [];
-      if (action.payload && arr) {  
-        if (action.payload.pageables) {  
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
             arr.push(e);
           })
-        }   
+        }
       }
       return {
         ...state,
@@ -55,12 +55,12 @@ export const notificationReducer = (
     }
     case NotificationActionTypes.ADDAPPELATIONS: {
       let arr = state.appelations ? state.appelations : [];
-      if (action.payload && arr) {  
-        if (action.payload.pageables) {  
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
             arr.push(e);
           })
-        }   
+        }
       }
       return {
         ...state,

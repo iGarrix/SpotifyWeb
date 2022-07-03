@@ -1,24 +1,25 @@
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../../Hooks/useActions';
 import { useTypedSelector } from '../../../../Hooks/useTypedSelector';
-import { changeDataAccountValidate, changeEmailAccountValidate, changeEmojieAccountValidate, changeOtherDataAccountValidate, changePasswordAccountValidate, IChangeDataAccountForm, IChangeDataAccountRequest, IChangeEmailAccountForm, IChangeEmailAccountRequest, IChangeEmojieForm, IChangeEmojieRequest, IChangeOtherDataAccountForm, IChangePasswordAccountForm, IChangePasswordAccountRequest, IChangePhoneAccountRequest, IUpdatePersonalData } from '../../../../Redux/Reducers/UserReducer/types';
+import {
+    changeDataAccountValidate, changeEmailAccountValidate, changeEmojieAccountValidate,
+    changeOtherDataAccountValidate, changePasswordAccountValidate, IChangeDataAccountForm,
+    IChangeDataAccountRequest, IChangeEmailAccountForm, IChangeEmailAccountRequest, IChangeEmojieForm,
+    IChangeEmojieRequest, IChangeOtherDataAccountForm, IChangePasswordAccountForm, IChangePasswordAccountRequest,
+    IChangePhoneAccountRequest, IUpdatePersonalData
+} from '../../../../Redux/Reducers/UserReducer/types';
 import { baseUrl, DeviceType } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
-import { FormikDefaultDropdown } from '../../../Commons/Dropdowns';
-import { FormikField } from '../../../Commons/Inputs/FieldSettings';
+import { FormikField } from '../../../Commons/Inputs/FormikField';
 import { DefaultPhoneInput } from '../../../Commons/Inputs/PhoneInput';
 
 export const PersonalData: React.FC = () => {
-
-    const nav = useNavigate();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
     const { updateEmojieUser, updatePDUser, updateNicknameUser, updatePhoneUser, updateEmailUser, updatePasswordUser } = useActions();
-
     const [ImageSrc, setImageSrc] = useState("");
     const [BackgroundSrc, setBackgroundSrc] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -40,23 +41,19 @@ export const PersonalData: React.FC = () => {
             setNumber(user.phone.toString())
         }
     }, [user]);
-
     useEffect(() => {
         if (error) {
             document.documentElement.scrollTo(0, 0);
         }
     }, [error]);
-
     const initialChangeEmojieValues: IChangeEmojieForm = {
         emojie: "", //user ? user.emojie : "",
     };
-
     const initialChangeDataAccountValues: IChangeDataAccountForm = {
         name: user ? user.name : "",
         surname: user ? user.surname : "",
         username: user ? user.username : ""
     };
-
     const initialChangeOtherDataAccountValues: IChangeOtherDataAccountForm = {
         date: user ? new Date(user.birthday).getDate().toString() : '',
         month: user ? new Date(user.birthday).getMonth().toString() : '',
@@ -65,17 +62,14 @@ export const PersonalData: React.FC = () => {
         country: user ? user.country : "",
     };
     const [number, setNumber] = useState(user ? user.phone.toString() : "");
-
     const initialChangeEmailAccountValues: IChangeEmailAccountForm = {
         email: "", //user ? user.email : "",
     };
-
     const initialChangePasswordAccountValues: IChangePasswordAccountForm = {
         oldPassword: '',
         password: '',
         passwordConfirm: ''
     };
-
     const onChangeEmojieHandle = async (values: IChangeEmojieForm) => {
         if (user) {
             try {
@@ -91,11 +85,10 @@ export const PersonalData: React.FC = () => {
             }
         }
     };
-
     const onChangeDataAccountHandle = async (values: IChangeDataAccountForm) => {
         if (user) {
             try {
-                const request : IUpdatePersonalData = {
+                const request: IUpdatePersonalData = {
                     findEmail: user.email,
                     newName: values.name,
                     newSurname: values.surname,
@@ -104,7 +97,7 @@ export const PersonalData: React.FC = () => {
                     newCountry: user.country,
                     device: DeviceType.desktop,
                 }
-                const request2 : IChangeDataAccountRequest = {
+                const request2: IChangeDataAccountRequest = {
                     findEmail: user.email,
                     newUserName: values.username,
                     device: DeviceType.desktop
@@ -117,11 +110,10 @@ export const PersonalData: React.FC = () => {
             }
         }
     };
-
     const onChangeOtherDataAccountHandle = async (values: IChangeOtherDataAccountForm) => {
         if (user && number && number.length === 13) {
             try {
-                const request : IUpdatePersonalData = {
+                const request: IUpdatePersonalData = {
                     findEmail: user.email,
                     newName: user.name,
                     newSurname: user.surname,
@@ -130,7 +122,7 @@ export const PersonalData: React.FC = () => {
                     newCountry: values.country,
                     device: DeviceType.desktop,
                 }
-                const request2 : IChangePhoneAccountRequest = {
+                const request2: IChangePhoneAccountRequest = {
                     findEmail: user.email,
                     newPhone: number,
                     device: DeviceType.desktop,
@@ -143,11 +135,10 @@ export const PersonalData: React.FC = () => {
             }
         }
     };
-
     const onChangeEmailAccountHandle = async (values: IChangeEmailAccountForm) => {
         if (user) {
             try {
-                const request : IChangeEmailAccountRequest = {
+                const request: IChangeEmailAccountRequest = {
                     findEmail: user.email,
                     newEmail: values.email,
                     device: DeviceType.desktop
@@ -159,11 +150,10 @@ export const PersonalData: React.FC = () => {
             }
         }
     };
-
     const onChangePasswordAccountHandle = async (values: IChangePasswordAccountForm) => {
         if (user) {
             try {
-                const request : IChangePasswordAccountRequest = {
+                const request: IChangePasswordAccountRequest = {
                     findEmail: user.email,
                     oldPassword: values.oldPassword,
                     newPassword: values.passwordConfirm,
@@ -176,10 +166,9 @@ export const PersonalData: React.FC = () => {
             }
         }
     };
-
     return (
         <>
-        <Helmet>
+            <Helmet>
                 <title>Soundwave | Personal Data</title>
             </Helmet>
             {
@@ -217,13 +206,13 @@ export const PersonalData: React.FC = () => {
                             </div>
                             {
                                 error ?
-                                <div className='w-full bg-red-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
-                                    <p className='font-medium text-lg text-center'>{error}</p>
-                                </div>
-                                : successMessage &&
-                                <div className='w-full bg-green-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
-                                    <p className='font-medium text-lg text-center'>{successMessage}</p>
-                                </div>
+                                    <div className='w-full bg-red-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
+                                        <p className='font-medium text-lg text-center'>{error}</p>
+                                    </div>
+                                    : successMessage &&
+                                    <div className='w-full bg-green-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
+                                        <p className='font-medium text-lg text-center'>{successMessage}</p>
+                                    </div>
                             }
                             <Formik
                                 initialValues={initialChangeDataAccountValues}
@@ -251,11 +240,11 @@ export const PersonalData: React.FC = () => {
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change other data</h1>
                                         <div className='grid grid-cols-3 gap-[30px]'>
-                                            <FormikField placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()}  onSumbit={() => { } } name={'date'} />
-                                            <FormikField placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { } } name={'month'} />
-                                            <FormikField placeholder='Years' type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { } } name={'years'} />
+                                            <FormikField placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()} onSumbit={() => { }} name={'date'} />
+                                            <FormikField placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { }} name={'month'} />
+                                            <FormikField placeholder='Years' type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { }} name={'years'} />
                                         </div>
-                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e)}} name={'phone'} label={'Phone'} value={number} error={'Invalid phone'} />
+                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={'Phone'} value={number} error={'Invalid phone'} />
                                         <div className='grid grid-cols-2 gap-[30px]'>
                                             <SettingsDropdownFormik name={'gender'} title={'Gender'} value={user.gender} options={["Male", "Female", "Other"]} />
                                             <SettingsDropdownFormik name={'country'} title={'Country'} value={user.country} options={["Ukraine", "USA", "Other"]} />
@@ -273,7 +262,7 @@ export const PersonalData: React.FC = () => {
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change email</h1>
-                                        <FormikField placeholder='Email' type="email" onSumbit={() => { } } value={user.email} name={'email'} />
+                                        <FormikField placeholder='Email' type="email" onSumbit={() => { }} value={user.email} name={'email'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
                                         </div>
@@ -284,12 +273,12 @@ export const PersonalData: React.FC = () => {
                                 initialValues={initialChangePasswordAccountValues}
                                 validationSchema={changePasswordAccountValidate}
                                 onSubmit={onChangePasswordAccountHandle}>
-                                <Form>                
-                                <div className='flex flex-col gap-[30px]'>
+                                <Form>
+                                    <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl text-center'>Change password</h1>
-                                        <FormikField placeholder='Old password' type='password' onSumbit={() => { } } name={'oldPassword'} />
-                                        <FormikField placeholder='New password' type='password' onSumbit={() => { } } name={'password'} />
-                                        <FormikField placeholder='Confirm new password' type='password' onSumbit={() => { } } name={'passwordConfirm'} />
+                                        <FormikField placeholder='Old password' type='password' onSumbit={() => { }} name={'oldPassword'} />
+                                        <FormikField placeholder='New password' type='password' onSumbit={() => { }} name={'password'} />
+                                        <FormikField placeholder='Confirm new password' type='password' onSumbit={() => { }} name={'passwordConfirm'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
                                         </div>

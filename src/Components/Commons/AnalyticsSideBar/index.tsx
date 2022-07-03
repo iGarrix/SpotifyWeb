@@ -8,9 +8,7 @@ const icon_heart = require('../../../Assets/Icons/Like.png');
 const icon_music = require('../../../Assets/Icons/Music.png');
 
 export const AnalyticsSideBar: React.FC = () => {
-
     const nav = useNavigate();
-
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
         <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-dark-200 to-dark-200/100">

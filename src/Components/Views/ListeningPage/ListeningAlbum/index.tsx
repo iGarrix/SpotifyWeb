@@ -20,10 +20,8 @@ export const ListeningAlbum: React.FC = () => {
 
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
-
     const { initSelectAlbum, initQueue, getTracks } = useActions();
     const nav = useNavigate();
-
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (playingReducer.nextPage && !playingReducer.loading) {
@@ -31,8 +29,6 @@ export const ListeningAlbum: React.FC = () => {
             }
         }
     }
-
-
     useEffect(() => {
         const work = async () => {
             const selectedAlbum = localStorage.getItem(StorageVariables.Album);
@@ -48,7 +44,6 @@ export const ListeningAlbum: React.FC = () => {
         }
         work();
     }, []);
-
     useEffect(() => {
         const fetchData = async (page: any) => {
             if (id && !playingReducer.tracks) {
@@ -61,7 +56,6 @@ export const ListeningAlbum: React.FC = () => {
         }
         fetchData(1);
     }, []);
-
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -73,7 +67,6 @@ export const ListeningAlbum: React.FC = () => {
         }
 
     }, [playingReducer.nextPage && playingReducer.loading])
-
     const FetchNext = async () => {
         if (playingReducer.tracks && playingReducer.nextPage && id) {
             const rq: IGetTracksRequest = {
@@ -83,7 +76,6 @@ export const ListeningAlbum: React.FC = () => {
             await getTracks(rq);
         }
     }
-
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
         if (response) {
@@ -92,7 +84,6 @@ export const ListeningAlbum: React.FC = () => {
             AddToHistory(item);
         }
     }
-
     const onPause = async () => {
         let storage_queue = localStorage.getItem(StorageVariables.Queue);
         if (storage_queue) {

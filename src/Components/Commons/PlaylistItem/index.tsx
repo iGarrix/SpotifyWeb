@@ -2,8 +2,7 @@ import React from "react";
 import { baseUrl } from "../../../types";
 import { IPlaylistItem } from "./types";
 
-
-export const PlaylistItem: React.FC<IPlaylistItem> = ({name, title, imageSrc, onClick}) => {
+export const PlaylistItem: React.FC<IPlaylistItem> = ({ name, title, imageSrc, onClick }) => {
     return (
         <div className="flex flex-col gap-2 cursor-pointer transition-all hover:scale-105" onClick={onClick}>
             <h1 className="font-medium text-2xl text-center">{name}</h1>

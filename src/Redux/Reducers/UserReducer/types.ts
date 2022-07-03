@@ -39,17 +39,17 @@ export const emailLoginValidate = Yup.object({
     .required("Password is required"),
 });
 
-export const nicknameLoginValidate = Yup.object({
-  userName: Yup.string()
-    .email("Email is invalid")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(
-      MinPasswordLenght,
-      `Password must be at least ${MinPasswordLenght} charaters`
-    )
-    .required("Password is required"),
-});
+// export const nicknameLoginValidate = Yup.object({
+//   userName: Yup.string()
+//     .email("Email is invalid")
+//     .required("Email is required"),
+//   password: Yup.string()
+//     .min(
+//       MinPasswordLenght,
+//       `Password must be at least ${MinPasswordLenght} charaters`
+//     )
+//     .required("Password is required"),
+// });
 
 export const emailForgotValidate = Yup.object({
   email: Yup.string(),
@@ -67,17 +67,13 @@ export const newPasswordChangeValidate = Yup.object({
     .required("Confirm password is required"),
 });
 
-export const verifyCodeForgotValidate = Yup.object({
-  code: Yup.string().required("Code is required").length(4, "Code is not valid"),
-});
-
 export const DeleteProfileValidate = Yup.object({
   password: Yup.string()
-  .min(
-    MinPasswordLenght,
-    `Password must be at least ${MinPasswordLenght} charaters`
-  )
-  .required("Password is required"),
+    .min(
+      MinPasswordLenght,
+      `Password must be at least ${MinPasswordLenght} charaters`
+    )
+    .required("Password is required"),
 });
 
 export const changeDataAccountValidate = Yup.object({

@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { ITrackResponse, PlayingAction, PlayingActionTypes } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../SelectAlbumReducer/types";
 import { IGetAllMySingleRequest, MySingleAction, MySingleActionTypes } from "./types";
 
 export const getMySingle = (data: IGetAllMySingleRequest) => {
