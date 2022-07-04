@@ -30,50 +30,39 @@ export const VerifyEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full pt-[12%] text-white">
+        <div className="w-full h-full text-white flex items-center justify-center">
             <Helmet>
                 <title>Soundwave | Verify Email</title>
             </Helmet>
-            <div className="grid grid-cols-5">
-                <div className="flex col-span-2 justify-end items-center">
-                    <div className="flex flex-col">
-                        <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
-                    </div>
-                </div>
-                <div className="flex justify-start items-center w-full col-span-3   ">
-                    <div className="flex flex-col gap-4 w-[80%]">
-                        <div className="flex justify-center">
-                            <h1 className="text-3xl font-bold">Verify Email</h1>
-                        </div>
-                        <div className="flex justify-center">
-                            <h2>We will send a code to your mail for verification</h2>
-                        </div>
-                        {user?.emailconfirm ? <div className="flex items-center justify-center"><h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : <Formik
-                            initialValues={initialValues}
-                            validationSchema={emailForgotValidate}
-                            onSubmit={onHandleSubmit}>
-                            <Form>
-                                <div className="flex flex-col w-full">
-                                    {
-                                        error &&
-                                        <div className="flex flex-col gap-3 items-center">
-                                            <div className="my-4 rounded-xl bg-red-500/60 py-3 px-4">
-                                                <h1 className="text-white font-semibold text-lg">{error}</h1>
-                                            </div>
+            <div className="flex gap-[190px]">
+                <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
+                <div className="flex flex-col justify-center gap-2 w-full">
+                    <h1 className="text-3xl font-bold text-center">Verify Email</h1>
+                    <h2 className="text-center">We will send a code to your mail for verification</h2>
+                    {user?.emailconfirm ? <div className="flex items-center justify-center"><h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : <Formik
+                        initialValues={initialValues}
+                        validationSchema={emailForgotValidate}
+                        onSubmit={onHandleSubmit}>
+                        <Form>
+                            <div className="flex flex-col w-full h-full mt-7">
+                                {
+                                    error &&
+                                    <div className="flex flex-col gap-3 items-center">
+                                        <div className="my-4 rounded-xl bg-red-500/60 py-3 px-4">
+                                            <h1 className="text-white font-semibold text-lg">{error}</h1>
                                         </div>
-                                    }
-                                    <div className="flex justify-center w-full items-center">
-                                        <Field placeholder="Email" value={user?.email} onChange={() => { }} />
                                     </div>
-                                    <div className="flex justify-end w-[80%] mt-7">
-                                        <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
-                                    </div>
+                                }
+                                <Field placeholder="Email" value={user?.email} onChange={() => { }} />
+                                <div className="flex justify-end mt-7">
+                                    <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
                                 </div>
-                            </Form>
-                        </Formik>}
-                    </div>
+                            </div>
+                        </Form>
+                    </Formik>}
                 </div>
             </div>
+
         </div>
     );
 };

@@ -75,7 +75,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
                 </div>
                 <div className="flex flex-col mb-1">
                     {!user?.emailconfirm ?
-                        <div className="bg-red-500/60 py-2 px-4 flex items-center gap-3 transition-all hover:bg-red-500/90 cursor-pointer">
+                        <div className="bg-red-500/60 py-2 px-4 flex items-center gap-3 transition-all hover:bg-red-500/90 cursor-pointer" onClick={() => {onNavigateClick("/accountsettings/verifyemail")}}>
                             <FontAwesomeIcon className="text-2xl" icon={faTriangleExclamation} />
                             <h1 className="select-none text-sm">Email don't confirmed</h1>
                         </div> : null
