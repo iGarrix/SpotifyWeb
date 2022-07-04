@@ -107,9 +107,9 @@ export const Login: React.FC = () => {
                       {
                         error &&
                         <div className="mt-4">
-                          <div className="text-red-500 text-lg flex items-center gap-2">
+                          <div className="text-red-500 text-lg flex flex-col justify-center items-center gap-2">
                             <FontAwesomeIcon icon={faTriangleExclamation} />
-                            <h1 className="font-semibold">{error}</h1>
+                            <h1 className="font-semibold text-center">{error}</h1>
                           </div>
                         </div>
                       }

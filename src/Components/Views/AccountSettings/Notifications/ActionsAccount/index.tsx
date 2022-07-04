@@ -56,8 +56,8 @@ export const ActionsAccount: React.FC = () => {
             </Helmet>
             {
                 reducer.error &&
-                <div className="flex flex-col py-5 items-center justify-center bg-red-500/60 rounded-xl">
-                    <h1 className="text-center text-lg">{reducer.   error}</h1>
+                <div className="flex flex-col py-5 items-center justify-center bg-red-500/80 rounded-xl">
+                    <h1 className="text-light-100 font-medium">{reducer.error}</h1>
                 </div>
             }
             {

@@ -65,7 +65,7 @@ export const SendAppelation: React.FC = () => {
                         {
                             error &&
                             <div className="w-full flex items-center justify-center rounded-xl py-3 bg-red-500/80">
-                                <h2 className="text-white">{error}fgfgfgfgf</h2>
+                                <h2 className="text-light-100 font-medium">{error}fgfgfgfgf</h2>
                             </div>
                         }
                         <Formik

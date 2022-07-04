@@ -185,7 +185,7 @@ export const PersonalData: React.FC = () => {
                                     </div>
                                     <div className="p-[50px] pb-[20px] z-10 flex flex-col gap-[20px]">
                                         <div className="flex justify-between gap-[43px] items-end">
-                                            <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl" />
+                                            <img alt="avatar" src={ImageSrc} className="transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl" />
                                             <div className="pb-[20px]">
                                                 <h2 className="text-dark-200 font-bold text-2xl">{user.name} {user.surname}</h2>
                                                 <p className="text-dark-200/80 font-medium">{user.username}</p>
@@ -206,12 +206,12 @@ export const PersonalData: React.FC = () => {
                             </div>
                             {
                                 error ?
-                                    <div className='w-full bg-red-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
-                                        <p className='font-medium text-lg text-center'>{error}</p>
+                                    <div className='w-full bg-red-500/80 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
+                                        <p className='font-medium text-light-100 text-center'>{error}</p>
                                     </div>
                                     : successMessage &&
                                     <div className='w-full bg-green-500/60 rounded-lg flex items-center justify-center overflow-hidden py-[20px] px-[20px]'>
-                                        <p className='font-medium text-lg text-center'>{successMessage}</p>
+                                        <p className='font-medium text-light-100 text-lg text-center'>{successMessage}</p>
                                     </div>
                             }
                             <Formik

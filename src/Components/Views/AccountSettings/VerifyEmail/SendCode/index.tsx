@@ -48,8 +48,8 @@ export const VerifyEmail: React.FC = () => {
                                 {
                                     error &&
                                     <div className="flex flex-col gap-3 items-center">
-                                        <div className="my-4 rounded-xl bg-red-500/60 py-3 px-4">
-                                            <h1 className="text-white font-semibold text-lg">{error}</h1>
+                                        <div className="my-4 rounded-xl bg-red-500/80 py-3 px-4">
+                                            <h1 className="text-light-100 font-semibold">{error}</h1>
                                         </div>
                                     </div>
                                 }

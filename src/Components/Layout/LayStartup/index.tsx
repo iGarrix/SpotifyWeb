@@ -20,15 +20,15 @@ export const LayStartup: React.FC = () => {
   }, [rx.queue]);
   const nav = useNavigate();
   return (
-    <div className="grid grid-cols-8 w-full nin-h-screen">
+    <div className="grid grid-cols-20 w-full nin-h-screen">
       {
         load.mySingleReducer.loading || load.myAlbumsReducer.loading || load.playingReducer.loading &&
         <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
       }
-      <div className="col-span-1 w-full h-full z-[100]">
+      <div className="col-span-3 w-full h-full z-[100]">
         <SideBar />
       </div>
-      <div className={`col-span-7 w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[40px]"}`}>
+      <div className={`col-[span_17] w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[40px]"}`}>
         <Header />
         <Outlet />
       </div>

@@ -71,8 +71,8 @@ export const VerifyAccount: React.FC = () => {
                     <div className="flex flex-col w-full gap-[40px] mt-[50px]">
                         {
                             error &&
-                            <div className="flex flex-col py-5 items-center justify-center bg-red-500/60 rounded-xl">
-                                <h1 className="text-center text-lg">{error}</h1>
+                            <div className="flex flex-col py-5 items-center justify-center bg-red-500/80 rounded-xl">
+                                <h1 className="text-light-100 text-center">{error}</h1>
                             </div>
                         }
                         <Outlet />

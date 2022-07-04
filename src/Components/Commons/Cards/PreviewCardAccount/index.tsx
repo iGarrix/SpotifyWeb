@@ -14,7 +14,7 @@ export const PreviewCardAccount: React.FC<IPreviewCardAccount> = ({ ...props }) 
                     <h2 className="font-semibold text-2xl">{props.nickname}</h2>
                     <h2 className="text-xl"><FontAwesomeIcon icon={props.icon} className="text-blue-500 animate-pulse" width={20} height={20} /></h2>
                 </div>
-                <p className="">{props.email}</p>
+                <p className="text-dark-200/60">{props.email}</p>
                 <div className="flex w-full justify-end mt-auto">
                     <p className={`${props.isSelect && "text-sky-500 blur-[0.5px]0"}`}>{props.title}</p>
                 </div>

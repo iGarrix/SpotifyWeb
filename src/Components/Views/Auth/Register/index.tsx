@@ -41,12 +41,14 @@ export const Register: React.FC = () => {
     email: "",
     phone: "",
     name: "",
-    surname: "Ukraine",
+    surname: "",
     gender: "Male",
     password: "",
     passwordConfirm: "",
-    country: "",
-    age: ""
+    country: "Ukraine",
+    date: "",
+    month: "",
+    years: ""
   };
   const onHandleSubmit = async (values: IRegisterForm) => {
     try {
@@ -60,7 +62,7 @@ export const Register: React.FC = () => {
         phone: phone,
         name: values.name,
         surname: values.surname,
-        birthday: new Date(new Date().getFullYear() - Number.parseInt(values.age), new Date().getMonth(), new Date().getDay()),
+        birthday: new Date(Number.parseInt(values.years), Number.parseInt(values.month), Number.parseInt(values.date)),
         gender: values.gender,
         country: values.country,
         device: DeviceType.desktop,
@@ -117,7 +119,7 @@ export const Register: React.FC = () => {
           {
             localError !== "" ?
               <div className="flex flex-col gap-3 items-center">
-                <div className="text-red-500 text-xl flex items-center gap-2">
+                <div className="text-red-500 text-xl flex flex-col justify-center items-center gap-2">
                   <FontAwesomeIcon icon={faTriangleExclamation} />
                   <h1 className="font-semibold">{localError}</h1>
                 </div>
@@ -157,12 +159,14 @@ export const Register: React.FC = () => {
                         title="Select your country"
                         label="country"
                         name="country"
+                        value="Ukraine"
                         options={["Ukraine", "USA", "Other"]}
                       />
                       <FormikDefaultDropdown
                         title="Select your gender"
                         label="gender"
                         name="gender"
+                        value="Male"
                         options={["Male", "Female", "Other"]}
                       />
                     </>
@@ -173,7 +177,12 @@ export const Register: React.FC = () => {
                     index: 4,
                     children: <>
                       <FormikField placeholder="Username" name="username" type="text" />
-                      <FormikField placeholder="Age" name="age" type="text" />
+                      <div className='grid grid-cols-3 gap-3'>
+                        <FormikField placeholder='Day' type="text" name={'date'} />
+                        <FormikField placeholder='Month' type="text" name={'month'} />
+                        <FormikField placeholder='Years' type="text" name={'years'} />
+                      </div>
+                      {/* <FormikField placeholder="Age" name="age" type="text" /> */}
                     </>
                   },
                   {

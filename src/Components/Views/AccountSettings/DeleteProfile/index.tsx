@@ -61,7 +61,7 @@ export const DeleteProfile: React.FC = () => {
                                 <h1 className="text-3xl font-medium font-['Lexend']">Delete account</h1>
                                 {
                                     error && error.length !== 0 ?
-                                        <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null
+                                        <p className="text-red-500 font-medium flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null
                                 }
                                 <div className="flex justify-center items-center flex-col px-20">
                                     <div className="flex flex-col w-full items-center">
