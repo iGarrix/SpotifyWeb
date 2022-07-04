@@ -56,7 +56,7 @@ export const DeleteProfile: React.FC = () => {
                     validationSchema={DeleteProfileValidate}
                     onSubmit={onHandleSubmit}>
                     <Form>
-                            <div className="rounded-md py-12 flex flex-col items-center justify-center gap-6 shadow-xl px-10">
+                            <div className="rounded-md py-12 flex flex-col items-center justify-center gap-6 shadow-xl px-10 border border-light-200">
                                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
                                 <h1 className="text-3xl font-medium font-['Lexend']">Delete account</h1>
                                 {

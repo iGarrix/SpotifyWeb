@@ -1,9 +1,12 @@
+import { NULL } from "sass";
 import { DefaultServerError } from "../../../types";
 import { INotificationStateState, NotificateAction, NotificationActionTypes } from "./types";
 
 const inialState: INotificationStateState = {
   notifications: null,
   appelations: null,
+  statuses: null,
+  selectedStatus: null,
   prevPage: null,
   nextPage: null,
   loading: false,
@@ -71,6 +74,42 @@ export const notificationReducer = (
         error: "",
       };
     }
+    case NotificationActionTypes.INITSTATUSES: {
+      return {
+        ...state,
+        statuses: action.payload ? action.payload.pageables : [],
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case NotificationActionTypes.ADDSTATUSES: {
+      let arr = state.statuses ? state.statuses : [];
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
+          action.payload.pageables.forEach(e => {
+            arr.push(e);
+          })
+        }
+      }
+      return {
+        ...state,
+        statuses: action.payload ? arr : null,
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case NotificationActionTypes.INITSELECTSTATUS: {
+      return {
+        ...state,
+        selectedStatus: action.payload,
+        loading: false,
+        error: "",
+      };
+    }
     case NotificationActionTypes.INITNOTIFICATION_WAITING: {
       return {
         ...state,
@@ -94,6 +133,8 @@ export const notificationReducer = (
         ...state,
         notifications: null,
         appelations: null,
+        statuses: null,
+        selectedStatus: null,
         prevPage: null,
         nextPage: null,
         loading: false,

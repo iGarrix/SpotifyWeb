@@ -44,6 +44,7 @@ import { Notifications } from "./Components/Views/AccountSettings/Notifications"
 import { LogsInAccount } from "./Components/Views/AccountSettings/Notifications/LogsInAccount";
 import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications/ActionsAccount";
 import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
+import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/StatusAccount";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -119,6 +120,7 @@ function App() {
               <Route index element={<LogsInAccount />} />
               <Route path="actions" element={<ActionsAccount />} />
               <Route path="appeal" element={<AppelationLogs />} />
+              <Route path="status" element={<StatusAccount />} />
             </Route>
           </Route>
         </Route>

@@ -66,7 +66,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
         onClose();
     }
     return (
-        <div className="rounded-md py-12 flex flex-col items-center gap-6 text-dark-200 bg-light-100 shadow-xl px-10">
+        <div className="rounded-md py-12 flex flex-col items-center gap-6 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
             <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             <h1 className="text-3xl font-medium font-['Lexend']">Rename</h1>
             {

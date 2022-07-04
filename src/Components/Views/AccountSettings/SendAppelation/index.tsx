@@ -43,7 +43,7 @@ export const SendAppelation: React.FC = () => {
                 user ?
                     <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 gap-[20px]">
                         <FullScreenModal visible={open} center>
-                            <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 shadow-xl px-[2%] py-[5%]">
+                            <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 shadow-xl px-[2%] py-[5%] border border-light-200">
                                 <FontAwesomeIcon icon={faCircleCheck} className="text-9xl" />
                                 <div className="flex flex-col items-center mt-[20px] mb-[30px] gap-[10px]">
                                     <h2 className="font-bold text-2xl">Your letter has been sent</h2>
