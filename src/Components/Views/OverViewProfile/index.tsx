@@ -51,9 +51,9 @@ export const OverviewProfile: React.FC = () => {
     }
   }, [user.overviewer])
   return (
-    <div className="overflow-x-hidden text-white flex flex-col h-full">
+    <div className="overflow-x-hidden text-light-100 flex flex-col h-full">
       <Helmet>
-        <title>Soundwave | {user.overviewer?.username}</title>
+        <title>Soundwave | {user.overviewer? user.overviewer.username : "Unknown"}</title>
       </Helmet>
       <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
         <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>

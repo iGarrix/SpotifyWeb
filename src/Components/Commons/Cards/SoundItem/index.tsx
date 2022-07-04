@@ -12,6 +12,11 @@ import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 import "./style.scss";
 import { ISoundItem } from "./types";
 
+const icon_pause = require('../../../../Assets/Icons/Pause.png');
+const icon_play = require('../../../../Assets/Icons/Play.png');
+const icon_like = require('../../../../Assets/Icons/Like.png');
+const icon_likered = require('../../../../Assets/Icons/LikeRed.png');
+
 export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick }) => {
 
     const { initQueue } = useActions();
@@ -28,13 +33,15 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
     }
 
     return (
-        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound` : "bg-dark-100"}`}>
+        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 text-dark-200"}`}>
             <div className="flex gap-6 items-center">
                 {
                     isPlay ?
-                        <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPause} onClick={onClick} />
+                        // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPause} onClick={onClick} />
+                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={onClick} />
                         :
-                        <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
+                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={onClick} />
+                        // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
                 <h1 className="text-medium">
                     {
@@ -53,7 +60,13 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                     item.track &&
                     <h1 className="text-thin w-[48px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>
                 }
-                <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all" translate-y-[-1px]`} icon={faHeart} />
+                {/* <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all" translate-y-[-1px]`} icon={faHeart} /> */}
+                {
+                    isLiked ? 
+                    <img alt="icon" className="w-[25px] cursor-pointer" src={icon_likered} />
+                    :
+                    <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_like} />
+                }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
                 }]}

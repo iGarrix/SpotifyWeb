@@ -9,6 +9,7 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { appelationMessageValidate, ISendAppelationForm, ISendAppelationRequest } from "../../../../Redux/Reducers/UserReducer/types";
 import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
 import { FormikTextArea } from "../../../Commons/Inputs/FormikTextArea";
+import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 
 export const SendAppelation: React.FC = () => {
     const nav = useNavigate();
@@ -40,23 +41,20 @@ export const SendAppelation: React.FC = () => {
             </Helmet>
             {
                 user ?
-                    <div className="flex flex-col h-full py-[50px] px-[5%] text-white gap-[20px]">
-                        {
-                            open &&
-                            <div className="fixed top-0 left-0 bg-dark-200/60 w-full h-full z-[10000] flex items-center justify-center">
-                                <div className="flex flex-col justify-center items-center rounded-xl bg-dark-100 px-[2%] py-[5%]">
-                                    <FontAwesomeIcon icon={faCircleCheck} className="text-9xl" />
-                                    <div className="flex flex-col items-center mt-[20px] mb-[30px] gap-[10px]">
-                                        <h2 className="font-bold text-2xl">Your letter has been sent</h2>
-                                        <p>the administration will consider it within
-                                            3 working days</p>
-                                    </div>
-                                    <span className="shadow-2xl shadow-dark-200/60">
-                                        <ProfileButton text="Go to the profile" onClick={() => { nav('/profile'); }} isSelect />
-                                    </span>
+                    <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 gap-[20px]">
+                        <FullScreenModal visible={open} center>
+                            <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 shadow-xl px-[2%] py-[5%]">
+                                <FontAwesomeIcon icon={faCircleCheck} className="text-9xl" />
+                                <div className="flex flex-col items-center mt-[20px] mb-[30px] gap-[10px]">
+                                    <h2 className="font-bold text-2xl">Your letter has been sent</h2>
+                                    <p>the administration will consider it within
+                                        3 working days</p>
                                 </div>
+                                <span className="shadow-2xl shadow-dark-200/60">
+                                    <ProfileButton text="Go to the profile" onClick={() => { nav('/profile'); }} isSelect />
+                                </span>
                             </div>
-                        }
+                        </FullScreenModal>
                         <div>
                             <h1 className="font-bold text-3xl">Appelations</h1>
                             <p className="font-medium">
@@ -66,8 +64,8 @@ export const SendAppelation: React.FC = () => {
                         </div>
                         {
                             error &&
-                            <div className="w-full flex items-center justify-center rounded-xl py-3 bg-red-500/60">
-                                <h2 className="text-white">{error}</h2>
+                            <div className="w-full flex items-center justify-center rounded-xl py-3 bg-red-500/80">
+                                <h2 className="text-white">{error}fgfgfgfgf</h2>
                             </div>
                         }
                         <Formik

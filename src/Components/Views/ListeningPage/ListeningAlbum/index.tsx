@@ -99,7 +99,7 @@ export const ListeningAlbum: React.FC = () => {
 
     }
     return (
-        <div className="w-full h-full pt-[7%] px-[15%] text-white relative">
+        <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
             {
                 playingReducer.album ?
                     <img alt="bg" src={`${baseUrl}Images/AlbomTemplates/${playingReducer.album?.albomDto?.templateimage}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} />
@@ -112,9 +112,9 @@ export const ListeningAlbum: React.FC = () => {
                         <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
                             className="h-96 w-96 rounded-xl object-cover bg-cover" />
                         <div className="py-3 flex items-center justify-between w-full">
-                            <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer" src={icon_share} />
-                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
-                                <img alt="icon" className="w-[14px]" src={icon_skip_forward} />
+                            <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                             </div>
                             <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
                                 onClick={onPause}
@@ -127,10 +127,10 @@ export const ListeningAlbum: React.FC = () => {
 
                                 }
                             </div>
-                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-white">
-                                <img alt="icon" className="w-[14px]" src={icon_skip_next} />
+                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
                             </div>
-                            <img alt="icon" className="w-[24px] text-red-500 cursor-pointer" src={icon_like} />
+                            <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} />
                         </div>
                     </div>
                 </div>
@@ -142,6 +142,15 @@ export const ListeningAlbum: React.FC = () => {
                                 playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
                                 <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {dayDiff(new Date(), new Date(playingReducer.album?.albomDto?.releasealbom))} days ago</p>
                             }
+                            <p className="font-thin flex gap-2">Creators: 
+                            {
+                        playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
+                            return (
+                                <span key={Guid.create().toString()}
+                                    className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: true }) }}>{i}{playingReducer.album?.creatorsAlbom?.length && index < playingReducer.album?.creatorsAlbom.length - 1 ? " • " : " "}</span>
+                            )
+                        })
+                    }</p>
                         </div>
                         <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
                             <div className="flex flex-col gap-[18px] h-full">

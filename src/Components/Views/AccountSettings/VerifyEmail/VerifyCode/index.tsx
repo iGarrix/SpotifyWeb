@@ -37,7 +37,7 @@ export const VerifyCodEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full pt-[12%] text-white">
+        <div className="w-full h-full pt-[12%] text-dark-200">
             <Helmet>
                 <title>Soundwave | Enter Code</title>
             </Helmet>
@@ -65,19 +65,36 @@ export const VerifyCodEmail: React.FC = () => {
                                 </div>
                             }
                             <div className="flex flex-col w-full items-center">
-                                <PinInput
-                                    length={4}
-                                    initialValue=""
-                                    onChange={(value, index) => { }}
-                                    type="numeric"
-                                    inputMode="number"
-                                    style={{ padding: '5px' }}
-                                    inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
-                                    onComplete={async (value, index) => { await onHandleSubmit(value) }}
-                                    autoSelect={true}
-
-                                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                                />
+                                {
+                                    1 === 1 ?
+                                    <PinInput
+                                        length={4}
+                                        initialValue=""
+                                        onChange={(value, index) => { }}
+                                        type="numeric"
+                                        inputMode="number"
+                                        style={{ padding: '5px' }}
+                                        inputStyle={{ borderColor: `#e6e6e6`, margin: `0px 10px`, backgroundColor: `#e6e6e6`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                        onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                                        autoSelect={true}
+    
+                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                                    />
+                                    :
+                                    <PinInput
+                                        length={4}
+                                        initialValue=""
+                                        onChange={(value, index) => { }}
+                                        type="numeric"
+                                        inputMode="number"
+                                        style={{ padding: '5px' }}
+                                        inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                        onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                                        autoSelect={true}
+    
+                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                                    />
+                                }
                             </div>
                         </div>
                     </div>

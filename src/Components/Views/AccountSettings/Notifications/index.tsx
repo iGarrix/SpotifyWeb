@@ -9,11 +9,11 @@ export const Notifications: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
-        <div className="flex flex-col h-full py-[50px] px-[5%] text-white gap-[20px]">
+        <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 gap-[20px]">
             <h1 className="font-bold text-3xl">Notification</h1>
             {
                 user?.verify === VerifyType.profile &&
-                <div className="bg-dark-100 flex justify-center rounded-md items-center py-3">
+                <div className="bg-light-200 flex justify-center rounded-md items-center py-3">
                     <div className="flex gap-6 items-center">
                         <h2 className="text-xl">You do not have a verified account</h2>
                         <ProfileButton text={"Verify now"} isSelect={true} onClick={() => { nav("../verifyaccount") }} />

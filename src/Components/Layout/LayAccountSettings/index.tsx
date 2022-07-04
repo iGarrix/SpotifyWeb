@@ -19,7 +19,7 @@ export const LayAccountSettings: React.FC = () => {
             <div className={`col-span-10 w-full h-full flex flex-col relative`}>
                 {
                     loading ?
-                        <div className="w-full h-full absolute top-0 left-0 bg-black/90 flex justify-center items-center z-[10]" style={{ zIndex: 5000 }}>
+                        <div className="w-full h-full absolute top-0 left-0 bg-light-100 flex justify-center items-center z-[10]" style={{ zIndex: 5000 }}>
                             <QuadraticLoader isVisisble={true} />
                         </div> : null
                 }

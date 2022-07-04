@@ -33,7 +33,7 @@ export const LayStartup: React.FC = () => {
         <Outlet />
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-8 z-[100]">
-        <div className={`col-span-1 w-full ${isVisible ? "" : "mb-6"}`}>
+        <div className={`col-span-1 w-full ${isVisible ? "mb-6" : "mb-6"}`}>
           <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("settings") }} />
         </div>
         {

@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller bg-gradient-to-b from-dark-200/80 to-dark-200 ${isDark ? "dark" : ""
+      className={`w-full min-h-screen flex scroller bg-light-100/90 ${isDark ? "dark" : ""
         }`}
     >
       <Routes>

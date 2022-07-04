@@ -66,8 +66,8 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
         onClose();
     }
     return (
-        <div className="rounded-md py-8 px-20 flex flex-col items-center gap-6">
-            <div className="w-full flex justify-end"><FontAwesomeIcon className="text-white font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
+        <div className="rounded-md py-12 flex flex-col items-center gap-6 text-dark-200 bg-light-100 shadow-xl px-10">
+            <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             <h1 className="text-3xl font-medium font-['Lexend']">Rename</h1>
             {
                 enterError && enterError.length !== 0 ?
@@ -76,7 +76,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
             <form onSubmit={onSubmit}>
                 {
                     user ?
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 px-20">
                         <Field placeholder="Enter new name" value={user?.name} onChange={(e: any) => { }} />
                         <Field placeholder="Enter new surname" value={user?.surname} onChange={(e: any) => { }} />
                         <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to rename pib?</button>

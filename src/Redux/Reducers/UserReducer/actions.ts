@@ -671,8 +671,8 @@ export const DeleteProfile = (data: IDeleteProfileRequest) => {
         data: data
       }
       );
-      dispatch({ type: UserActionTypes.INITUSER_CLEAR });
       LogoutUser();
+      dispatch({ type: UserActionTypes.INITUSER_CLEAR });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
 
     }, [user]);
     return (
-        <div className="py-2 px-10 bg-dark-200 flex justify-end overflow-x-hidden sticky top-0 z-[8000]">
+        <div className="py-2 px-10 bg-light-200 flex justify-end overflow-x-hidden sticky top-0 z-[8000]">
             <div className="flex gap-7 items-center">
                 {
                     user ?
@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
                                 </div>} />
                             </div>
                         :
-                        <FontAwesomeIcon className="text-white rounded-lg py-1.5 text-2xl cursor-pointer" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
+                        <FontAwesomeIcon className="text-dark-200 rounded-lg py-1.5 text-2xl cursor-pointer" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
                 }
             </div>
         </div>

@@ -35,7 +35,7 @@ export const DeleteProfile: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full px-[5%] py-[50px] text-white">
+        <div className="w-full h-full px-[5%] py-[50px] text-dark-200">
             <Helmet>
                 <title>Soundwave | Delete Account</title>
             </Helmet>
@@ -44,21 +44,20 @@ export const DeleteProfile: React.FC = () => {
                     <div className="flex">
                         <h1 className="text-3xl font-bold">Delete Profile</h1>
                     </div>
-                    <div className="w-auto flex items-center gap-3 bg-dark-200/40 rounded-md px-4 py-2">
+                    <div className="w-auto flex items-center gap-3 bg-light-200 rounded-md px-4 py-2">
                         <h2 className="text-lg">Your profile will be deleted and you will be able to restore it within 30 days</h2>
                         <ProfileButton text="Delete profile" onClick={() => { setOpenModal(true) }} isSelect={true} />
                     </div>
                 </div>
             </div>
-            <FullScreenModal visible={openModal}>
+            <FullScreenModal visible={openModal} center>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={DeleteProfileValidate}
                     onSubmit={onHandleSubmit}>
                     <Form>
-                        <div className="flex w-screen h-full justify-center items-center">
-                            <div className="rounded-md py-8 flex flex-col items-center justify-center gap-6">
-                                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-white font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
+                            <div className="rounded-md py-12 flex flex-col items-center justify-center gap-6 shadow-xl px-10">
+                                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
                                 <h1 className="text-3xl font-medium font-['Lexend']">Delete account</h1>
                                 {
                                     error && error.length !== 0 ?
@@ -73,7 +72,8 @@ export const DeleteProfile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {/* <div className="flex w-screen h-full justify-center items-center">
+                        </div> */}
                     </Form>
                 </Formik>
             </FullScreenModal>

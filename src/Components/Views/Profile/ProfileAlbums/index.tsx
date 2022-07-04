@@ -90,8 +90,8 @@ export const ProfileAlbums: React.FC = () => {
                         </div>
                         :
                         <>
-                            <FontAwesomeIcon className="text-7xl font-medium" icon={faCompactDisc} />
-                            <div className="flex flex-col items-center gap-8">
+                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faCompactDisc} />
+                            <div className="flex flex-col items-center gap-8 text-dark-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-3xl">Create you first album</h1>
                                     <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>

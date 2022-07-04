@@ -35,11 +35,11 @@ export const PasswordVerifyCode: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full flex items-center justify-center text-white">
+        <div className="w-full h-full flex items-center justify-center text-dark-200">
             <Helmet>
                 <title>Soundwave | Step 2 - Verify Code</title>
             </Helmet>
-            <div className="flex items-center flex-col gap-3 bg-dark-200/60 rounded-xl py-8 px-20">
+            <div className="flex items-center flex-col gap-3 bg-light-100 shadow-xl rounded-xl py-8 px-20">
                 <h1 className="text-center font-medium text-2xl">Verify code</h1>
                 {
                     error &&
@@ -47,19 +47,36 @@ export const PasswordVerifyCode: React.FC = () => {
                         <h1 className="text-white font-semibold text-center">{error}</h1>
                     </div>
                 }
-                <PinInput
-                    length={4}
-                    initialValue=""
-                    onChange={(value, index) => { }}
-                    type="numeric"
-                    inputMode="number"
-                    style={{ padding: '5px' }}
-                    inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
-                    onComplete={async (value, index) => { await onHandleSubmit(value) }}
-                    autoSelect={true}
+                {
+                    1 === 1 ?
+                        <PinInput
+                            length={4}
+                            initialValue=""
+                            onChange={(value, index) => { }}
+                            type="numeric"
+                            inputMode="number"
+                            style={{ padding: '5px' }}
+                            inputStyle={{ borderColor: `#e6e6e6`, margin: `0px 10px`, backgroundColor: `#e6e6e6`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                            onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                            autoSelect={true}
 
-                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                />
+                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                        />
+                        :
+                        <PinInput
+                            length={4}
+                            initialValue=""
+                            onChange={(value, index) => { }}
+                            type="numeric"
+                            inputMode="number"
+                            style={{ padding: '5px' }}
+                            inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                            onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                            autoSelect={true}
+
+                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                        />
+                }
             </div>
         </div>
     );

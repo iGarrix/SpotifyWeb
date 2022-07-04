@@ -20,7 +20,7 @@ import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { DefaultPhoneInput } from "../../../Commons/Inputs/PhoneInput";
 import { SignUpSteps } from "../../../Commons/Steps/SignUpSteps";
 
-const logo = require('../../../../Assets/Logo.png');
+const logo = require('../../../../Assets/LogoLight.png');
 const background1 = require('../../../../Assets/Background1.png');
 const background2 = require('../../../../Assets/Background2.png');
 
@@ -41,8 +41,8 @@ export const Register: React.FC = () => {
     email: "",
     phone: "",
     name: "",
-    surname: "",
-    gender: "",
+    surname: "Ukraine",
+    gender: "Male",
     password: "",
     passwordConfirm: "",
     country: "",
@@ -66,8 +66,8 @@ export const Register: React.FC = () => {
         device: DeviceType.desktop,
         password: values.passwordConfirm,
       };
-      await registerUser(request);
       localStorage.removeItem("tempphone");
+      await registerUser(request);
       nav("/profile");
     } catch (error) {
       console.error(error);
@@ -79,6 +79,7 @@ export const Register: React.FC = () => {
       accessToken: response.accessToken,
     }
     await externalLoginlUser(request);
+    localStorage.removeItem("tempphone");
     nav("/profile");
   }
   const responseError = (error: any) => {
@@ -96,7 +97,7 @@ export const Register: React.FC = () => {
   }
 
   return (
-    <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 flex justify-center items-center relative">
+    <div className="overflow-x-hidden w-full min-h-screen bg-light-200 flex justify-center items-center relative">
       <Helmet>
         <title>Soundwave | Register</title>
       </Helmet>
@@ -116,7 +117,7 @@ export const Register: React.FC = () => {
           {
             localError !== "" ?
               <div className="flex flex-col gap-3 items-center">
-                <div className="text-black text-xl flex items-center gap-2">
+                <div className="text-red-500 text-xl flex items-center gap-2">
                   <FontAwesomeIcon icon={faTriangleExclamation} />
                   <h1 className="font-semibold">{localError}</h1>
                 </div>

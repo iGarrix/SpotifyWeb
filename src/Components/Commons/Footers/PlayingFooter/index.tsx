@@ -223,11 +223,11 @@ export const PlayingFooter: React.FC = () => {
                         <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
                             <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white">
-                                    <img alt="icon" className="w-[16px]" src={icon_shuffle} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200">
+                                    <img alt="icon" className="w-[18px]" src={icon_shuffle} />
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white active:bg-blue-500" onClick={toggleBackward}>
-                                    <img alt="icon" className="w-[11px]" src={icon_skip_forward} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 active:bg-blue-500" onClick={toggleBackward}>
+                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                 </div>
                                 <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[40px] h-[40px] rounded-full cursor-pointer"
                                     onClick={() => { togglePlay(!isPlaying) }}
@@ -240,11 +240,11 @@ export const PlayingFooter: React.FC = () => {
 
                                     }
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-white active:bg-blue-500" onClick={toggleForward}>
-                                    <img alt="icon" className="w-[11px]" src={icon_skip_next} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 active:bg-blue-500" onClick={toggleForward}>
+                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
                                 </div>
                                 <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all ${isRepeat ? "bg-blue-500" : "bg-white"}`} onClick={() => { setRepeat(!isRepeat) }}>
-                                    <img alt="icon" className="w-[16px]" src={icon_repeat} />
+                                    <img alt="icon" className="w-[18px]" src={icon_repeat} />
                                 </div>
                             </div>
                             {

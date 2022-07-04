@@ -56,7 +56,7 @@ export const VerifyAccount: React.FC = () => {
         <>
             {
                 user &&
-                <div className="flex flex-col h-full py-[50px] px-[150px] text-white">
+                <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200">
                     <h1 className="text-3xl font-bold">Verify your account</h1>
                     <div className="flex flex-col mt-[40px] w-full gap-[20px]">
                         <div className="grid grid-cols-3 w-full gap-10">

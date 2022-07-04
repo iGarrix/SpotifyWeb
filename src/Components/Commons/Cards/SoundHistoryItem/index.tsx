@@ -15,7 +15,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
     const nav = useNavigate();
 
     return (
-        <div className="flex gap-20 cursor-pointer soundhistory" onClick={onClick}>
+        <div className="flex gap-20 cursor-pointer soundhistory text-dark-200" onClick={onClick}>
             <div className="flex gap-4">
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
                     className="w-[124px] h-[124px] bg-cover object-cover bg-no-repeat rounded-lg" />
@@ -44,7 +44,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                         </div>
                         {
                             track?.create &&
-                            <p className="text-gray-500 font-medium whitespace-nowrap">realised {dayDiff(new Date(), new Date(track.create))} days ago</p>
+                            <p className="text-dark-200/60 font-medium whitespace-nowrap">realised {dayDiff(new Date(), new Date(track.create))} days ago</p>
                         }
                     </div>
                 </div>

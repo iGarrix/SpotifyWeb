@@ -21,8 +21,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Helmet } from "react-helmet";
 import { FormikField } from "../../../Commons/Inputs/FormikField";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
-const logo = require('../../../../Assets/Logo.png');
+const logo = require('../../../../Assets/LogoLight.png');
 const background1 = require('../../../../Assets/Background1.png');
 const background2 = require('../../../../Assets/Background2.png');
 
@@ -76,7 +77,7 @@ export const Login: React.FC = () => {
     
   }
   return (
-    <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-100 to-dark-200 grid grid-cols-12 items-center relative">
+    <div className="overflow-x-hidden w-full min-h-screen from-light-200 grid grid-cols-12 items-center relative">
       <Helmet>
         <title>Soundwave | Authorizate</title>
       </Helmet>
@@ -103,9 +104,15 @@ export const Login: React.FC = () => {
                 <Form>
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3 items-center">
-                      <div className="mt-4">
-                        <h1 className="text-black font-semibold text-lg">{error}</h1>
-                      </div>
+                      {
+                        error &&
+                        <div className="mt-4">
+                          <div className="text-red-500 text-lg flex items-center gap-2">
+                            <FontAwesomeIcon icon={faTriangleExclamation} />
+                            <h1 className="font-semibold">{error}</h1>
+                          </div>
+                        </div>
+                      }
                     </div>
                     <div className="flex flex-col gap-3">
                       <FormikField placeholder="Email" name="email" type="email" />

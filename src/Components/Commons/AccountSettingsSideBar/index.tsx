@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { SettingsBarItem } from "./SettingsBarItem";
 
-const logo = require("../../../Assets/Logo.png");
+const logo = require("../../../Assets/LogoLight.png");
 
 const icon_pdaccount = require('../../../Assets/Icons/PDAccount.png');
 const icon_verifyemail = require('../../../Assets/Icons/VerifyEmail.png');
-const icon_verifyphone = require('../../../Assets/Icons/VerifyPhone.png');
 const icon_sendappelation = require('../../../Assets/Icons/SendAppelation.png');
 const icon_protected = require('../../../Assets/Icons/Protected.png');
-const icon_notify = require('../../../Assets/Icons/Notify.png');
+const icon_notify = require('../../../Assets/Icons/Notifications.png');
 const icon_trash = require('../../../Assets/Icons/Trash.png');
 
 export const AccountSettingsSideBar: React.FC = () => {
@@ -20,7 +19,7 @@ export const AccountSettingsSideBar: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
 
     return (
-        <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-dark-200 to-dark-200/100">
+        <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-200 to-light-200/100">
             <div className="w-full flex justify-center">
                 <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/") }} />
             </div>

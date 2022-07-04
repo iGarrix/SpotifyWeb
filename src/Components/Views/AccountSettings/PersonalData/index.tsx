@@ -173,10 +173,10 @@ export const PersonalData: React.FC = () => {
             </Helmet>
             {
                 user ?
-                    <div className="flex flex-col items-center h-full py-[50px] px-[25%] gap-[40px] text-white">
+                    <div className="flex flex-col items-center h-full py-[50px] px-[25%] gap-[40px] text-dark-200">
                         <div className='flex flex-col h-full gap-[40px]'>
                             <div className='flex w-full justify-center'>
-                                <div className="rounded-xl shadow-2xl flex flex-col items-center bg-dark-100 gap-[20px] relative overflow-hidden">
+                                <div className="rounded-xl shadow-2xl flex flex-col items-center bg-light-200 gap-[20px] relative overflow-hidden">
                                     <div className="absolute top-0 left-0 w-full h-full grid grid-rows-10">
                                         <div className="row-span-3 overflow-hidden relative w-full h-full">
                                             <div className="absolute w-full h-full bg-black/30"></div>
@@ -187,8 +187,8 @@ export const PersonalData: React.FC = () => {
                                         <div className="flex justify-between gap-[43px] items-end">
                                             <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl" />
                                             <div className="pb-[20px]">
-                                                <h2 className="text-white font-bold text-2xl">{user.name} {user.surname}</h2>
-                                                <p className="text-white/80 font-medium">{user.username}</p>
+                                                <h2 className="text-dark-200 font-bold text-2xl">{user.name} {user.surname}</h2>
+                                                <p className="text-dark-200/80 font-medium">{user.username}</p>
                                             </div>
                                         </div>
                                         <div className="w-full">

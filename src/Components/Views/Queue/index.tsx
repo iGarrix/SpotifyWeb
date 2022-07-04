@@ -47,7 +47,7 @@ export const Queue: React.FC = () => {
         }
     }, []);
     return (
-        <div className="w-full flex flex-col gap-6 items-start text-white px-[3%] py-[2%]">
+        <div className="w-full flex flex-col gap-6 items-start text-dark-200 px-[3%] py-[2%]">
             <Helmet>
                 <title>Soundwave | Playing Queue</title>
             </Helmet>
@@ -95,7 +95,7 @@ export const Queue: React.FC = () => {
                         }
                     </div>
                     :
-                    <div className="rounded-xl bg-dark-200/60 px-12 py-6 flex flex-col gap-6">
+                    <div className="rounded-xl bg-light-200 px-12 py-6 flex flex-col gap-6">
                         <h1 className="font-semibold text-3xl">No playing song</h1>
                         <p className="text-xl">Turn on a song to add it to the queue</p>
                     </div>

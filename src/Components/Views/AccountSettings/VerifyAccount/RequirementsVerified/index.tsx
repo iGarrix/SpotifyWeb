@@ -5,16 +5,16 @@ import { fillingUser, monthDiff } from "../../../../../types";
 export const RequirementsVerified = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     return (
-        <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[15px] text-dark-200">
             <Helmet>
                 <title>Soundwave | Verified plan</title>
             </Helmet>
             <h1 className="font-medium text-lg">Requirements</h1>
-            <div className="grid grid-cols-2 w-full bg-dark-200/60">
-                <div className="flex justify-center border-b-[1px] border-white">
+            <div className="grid grid-cols-2 w-full shadow-xl shadow-light-200">
+                <div className="flex justify-center border-b-[1px] border-light-200">
                     <h1 className="text-xl font-semibold py-3">Filling profile</h1>
                 </div>
-                <div className="flex justify-center border-b-[1px] border-white">
+                <div className="flex justify-center border-b-[1px] border-light-200">
                     <h1 className="text-xl font-semibold py-3">Visiting</h1>
                 </div>
                 <div className="flex flex-col pl-[10%] py-[3%]">

@@ -27,7 +27,7 @@ export const PasswordSendEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full text-white flex justify-center items-center">
+        <div className="w-full h-full text-dark-200 flex justify-center items-center">
             <Helmet>
                 <title>Soundwave | Step 1 - Send Code</title>
             </Helmet>
@@ -36,7 +36,7 @@ export const PasswordSendEmail: React.FC = () => {
                 validationSchema={emailForgotValidate}
                 onSubmit={onHandleSubmit}>
                 <Form>
-                    <div className="flex items-center flex-col gap-6 bg-dark-200/60 rounded-xl py-8 px-20">
+                    <div className="flex items-center flex-col gap-6 bg-light-100 shadow-xl rounded-xl py-8 px-20">
                         <h1 className="text-center font-medium text-2xl">Forgot password</h1>
                         {
                             error &&

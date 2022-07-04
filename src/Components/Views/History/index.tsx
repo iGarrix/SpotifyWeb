@@ -50,7 +50,7 @@ export const History: React.FC = () => {
         }
     }
     return (
-        <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-white bg-no-repeat h-full">
+        <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 bg-no-repeat h-full">
             <Helmet>
                 <title>Soundwave | Your history</title>
             </Helmet>
