@@ -73,19 +73,24 @@ export const minYears = 12;
 
 
 export function monthDiff(d1: Date, d2: Date) {
-  var months;
-  months = (d1.getFullYear() - d2.getFullYear()) * 12;
-  months += d1.getMonth();
-  months -= d2.getMonth();
-  return months <= 0 ? 0 : months;
+  // var months;
+  // months = (d1.getFullYear() - d2.getFullYear()) * 12;
+  // months += d1.getMonth();
+  // months -= d2.getMonth();
+  // return months <= 0 ? 0 : months;
+  var diff = Math.abs(d1.getTime() - d2.getTime());
+  var diffMonth = Math.ceil(diff / (1000 * 3600 * 24 * 30));
+  return diffMonth;
 }
 
 export function dayDiff(d1: Date, d2: Date) {
-  var day;
-  day = (d1.getFullYear() - d2.getFullYear()) * 12;
-  day += d1.getDay();
-  day -= d2.getDay();
-  return day <= 0 ? 0 : day;
+  // var day;
+  // day = ((d1.getFullYear() - d2.getFullYear()) * 12) * 30;
+  // console.log(day);
+  // return day <= 0 ? 0 : day;
+  var diff = Math.abs(d1.getTime() - d2.getTime());
+  var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  return diffDays;
 }
 
 export function fillingUser(user : IUser | null) {

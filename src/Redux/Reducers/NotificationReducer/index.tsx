@@ -1,4 +1,3 @@
-import { NULL } from "sass";
 import { DefaultServerError } from "../../../types";
 import { INotificationStateState, NotificateAction, NotificationActionTypes } from "./types";
 
