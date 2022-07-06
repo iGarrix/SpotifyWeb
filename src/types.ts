@@ -12,7 +12,6 @@ export enum DeviceType {
 
 export enum VerifyType {
   profile = "Profile",
-  artist = "Artist",
   verify = "VerifyProfile",
 }
 

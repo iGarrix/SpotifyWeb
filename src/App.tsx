@@ -36,7 +36,6 @@ import { VerifyCodEmail } from "./Components/Views/AccountSettings/VerifyEmail/V
 import { DeleteProfile } from "./Components/Views/AccountSettings/DeleteProfile";
 import { PersonalData } from "./Components/Views/AccountSettings/PersonalData";
 import { VerifyAccount } from "./Components/Views/AccountSettings/VerifyAccount";
-import { RequirementsArtist } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsArtist";
 import { RequirementsVerified } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsVerified";
 import { RequirementsDefault } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsDefault";
 import { SendAppelation } from "./Components/Views/AccountSettings/SendAppelation";
@@ -113,7 +112,6 @@ function App() {
             <Route path="sendappelation" element={<SendAppelation />} />
             <Route path="verifyaccount" element={<VerifyAccount />}>
               <Route index element={<RequirementsDefault />} />
-              <Route path="artist" element={<RequirementsArtist />} />
               <Route path="verified" element={<RequirementsVerified />} />
             </Route>
             <Route path="notification" element={<Notifications />}>

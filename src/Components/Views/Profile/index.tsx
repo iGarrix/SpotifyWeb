@@ -1,4 +1,4 @@
-import { faCheck, faCompactDisc, faImage, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faImage, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -28,7 +28,6 @@ export const Profile: React.FC = () => {
       setImageSrc(user.avatar.includes("http") ? user.avatar
         : baseUrl + "Images/Users/" + user.avatar);
       setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
-        user.verify === VerifyType.artist ? <FontAwesomeIcon icon={faCompactDisc} width={20} height={20} /> :
           user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
       if (user.background && user.background.length !== 0) {
         if (user.background.includes("http")) {

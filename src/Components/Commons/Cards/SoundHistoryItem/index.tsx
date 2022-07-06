@@ -1,4 +1,4 @@
-import { faCheck, faCompactDisc, faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
@@ -32,7 +32,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                                 })
                             }
                             <FontAwesomeIcon className="w-[16px] h-[16px] flex items-center text-primary-100 -translate-y-[12%]" icon={trackCreators ? trackCreators[0].verify === VerifyType.verify ? faCheck :
-                                trackCreators[0].verify === VerifyType.artist ? faCompactDisc : faUser : faUser} /></p>
+                                trackCreators[0].verify === VerifyType.verify ? faCheck : faUser : faUser} /></p>
                     </div>
                     <div className="flex flex-col">
                         <div className="text-gray-500 font-medium flex gap-1">Duration
