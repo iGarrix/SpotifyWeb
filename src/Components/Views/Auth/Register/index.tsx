@@ -96,6 +96,9 @@ export const Register: React.FC = () => {
     if (step > 1) {
       setStep(step - 1);
     }
+    else{
+      nav("/authorizate");
+    }
   }
 
   return (
