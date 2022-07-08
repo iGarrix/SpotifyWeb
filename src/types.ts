@@ -19,6 +19,7 @@ export enum StorageVariables {
   Queue = "queue",
   History = "history",
   Album = "selectAlbum",
+  Playlist = "selectPlaylist",
   Track = "selectTrack",
   ForgotUser = "ForgotUser",
   VerifyResponse = "VerifyResponse",

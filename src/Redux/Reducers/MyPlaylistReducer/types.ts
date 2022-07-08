@@ -1,4 +1,4 @@
-import { IPagableResponse } from "../../../types";
+import { IPagableResponse, IUser } from "../../../types";
 
 export enum MyPlaylistActionTypes {
   INITMYPLAYLIST = "INITMYPLAYLIST",
@@ -9,6 +9,7 @@ export enum MyPlaylistActionTypes {
 }
 
 export interface IPlaylist {
+  returnId: string,
   name: string,
   image: string,
   accessStatus: string,
@@ -23,7 +24,7 @@ export interface IGenre {
 export interface IPagableMyPlaylistItem {
   playlistDto: IPlaylist | null,
   playlistGenres: IGenre | null,
-  playlistCreator: string,
+  playlistCreator: IUser | null,
   songs: number
 }
 

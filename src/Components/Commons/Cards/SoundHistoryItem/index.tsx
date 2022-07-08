@@ -44,7 +44,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                         </div>
                         {
                             track?.create &&
-                            <p className="text-dark-200/60 font-medium whitespace-nowrap">realised {dayDiff(new Date(), new Date(track.create))} days ago</p>
+                            <p className="text-dark-200/60 font-medium whitespace-nowrap">realised {moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
                         }
                     </div>
                 </div>

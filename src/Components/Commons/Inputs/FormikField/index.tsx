@@ -17,7 +17,7 @@ export const FormikField: React.FC<IFormikField> = ({ placeholder, value, type, 
                 onChange={field.onChange}
                 name={field.name}
                 className={`text-dark-200 rounded-lg py-2.5 px-4 outline-none border-0 bg-light-200
-                 ${isOutline ? "border-[1px] border-dark-200" : ""} ${props.className}`} />
+                shadow-xl ${isOutline ? "border-[1px] border-dark-200" : ""} ${props.className}`} />
         </div>
     )
 }

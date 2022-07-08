@@ -44,6 +44,7 @@ import { LogsInAccount } from "./Components/Views/AccountSettings/Notifications/
 import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications/ActionsAccount";
 import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
 import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/StatusAccount";
+import { ListeningPlaylist } from "./Components/Views/ListeningPage/ListeningPlaylist";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -88,6 +89,7 @@ function App() {
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
+            <Route path=":id" element={<ListeningPlaylist />} />
           </Route>
 
           <Route path="overview" element={<Outlet />}>

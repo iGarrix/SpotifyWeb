@@ -180,7 +180,7 @@ export const PersonalData: React.FC = () => {
                                     <div className="absolute top-0 left-0 w-full h-full grid grid-rows-10">
                                         <div className="row-span-3 overflow-hidden relative w-full h-full">
                                             <div className="absolute w-full h-full bg-black/30"></div>
-                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover" src={BackgroundSrc} />
+                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover" src={BackgroundSrc} onError={(tg: any) => { tg.target.src = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg"}} />
                                         </div>
                                     </div>
                                     <div className="p-[50px] pb-[20px] z-10 flex flex-col gap-[20px]">

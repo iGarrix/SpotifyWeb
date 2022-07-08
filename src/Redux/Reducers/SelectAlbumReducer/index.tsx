@@ -3,13 +3,14 @@ import { IPlayingStateState, PlayingAction, PlayingActionTypes } from "./types";
 
 const inialState: IPlayingStateState = {
   album: null,
+  playlist: null,
   tracks: null,
   queue: null,
   loading: false,
   error: "",
   prevPage: null,
   nextPage: null,
-  history: null
+  history: null,
 };
 
 export const playingReducer = (
@@ -21,6 +22,14 @@ export const playingReducer = (
       return {
         ...state,
         album: action.payload,
+        loading: false,
+        error: "",
+      };
+    }
+    case PlayingActionTypes.INITSELECTPLAYLIST: {
+      return {
+        ...state,
+        playlist: action.payload,
         loading: false,
         error: "",
       };
@@ -90,6 +99,7 @@ export const playingReducer = (
       return {
         ...state,
         album: null,
+        playlist: null,
         queue: null,
         tracks: null,
         loading: false,

@@ -6,22 +6,32 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IGetAllMyPlaylistRequest } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const ProfilePlaylists: React.FC = () => {
     const nav = useNavigate();
-    const { getMyPlaylists, addMyPlaylists } = useActions();
+    const { getMyPlaylists, addMyPlaylists, clearTracks } = useActions();
 
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
-    // BUG PLAYLIST
+
+    const scrollHadler = async () => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
+            if (rx.nextPage && !rx.loading) {
+                const top = document.documentElement.scrollTop;
+                await FetchNext();
+                document.documentElement.scrollTop = top;
+            }
+        }
+    }
     useEffect(() => {
         const fetchData = async () => {
-            if (user && !playlists && rx.error !== "List empty") {
+            if (user) {
                 const rq: IGetAllMyPlaylistRequest = {
                     email: user.email,
                     page: 1
@@ -30,14 +40,35 @@ export const ProfilePlaylists: React.FC = () => {
             }
         }
         fetchData();
-    }, [user, playlists]);
+    }, [user]);
+
+    useEffect(() => {
+        const listener = () => {
+            document.addEventListener("scroll", scrollHadler);
+        }
+        listener();
+
+        return function () {
+            document.removeEventListener("scroll", scrollHadler);
+        }
+
+    }, [rx.nextPage && rx.loading])
+
     const FetchNext = async () => {
         if (rx.playlists && rx.nextPage && user) {
             const rq: IGetAllMyPlaylistRequest = {
-                email: user.email,
+                email: user?.email,
                 page: rx.nextPage,
             }
             await addMyPlaylists(rq);
+        }
+    }
+
+    const onSelectPlaylist = async (item: IPagableMyPlaylistItem | null) => {
+        if (item) {
+            localStorage.setItem(StorageVariables.Playlist, JSON.stringify(item));
+            nav("/playlist/" + item?.playlistDto?.returnId);
+            await clearTracks();
         }
     }
     return (
@@ -55,19 +86,11 @@ export const ProfilePlaylists: React.FC = () => {
                                 {
                                     playlists.map(item => {
                                         return (
-                                            <PlaylistItem key={Guid.create().toString()} onClick={() => { }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
+                                            <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
                                         )
                                     })
                                 }
                             </div>
-                            {
-                                rx.nextPage ?
-                                    <div className="flex w-full justify-end py-5 px-64">
-                                        <button onClick={FetchNext}><FontAwesomeIcon className="text-2xl bg-white text-black rounded-full px-4 py-3" icon={faArrowDown} /></button>
-                                    </div>
-                                    :
-                                    null
-                            }
                         </div>
                         :
                         <>

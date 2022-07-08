@@ -38,7 +38,7 @@ export const Profile: React.FC = () => {
         }
       }
       else {
-        setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
+        setBackgroundSrc('https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg');
       }
     }
   }, [user]);
@@ -106,7 +106,7 @@ export const Profile: React.FC = () => {
                     <input type="file" id="file" accept="image/*" onChange={onChangeAvatar} className="hidden" />
                     <label htmlFor="file"><FontAwesomeIcon className="text-6xl cursor-pointer" icon={faImage} /> </label>
                   </div>
-                  <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all object-cover w-full h-full" />
+                  <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg"}} />
                 </div> :
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
                 </div>
