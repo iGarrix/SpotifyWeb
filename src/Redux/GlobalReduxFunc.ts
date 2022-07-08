@@ -12,7 +12,7 @@ export function ClearRedux (dispatch: Dispatch<any>) {
     dispatch({ type: MyAlbumActionTypes.INITMYALBUM_CLEAR });
     dispatch({ type: MySingleActionTypes.INITMYSINGLE_CLEAR });
     dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_CLEAR });
-    dispatch({ type: MyGenreActionTypes.INITSELECTGENRE_CLEAR });
+    dispatch({ type: MyGenreActionTypes.INITGENRE_CLEAR });
     localStorage.removeItem("token");
     localStorage.removeItem("refreshtoken");
     localStorage.removeItem("expiredin");

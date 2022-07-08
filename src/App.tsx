@@ -45,6 +45,7 @@ import { LogsInAccount } from "./Components/Views/AccountSettings/Notifications/
 import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications/ActionsAccount";
 import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
 import { Genres } from "./Components/Views/Genre";
+import { GenreDetails } from "./Components/Views/Genre/Details";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -79,7 +80,10 @@ function App() {
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />
           <Route path="search" element={<Search />} />
-          <Route path="genres" element={<Genres />} />
+          <Route path="genres" element={<Outlet />} >
+            <Route index element={<Genres />} />
+            <Route path=":name" element={<GenreDetails />} />
+          </Route>
           <Route path="createplaylist" element={<Settings />} />
           <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />

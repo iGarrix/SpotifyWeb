@@ -1,9 +1,10 @@
 import { DefaultServerError } from "../../../types";
-import { IMyGenreStateState, MyGenreAction, MyGenreActionTypes } from "./types";
+import { IGenreStateState, MyGenreAction, MyGenreActionTypes } from "./types";
 
 
-const inialState: IMyGenreStateState = {
+const inialState: IGenreStateState = {
   genres: null,
+  playlists: null,
   loading: false,
   error: "",
   prevPage: null,
@@ -13,9 +14,9 @@ const inialState: IMyGenreStateState = {
 export const myGenreReducer = (
   state = inialState,
   action: MyGenreAction
-): IMyGenreStateState => {
+): IGenreStateState => {
   switch (action.type) {
-    case MyGenreActionTypes.INITMYGENRE: {
+    case MyGenreActionTypes.INITGENRE: {
       return {
         ...state,
         genres: action.payload ? action.payload.pageables : [],
@@ -25,7 +26,7 @@ export const myGenreReducer = (
         error: "",
       };
     }
-    case MyGenreActionTypes.ADDMYGENRE: {
+    case MyGenreActionTypes.ADDGENRE: {
       let arr = state.genres ? state.genres : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
@@ -43,13 +44,43 @@ export const myGenreReducer = (
         error: "",
       };
     }
-    case MyGenreActionTypes.INITMYGENRE_WAITING: {
+
+    case MyGenreActionTypes.INITGENREPLAYLIST: {
+      return {
+        ...state,
+        playlists: action.payload ? action.payload.pageables : [],
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case MyGenreActionTypes.ADDGENREPLAYLIST: {
+      let arr = state.playlists ? state.playlists : [];
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
+          action.payload.pageables.forEach(e => {
+            arr.push(e);
+          })
+        }
+      }
+      return {
+        ...state,
+        playlists: action.payload ? arr : null,
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+
+    case MyGenreActionTypes.INITGENRE_WAITING: {
       return {
         ...state,
         loading: action.payload,
       };
     }
-    case MyGenreActionTypes.INITMYGENRE_ERROR: {
+    case MyGenreActionTypes.INITGENRE_ERROR: {
       return {
         ...state,
         error:
@@ -60,12 +91,26 @@ export const myGenreReducer = (
       };
     }
 
-    case MyGenreActionTypes.INITMYGENRE_CLEAR: {
+    case MyGenreActionTypes.INITGENRE_CLEAR: {
       return {
         ...state,
         genres: null,
+        playlists: null,
         loading: false,
         error: "",
+        nextPage: null,
+        prevPage: null,
+      };
+    }
+
+    case MyGenreActionTypes.INITGENREPLAYLIST_CLEAR: {
+      return {
+        ...state,
+        playlists: null,
+        loading: false,
+        error: "",
+        nextPage: null,
+        prevPage: null,
       };
     }
 

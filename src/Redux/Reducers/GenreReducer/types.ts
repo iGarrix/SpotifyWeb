@@ -1,13 +1,16 @@
 import { IPagableResponse } from "../../../types";
+import { IPagableMyPlaylistItem, IPlaylist } from "../MyPlaylistReducer/types";
 
 
 export enum MyGenreActionTypes {
-    INITMYGENRE = "INITMYGENRE",
-    ADDMYGENRE = "ADDMYGENRE",
-    INITMYGENRE_WAITING = "INITMYGENRE_WAITING",
-    INITMYGENRE_ERROR = "INITMYGENRE_ERROR",
-    INITMYGENRE_CLEAR = "INITMYGENRE_CLEAR",
-    INITSELECTGENRE_CLEAR = "INITSELECTGENRE_CLEAR"
+    INITGENRE = "INITGENRE",
+    ADDGENRE = "ADDGENRE",
+    INITGENREPLAYLIST = "INITGENREPLAYLIST",
+    ADDGENREPLAYLIST = "ADDGENREPLAYLIST",
+    INITGENRE_WAITING = "INITGENRE_WAITING",
+    INITGENRE_ERROR = "INITGENRE_ERROR",
+    INITGENRE_CLEAR = "INITGENRE_CLEAR",
+    INITGENREPLAYLIST_CLEAR = "INITGENREPLAYLIST_CLEAR"
 }
 
 export interface IGenre {
@@ -19,41 +22,58 @@ export interface IPagableMyGenreItem {
   genre: IGenre | null
 }
 
-export interface IMyGenreStateState {
-  genres: IGenre[] | null;
+export interface IGenreStateState {
+  genres: IGenre[] | null,
+  playlists: IPagableMyPlaylistItem[] | null,
   prevPage: number | null,
   nextPage: number | null,
-  loading: boolean;
-  error: string;
+  loading: boolean,
+  error: string,
 }
 
-export interface IGetAllMyGenreRequest {
+export interface IGetAllGenreRequest {
   page: number
 }
 
-export interface InitMyGenreAction {
-  type: MyGenreActionTypes.INITMYGENRE;
+export interface InitGenreAction {
+  type: MyGenreActionTypes.INITGENRE;
   payload: IPagableResponse | null;
 }
-export interface AddMyGenreAction {
-  type: MyGenreActionTypes.ADDMYGENRE;
+export interface AddGenreAction {
+  type: MyGenreActionTypes.ADDGENRE;
   payload: IPagableResponse | null;
 }
-export interface InitMyGenreWaitAction {
-  type: MyGenreActionTypes.INITMYGENRE_WAITING;
+
+export interface InitGenrePlaylistAction {
+  type: MyGenreActionTypes.INITGENREPLAYLIST;
+  payload: IPagableResponse | null;
+}
+export interface AddGenrePlaylistAction {
+  type: MyGenreActionTypes.ADDGENREPLAYLIST;
+  payload: IPagableResponse | null;
+}
+export interface InitGenreWaitAction {
+  type: MyGenreActionTypes.INITGENRE_WAITING;
   payload: boolean;
 }
-export interface InitMyGenreErrorAction {
-  type: MyGenreActionTypes.INITMYGENRE_ERROR;
+export interface InitGenreErrorAction {
+  type: MyGenreActionTypes.INITGENRE_ERROR;
   payload: string;
 }
-export interface InitMyGenreClearAction {
-  type: MyGenreActionTypes.INITMYGENRE_CLEAR;
+export interface InitGenreClearAction {
+  type: MyGenreActionTypes.INITGENRE_CLEAR;
+}
+
+export interface InitGenrePlayistClearAction {
+  type: MyGenreActionTypes.INITGENREPLAYLIST_CLEAR;
 }
 
 export type MyGenreAction =
-  | InitMyGenreAction
-  | InitMyGenreWaitAction
-  | InitMyGenreErrorAction
-  | InitMyGenreClearAction
-  | AddMyGenreAction;
+  | InitGenreAction
+  |  InitGenrePlaylistAction
+  | InitGenreWaitAction
+  | InitGenreErrorAction
+  | InitGenreClearAction
+  | AddGenreAction
+  | InitGenrePlayistClearAction
+  |  AddGenrePlaylistAction;

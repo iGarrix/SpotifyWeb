@@ -1,39 +1,33 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
-import { useActions } from "../../../Hooks/useActions";
-import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IGenre, IGetAllGenreRequest, IPagableMyGenreItem } from "../../../Redux/Reducers/GenreReducer/types";
-import { GenreItem } from "../../Commons/Cards/GenreCard";
+import { useNavigate, useParams } from "react-router-dom";
+import { useActions } from "../../../../Hooks/useActions";
+import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
-export const Genres: React.FC = () => {
-
+export const GenreDetails: React.FC = () => {
+    const { name } = useParams();
     const nav = useNavigate();
-    const { getAllGenre, addGenre, clearGenrePlaylist } = useActions();
+    const { getAllGenrePlaylist, addGenrePlaylist } = useActions();
     const rx = useTypedSelector(state => state.genreReducer);
-    const genre = useTypedSelector(state => state.genreReducer.genres);
+    const playlist = useTypedSelector(state => state.genreReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
-                const top = document.documentElement.scrollTop;
                 await FetchNext();
-                document.documentElement.scrollTop = top;
             }
         }
     }
     useEffect(() => {
         const fetchData = async () => {
-            if (user) {
-                const rq: IGetAllGenreRequest = {
-                    page: 1
-                }
-                await getAllGenre(rq);
+            if (user && name) {
+                await getAllGenrePlaylist(name, 1);
             }
         }
         fetchData();
-    }, [user]);
+    }, [user, name]);
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -46,31 +40,30 @@ export const Genres: React.FC = () => {
 
     }, [rx.nextPage && rx.loading])
     const FetchNext = async () => {
-        if (rx.genres && rx.nextPage && user) {
-            const rq: IGetAllGenreRequest = {
-                page: rx.nextPage,
-            }
-            await addGenre(rq);
+        if (rx.playlists && rx.nextPage && user && name) {
+            await addGenrePlaylist(name, rx.nextPage);
         }
     }
-    const onSelectGenre = async (item: IGenre | null) => {
-        if (item) {
-            clearGenrePlaylist();
-            nav(item?.name);
-        }
-    }
+    // const onSelectGenre = async (item: IGenre | null) => {
+    //     if (item) {
+    //         nav(item?.name);
+    //     }
+    // }
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
             <Helmet>
-                <title>Soundwave | Genres all</title>
+                <title>Soundwave | Genres Details</title>
             </Helmet>
             <div className="w-full flex flex-col gap-5">
-                <h1 className="font-semibold text-2xl">Genres</h1>
+                <h1 className="font-semibold text-5xl my-10">{name}</h1>
+                <div className="w-full flex justify-between items-center">
+                    <h1 className="font-medium text-2xl text-dark-200">Weekly top playlists</h1>
+                </div>
                 <div className="flex items-center gap-6 flex-wrap justify-between">
                     {
-                        genre?.map(item => {
+                        playlist?.map(item => {
                             return (
-                                <GenreItem key={Guid.create().toString()} onClick={() => { onSelectGenre(item) }} name={item.name} image={item.image} />
+                                <PlaylistItem key={Guid.create().toString()} onClick={() => { }} name={item.playlistDto?.name} imageSrc={item.playlistDto?.image} title={`${item.songs} songs`} />
                             )
                         })
                     }
