@@ -4,7 +4,7 @@ import { Guid } from "guid-typescript";
 import moment from "moment";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { baseUrl, dayDiff, VerifyType } from "../../../../types";
+import { baseUrl, dayDiff, defaultAlbumImage, VerifyType } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
 import "./style.scss";
@@ -18,7 +18,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
         <div className="flex gap-20 cursor-pointer soundhistory text-dark-200" onClick={onClick}>
             <div className="flex gap-4">
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
-                    className="w-[124px] h-[124px] bg-cover object-cover bg-no-repeat rounded-lg" />
+                    className="w-[124px] h-[124px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                 <div className="flex flex-col justify-between">
                     <div className="flex flex-col">
                         <h1 className="text-xl">{track?.name}</h1>

@@ -4,6 +4,7 @@ import * as MyAlbumActions from "../Reducers/MyAlbumReducer/actions";
 import * as MySingleActions from "../Reducers/MySingleReducer/actions";
 import * as SelectedAlbumActions from "../Reducers/SelectAlbumReducer/actions";
 import * as NotificationActions from "../Reducers/NotificationReducer/action";
+import * as MainActions from "../Reducers/MainReducer/actions";
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   ...UserActions,
@@ -12,4 +13,5 @@ export default {
   ...MySingleActions,
   ...SelectedAlbumActions,
   ...NotificationActions,
+  ...MainActions,
 };

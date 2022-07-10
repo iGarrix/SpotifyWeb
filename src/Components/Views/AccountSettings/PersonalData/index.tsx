@@ -10,7 +10,7 @@ import {
     IChangeEmojieRequest, IChangeOtherDataAccountForm, IChangePasswordAccountForm, IChangePasswordAccountRequest,
     IChangePhoneAccountRequest, IUpdatePersonalData
 } from '../../../../Redux/Reducers/UserReducer/types';
-import { baseUrl, DeviceType } from '../../../../types';
+import { baseUrl, defaultAvatarImage, defaultBackgroundImage, DeviceType, GetUserAvatar, GetUserBackground } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
 import { FormikField } from '../../../Commons/Inputs/FormikField';
@@ -20,27 +20,7 @@ export const PersonalData: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
     const { updateEmojieUser, updatePDUser, updateNicknameUser, updatePhoneUser, updateEmailUser, updatePasswordUser } = useActions();
-    const [ImageSrc, setImageSrc] = useState("");
-    const [BackgroundSrc, setBackgroundSrc] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    useEffect(() => {
-        if (user != null) {
-            setImageSrc(user.avatar.includes("http") ? user.avatar
-                : baseUrl + "Images/Users/" + user.avatar);
-            if (user.background && user.background.length !== 0) {
-                if (user.background.includes("http")) {
-                    setBackgroundSrc(user.background);
-                }
-                else {
-                    setBackgroundSrc(baseUrl + "Images/Users/" + user.background);
-                }
-            }
-            else {
-                setBackgroundSrc('https://www.rmets.org/sites/default/files/cloud%2520to%2520cloud%2520lightning_0.jpg');
-            }
-            setNumber(user.phone.toString())
-        }
-    }, [user]);
     useEffect(() => {
         if (error) {
             document.documentElement.scrollTo(0, 0);
@@ -180,12 +160,13 @@ export const PersonalData: React.FC = () => {
                                     <div className="absolute top-0 left-0 w-full h-full grid grid-rows-10">
                                         <div className="row-span-3 overflow-hidden relative w-full h-full">
                                             <div className="absolute w-full h-full bg-black/30"></div>
-                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover" src={BackgroundSrc} onError={(tg: any) => { tg.target.src = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg"}} />
+                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover" src={GetUserBackground(user)} onError={(tg: any) => { tg.target.src = defaultBackgroundImage}} />
                                         </div>
                                     </div>
                                     <div className="p-[50px] pb-[20px] z-10 flex flex-col gap-[20px]">
                                         <div className="flex justify-between gap-[43px] items-end">
-                                            <img alt="avatar" src={ImageSrc} className="transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl" />
+                                            <img alt="avatar" src={GetUserAvatar(user)} className="transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl"
+                                            onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
                                             <div className="pb-[20px]">
                                                 <h2 className="text-dark-200 font-bold text-2xl">{user.name} {user.surname}</h2>
                                                 <p className="text-dark-200/80 font-medium">{user.username}</p>

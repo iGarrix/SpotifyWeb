@@ -22,7 +22,7 @@ export const AccountSettingsSideBar: React.FC = () => {
     return (
         <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-200 to-light-200/100">
             <div className="w-full flex justify-center">
-                <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/") }} />
+                <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/accountsettings") }} />
             </div>
             <div className="flex flex-col h-full z-10">
                 <SettingsBarItem text="Update personal data" isSelect={history.pathname === "/accountsettings"} icon={icon_pdaccount}

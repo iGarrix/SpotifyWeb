@@ -6,7 +6,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IChangeAvatarRequest } from "../../../Redux/Reducers/UserReducer/types";
-import { baseUrl, VerifyType } from "../../../types";
+import { baseUrl, defaultAvatarImage, GetUserAvatar, GetUserBackground, VerifyType } from "../../../types";
 import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { FullScreenModal } from "../../Commons/Modals/FullScreenModal";
 import { RenameBioModal } from "../../Commons/Modals/FullScreenModal/RenameBioModal";
@@ -19,27 +19,12 @@ export const Profile: React.FC = () => {
   const nav = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(window.location.pathname);
-  const [ImageSrc, setImageSrc] = useState("");
-  const [BackgroundSrc, setBackgroundSrc] = useState("");
   const [verifyImage, setVerifyImage] = useState<any>();
   const { updateAvatarUser, updateBackgroundUser } = useActions();
   useEffect(() => {
     if (user != null) {
-      setImageSrc(user.avatar.includes("http") ? user.avatar
-        : baseUrl + "Images/Users/" + user.avatar);
       setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
           user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
-      if (user.background && user.background.length !== 0) {
-        if (user.background.includes("http")) {
-          setBackgroundSrc(user.background);
-        }
-        else {
-          setBackgroundSrc(baseUrl + "Images/Users/" + user.background);
-        }
-      }
-      else {
-        setBackgroundSrc('https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg');
-      }
     }
   }, [user]);
   const onChangeName = () => {
@@ -95,24 +80,20 @@ export const Profile: React.FC = () => {
             <RenameBioModal onSave={onSaveChanges} onClose={onCloseModal} />
           </FullScreenModal> : null
       }
-      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${BackgroundSrc}")` }}>
+      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${GetUserBackground(user)}")` }}>
         <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
         <div className="flex flex-col w-full px-20 pt-16 z-[2]">
           <div className="flex gap-6 w-full">
             {
-              user?.avatar.length !== 0 ? ImageSrc !== "" ?
+              user?.avatar.length !== 0 ?
                 <div className="w-48 h-48 relative overflow-hidden rounded-xl">
                   <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                     <input type="file" id="file" accept="image/*" onChange={onChangeAvatar} className="hidden" />
                     <label htmlFor="file"><FontAwesomeIcon className="text-6xl cursor-pointer" icon={faImage} /> </label>
                   </div>
-                  <img alt="avatar" src={ImageSrc} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg"}} />
+                  <img alt="avatar" src={GetUserAvatar(user)} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage}} />
                 </div> :
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
-                </div>
-                :
-                <div className="bg-green-600 rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
-                  <h1 className="text-8xl select-none">{user?.username.charAt(0)}</h1>
                 </div>
             }
             <div className="flex flex-col gap-2">

@@ -45,6 +45,8 @@ import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications
 import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
 import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/StatusAccount";
 import { ListeningPlaylist } from "./Components/Views/ListeningPage/ListeningPlaylist";
+import { WeeklyAlbums } from "./Components/Views/Welcome/WeeklyAlbums";
+import { WeeklyArtist } from "./Components/Views/Welcome/WeeklyArtist";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -78,6 +80,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />
+          <Route path="weeklyalbums" element={<WeeklyAlbums />} />
+          <Route path="weeklyartist" element={<WeeklyArtist />} />
           <Route path="search" element={<Search />} />
           <Route path="genres" element={<Settings />} />
           <Route path="createplaylist" element={<Settings />} />

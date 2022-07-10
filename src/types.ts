@@ -48,7 +48,7 @@ export interface IUser {
 }
 
 export interface IHistory {
-    soundobjs : ITrackResponse[],
+  soundobjs: ITrackResponse[],
 }
 
 export interface IPagableResponse<T = any> {
@@ -68,8 +68,11 @@ export interface IRefreshModel {
   refreshToken: string,
 }
 
-export const TempTake = 10;
+export const TempTake = 20;
 export const minYears = 12;
+export const defaultAlbumImage = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png";
+export const defaultAvatarImage = "https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg";
+export const defaultBackgroundImage = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg";
 
 
 export function monthDiff(d1: Date, d2: Date) {
@@ -93,14 +96,39 @@ export function dayDiff(d1: Date, d2: Date) {
   return diffDays;
 }
 
-export function fillingUser(user : IUser | null) {
+export function fillingUser(user: IUser | null) {
   if (user) {
-      if (user.avatar.length !== 0 && user.background && user.avatar && user.background.length !== 0
-        && user.birthday != null && user.country !== "No Above" && user.gender.length !== 0 
-        && user.phone.toString().length !== 0 && user.emojie.length !== 0 && user.country.length !== 0 && user.country
-        && user.emailconfirm) {
-          return true;
-      }
+    if (user.avatar.length !== 0 && user.background && user.avatar && user.background.length !== 0
+      && user.birthday != null && user.country !== "No Above" && user.gender.length !== 0
+      && user.phone.toString().length !== 0 && user.emojie.length !== 0 && user.country.length !== 0 && user.country
+      && user.emailconfirm) {
+      return true;
+    }
   }
   return false;
+}
+
+export function GetUserAvatar(user: IUser | null) {
+  if (user) {
+    return user.avatar.includes("http") ? user.avatar
+      : baseUrl + "Images/Users/" + user.avatar;
+  }
+  return "";
+}
+
+export function GetUserBackground(user: IUser | null) {
+  if (user) {
+    if (user.background && user.background.length !== 0) {
+      if (user.background.includes("http")) {
+        return user.background;
+      }
+      else {
+        return baseUrl + "Images/Users/" + user.background;
+      }
+    }
+    else {
+      return defaultBackgroundImage;
+    }
+  }
+  return "";
 }

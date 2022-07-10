@@ -72,7 +72,7 @@ export const ProfilePlaylists: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative text-dark-200">
             <Helmet>
                 <title>Soundwave | My Playlist</title>
             </Helmet>

@@ -1,3 +1,5 @@
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect } from "react";
@@ -6,7 +8,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl, dayDiff, StorageVariables } from "../../../../types";
+import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 const bg = require('../../../../Assets/Background2.png');
@@ -80,7 +82,6 @@ export const ListeningAlbum: React.FC = () => {
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
         if (response) {
-            //response.isPlay = true;
             initQueue(response);
             AddToHistory(item);
         }
@@ -110,7 +111,7 @@ export const ListeningAlbum: React.FC = () => {
                 <div className="flex justify-end col-span-2">
                     <div className="flex flex-col fixed">
                         <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
-                            className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png" }} />
+                            className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                         <div className="py-3 flex items-center justify-between w-full">
                             <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
                             <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
@@ -156,9 +157,18 @@ export const ListeningAlbum: React.FC = () => {
                             <div className="flex flex-col gap-[18px] h-full">
                                 {
                                     playingReducer.error &&
-                                    <div className="flex justify-center items-center overflow-hidden p-2 rounded-xl bg-red-500/80 text-light-100">
-                                        <p className="text-center text-lg font-medium">{playingReducer.error}</p>
+                                    <div className="flex flex-col justify-center w-full gap-5">
+                                        <hr className="w-full border-dark-200" />
+                                        <FontAwesomeIcon className="text-4xl font-medium text-dark-200 mt-[2%]" icon={faMusic} />
+                                        <div className="flex flex-col items-center gap-8 text-dark-200">
+                                            <div className="flex flex-col gap-3 items-center">
+                                                <h1 className="font-medium text-xl">{playingReducer.error}</h1>
+                                            </div>
+                                        </div>
                                     </div>
+                                    // <div className="flex justify-center items-center overflow-hidden p-2 rounded-xl bg-red-500/80 text-light-100">
+                                    //     <p className="text-center text-lg font-medium">{playingReducer.error}</p>
+                                    // </div>
                                 }
                                 {
                                     playingReducer.tracks?.map((item) => {

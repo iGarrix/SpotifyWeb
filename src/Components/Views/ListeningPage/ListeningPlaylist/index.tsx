@@ -6,7 +6,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl, dayDiff, StorageVariables } from "../../../../types";
+import { baseUrl, dayDiff, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 const bg = require('../../../../Assets/Background2.png');
@@ -108,7 +108,7 @@ export const ListeningPlaylist: React.FC = () => {
                 <div className="flex justify-end col-span-2">
                     <div className="flex flex-col fixed">
                         <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.playlist?.playlistDto?.image}`}
-                            className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png"}}/>
+                            className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage}}/>
                         <div className="py-3 flex items-center justify-between w-full">
                             <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
                             <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
