@@ -1,8 +1,10 @@
 import { IHistory, IPagableResponse, IUser } from "../../../types";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
+import { IPagableMyPlaylistItem } from "../MyPlaylistReducer/types";
 
 export enum PlayingActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
+    INITSELECTPLAYLIST = "INITSELECTPLAYLIST",
     INITSELECTALBUMS_WAITING = "INITSELECTALBUMS_WAITING",
     INITSELECTALBUMS_ERROR = "INITSELECTALBUMS_ERROR",
     INITSELECTALBUMS_CLEAR = "INITSELECTALBUMS_CLEAR",
@@ -35,7 +37,8 @@ export interface IQueue {
 }
 
 export interface IPlayingStateState {
-    album: IPagableMyAlbumItem | null;
+    album: IPagableMyAlbumItem | null,
+    playlist: IPagableMyPlaylistItem | null,
     tracks: ITrackResponse[] | null,
     queue: IQueue | null,
     history: IHistory | null,
@@ -50,6 +53,11 @@ export interface IGetTracksRequest {
     page: number,
 }
 
+export interface IGetPlaylistTracksRequest {
+    returnId: string,
+    page: number,
+}
+
 export interface IGetTracksResponse {
     track: ITrack | null,
     trackCreators: string | null;
@@ -58,6 +66,10 @@ export interface IGetTracksResponse {
 export interface InitPlayingAction {
     type: PlayingActionTypes.INITSELECTALBUM;
     payload: IPagableMyAlbumItem | null;
+}
+export interface InitPlayingPlaylistAction {
+    type: PlayingActionTypes.INITSELECTPLAYLIST;
+    payload: IPagableMyPlaylistItem | null;
 }
 export interface InitPlayingTrackAction {
     type: PlayingActionTypes.INITSELECTALBUMTRACKS;
@@ -108,4 +120,5 @@ export type PlayingAction =
     ClearTracksAction |
     InitHistoryAction |
     ClearHistoryAction |
-    SetPlayingAction;
+    SetPlayingAction |
+    InitPlayingPlaylistAction;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SideBarItem } from "./SideBarItem";
 
 const logo = require("../../../Assets/LogoLight.png");
@@ -11,23 +11,23 @@ const icon_playlist = require('../../../Assets/Icons/Playlist.png');
 const icon_history = require('../../../Assets/Icons/HistoryWhite.png');
 
 export const SideBar: React.FC = () => {
+    const history = useLocation();
     const nav = useNavigate();
-    const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
         <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-200 to-light-200/100">
             <div className="w-full flex justify-center">
                 <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/") }} />
             </div>
             <div className="flex flex-col h-full z-10">
-                <SideBarItem text="Home" isSelect={currentItem === "/"} icon={icon_home} onClick={() => { setCurrentItem("/"); nav(""); }} />
-                <SideBarItem text="Search" isSelect={currentItem === "/search"} icon={icon_search} onClick={() => { setCurrentItem("/search"); nav("search") }} />
-                <SideBarItem text="Genres" isSelect={currentItem === "/genres"} icon={icon_music} onClick={() => { setCurrentItem("/genres"); nav("genres") }} />
-                <SideBarItem text="History" isSelect={currentItem === "/history"} icon={icon_history} onClick={() => { setCurrentItem("/history"); nav("history") }} />
+                <SideBarItem text="Home" isSelect={history.pathname === "/"} icon={icon_home} onClick={() => { nav(""); }} />
+                <SideBarItem text="Search" isSelect={history.pathname.includes("/search")} icon={icon_search} onClick={() => { nav("search") }} />
+                <SideBarItem text="Genres" isSelect={history.pathname.includes("/genres")} icon={icon_music} onClick={() => { nav("genres") }} />
+                <SideBarItem text="History" isSelect={history.pathname.includes("/history")} icon={icon_history} onClick={() => { nav("history") }} />
                 <div className="py-3">
-                    <hr className="border-light-100" />
+                    <hr className="border-light-300" />
                 </div>
-                <SideBarItem text="Create playlist" isSelect={currentItem === "/createplaylist"} icon={icon_playlist} onClick={() => { setCurrentItem("/createplaylist"); nav("createplaylist") }} />
-                <SideBarItem text="My media library" isSelect={currentItem === "/medialibrary"} icon={icon_library} onClick={() => { setCurrentItem("/medialibrary"); nav("medialibrary") }} />
+                <SideBarItem text="Create playlist" isSelect={history.pathname.includes("/createplaylist")} icon={icon_playlist} onClick={() => { nav("createplaylist") }} />
+                <SideBarItem text="My media library" isSelect={history.pathname.includes("/medialibrary")} icon={icon_library} onClick={() => { nav("medialibrary") }} />
             </div>
         </div>
     )

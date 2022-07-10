@@ -20,12 +20,14 @@ export const Notifications: React.FC = () => {
                     </div>
                 </div>
             }
-            <div className="flex items-center rounded-md gap-[20px]">
+            <div className="flex justify-center items-center rounded-md gap-[20px]">
                 <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification'); nav('') }}>Logs in account</p>
                 <p>/</p>
                 <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification/actions" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification/actions'); nav('actions') }}>Account actions</p>
                 <p>/</p>
                 <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification/appeal" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification/appeal'); nav('appeal') }}>Appelations</p>
+                <p>/</p>
+                <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification/status" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification/status'); nav('status') }}>Status</p>       
             </div>
             <Outlet />
         </div>

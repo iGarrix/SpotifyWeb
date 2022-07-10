@@ -3,9 +3,9 @@ import { IDefaultButton } from "./types";
 
 import "./style.scss";
 
-export const DefaultButton: React.FC<IDefaultButton> = ({ text, type, onClick }) => {
+export const DefaultButton: React.FC<IDefaultButton> = ({ text, type, importantDark, onClick }) => {
     return (
-        <button type={type} className="py-2 px-3 font-medium text-xl relative transition-all hover:contrast-125
-        overflow-hidden rounded-xl bg-light-200 text-dark-200 shadow-xl select-none cursor-pointer" onClick={onClick}>{text}</button>
+        <button type={type} className={`py-2 px-3 font-medium text-xl relative transition-all hover:contrast-125
+        overflow-hidden rounded-xl shadow-xl select-none cursor-pointer ${importantDark ? "bg-dark-100/90 text-light-100" : "bg-light-200 text-dark-200"}`} onClick={onClick}>{text}</button>
     )
 }

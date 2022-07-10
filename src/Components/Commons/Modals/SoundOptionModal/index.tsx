@@ -1,7 +1,6 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useRef, useState } from "react";
 //import { useNavigate } from "react-router-dom";
-
 import { ISoundOptionModal } from "./types";
 
 export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options }) => {

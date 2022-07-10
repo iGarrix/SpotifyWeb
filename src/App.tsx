@@ -36,7 +36,6 @@ import { VerifyCodEmail } from "./Components/Views/AccountSettings/VerifyEmail/V
 import { DeleteProfile } from "./Components/Views/AccountSettings/DeleteProfile";
 import { PersonalData } from "./Components/Views/AccountSettings/PersonalData";
 import { VerifyAccount } from "./Components/Views/AccountSettings/VerifyAccount";
-import { RequirementsArtist } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsArtist";
 import { RequirementsVerified } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsVerified";
 import { RequirementsDefault } from "./Components/Views/AccountSettings/VerifyAccount/RequirementsDefault";
 import { SendAppelation } from "./Components/Views/AccountSettings/SendAppelation";
@@ -46,6 +45,10 @@ import { ActionsAccount } from "./Components/Views/AccountSettings/Notifications
 import { AppelationLogs } from "./Components/Views/AccountSettings/Notifications/AppelationLogs";
 import { Genres } from "./Components/Views/Genre";
 import { GenreDetails } from "./Components/Views/Genre/Details";
+import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/StatusAccount";
+import { ListeningPlaylist } from "./Components/Views/ListeningPage/ListeningPlaylist";
+import { WeeklyAlbums } from "./Components/Views/Welcome/WeeklyAlbums";
+import { WeeklyArtist } from "./Components/Views/Welcome/WeeklyArtist";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -79,6 +82,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LayStartup />}>
           <Route index element={<Welcome />} />
+          <Route path="weeklyalbums" element={<WeeklyAlbums />} />
+          <Route path="weeklyartist" element={<WeeklyArtist />} />
           <Route path="search" element={<Search />} />
           <Route path="genres" element={<Outlet />} >
             <Route index element={<Genres />} />
@@ -93,6 +98,7 @@ function App() {
             <Route path=":id" element={<ListeningAlbum />} />
           </Route>
           <Route path="playlist" element={<Outlet />}>
+            <Route path=":id" element={<ListeningPlaylist />} />
           </Route>
 
           <Route path="overview" element={<Outlet />}>
@@ -117,13 +123,13 @@ function App() {
             <Route path="sendappelation" element={<SendAppelation />} />
             <Route path="verifyaccount" element={<VerifyAccount />}>
               <Route index element={<RequirementsDefault />} />
-              <Route path="artist" element={<RequirementsArtist />} />
               <Route path="verified" element={<RequirementsVerified />} />
             </Route>
             <Route path="notification" element={<Notifications />}>
               <Route index element={<LogsInAccount />} />
               <Route path="actions" element={<ActionsAccount />} />
               <Route path="appeal" element={<AppelationLogs />} />
+              <Route path="status" element={<StatusAccount />} />
             </Route>
           </Route>
         </Route>

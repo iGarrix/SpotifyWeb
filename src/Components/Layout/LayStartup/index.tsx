@@ -28,17 +28,17 @@ export const LayStartup: React.FC = () => {
       <div className="col-span-3 w-full h-full z-[100]">
         <SideBar />
       </div>
-      <div className={`col-[span_17] w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[40px]"}`}>
+      <div className={`col-[span_17] w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[100px]"}`}>
         <Header />
         <Outlet />
       </div>
-      <div className="fixed bottom-0 w-full grid grid-cols-8 z-[100]">
-        <div className={`col-span-1 w-full ${isVisible ? "mb-6" : "mb-6"}`}>
+      <div className="fixed bottom-0 w-full grid grid-cols-20 z-[100]">
+        <div className={`col-[span_3] w-full ${isVisible ? "mb-6" : "mb-6"}`}>
           <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("settings") }} />
         </div>
         {
           isVisible ?
-            <div className="col-span-8">
+            <div className="col-[span_20]">
               <PlayingFooter />
             </div> : null
         }

@@ -23,7 +23,7 @@ import { Helmet } from "react-helmet";
 import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
-const logo = require('../../../../Assets/LogoLight.png');
+const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
 const background2 = require('../../../../Assets/Background2.png');
 
@@ -77,7 +77,7 @@ export const Login: React.FC = () => {
     
   }
   return (
-    <div className="overflow-x-hidden w-full min-h-screen from-light-200 grid grid-cols-12 items-center relative">
+    <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200 grid grid-cols-12 items-center relative">
       <Helmet>
         <title>Soundwave | Authorizate</title>
       </Helmet>
@@ -122,7 +122,7 @@ export const Login: React.FC = () => {
                         type="password"
                       />
                     </div>
-                    <DefaultButton text="Login" onClick={() => { }} />
+                    <DefaultButton importantDark text="Login" onClick={() => { }} />
                   </div>
                 </Form>
               </Formik>

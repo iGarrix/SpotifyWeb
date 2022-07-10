@@ -11,8 +11,8 @@ export const LayProfile: React.FC = () => {
     <>
       {
         loading ?
-          <div className="w-full h-full fixed top-0 left-0 bg-black/60 flex justify-center items-center" style={{ zIndex: 5000 }}>
-            <QuadraticLoader isVisisble={loading} />
+          <div className="w-full h-full fixed top-0 left-0 bg-black/60 flex justify-center items-center z-[8500]" >
+            <QuadraticLoader isVisisble={true} />
           </div> : null
       }
       <AuthorizateRoute user={user}>

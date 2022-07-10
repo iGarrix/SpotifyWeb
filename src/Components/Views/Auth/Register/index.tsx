@@ -20,7 +20,7 @@ import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { DefaultPhoneInput } from "../../../Commons/Inputs/PhoneInput";
 import { SignUpSteps } from "../../../Commons/Steps/SignUpSteps";
 
-const logo = require('../../../../Assets/LogoLight.png');
+const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
 const background2 = require('../../../../Assets/Background2.png');
 
@@ -102,7 +102,7 @@ export const Register: React.FC = () => {
   }
 
   return (
-    <div className="overflow-x-hidden w-full min-h-screen bg-light-200 flex justify-center items-center relative">
+    <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200 flex justify-center items-center relative">
       <Helmet>
         <title>Soundwave | Register</title>
       </Helmet>

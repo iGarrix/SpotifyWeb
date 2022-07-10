@@ -1,34 +1,34 @@
 import { DefaultServerError } from "../../../types";
-import { INotificationStateState, NotificateAction, NotificationActionTypes } from "./types";
+import { IMainState, MainActionTypes, MyMainAction } from "./types";
 
-const inialState: INotificationStateState = {
-  notifications: null,
-  appelations: null,
-  statuses: null,
-  selectedStatus: null,
+
+const inialState: IMainState = {
+  albums: null,
+  artists: null,
+  tracks: null,
   prevPage: null,
   nextPage: null,
   loading: false,
   error: "",
 };
 
-export const notificationReducer = (
+export const mainReducer = (
   state = inialState,
-  action: NotificateAction
-): INotificationStateState => {
+  action: MyMainAction
+): IMainState => {
   switch (action.type) {
-    case NotificationActionTypes.INITNOTIFICATION: {
+    case MainActionTypes.INITWEEKLYARTIST: {
       return {
         ...state,
-        notifications: action.payload ? action.payload.pageables : [],
+        artists: action.payload ? action.payload.pageables : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.ADDNOTIFICATION: {
-      let arr = state.notifications ? state.notifications : [];
+    case MainActionTypes.ADDWEEKLYARTIST: {
+      let arr = state.artists ? state.artists : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
@@ -38,25 +38,26 @@ export const notificationReducer = (
       }
       return {
         ...state,
-        notifications: action.payload ? arr : null,
+        artists: action.payload ? arr : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.INITAPPELATIONS: {
+
+    case MainActionTypes.INITWEEKLYALBUM: {
       return {
         ...state,
-        appelations: action.payload ? action.payload.pageables : [],
+        albums: action.payload ? action.payload.pageables : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.ADDAPPELATIONS: {
-      let arr = state.appelations ? state.appelations : [];
+    case MainActionTypes.ADDWEEKLYALBUM: {
+      let arr = state.albums ? state.albums : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
@@ -66,25 +67,26 @@ export const notificationReducer = (
       }
       return {
         ...state,
-        appelations: action.payload ? arr : null,
+        albums: action.payload ? arr : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.INITSTATUSES: {
+
+    case MainActionTypes.INITWEEKLYSONGSALBUM: {
       return {
         ...state,
-        statuses: action.payload ? action.payload.pageables : [],
+        tracks: action.payload ? action.payload.pageables : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.ADDSTATUSES: {
-      let arr = state.statuses ? state.statuses : [];
+    case MainActionTypes.ADDWEEKLYSONGSALBUM: {
+      let arr = state.tracks ? state.tracks : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
           action.payload.pageables.forEach(e => {
@@ -94,31 +96,23 @@ export const notificationReducer = (
       }
       return {
         ...state,
-        statuses: action.payload ? arr : null,
+        tracks: action.payload ? arr : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
       };
     }
-    case NotificationActionTypes.INITSELECTSTATUS: {
-      return {
-        ...state,
-        selectedStatus: action.payload,
-        loading: false,
-        error: "",
-      };
-    }
-    case NotificationActionTypes.INITNOTIFICATION_WAITING: {
+
+    case MainActionTypes.MAIN_WAITING: {
       return {
         ...state,
         loading: action.payload,
       };
     }
-    case NotificationActionTypes.INITNOTIFICATION_ERROR: {
+    case MainActionTypes.MAIN_ERROR: {
       return {
         ...state,
-        notifications: null,
         error:
           action.payload === undefined || action.payload === null
             ? DefaultServerError
@@ -127,15 +121,11 @@ export const notificationReducer = (
       };
     }
 
-    case NotificationActionTypes.INITNOTIFICATION_CLEAR: {
+    case MainActionTypes.MAINCLEAR: {
       return {
         ...state,
-        notifications: null,
-        appelations: null,
-        statuses: null,
-        selectedStatus: null,
-        prevPage: null,
-        nextPage: null,
+        artists: null,
+        tracks: null,
         loading: false,
         error: "",
       };

@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -205,8 +206,11 @@ export const PlayingFooter: React.FC = () => {
             {
                 rx && rx.soundobjs && rx.soundobjs[0].trackCreators ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
+                        <Helmet>
+                            <title>{rx.soundobjs[0].track?.name + " - "+ rx.soundobjs[0].trackCreators[0].username}</title>
+                        </Helmet>
                         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image}')` }}></div>
-                        <div className="absolute top-0 left-0 w-full h-full bg-dark-200/30 z-[-1]"></div>
+                        <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
                         <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
                             <div className="flex items-center gap-3 overflow-hidden">
                                 <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"

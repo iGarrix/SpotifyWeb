@@ -1,4 +1,4 @@
-import { faCheck, faCompactDisc, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,6 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
 
 
     const [verifyImage] = useState(user?.verify === VerifyType.profile ? <FontAwesomeIcon className="verifyiconfixed" icon={faUser} width={12} height={12} /> :
-        user?.verify === VerifyType.artist ? <FontAwesomeIcon className="verifyiconfixed" icon={faCompactDisc} width={12} height={12} /> :
             user?.verify === VerifyType.verify ? <FontAwesomeIcon className="verifyiconfixed" icon={faCheck} width={12} height={12} /> : null)
     useEffect(() => {
 
