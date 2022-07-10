@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { clearTracks } from "../../../../Redux/Reducers/SelectAlbumReducer/actions";
+import { StorageVariables } from "../../../../types";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const GenreDetails: React.FC = () => {
@@ -44,11 +47,13 @@ export const GenreDetails: React.FC = () => {
             await addGenrePlaylist(name, rx.nextPage);
         }
     }
-    // const onSelectGenre = async (item: IGenre | null) => {
-    //     if (item) {
-    //         nav(item?.name);
-    //     }
-    // }
+    const onSelectPlaylist = async (item: IPagableMyPlaylistItem | null) => {
+        if (item) {
+            localStorage.setItem(StorageVariables.Playlist, JSON.stringify(item));
+            nav("/playlist/" + item?.playlistDto?.returnId);
+            await clearTracks();
+        }
+    }
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
             <Helmet>
@@ -63,7 +68,7 @@ export const GenreDetails: React.FC = () => {
                     {
                         playlist?.map(item => {
                             return (
-                                <PlaylistItem key={Guid.create().toString()} onClick={() => { }} name={item.playlistDto?.name} imageSrc={item.playlistDto?.image} title={`${item.songs} songs`} />
+                                <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} imageSrc={item.playlistDto?.image} title={`${item.songs} songs`} />
                             )
                         })
                     }
