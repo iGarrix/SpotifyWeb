@@ -148,7 +148,7 @@ export const ListeningAlbum: React.FC = () => {
                                     playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
                                         return (
                                             <span key={Guid.create().toString()}
-                                                className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: true }) }}>{i}{playingReducer.album?.creatorsAlbom?.length && index < playingReducer.album?.creatorsAlbom.length - 1 ? " • " : " "}</span>
+                                                className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: false }) }}>{i}{playingReducer.album?.creatorsAlbom?.length && index < playingReducer.album?.creatorsAlbom.length - 1 ? " • " : " "}</span>
                                         )
                                     })
                                 }</p>
@@ -166,9 +166,6 @@ export const ListeningAlbum: React.FC = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    // <div className="flex justify-center items-center overflow-hidden p-2 rounded-xl bg-red-500/80 text-light-100">
-                                    //     <p className="text-center text-lg font-medium">{playingReducer.error}</p>
-                                    // </div>
                                 }
                                 {
                                     playingReducer.tracks?.map((item) => {

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IGenre, IGetAllGenreRequest, IPagableMyGenreItem } from "../../../Redux/Reducers/GenreReducer/types";
+import { IGenre, IGetAllGenreRequest } from "../../../Redux/Reducers/GenreReducer/types";
 import { GenreItem } from "../../Commons/Cards/GenreCard";
 
 export const Genres: React.FC = () => {

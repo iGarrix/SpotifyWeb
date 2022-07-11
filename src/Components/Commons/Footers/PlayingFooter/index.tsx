@@ -55,8 +55,14 @@ export const PlayingFooter: React.FC = () => {
             const _elapsed = Math.floor(audioPlayer?.current?.currentTime);
             setDuration(_duration);
             setElapsed(_elapsed);
+            // if (audioPlayer.current) {  
+            //     audioPlayer.current.volume = volume / 100;
+            // }
         }
         else {
+            if (audioPlayer.current) {  
+                audioPlayer.current.volume = 0;
+            }
             togglePlay(false);
         }
     }

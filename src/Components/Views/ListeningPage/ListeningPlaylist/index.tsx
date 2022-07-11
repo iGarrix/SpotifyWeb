@@ -1,3 +1,5 @@
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect } from "react";
@@ -142,15 +144,21 @@ export const ListeningPlaylist: React.FC = () => {
                             }
                             <p className="font-thin flex gap-2">Creators:
                                 <span className="cursor-pointer hover:text-blue-400" 
-                                onClick={() => { nav("/overview/", { replace: true }) }}>{playingReducer.playlist?.playlistCreator?.username}</span>
+                                onClick={() => { nav("/overview/" + playingReducer.playlist?.playlistCreator?.username, { replace: false }) }}>{playingReducer.playlist?.playlistCreator?.username}</span>
                             </p>
                         </div>
                         <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
                             <div className="flex flex-col gap-[18px] h-full">
                                 {
                                     playingReducer.error &&
-                                    <div className="flex justify-center items-center overflow-hidden p-2 rounded-xl bg-red-500/80 text-light-100">
-                                        <p className="text-center text-lg font-medium">{playingReducer.error}</p>
+                                    <div className="flex flex-col justify-center w-full gap-5">
+                                        <hr className="w-full border-dark-200" />
+                                        <FontAwesomeIcon className="text-4xl font-medium text-dark-200 mt-[2%]" icon={faMusic} />
+                                        <div className="flex flex-col items-center gap-8 text-dark-200">
+                                            <div className="flex flex-col gap-3 items-center">
+                                                <h1 className="font-medium text-xl">{playingReducer.error}</h1>
+                                            </div>
+                                        </div>
                                     </div>
                                 }
                                 {
