@@ -49,6 +49,11 @@ import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/
 import { ListeningPlaylist } from "./Components/Views/ListeningPage/ListeningPlaylist";
 import { WeeklyAlbums } from "./Components/Views/Welcome/WeeklyAlbums";
 import { WeeklyArtist } from "./Components/Views/Welcome/WeeklyArtist";
+import { MyMediaLibrary } from "./Components/Views/MyMediaLibrary";
+import { MyMediaLibrarySingle } from "./Components/Views/MyMediaLibrary/SingleTracks";
+import { MyMediaLibraryAlbums } from "./Components/Views/MyMediaLibrary/Albums";
+import { MyMediaLibraryCreators } from "./Components/Views/MyMediaLibrary/Creators";
+import { MyMediaLibraryPlaylists } from "./Components/Views/MyMediaLibrary/Playlists";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -112,6 +117,16 @@ function App() {
               <Route path="albums" element={<ProfileAlbums />} />
             </Route>
           </Route>
+          
+          <Route path="medialibrary"element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+            <Route path="" element={<MyMediaLibrary />} >  
+              <Route index element={<MyMediaLibrarySingle />} />
+              <Route path="albums" element={<MyMediaLibraryAlbums />} />
+              <Route path="playlists" element={<MyMediaLibraryPlaylists />} />
+              <Route path="creators" element={<MyMediaLibraryCreators />} />
+            </Route>
+            {/* <Route path=":name" element={<GenreDetails />} /> */}
+        </Route>
         </Route>
 
         <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
@@ -133,10 +148,6 @@ function App() {
             </Route>
           </Route>
         </Route>
-
-
-
-
 
         <Route path="s&a" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route index element={<StudioIntro />} />
