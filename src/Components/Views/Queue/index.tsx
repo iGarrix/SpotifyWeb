@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react"
 import { Helmet } from "react-helmet";
-import { RemoveWithQueue } from "../../../Helpers/QueueHelper";
+import { AddToHistory, RemoveWithQueue, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IQueue } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue, ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
 import { StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
@@ -46,6 +46,15 @@ export const Queue: React.FC = () => {
             document.removeEventListener("scroll", scrollHadler);
         }
     }, []);
+
+    const onSelectTrack = (item: ITrackResponse | null) => {
+        const response = SetPlayingTrack(item);
+        if (response) {
+            initQueue(response);
+            AddToHistory(item);
+        }
+    }
+    
     return (
         <div className="w-full flex flex-col gap-6 items-start text-dark-200 px-[3%] py-[2%]">
             <Helmet>
@@ -53,44 +62,26 @@ export const Queue: React.FC = () => {
             </Helmet>
             {
                 rx && rx.queue && rx.queue.soundobjs && rx.queue.soundobjs.length > 0 ?
-                    <div className="flex flex-col gap-6">
-                        <h1 className="font-semibold text-2xl">Selected track</h1>
+                    <div className="flex flex-col gap-6 w-full">
                         {
                             rx.queue.soundobjs[0] &&
                             <>
-                                <SoundHistoryItem options={[{
-                                    title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
-                                },
-                                {
-                                    title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => {
-                                        if (rx && rx.queue && rx.queue.soundobjs) {
-                                            RmWithQueue(rx.queue.soundobjs[0].track?.returnId, rx.queue?.isPlay)
+                                <div className="flex flex-col gap-6 w-full">
+                                    <h1 className="font-semibold text-2xl">In queue</h1>
+                                    <div className="flex flex-col gap-6 w-full">
+                                        {
+                                            rx.queue.soundobjs.map((item: ITrackResponse, index: number) => {
+                                                return (
+                                                    <SoundHistoryItem key={Guid.create().toString()} index={index} selected={rx.queue?.playedIndex === index}
+                                                        options={[{
+                                                            title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
+                                                        }]}
+                                                        track={item.track} trackCreators={item.trackCreators} onClick={() => { onSelectTrack(item) }} />
+                                                )
+                                            })
                                         }
-                                    }
-                                }]} track={rx.queue.soundobjs[0].track} trackCreators={rx.queue.soundobjs[0].trackCreators} onClick={() => { }} />
-                                {
-                                    rx.queue.soundobjs.length === 1 ?
-                                        <h1 className="font-semibold text-2xl mt-4">Queue is empty</h1>
-                                        :
-                                        <div className="flex flex-col gap-6 mt-4">
-                                            <h1 className="font-semibold text-2xl">In queue</h1>
-                                            <div className="flex flex-col gap-6">
-                                                {
-                                                    rx.queue.soundobjs.filter(f => f.track?.returnId !== rx.queue?.soundobjs[0].track?.returnId).map(item => {
-                                                        return (
-                                                            <SoundHistoryItem key={Guid.create().toString()}
-                                                                options={[{
-                                                                    title: "Save to library", icon: <FontAwesomeIcon icon={faHeart} />, onClick: () => { }
-                                                                }, {
-                                                                    title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
-                                                                }]}
-                                                                track={item.track} trackCreators={item.trackCreators} onClick={() => { }} />
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                }
+                                    </div>
+                                </div>
                             </>
                         }
                     </div>

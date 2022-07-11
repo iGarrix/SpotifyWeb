@@ -62,7 +62,7 @@ export const History: React.FC = () => {
                 <title>Soundwave | Your history</title>
             </Helmet>
             {rx && rx.history && rx.history.soundobjs.length > 0 ?
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 w-full">
                     <h1 className="font-semibold text-2xl">Listening history</h1>
                     <div className="flex flex-col gap-10 w-full">
                         {

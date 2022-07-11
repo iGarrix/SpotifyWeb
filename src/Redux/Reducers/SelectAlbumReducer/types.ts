@@ -34,6 +34,7 @@ export interface ITrackResponse {
 export interface IQueue {
     soundobjs: ITrackResponse[],
     isPlay: boolean,
+    playedIndex: number,
 }
 
 export interface IPlayingStateState {

@@ -2,7 +2,7 @@ import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -23,11 +23,13 @@ export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const { initSelectPlaylist, initQueue, getPlaylistTracks } = useActions();
+    const [isInited, setInited] = useState(false);
     const nav = useNavigate();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (playingReducer.nextPage && !playingReducer.loading) {
                 await FetchNext();
+                InitQueueAlbum();
             }
         }
     }
@@ -69,6 +71,16 @@ export const ListeningPlaylist: React.FC = () => {
         }
 
     }, [playingReducer.nextPage && playingReducer.loading])
+
+    const InitQueueAlbum = () => {
+        if (playingReducer.tracks && !isInited) {
+            const newQueue: IQueue = { soundobjs: [...playingReducer.tracks], isPlay: false, playedIndex: 0, };
+            localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
+            initQueue(newQueue);
+            setInited(true);
+        }
+    }
+
     const FetchNext = async () => {
         if (playingReducer.tracks && playingReducer.nextPage && id) {
             const rq: IGetPlaylistTracksRequest = {
@@ -79,6 +91,7 @@ export const ListeningPlaylist: React.FC = () => {
         }
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
+        InitQueueAlbum();
         const response = SetPlayingTrack(item);
         if (response) {
             initQueue(response);
@@ -166,7 +179,7 @@ export const ListeningPlaylist: React.FC = () => {
                                         return (
                                             <SoundItem key={Guid.create().toString()} item={item}
                                                 isLiked={true}
-                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
                                                 onClick={() => { onSelectTrack(item) }} />
                                         )
                                     })
