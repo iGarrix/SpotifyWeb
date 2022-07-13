@@ -25,15 +25,13 @@ export const Genres: React.FC = () => {
     }
     useEffect(() => {
         const fetchData = async () => {
-            if (user) {
                 const rq: IGetAllGenreRequest = {
                     page: 1
                 }
                 await getAllGenre(rq);
-            }
         }
         fetchData();
-    }, [user]);
+    }, []);
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);

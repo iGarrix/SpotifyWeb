@@ -131,14 +131,14 @@ export const AllResultSearch: React.FC = () => {
                                                 isPlay={playingReducer.queue?.isPlay}
                                                 name={(reducer.searchall?.bestResult as IAlbumSearch).name}
                                                 creators={(reducer.searchall?.bestResult as IAlbumSearch).creators.map(i => i.username)}
-                                                image={baseUrl + "Image/AlbomImages/" + (reducer.searchall?.bestResult as IAlbumSearch).image} />
+                                                image={baseUrl + "Images/AlbomImages/" + (reducer.searchall?.bestResult as IAlbumSearch).image} />
                                             :
                                             TypeOfInstance(reducer.searchall?.bestResult) === BestResultTypes.Single ?
                                                 <TrackResultCard
                                                     onSelect={() => { onSelectTrack((reducer.searchall?.bestResult as ITrackResponse)) } }
                                                     name={(reducer.searchall?.bestResult as ITrackResponse).track?.name}
                                                     isPlay={playingReducer.queue && (reducer.searchall?.bestResult as ITrackResponse).track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === (reducer.searchall?.bestResult as ITrackResponse).track?.returnId && playingReducer.queue?.isPlay : false}
-                                                    image={baseUrl + "Images/Tracks" + (reducer.searchall?.bestResult as ITrackResponse).track?.image}
+                                                    image={baseUrl + "Images/Tracks/" + (reducer.searchall?.bestResult as ITrackResponse).track?.image}
                                                     creators={(reducer.searchall?.bestResult as ITrackResponse).trackCreators?.map(i => i.username)} />
                                                 :
                                                 <PlaylistResultCard 
@@ -146,7 +146,7 @@ export const AllResultSearch: React.FC = () => {
                                                     onSelect={() => { upt ? onSelectTrack(reducer.searchall?.tracks[0]) : onSelectTrack(playingReducer.queue?.soundobjs[playingReducer.queue.playedIndex]) }}
                                                     isPlay={playingReducer.queue?.isPlay}
                                                     name={(reducer.searchall?.bestResult as IPlaylistSearch).name}
-                                                    image={baseUrl + "Image/Playlist" + (reducer.searchall?.bestResult as IPlaylistSearch).image}
+                                                    image={baseUrl + "Images/Playlist/" + (reducer.searchall?.bestResult as IPlaylistSearch).image}
                                                     creators={[(reducer.searchall?.bestResult as IPlaylistSearch).creator.username]} />
                                 }
                             </div>

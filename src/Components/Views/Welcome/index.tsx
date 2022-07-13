@@ -134,11 +134,11 @@ export const Welcome: React.FC = () => {
             </div>
             {
               mainReducer.tracks ?
-                <div>
+                <div className="flex flex-col gap-6">
                   {
                     mainReducer.tracks.map(item => {
                       return (
-                        <SoundItem key={Guid.create().toString()} isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                        <SoundItem key={Guid.create().toString()} isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
                           isLiked={false} item={item} onClick={() => { onSelectTrack(item) }} />
                       )
                     })

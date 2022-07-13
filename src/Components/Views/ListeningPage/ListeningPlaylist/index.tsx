@@ -115,14 +115,14 @@ export const ListeningPlaylist: React.FC = () => {
         <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
             {
                 playingReducer.playlist ?
-                    <img alt="bg" src={`${baseUrl}Images/AlbomTemplates/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png"}} />
+                    <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png"}} />
                     :
                     null
             }
             <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
                 <div className="flex justify-end col-span-2">
                     <div className="flex flex-col fixed">
-                        <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.playlist?.playlistDto?.image}`}
+                        <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                             className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage}}/>
                         <div className="py-3 flex items-center justify-between w-full">
                             <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
