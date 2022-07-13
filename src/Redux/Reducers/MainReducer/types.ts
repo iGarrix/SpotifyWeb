@@ -1,5 +1,5 @@
 import { IPagableResponse, IUser } from "../../../types";
-import { IAlbum, IPagableMyAlbumItem } from "../MyAlbumReducer/types";
+import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
 import { ITrackResponse } from "../SelectAlbumReducer/types";
 
 export enum MainActionTypes {
@@ -64,7 +64,7 @@ export interface InitMainlearAction {
     type: MainActionTypes.MAINCLEAR;
 }
 
-export type MyMainAction =
+export type MainAction =
     | InitMainAlbumAction
     | InitMainArtistAction
     | InitMainSongsAlbumAction

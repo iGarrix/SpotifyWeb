@@ -1,7 +1,6 @@
-export interface IField {
+export interface ISearchField {
     placeholder: string,
     value?: string,
     icon?: any,
-    visiblePlaceholder?: boolean,
     onChange: (e: any) => void,
 }

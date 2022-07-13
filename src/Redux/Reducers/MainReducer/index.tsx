@@ -1,5 +1,5 @@
 import { DefaultServerError } from "../../../types";
-import { IMainState, MainActionTypes, MyMainAction } from "./types";
+import { IMainState, MainActionTypes, MainAction } from "./types";
 
 
 const inialState: IMainState = {
@@ -14,7 +14,7 @@ const inialState: IMainState = {
 
 export const mainReducer = (
   state = inialState,
-  action: MyMainAction
+  action: MainAction
 ): IMainState => {
   switch (action.type) {
     case MainActionTypes.INITWEEKLYARTIST: {

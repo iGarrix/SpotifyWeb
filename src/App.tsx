@@ -49,6 +49,12 @@ import { StatusAccount } from "./Components/Views/AccountSettings/Notifications/
 import { ListeningPlaylist } from "./Components/Views/ListeningPage/ListeningPlaylist";
 import { WeeklyAlbums } from "./Components/Views/Welcome/WeeklyAlbums";
 import { WeeklyArtist } from "./Components/Views/Welcome/WeeklyArtist";
+import { AllResultSearch } from "./Components/Views/Search/AllResult";
+import { AlbumsResult } from "./Components/Views/Search/AlbumsResult";
+import { PlaylistResult } from "./Components/Views/Search/PlaylistResult";
+import { TracksResult } from "./Components/Views/Search/TracksResult";
+import { ProfileResult } from "./Components/Views/Search/ProfileResult";
+import { CreatorsResult } from "./Components/Views/Search/CreatorsResult";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -84,7 +90,14 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path="weeklyalbums" element={<WeeklyAlbums />} />
           <Route path="weeklyartist" element={<WeeklyArtist />} />
-          <Route path="search" element={<Search />} />
+          <Route path="search" element={<Search />}>
+            <Route index element={<AllResultSearch />} />
+            <Route path="albums" element={<AlbumsResult />} />
+            <Route path="playlists" element={<PlaylistResult />} />
+            <Route path="tracks" element={<TracksResult />} />
+            <Route path="creators" element={<CreatorsResult />} />
+            <Route path="profiles" element={<ProfileResult />} />
+          </Route>
           <Route path="genres" element={<Outlet />} >
             <Route index element={<Genres />} />
             <Route path=":name" element={<GenreDetails />} />
