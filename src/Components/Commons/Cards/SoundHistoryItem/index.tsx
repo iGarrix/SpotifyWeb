@@ -19,7 +19,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
 
     return (
         <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 relative">
-            <div className="absolute top-0 left-0 w-full h-full" onClick={onClick}></div>
+            <div className="absolute top-0 left-0 w-full h-full z-[10]" onClick={onClick}></div>
             <div className="flex w-full gap-4">
                 {
                     index != undefined &&
@@ -28,11 +28,11 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                     </div>
                 }
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
-                    className="w-[124px] h-[124px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
-                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden z-10 ${selected && "bg-light-200 shadow-xl rounded-xl"}`}>
+                    className="w-[100px] h-[100px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
+                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 shadow-xl rounded-xl"}`}>
                     <div className="flex flex-col items-center justify-center col-span-4">
                         <h1 className="text-xl">{track?.name}</h1>
-                        <p className="text-gray-500 font-medium flex gap-2 items-center">
+                        <p className="text-gray-500 font-medium flex gap-2 items-center z-10">
                             {
                                 trackCreators?.map(i => i.username).map((i: any, index: number) => {
                                     return (
@@ -62,10 +62,10 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4 col-span-1">
-                        <img alt="icon" className="invert w-[24px]" src={icon_like} onClick={onLike} />
+                        <img alt="icon" className="invert w-[24px] z-[11]" src={icon_like} onClick={onLike} />
                     </div>
                 </div>
-                <div className="soundhistory_menu">
+                <div className="soundhistory_menu z-[11]">
                     <SoundOptionModal options={options}
                         trigger={<FontAwesomeIcon className=" w-[20px] h-[20px] text-dark-200" icon={faEllipsisVertical} />} />
                 </div>

@@ -1,4 +1,4 @@
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
@@ -51,6 +51,7 @@ export const History: React.FC = () => {
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
+        console.log(response)
         if (response) {
             initQueue(response);
             AddToHistory(item);
