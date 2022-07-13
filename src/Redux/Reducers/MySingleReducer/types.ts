@@ -1,5 +1,5 @@
 import { IPagableResponse } from "../../../types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 
 export enum MySingleActionTypes {
   INITMYSINGLE = "INITMYSINGLE",

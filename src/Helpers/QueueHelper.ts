@@ -1,4 +1,4 @@
-import { IQueue, ITrackResponse } from "../Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue, ITrackResponse } from "../Redux/Reducers/PlayingReducer/types";
 import { IHistory, StorageVariables } from "../types";
 
 

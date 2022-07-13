@@ -7,14 +7,14 @@ import { IHistory, IPagableResponse } from "../../../types";
 import { IPagableMyPlaylistItem } from "../MyPlaylistReducer/types";
 
 
-export const initSelectAlbum = (data: IPagableMyAlbumItem) => {
+export const initSelectAlbum = (data: IPagableMyAlbumItem | null) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     dispatch({ type: PlayingActionTypes.INITSELECTALBUM, payload: data });
     dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: false });
   };
 };
 
-export const initSelectPlaylist = (data: IPagableMyPlaylistItem) => {
+export const initSelectPlaylist = (data: IPagableMyPlaylistItem | null) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     dispatch({ type: PlayingActionTypes.INITSELECTPLAYLIST, payload: data });
     dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: false });
@@ -95,6 +95,60 @@ export const getPlaylistTracks = (data: IGetPlaylistTracksRequest) => {
         AuthorizateHeader(token)
       );
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMTRACKS, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const findAlbum = (id: string) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+    try {
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.get<IPagableMyAlbumItem>(
+        `api/Albom/Find?returnId=${id}`,
+        AuthorizateHeader(token)
+      );
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUM, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const findPlaylist = (id: string) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+    try {
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.get<IPagableMyPlaylistItem>(
+        `api/Playlist/Find?returnId=${id}`,
+        AuthorizateHeader(token)
+      );
+      dispatch({ type: PlayingActionTypes.INITSELECTPLAYLIST, payload: response.data });
 
       return Promise.resolve();
     } catch (error) {

@@ -8,7 +8,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
-import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
@@ -79,7 +79,7 @@ export const ProfileSingles: React.FC = () => {
                     <QuadraticLoader isVisisble={true} />
                     :
                     singles && rx.error.length === 0 ?
-                        <div className="w-full h-full flex flex-col gap-[18px] px-[330px]">
+                        <div className="w-full h-full flex flex-col gap-[15px] px-[330px]">
                             {
                                 singles.map(item => {
                                     return (

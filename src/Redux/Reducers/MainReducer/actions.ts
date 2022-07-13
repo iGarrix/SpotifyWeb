@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse, IUser } from "../../../types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 import { MainActionTypes, MainAction } from "./types";
 
 export const getMainArtist = (page: number) => {

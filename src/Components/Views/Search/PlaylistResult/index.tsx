@@ -10,7 +10,7 @@ import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const PlaylistResult : React.FC = () => {
     const nav = useNavigate();
-    const { getAllSearchPlaylist, addAllSearchPlaylist, clearTracks} = useActions();
+    const { getAllSearchPlaylist, addAllSearchPlaylist, initSelectPlaylist, clearTracks} = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const scrollHadler = async () => {
@@ -56,8 +56,9 @@ export const PlaylistResult : React.FC = () => {
     }
     const onSelectPlaylist = async (id: string | null) => {
         if (id) {
-            nav("/playlist/" + id);
             await clearTracks();
+            await initSelectPlaylist(null);
+            nav("/playlist/" + id);
         }
     }
     return (
@@ -69,7 +70,7 @@ export const PlaylistResult : React.FC = () => {
                 rx.playlists && rx.playlists.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Playlist All</h1>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-6 flex-wrap">
                             {
                                 rx.playlists?.map(item => {
                                     return (

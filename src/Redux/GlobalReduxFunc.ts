@@ -4,7 +4,7 @@ import { MyAlbumActionTypes } from "./Reducers/MyAlbumReducer/types";
 import { MyMediaLibraryActionTypes } from "./Reducers/MyMediaLibraryReducer/types";
 import { MyPlaylistActionTypes } from "./Reducers/MyPlaylistReducer/types";
 import { MySingleActionTypes } from "./Reducers/MySingleReducer/types";
-import { PlayingActionTypes } from "./Reducers/SelectAlbumReducer/types";
+import { PlayingActionTypes } from "./Reducers/PlayingReducer/types";
 import { UserActionTypes } from "./Reducers/UserReducer/types";
 
 export function ClearRedux (dispatch: Dispatch<any>) {

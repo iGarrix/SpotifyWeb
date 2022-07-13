@@ -70,7 +70,7 @@ export const ProfileResult: React.FC = () => {
                 rx.profiles && rx.profiles.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Profiles All</h1>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-6 flex-wrap">
                             {
                                 rx.profiles?.map(item => {
                                     return (

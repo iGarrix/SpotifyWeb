@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IQueue } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, StorageVariables } from "../../../../types";
 import { Slider } from "../../Slider";
 
@@ -151,7 +151,6 @@ export const PlayingFooter: React.FC = () => {
             if (volume > 0) {
                 setVolume(0);
                 audioPlayer.current.volume = 0 / 100;
-                audioPlayer.current.muted = true;
             }
             else {
                 const vol = localStorage.getItem(StorageVariables.Volume);
@@ -206,7 +205,7 @@ export const PlayingFooter: React.FC = () => {
                                     src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} />
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
-                                        {/* <h1 className="font-semibold">{rx.soundobjs[rx.playedIndex].trackCreators[0].username} {rx.soundobjs[rx.playedIndex].trackCreators.length > 1 ? " ..." : ""}</h1> */}
+                                            <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => {nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username)}}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
                                         <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share} />
                                     </div>
                                     <p className="text-gray-300">{rx.soundobjs[rx.playedIndex].track?.name.substring(0, 30)}</p>

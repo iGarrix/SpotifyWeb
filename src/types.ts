@@ -1,4 +1,4 @@
-import { ITrackResponse } from "./Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "./Redux/Reducers/PlayingReducer/types";
 
 export enum Theme {
   dark = "dark",
@@ -18,8 +18,6 @@ export enum VerifyType {
 export enum StorageVariables {
   Queue = "queue",
   History = "history",
-  Album = "selectAlbum",
-  Playlist = "selectPlaylist",
   Track = "selectTrack",
   ForgotUser = "ForgotUser",
   VerifyResponse = "VerifyResponse",

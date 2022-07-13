@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const MyMediaLibraryPlaylists: React.FC = () => {
   const nav = useNavigate();
-    const { getMyMediaLibraryPlaylists, addMyMediaLibraryPlaylists, clearTracks } = useActions();
+    const { getMyMediaLibraryPlaylists, addMyMediaLibraryPlaylists, clearTracks, initSelectPlaylist } = useActions();
 
     const rx = useTypedSelector(state => state.myMediaLibraryReducer);
     const playlists = useTypedSelector(state => state.myMediaLibraryReducer.playlists);
@@ -66,9 +65,9 @@ export const MyMediaLibraryPlaylists: React.FC = () => {
 
     const onSelectPlaylist = async (item: IPagableMyPlaylistItem | null) => {
         if (item) {
-            localStorage.setItem(StorageVariables.Playlist, JSON.stringify(item));
-            nav("/playlist/" + item?.playlistDto?.returnId);
             await clearTracks();
+            await initSelectPlaylist(null);
+            nav("/playlist/" + item?.playlistDto?.returnId);
         }
     }
   return (

@@ -1,5 +1,5 @@
 import { IPagableResponse } from "../../../types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 
 export enum SearchActionTypes {
     INITSEARCHALL = "INITSEARCHALL",
@@ -25,14 +25,6 @@ export interface IUserSearch {
     avatar: string,
     verifyType: string,
 }
-// export interface ITrackSearch {
-//     id: string,
-//     trackId: string,
-//     name: string,
-//     image: string,
-//     duration: string,
-//     creators: Array<IUserSearch>,
-// }
 export interface IPlaylistSearch {
     id: string,
     name: string,

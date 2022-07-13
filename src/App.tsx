@@ -17,7 +17,7 @@ import { ProfilePlaylists } from "./Components/Views/Profile/ProfilePlaylists";
 import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
-import { IQueue } from "./Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue } from "./Redux/Reducers/PlayingReducer/types";
 import { StorageVariables, TempTake } from "./types";
 import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";

@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyAlbumRequest, IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
-import { StorageVariables } from "../../../../types";
 import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const MyMediaLibraryAlbums: React.FC = () => {
   const nav = useNavigate();
-    const { getMyMediaLibraryAlbums, addMyMediaLibraryAlbums, clearTracks } = useActions();
+    const { getMyMediaLibraryAlbums, addMyMediaLibraryAlbums, clearTracks, initSelectAlbum } = useActions();
     const rx = useTypedSelector(state => state.myMediaLibraryReducer);
     const albums = useTypedSelector(state => state.myMediaLibraryReducer.albums);
     const user = useTypedSelector(state => state.userReducer.profile);
@@ -61,9 +60,9 @@ export const MyMediaLibraryAlbums: React.FC = () => {
     }
     const onSelectAlbum = async (item: IPagableMyAlbumItem | null) => {
         if (item) {
-            localStorage.setItem(StorageVariables.Album, JSON.stringify(item));
-            nav("/album/" + item?.albomDto?.returnId);
             await clearTracks();
+            await initSelectAlbum(null);
+            nav("/album/" + item?.albomDto?.returnId);
         }
     }
   return (

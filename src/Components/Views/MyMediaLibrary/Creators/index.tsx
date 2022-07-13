@@ -58,13 +58,6 @@ export const MyMediaLibraryCreators: React.FC = () => {
           await addMyMediaLibraryArtists(1, user.email);
       }
   }
-  const onSelectArtists = async (item: IPagableMyAlbumItem | null) => {
-      if (item) {
-          localStorage.setItem(StorageVariables.Album, JSON.stringify(item));
-          nav("/users/" + item?.albomDto?.returnId);
-          await clearTracks();
-      }
-  }
   return (
     <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
       <Helmet>

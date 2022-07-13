@@ -1,4 +1,4 @@
-import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import { faCompactDisc, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AddToHistory, AddToQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
@@ -23,7 +23,7 @@ export const ListeningAlbum: React.FC = () => {
 
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
-    const { initSelectAlbum, initQueue, getTracks } = useActions();
+    const { initQueue, getTracks ,findAlbum } = useActions();
     const [isInited, setInited] = useState(false);
     const nav = useNavigate();
     const scrollHadler = async () => {
@@ -36,12 +36,16 @@ export const ListeningAlbum: React.FC = () => {
     }
     useEffect(() => {
         const work = async () => {
-            const selectedAlbum = localStorage.getItem(StorageVariables.Album);
-            if (selectedAlbum) {
-                if (JSON.parse(selectedAlbum).albomDto.returnId === id) {
-                    await initSelectAlbum(JSON.parse(selectedAlbum));
-                    return;
+            if (id) {     
+                await findAlbum(id);
+                if (!playingReducer.tracks) {
+                    const rq: IGetTracksRequest = {
+                        albomId: id,
+                        page: 1,
+                    }
+                    await getTracks(rq);
                 }
+                return;
             }
             else {
                 nav(-1);
@@ -49,18 +53,19 @@ export const ListeningAlbum: React.FC = () => {
         }
         work();
     }, []);
-    useEffect(() => {
-        const fetchData = async (page: any) => {
-            if (id && !playingReducer.tracks) {
-                const rq: IGetTracksRequest = {
-                    albomId: id,
-                    page: page,
-                }
-                await getTracks(rq);
-            }
-        }
-        fetchData(1);
-    }, []);
+    // useEffect(() => {
+    //     const fetchData = async (page: any) => {
+    //         if (id && !playingReducer.tracks) {
+    //             const rq: IGetTracksRequest = {
+    //                 albomId: id,
+    //                 page: page,
+    //             }
+    //             await getTracks(rq);
+    //             console.log("initTracks");
+    //         }
+    //     }
+    //     fetchData(1);
+    // }, []);
 
     const InitQueueAlbum = () => {
         if (playingReducer.tracks && !isInited) {
@@ -100,14 +105,14 @@ export const ListeningAlbum: React.FC = () => {
         }
     }
     const onPause = async () => {
-        let storage_queue = localStorage.getItem(StorageVariables.Queue);
-        if (storage_queue) {
-            let queue = JSON.parse(storage_queue) as IQueue;
-            queue.isPlay = !queue.isPlay;
-            localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-            await initQueue(queue);
-            return;
-        }
+        // let storage_queue = localStorage.getItem(StorageVariables.Queue);
+        // if (storage_queue) {
+        //     let queue = JSON.parse(storage_queue) as IQueue;
+        //     queue.isPlay = !queue.isPlay;
+        //     localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+        //     await initQueue(queue);
+        //     return;
+        // }
         if (playingReducer.tracks) {
             await onSelectTrack(playingReducer.tracks[0]);
         }
@@ -120,81 +125,93 @@ export const ListeningAlbum: React.FC = () => {
                     :
                     null
             }
-            <div className="w-full h-full grid grid-cols-5 gap-12 z-[5]">
-                <div className="flex justify-end col-span-2">
-                    <div className="flex flex-col fixed">
-                        <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
-                            className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
-                        <div className="py-3 flex items-center justify-between w-full">
-                            <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
-                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
-                                <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
-                            </div>
-                            <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
-                                onClick={onPause}
-                                style={{ backgroundImage: `url(${bg})` }}>
-                                {
-                                    playingReducer.queue?.isPlay ?
-                                        <img alt="icon" className="w-[30px] -translate-x-[0.5px]" src={icon_pause} />
-                                        :
-                                        <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} />
+            {
+                playingReducer.album ? 
+                <div className="w-full h-full grid grid-cols-5 gap-12 z-[5]">
+                    <div className="flex justify-end col-span-2">
+                        <div className="flex flex-col fixed">
+                            <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
+                                className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                            <div className="py-3 flex items-center justify-between w-full">
+                                <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
+                                <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
+                                </div>
+                                <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
+                                    onClick={onPause}
+                                    style={{ backgroundImage: `url(${bg})` }}>
+                                    {
+                                        playingReducer.queue?.isPlay ?
+                                            <img alt="icon" className="w-[30px] -translate-x-[0.5px]" src={icon_pause} />
+                                            :
+                                            <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} />
 
-                                }
+                                    }
+                                </div>
+                                <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
+                                </div>
+                                <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} />
                             </div>
-                            <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
-                                <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
-                            </div>
-                            <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} />
                         </div>
                     </div>
-                </div>
-                <div className="flex justify-start w-full col-span-3 mb-32 z-10">
-                    <div className="flex flex-col gap-4 w-full">
-                        <div className="flex flex-col gap-1">
-                            <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
-                            {
-                                playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")}</p>
-                            }
-                            <p className="font-thin flex gap-2">Creators:
+                    <div className="flex justify-start w-full col-span-3 mb-32 z-10">
+                        <div className="flex flex-col gap-4 w-full">
+                            <div className="flex flex-col gap-1">
+                                <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
                                 {
-                                    playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
-                                        return (
-                                            <span key={Guid.create().toString()}
-                                                className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: false }) }}>{i}{playingReducer.album?.creatorsAlbom?.length && index < playingReducer.album?.creatorsAlbom.length - 1 ? " • " : " "}</span>
-                                        )
-                                    })
-                                }</p>
-                        </div>
-                        <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
-                            <div className="flex flex-col gap-[18px] h-full">
-                                {
-                                    playingReducer.error &&
-                                    <div className="flex flex-col justify-center w-full gap-5">
-                                        <hr className="w-full border-dark-200" />
-                                        <FontAwesomeIcon className="text-4xl font-medium text-dark-200 mt-[2%]" icon={faMusic} />
-                                        <div className="flex flex-col items-center gap-8 text-dark-200">
-                                            <div className="flex flex-col gap-3 items-center">
-                                                <h1 className="font-medium text-xl">{playingReducer.error}</h1>
+                                    playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
+                                    <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")}</p>
+                                }
+                                <p className="font-thin flex gap-2">Creators:
+                                    {
+                                        playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
+                                            return (
+                                                <span key={Guid.create().toString()}
+                                                    className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: false }) }}>{i}{playingReducer.album?.creatorsAlbom?.length && index < playingReducer.album?.creatorsAlbom.length - 1 ? " • " : " "}</span>
+                                            )
+                                        })
+                                    }</p>
+                            </div>
+                            <div className="flex flex-col gap-4 overflow-x-hidden pr-5 pb-10 h-full">
+                                <div className="flex flex-col gap-[18px] h-full">
+                                    {
+                                        playingReducer.error &&
+                                        <div className="flex flex-col justify-center w-full gap-5">
+                                            <hr className="w-full border-dark-200" />
+                                            <FontAwesomeIcon className="text-4xl font-medium text-dark-200 mt-[2%]" icon={faMusic} />
+                                            <div className="flex flex-col items-center gap-8 text-dark-200">
+                                                <div className="flex flex-col gap-3 items-center">
+                                                    <h1 className="font-medium text-xl">{playingReducer.error}</h1>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
-                                {
-                                    playingReducer.tracks?.map((item) => {
-                                        return (
-                                            <SoundItem key={Guid.create().toString()} item={item}
-                                                isLiked={true}
-                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                                onClick={() => { onSelectTrack(item) }} />
-                                        )
-                                    })
-                                }
+                                    }
+                                    {
+                                        playingReducer.tracks?.map((item) => {
+                                            return (
+                                                <SoundItem key={Guid.create().toString()} item={item}
+                                                    isLiked={true}
+                                                    isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                                    onClick={() => { onSelectTrack(item) }} />
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                :
+                <div className="flex flex-col items-center w-full gap-5">
+                    <FontAwesomeIcon className="text-6xl font-medium text-dark-200" icon={faCompactDisc} />
+                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                        <div className="flex flex-col gap-3 items-center">
+                            <h1 className="font-medium text-2xl">{playingReducer.error}</h1>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     )
 }

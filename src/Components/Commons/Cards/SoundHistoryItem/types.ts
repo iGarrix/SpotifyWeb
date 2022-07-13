@@ -1,4 +1,4 @@
-import { ITrack } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrack } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { IUser } from "../../../../types";
 
 export interface ISoundHistoryItem {

@@ -13,7 +13,7 @@ import { AlbumCard } from "../../../Commons/Cards/AlbumCard";
 
 export const WeeklyAlbums: React.FC = () => {
 
-    const { getMainAlbums, addMainAlbums, clearTracks } = useActions();
+    const { getMainAlbums, addMainAlbums, clearTracks, initSelectAlbum } = useActions();
     const mainReducer = useTypedSelector(state => state.mainReducer);
     const [isPending, startTransition] = useTransition();
     const nav = useNavigate();
@@ -63,9 +63,9 @@ export const WeeklyAlbums: React.FC = () => {
 
     const onSelectAlbum = async (item: IPagableMyAlbumItem | null) => {
         if (item) {
-            localStorage.setItem(StorageVariables.Album, JSON.stringify(item));
-            nav("/album/" + item?.albomDto?.returnId);
             await clearTracks();
+            await initSelectAlbum(null);
+            nav("/album/" + item?.albomDto?.returnId);
         }
     }
 

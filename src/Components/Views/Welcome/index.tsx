@@ -8,7 +8,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IPagableMyAlbumItem } from "../../../Redux/Reducers/MyAlbumReducer/types";
-import { ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, defaultAvatarImage, GetUserAvatar, IHistory, StorageVariables } from "../../../types";
 import { AlbumCard } from "../../Commons/Cards/AlbumCard";
 import { SoundItem } from "../../Commons/Cards/SoundItem";
@@ -17,7 +17,7 @@ const icon_play = require('../../../Assets/Icons/Play.png');
 const bg = require('../../../Assets/Background2.png');
 
 export const Welcome: React.FC = () => {
-  const { initHistory, getMainArtist, getMainAlbums, getMainTracks, initQueue, clearTracks } = useActions();
+  const { initHistory, getMainArtist, getMainAlbums, getMainTracks, initQueue, clearTracks, initSelectAlbum } = useActions();
   const [isPending, startTransition] = useTransition();
 
   const playingReducer = useTypedSelector(state => state.playingReducer);
@@ -64,9 +64,9 @@ export const Welcome: React.FC = () => {
 
   const onSelectAlbum = async (item: IPagableMyAlbumItem | null) => {
     if (item) {
-      localStorage.setItem(StorageVariables.Album, JSON.stringify(item));
-      nav("/album/" + item?.albomDto?.returnId);
       await clearTracks();
+      await initSelectAlbum(null);
+      nav("/album/" + item?.albomDto?.returnId);
     }
   }
 
@@ -82,7 +82,7 @@ export const Welcome: React.FC = () => {
         <title>Soundwave</title>
       </Helmet>
       {
-        mainReducer.albums &&
+        mainReducer.albums && mainReducer.albums[0] && mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom[0].username &&
         <div className="py-10 grid grid-cols-12 gap-x-8 bg-cover bg-no-repeat object-cover relative" style={{ backgroundImage: `url('${baseUrl + "Images/AlbomTemplates/" + mainReducer.albums[0].albomDto?.templateimage}')` }}>
           <div className="absolute w-full h-full top-0 left-0 bg-dark-200/70"></div>
           <div className="flex col-span-5 w-full justify-end items-center z-[2]">
@@ -134,7 +134,7 @@ export const Welcome: React.FC = () => {
             </div>
             {
               mainReducer.tracks ?
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-[15px]">
                   {
                     mainReducer.tracks.map(item => {
                       return (
@@ -187,7 +187,7 @@ export const Welcome: React.FC = () => {
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (
-                        <AlbumCard key={Guid.create().toString()} name={item.track?.name} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); nav("/history") }} />
+                        <AlbumCard key={Guid.create().toString()} name={item.track?.name} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); }} />
                       )
                     })
                   }

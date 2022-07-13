@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 import { AddToHistory, RemoveWithQueue, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { IQueue, ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
+import { IQueue, ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { StorageVariables, TempTake } from "../../../types";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 

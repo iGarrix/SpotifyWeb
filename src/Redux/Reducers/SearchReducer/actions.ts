@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 import { IAlbumSearch, IPlaylistSearch, ISearchAllModel, IUserSearch, SearchAction, SearchActionTypes } from "./types";
 
 export const SearchAllXHR = (searchQuery: string) => {
@@ -28,6 +28,31 @@ export const SearchAllXHR = (searchQuery: string) => {
             }
         }
     };
+};
+
+export const SearchAllWithoutBestResultXHR = () => {
+  return async (dispatch: Dispatch<SearchAction>) => {
+      try {
+          dispatch({ type: SearchActionTypes.SEARCH_WAITING, payload: true });
+          const response = await http.get<ISearchAllModel>(
+              `api/Search/SearchAllWithoutBestResult`
+          );
+          dispatch({ type: SearchActionTypes.INITSEARCHALL, payload: response.data });
+
+          return Promise.resolve();
+      } catch (error) {
+          if (axios.isAxiosError(error)) {
+              const serverError = error as AxiosError<any>;
+              dispatch({
+                  type: SearchActionTypes.SEARCH_ERROR,
+                  payload: serverError.response?.data,
+              });
+              if (serverError && serverError.response) {
+                  return Promise.reject(serverError.response.data);
+              }
+          }
+      }
+  };
 };
 
 

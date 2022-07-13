@@ -7,7 +7,7 @@ import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
-import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";

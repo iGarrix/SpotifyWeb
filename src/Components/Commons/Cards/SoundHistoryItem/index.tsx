@@ -18,7 +18,8 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
     const nav = useNavigate();
 
     return (
-        <div className="flex gap-20 cursor-pointer soundhistory text-dark-200">
+        <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 relative">
+            <div className="absolute top-0 left-0 w-full h-full" onClick={onClick}></div>
             <div className="flex w-full gap-4">
                 {
                     index != undefined &&
@@ -28,7 +29,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                 }
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
                     className="w-[124px] h-[124px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
-                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 shadow-xl rounded-xl"}`} onClick={onClick}>
+                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden z-10 ${selected && "bg-light-200 shadow-xl rounded-xl"}`}>
                     <div className="flex flex-col items-center justify-center col-span-4">
                         <h1 className="text-xl">{track?.name}</h1>
                         <p className="text-gray-500 font-medium flex gap-2 items-center">

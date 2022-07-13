@@ -1,4 +1,4 @@
-import { faArrowDown, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const ProfilePlaylists: React.FC = () => {
     const nav = useNavigate();
-    const { getMyPlaylists, addMyPlaylists, clearTracks } = useActions();
+    const { getMyPlaylists, addMyPlaylists, clearTracks, initSelectPlaylist } = useActions();
 
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
@@ -66,9 +65,9 @@ export const ProfilePlaylists: React.FC = () => {
 
     const onSelectPlaylist = async (item: IPagableMyPlaylistItem | null) => {
         if (item) {
-            localStorage.setItem(StorageVariables.Playlist, JSON.stringify(item));
-            nav("/playlist/" + item?.playlistDto?.returnId);
             await clearTracks();
+            await initSelectPlaylist(null);
+            nav("/playlist/" + item?.playlistDto?.returnId);
         }
     }
     return (

@@ -10,7 +10,7 @@ import { AlbumItem } from "../../../Commons/AlbumItem";
 
 export const AlbumsResult : React.FC = () => {
     const nav = useNavigate();
-    const { getAllSearchAlbum, addAllSearchAlbum, clearTracks} = useActions();
+    const { getAllSearchAlbum, addAllSearchAlbum, initSelectAlbum, clearTracks} = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const scrollHadler = async () => {
@@ -56,8 +56,9 @@ export const AlbumsResult : React.FC = () => {
     }
     const onSelectAlbum = async (id: string | null) => {
         if (id) {
-            nav("/album/" + id);
             await clearTracks();
+            await initSelectAlbum(null);
+            nav("/album/" + id);
         }
     }
     return (
@@ -69,7 +70,7 @@ export const AlbumsResult : React.FC = () => {
                 rx.albums && rx.albums.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Albums All</h1>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-[15px] flex-wrap">
                             {
                                 rx.albums?.map(item => {
                                     return (

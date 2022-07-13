@@ -28,7 +28,7 @@ export interface ITrack {
 
 export interface ITrackResponse {
     track: ITrack | null,
-    trackCreators: IUser[] | null,
+    trackCreators: IUser[],
 }
 
 export interface IQueue {

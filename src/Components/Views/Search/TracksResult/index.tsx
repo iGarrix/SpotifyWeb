@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
+import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 export const TracksResult : React.FC = () => {
@@ -73,7 +73,7 @@ export const TracksResult : React.FC = () => {
                 rx.tracks && rx.tracks.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Tracks All</h1>
-                        <div className="flex flex-col gap-6 flex-wrap justify-between">
+                        <div className="flex flex-col gap-[15px] flex-wrap">
                             {
                                 rx.tracks?.map(item => {
                                     return (

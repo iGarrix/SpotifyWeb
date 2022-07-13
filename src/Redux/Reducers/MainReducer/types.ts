@@ -1,6 +1,6 @@
 import { IPagableResponse, IUser } from "../../../types";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 
 export enum MainActionTypes {
     INITWEEKLYALBUM = "INITWEEKLYALBUM",

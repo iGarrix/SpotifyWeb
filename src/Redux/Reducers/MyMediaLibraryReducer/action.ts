@@ -5,7 +5,7 @@ import { IPagableResponse, IUser } from "../../../types";
 import { IGetAllMyAlbumRequest } from "../MyAlbumReducer/types";
 import { IGetAllMyPlaylistRequest } from "../MyPlaylistReducer/types";
 import { IGetAllMySingleRequest } from "../MySingleReducer/types";
-import { ITrackResponse } from "../SelectAlbumReducer/types";
+import { ITrackResponse } from "../PlayingReducer/types";
 import { MyMediaLibraryAction, MyMediaLibraryActionTypes } from "./types";
 
 export const getMyMediaLibrarySingle = (data: IGetAllMySingleRequest) => {

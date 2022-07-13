@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { IAlbum, IGetAllMyAlbumRequest, MyAlbumAction, MyAlbumActionTypes } from "./types";
+import { IAlbum, IGetAllMyAlbumRequest, IPagableMyAlbumItem, MyAlbumAction, MyAlbumActionTypes } from "./types";
 
 export const getMyAlbum = (data: IGetAllMyAlbumRequest) => {
   return async (dispatch: Dispatch<MyAlbumAction>) => {
