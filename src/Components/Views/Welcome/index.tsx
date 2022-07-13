@@ -9,7 +9,7 @@ import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IPagableMyAlbumItem } from "../../../Redux/Reducers/MyAlbumReducer/types";
 import { ITrackResponse } from "../../../Redux/Reducers/SelectAlbumReducer/types";
-import { baseUrl, defaultAvatarImage, GetUserAvatar, IHistory, StorageVariables } from "../../../types";
+import { baseUrl, defaultAlbumImage, defaultAvatarImage, GetUserAvatar, IHistory, StorageVariables } from "../../../types";
 import { AlbumCard } from "../../Commons/Cards/AlbumCard";
 import { SoundItem } from "../../Commons/Cards/SoundItem";
 
@@ -88,7 +88,7 @@ export const Welcome: React.FC = () => {
           <div className="flex col-span-5 w-full justify-end items-center z-[2]">
             <img alt="bestofweek"
               className="bg-no-repeat object-cover bg-cover rounded-xl shadow-xl w-[264px] h-[264px]"
-              src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} />
+              src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
           </div>
           <div className="flex flex-col gap-2 col-start-6 col-span-7 z-[2]">
             <p className="font-medium text-xl">The best of week</p>

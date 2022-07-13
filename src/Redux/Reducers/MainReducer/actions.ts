@@ -3,10 +3,10 @@ import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse, IUser } from "../../../types";
 import { ITrackResponse } from "../SelectAlbumReducer/types";
-import { MainActionTypes, MyMainAction } from "./types";
+import { MainActionTypes, MainAction } from "./types";
 
 export const getMainArtist = (page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     try {
       dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
       const token = localStorage.getItem("token");
@@ -34,7 +34,7 @@ export const getMainArtist = (page: number) => {
 
 
 export const addMainArtist = (page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     try {
       dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
       const token = localStorage.getItem("token");
@@ -61,7 +61,7 @@ export const addMainArtist = (page: number) => {
 };
 
 export const getMainAlbums = (page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     try {
       dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
       const token = localStorage.getItem("token");
@@ -89,7 +89,7 @@ export const getMainAlbums = (page: number) => {
 
 
 export const addMainAlbums = (page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     try {
       dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
       const token = localStorage.getItem("token");
@@ -117,7 +117,7 @@ export const addMainAlbums = (page: number) => {
 
 
 export const getMainTracks = (albomId: any, page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     if (albomId) {
       try {
         dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
@@ -147,7 +147,7 @@ export const getMainTracks = (albomId: any, page: number) => {
 
 
 export const addMainTracks = (albomId: any, page: number) => {
-  return async (dispatch: Dispatch<MyMainAction>) => {
+  return async (dispatch: Dispatch<MainAction>) => {
     if (albomId) {
       try {
         dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });

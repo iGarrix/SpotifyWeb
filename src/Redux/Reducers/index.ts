@@ -6,6 +6,7 @@ import { myMediaLibraryReducer } from "./MyMediaLibraryReducer";
 import { myPlaylistReducer } from "./MyPlaylistReducer";
 import { mySinglesReducer } from "./MySingleReducer";
 import { notificationReducer } from "./NotificationReducer";
+import { searchReducer } from "./SearchReducer";
 import { playingReducer } from "./SelectAlbumReducer";
 import { userReducer } from "./UserReducer";
 
@@ -19,6 +20,7 @@ export const rootReducer = combineReducers({
   genreReducer: myGenreReducer,
   mainReducer: mainReducer,
   myMediaLibraryReducer: myMediaLibraryReducer,
+  searchReducer: searchReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

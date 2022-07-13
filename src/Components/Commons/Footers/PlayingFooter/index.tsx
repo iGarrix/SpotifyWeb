@@ -57,6 +57,9 @@ export const PlayingFooter: React.FC = () => {
             setElapsed(_elapsed);
         }
         else {
+            if (audioPlayer.current) {  
+                audioPlayer.current.volume = 0;
+            }
             togglePlay(false);
         }
     }
@@ -138,24 +141,10 @@ export const PlayingFooter: React.FC = () => {
         }
     }
     const toggleForward = () => {
-        if (rx && rx.soundobjs.length > 1) {
-            let newQueue = NextTrackInQeueue();
-            if (newQueue) {
-                newQueue.isPlay = true;
-                initQueue(newQueue);
-                if (rx && rx.soundobjs) {
-                    if (audioPlayer.current) {
-                        audioPlayer.current.currentTime = 0;
-                        audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
-                    }
-                }
-            }
-        }
+        
     }
     const toggleBackward = () => {
-        if (audioPlayer.current) {
-            audioPlayer.current.currentTime -= 10;
-        }
+        
     }
     const onMute = () => {
         if (audioPlayer.current) {
@@ -204,28 +193,28 @@ export const PlayingFooter: React.FC = () => {
     return (
         <>
             {
-                rx && rx.soundobjs && rx.soundobjs[0].trackCreators ?
+                rx && rx.soundobjs && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
-                        <Helmet>
-                            <title>{rx.soundobjs[0].track?.name + " - "+ rx.soundobjs[0].trackCreators[0].username}</title>
-                        </Helmet>
-                        <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image}')` }}></div>
+                        {/* <Helmet>
+                            <title>{rx.soundobjs[rx.playedIndex].track?.name + " - " + rx.soundobjs[rx.playedIndex].trackCreators[0].username}</title>
+                        </Helmet> */}
+                        <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image}')` }}></div>
                         <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
                         <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
                             <div className="flex items-center gap-3 overflow-hidden">
                                 <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"
-                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[0].track?.image} />
+                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} />
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
-                                        <h1 className="font-semibold">{rx.soundobjs[0].trackCreators[0].username} {rx.soundobjs[0].trackCreators.length > 1 ? " ..." : ""}</h1>
+                                        {/* <h1 className="font-semibold">{rx.soundobjs[rx.playedIndex].trackCreators[0].username} {rx.soundobjs[rx.playedIndex].trackCreators.length > 1 ? " ..." : ""}</h1> */}
                                         <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share} />
                                     </div>
-                                    <p className="text-gray-300">{rx.soundobjs[0].track?.name.substring(0, 30)}</p>
+                                    <p className="text-gray-300">{rx.soundobjs[rx.playedIndex].track?.name.substring(0, 30)}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
-                            <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid} preload={"metadata"} />
+                            <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[rx.playedIndex].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
                                 <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200">
                                     <img alt="icon" className="w-[18px]" src={icon_shuffle} />

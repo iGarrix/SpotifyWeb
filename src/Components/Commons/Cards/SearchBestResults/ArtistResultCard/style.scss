@@ -1,0 +1,12 @@
+.mainresultcard {
+    @apply transition-all hover:shadow-lg;
+    .mainresultbutton {
+        @apply opacity-0 transition-all translate-y-[5px];
+    }
+
+    &:hover {
+        .mainresultbutton {
+            @apply opacity-100 translate-y-[0];
+        }
+    }
+}

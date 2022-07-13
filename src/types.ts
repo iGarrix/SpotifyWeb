@@ -26,6 +26,13 @@ export enum StorageVariables {
   Volume = "vol"
 }
 
+export enum BestResultTypes {
+  User = "user",
+  Single = "single",
+  Album = "album",
+  Playlist = "playlist",
+}
+
 export const MinPasswordLenght = 8;
 export const DefaultServerError = "The service is temporarily disabled, please try again later";
 
@@ -124,6 +131,31 @@ export function GetUserBackground(user: IUser | null) {
       }
       else {
         return baseUrl + "Images/Users/" + user.background;
+      }
+    }
+    else {
+      return defaultBackgroundImage;
+    }
+  }
+  return "";
+}
+
+export function GetUserAvatarSimple(image: string | null) {
+  if (image) {
+    return image.includes("http") ? image
+      : baseUrl + "Images/Users/" + image;
+  }
+  return "";
+}
+
+export function GetUserBackgroundSimple(image: string | null) {
+  if (image) {
+    if (image && image.length !== 0) {
+      if (image.includes("http")) {
+        return image;
+      }
+      else {
+        return baseUrl + "Images/Users/" + image;
       }
     }
     else {

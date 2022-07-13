@@ -85,7 +85,7 @@ export const ProfileSingles: React.FC = () => {
                                     return (
                                         <SoundItem key={Guid.create().toString()}
                                             onClick={() => { onSelectTrack(item) }}
-                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[0].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
                                             isLiked={false} item={item}
                                         />
                                     )

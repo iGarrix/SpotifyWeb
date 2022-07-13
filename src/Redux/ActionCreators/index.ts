@@ -7,6 +7,7 @@ import * as NotificationActions from "../Reducers/NotificationReducer/action";
 import * as GenreActions from "../Reducers/GenreReducer/actions";
 import * as MainActions from "../Reducers/MainReducer/actions";
 import * as MyMediaLibraryAction from "../Reducers/MyMediaLibraryReducer/action";
+import * as SearchActions from "../Reducers/SearchReducer/actions";
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   ...UserActions,
@@ -18,4 +19,5 @@ export default {
   ...GenreActions,
   ...MainActions,
   ...MyMediaLibraryAction,
+  ...SearchActions,
 };
