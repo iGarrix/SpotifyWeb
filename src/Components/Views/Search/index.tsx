@@ -25,6 +25,9 @@ export const Search: React.FC = () => {
         if (searchQuery && searchQuery.length != 0) {
             onSearch(searchQuery)
         }
+        else{
+            onSearch("");
+        }
     }, [searchQuery]);
 
     useEffect(() => {
@@ -66,7 +69,7 @@ export const Search: React.FC = () => {
                         <FilterButton text="Albums" isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
                         <FilterButton text="Playlists" isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
                         <FilterButton text="Tracks" isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
-                        <FilterButton text="Creators" isSelected={history.pathname.includes("/creators")} onClick={() => {onNavigateFilter("creators")}}/>
+                        <FilterButton text="Artists" isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
                         <FilterButton text="Profiles" isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
                     </div>
                 </div>

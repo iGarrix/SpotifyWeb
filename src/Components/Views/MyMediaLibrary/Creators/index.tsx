@@ -1,4 +1,4 @@
-import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
@@ -101,7 +101,7 @@ export const MyMediaLibraryCreators: React.FC = () => {
                         </div>
                         :
                         <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
+                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faCircleUser} />
                             <div className="flex flex-col items-center gap-8 text-dark-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-3xl">Save you first artist</h1>

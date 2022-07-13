@@ -178,7 +178,7 @@ export const AllResultSearch: React.FC = () => {
                         {
                             reducer.searchall.albums.map(item => {
                                 return (
-                                    <AlbumItem name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) } } title={item.creators.map(i => i.username).join(" ")} />
+                                    <AlbumItem key={Guid.create().toString()} name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) } } title={item.creators.map(i => i.username).join(" ")} />
                                 )
                             })
                         }
@@ -193,7 +193,7 @@ export const AllResultSearch: React.FC = () => {
                         {
                             reducer.searchall.playlists.map(item => {
                                 return (
-                                    <PlaylistItem name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id)}} />
+                                    <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id)}} />
                                 )
                             })
                         }

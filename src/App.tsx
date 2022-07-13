@@ -100,7 +100,7 @@ function App() {
             <Route path="albums" element={<AlbumsResult />} />
             <Route path="playlists" element={<PlaylistResult />} />
             <Route path="tracks" element={<TracksResult />} />
-            <Route path="creators" element={<CreatorsResult />} />
+            <Route path="artists" element={<CreatorsResult />} />
             <Route path="profiles" element={<ProfileResult />} />
           </Route>
           <Route path="genres" element={<Outlet />} >

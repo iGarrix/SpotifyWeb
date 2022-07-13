@@ -1,7 +1,18 @@
+import { IPagableResponse } from "../../../types";
 import { ITrackResponse } from "../SelectAlbumReducer/types";
 
 export enum SearchActionTypes {
     INITSEARCHALL = "INITSEARCHALL",
+    ADDSEARCHPROFILE = "ADDSEARCHPROFILE",
+    INITSEARCHPROFILE = "INITSEARCHPROFILE",
+    ADDSEARCHARTISTS = "ADDSEARCHARTISTS",
+    INITSEARCHARTISTS = "INITSEARCHARTISTS",
+    ADDSEARCHPLAYLIST = "ADDSEARCHPLAYLIST",
+    INITSEARCHPLAYLIST = "INITSEARCHPLAYLIST",
+    ADDSEARCHALBUM = "ADDSEARCHALBUM",
+    INITSEARCHALBUM = "INITSEARCHALBUM",
+    ADDSEARCHTRACK = "ADDSEARCHTRACK",
+    INITSEARCHTRACK = "INITSEARCHTRACK",
     SEARCH_WAITING = "SEARCH_WAITING",
     SEARCH_ERROR = "SEARCH_ERROR",
     SEARCHCLEAR = "SEARCHCLEAR",
@@ -47,6 +58,11 @@ export interface ISearchAllModel {
 
 export interface ISearchState {
     searchall: ISearchAllModel | null,
+    profiles: Array<IUserSearch> | null,
+    artists: Array<IUserSearch> | null,
+    playlists: Array<IPlaylistSearch> | null,
+    albums: Array<IAlbumSearch> | null,
+    tracks: Array<ITrackResponse> | null,
     prevPage: number | null,
     nextPage: number | null,
     loading: boolean;
@@ -56,6 +72,52 @@ export interface ISearchState {
 export interface InitSearchAllAction {
     type: SearchActionTypes.INITSEARCHALL;
     payload: ISearchAllModel | null;
+}
+export interface InitSearchProfileActions{
+    type: SearchActionTypes.INITSEARCHPROFILE;
+    payload: IPagableResponse | null;
+}
+
+export interface AddSearchProfileAction{
+    type: SearchActionTypes.ADDSEARCHPROFILE;
+    payload: IPagableResponse | null;
+}
+export interface InitSearchArtistsActions{
+    type: SearchActionTypes.INITSEARCHARTISTS;
+    payload: IPagableResponse | null;
+}
+
+export interface AddSearchArtistsAction{
+    type: SearchActionTypes.ADDSEARCHARTISTS;
+    payload: IPagableResponse | null;
+}
+export interface InitSearchPlaylistActions{
+    type: SearchActionTypes.INITSEARCHPLAYLIST;
+    payload: IPagableResponse | null;
+}
+
+export interface AddSearchPlaylistAction{
+    type: SearchActionTypes.ADDSEARCHPLAYLIST;
+    payload: IPagableResponse | null;
+}
+export interface InitSearchAlbumsActions{
+    type: SearchActionTypes.INITSEARCHALBUM;
+    payload: IPagableResponse | null;
+}
+
+export interface AddSearchAlbumsAction{
+    type: SearchActionTypes.ADDSEARCHALBUM;
+    payload: IPagableResponse | null;
+}
+
+export interface InitSearchTrackActions{
+    type: SearchActionTypes.INITSEARCHTRACK;
+    payload: IPagableResponse | null;
+}
+
+export interface AddSearchTrackAction{
+    type: SearchActionTypes.ADDSEARCHTRACK;
+    payload: IPagableResponse | null;
 }
 export interface InitSearchWaitAction {
     type: SearchActionTypes.SEARCH_WAITING;
@@ -71,6 +133,16 @@ export interface InitSearchlearAction {
 
 export type SearchAction =
     | InitSearchAllAction
+    | InitSearchProfileActions
+    | AddSearchProfileAction
+    | InitSearchArtistsActions
+    | AddSearchArtistsAction
+    | InitSearchPlaylistActions
+    | AddSearchPlaylistAction
+    | InitSearchAlbumsActions
+    | AddSearchAlbumsAction
+    | InitSearchTrackActions
+    | AddSearchTrackAction
     | InitSearchWaitAction
     | InitSearchErrorAction
     | InitSearchlearAction;
