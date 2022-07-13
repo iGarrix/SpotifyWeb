@@ -9,6 +9,7 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { baseUrl, defaultAvatarImage, defaultBackgroundImage, GetUserAvatar } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
+import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
 
 export const WeeklyArtist: React.FC = () => {
 
@@ -82,12 +83,7 @@ export const WeeklyArtist: React.FC = () => {
                             {
                                 mainReducer.artists.map(item => {
                                     return (
-                                        <div key={Guid.create().toString()} className="flex flex-col cursor-pointer text-dark-200 gap-1" onClick={() => { nav("/overview/" + item.username) }}>
-                                          <img alt="artist" src={GetUserAvatar(item)}
-                                            onError={(tg: any) => { tg.target.src = defaultAvatarImage }}
-                                            className="w-[164px] h-[164px] bg-cover object-cover bg-no-repeat rounded-xl transition-all hover:shadow-xl" />
-                                          <p className="text-center font-medium">{item.username}</p>
-                                        </div>
+                                        <UserOverviever key={Guid.create().toString()} avatar={item.avatar} username={item.username} />
                                       )
                                 })
                             }

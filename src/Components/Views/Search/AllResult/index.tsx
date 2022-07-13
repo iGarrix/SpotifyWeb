@@ -1,17 +1,21 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState, useTransition } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { string } from "yup";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IAlbumSearch, IPlaylistSearch, IUserSearch } from "../../../../Redux/Reducers/SearchReducer/types";
 import { ITrackResponse } from "../../../../Redux/Reducers/SelectAlbumReducer/types";
 import { baseUrl, BestResultTypes, GetUserAvatarSimple } from "../../../../types";
+import { AlbumItem } from "../../../Commons/AlbumItem";
 import { AlbumResultCard } from "../../../Commons/Cards/SearchBestResults/AlbumResultCard";
 import { ArtistResultCard } from "../../../Commons/Cards/SearchBestResults/ArtistResultCard";
 import { PlaylistResultCard } from "../../../Commons/Cards/SearchBestResults/PlaylistResultCard";
 import { TrackResultCard } from "../../../Commons/Cards/SearchBestResults/TrackResultCard";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
+import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
+import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 
 export const AllResultSearch: React.FC = () => {
@@ -166,30 +170,66 @@ export const AllResultSearch: React.FC = () => {
                     </div>
                 </div>
             }
-            <div className="flex flex-col gap-1">
-                <h1 className="font-medium text-2xl">Albums</h1>
-                <div className="flex items-center justify-between w-full flex-wrap gap-3">
-
+            {
+                reducer.searchall?.albums && reducer.searchall.albums.length > 0 &&
+                <div className="flex flex-col gap-6">
+                    <h1 className="font-medium text-2xl">Albums</h1>
+                    <div className="flex items-center justify-between w-full flex-wrap gap-6">
+                        {
+                            reducer.searchall.albums.map(item => {
+                                return (
+                                    <AlbumItem name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) } } title={item.creators.map(i => i.username).join(" ")} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="flex flex-col gap-1">
-                <h1 className="font-medium text-2xl">Playlists</h1>
-                <div className="flex items-center justify-between w-full flex-wrap gap-3">
-
+            }
+            {
+                reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
+                <div className="flex flex-col gap-6">
+                    <h1 className="font-medium text-2xl">Playlists</h1>
+                    <div className="flex items-center justify-between w-full flex-wrap gap-6">
+                        {
+                            reducer.searchall.playlists.map(item => {
+                                return (
+                                    <PlaylistItem name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id)}} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="flex flex-col gap-1">
-                <h1 className="font-medium text-2xl">Creators</h1>
-                <div className="flex items-center justify-between w-full flex-wrap gap-3">
-
+            }
+            {
+                reducer.searchall?.artists && reducer.searchall.artists.length > 0 &&
+                <div className="flex flex-col gap-3">
+                    <h1 className="font-medium text-2xl">Creators</h1>
+                    <div className="flex items-center justify-between w-full flex-wrap gap-3">
+                        {
+                            reducer.searchall.artists.map(item => {
+                                return (
+                                    <UserOverviever key={Guid.create().toString()} avatar={item.avatar} username={item.username} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="flex flex-col gap-1">
-                <h1 className="font-medium text-2xl">Profiles</h1>
-                <div className="flex items-center justify-between w-full flex-wrap gap-3">
-
+            }
+            {
+                reducer.searchall?.profiles && reducer.searchall.profiles.length > 0 &&
+                <div className="flex flex-col gap-3">
+                    <h1 className="font-medium text-2xl">Profiles</h1>
+                    <div className="flex items-center justify-between w-full flex-wrap gap-3">
+                        {
+                            reducer.searchall.profiles.map(item => {
+                                return (
+                                    <UserOverviever key={Guid.create().toString()} avatar={item.avatar} username={item.username} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }
