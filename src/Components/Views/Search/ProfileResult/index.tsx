@@ -2,9 +2,10 @@ import { faCircleUser, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { profile } from "console";
 import { Guid } from "guid-typescript";
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { start } from "repl";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
@@ -14,6 +15,7 @@ export const ProfileResult: React.FC = () => {
     const { getAllSearchProfile, addAllSearchProfile } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isPending, startTransition] = useTransition();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -29,13 +31,17 @@ export const ProfileResult: React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchProfile(query, 1);
             }
-            fetchData();
+            startTransition(() => {
+                fetchData();
+            });
             const addNew = async () => {
                 if (document.documentElement.scrollTop === 0) {
                     await FetchNext();
                 }
             }
-            addNew();
+            startTransition(() => {
+                addNew();
+            });
         }
     }, [searchParams]);
     useEffect(() => {

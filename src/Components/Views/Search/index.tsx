@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { createSearchParams, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
@@ -18,6 +18,7 @@ export const Search: React.FC = () => {
         }
         return "";
     });
+    const [isPending, startTransition] = useTransition();
     const nav = useNavigate();
     const history = useLocation();
 
@@ -34,8 +35,10 @@ export const Search: React.FC = () => {
         ClearSearchXHR();
     }, [])
 
-    const onSearch = (value: string) => {
-        setSearchParams({query: value});
+    const onSearch = (value: string) => {    
+        startTransition(() => {
+            setSearchParams({query: value});
+        });   
     }
 
     const onNavigateFilter = (value: string) => {

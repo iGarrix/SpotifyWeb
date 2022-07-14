@@ -1,7 +1,7 @@
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
@@ -13,6 +13,7 @@ export const CreatorsResult : React.FC = () => {
     const { getAllSearchArtists, addAllSearchArtists } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isPending, startTransition] = useTransition();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -28,13 +29,17 @@ export const CreatorsResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchArtists(query, 1);
             }
-            fetchData();
+            startTransition(() => {      
+                fetchData();
+            });
             const addNew = async () => {
                 if (document.documentElement.scrollTop === 0) {
                     await FetchNext();
                 }
             }
-            addNew();
+            startTransition(() => {      
+                addNew();
+            });
         }
     }, [searchParams]);
     useEffect(() => {

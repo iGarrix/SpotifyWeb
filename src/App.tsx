@@ -73,16 +73,16 @@ function App() {
   useEffect(() => {
 
     const storage_queue = localStorage.getItem(StorageVariables.Queue);
-        if (storage_queue) {
-            let stor_queue = JSON.parse(storage_queue) as IQueue;
-            const size = stor_queue.soundobjs.length;
-            if (stor_queue.isPlay === true) {
-              stor_queue.isPlay = false;
-              localStorage.setItem(StorageVariables.Queue, JSON.stringify(stor_queue));
-            }
-            stor_queue.soundobjs?.splice(TempTake, size);
-            initQueue(stor_queue);
-        }
+    if (storage_queue) {
+      let stor_queue = JSON.parse(storage_queue) as IQueue;
+      const size = stor_queue.soundobjs.length;
+      if (stor_queue.isPlay === true) {
+        stor_queue.isPlay = false;
+        localStorage.setItem(StorageVariables.Queue, JSON.stringify(stor_queue));
+      }
+      stor_queue.soundobjs?.splice(TempTake, size);
+      initQueue(stor_queue);
+    }
   }, []);
 
   return (
@@ -124,29 +124,30 @@ function App() {
           </Route>
 
           <Route path="profile" element={<LayProfile />}>
+
             <Route path="" element={<Profile />}>
               <Route index element={<ProfileSingles />} />
               <Route path="playlists" element={<ProfilePlaylists />} />
               <Route path="albums" element={<ProfileAlbums />} />
             </Route>
           </Route>
-          
-          <Route path="medialibrary"element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
-            <Route path="" element={<MyMediaLibrary />} >  
+
+          <Route path="medialibrary" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+            <Route path="" element={<MyMediaLibrary />} >
               <Route index element={<MyMediaLibrarySingle />} />
               <Route path="albums" element={<MyMediaLibraryAlbums />} />
               <Route path="playlists" element={<MyMediaLibraryPlaylists />} />
               <Route path="creators" element={<MyMediaLibraryCreators />} />
             </Route>
             {/* <Route path=":name" element={<GenreDetails />} /> */}
-        </Route>
+          </Route>
         </Route>
 
         <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route path="" element={<LayAccountSettings />}>
             <Route index element={<PersonalData />} />
-            <Route path="verifyemail" element={<VerifyEmail/>} />
-            <Route path="verifycodeemail" element={<VerifyCodEmail/>} />
+            <Route path="verifyemail" element={<VerifyEmail />} />
+            <Route path="verifycodeemail" element={<VerifyCodEmail />} />
             <Route path="deleteaccount" element={<DeleteProfile />} />
             <Route path="sendappelation" element={<SendAppelation />} />
             <Route path="verifyaccount" element={<VerifyAccount />}>

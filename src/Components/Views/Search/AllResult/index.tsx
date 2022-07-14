@@ -1,7 +1,6 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState, useTransition } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { string } from "yup";
 import { AddToHistory, AddToQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -33,10 +32,12 @@ export const AllResultSearch: React.FC = () => {
     }
 
     useEffect(() => {
-        const work = async () => {
-            await SearchAllWithoutBestResultXHR();
-        }
-        work();
+        startTransition(() => {
+            const work = async () => {
+                await SearchAllWithoutBestResultXHR();
+            }
+            work();
+        });
     }, []);
 
     useEffect(() => {
@@ -44,10 +45,10 @@ export const AllResultSearch: React.FC = () => {
         if (query) {
             startTransition(() => {
                 fetchData(query);
-                if (upt != true) {
-                    setUpt(true);
-                }
-            })
+            });
+            if (upt != true) {
+                setUpt(true);
+            }
         }
     }, [searchParams]);
 
@@ -93,7 +94,6 @@ export const AllResultSearch: React.FC = () => {
         }
         if (response) {
             initQueue(response);
-            //playingReducer.queue?.soundobjs[playingReducer.queue.playedIndex].track?.returnId !== item.track.returnId
             if (!upt && playingReducer.queue?.soundobjs[playingReducer.queue.playedIndex].track?.returnId !== item.track.returnId) {
                 setPlayingTrack(false);
             }
@@ -111,8 +111,6 @@ export const AllResultSearch: React.FC = () => {
             AddToHistory(item);
         }
     }
-
-    console.log(upt);
 
     return (
         <div className="flex flex-col gap-8">

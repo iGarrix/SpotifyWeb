@@ -1,7 +1,7 @@
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
@@ -16,6 +16,7 @@ export const TracksResult : React.FC = () => {
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
+    const [isPending, startTransition] = useTransition();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -31,13 +32,17 @@ export const TracksResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchTrack(query, 1);
             }
-            fetchData();
+            startTransition(() => {          
+                fetchData();
+            });
             const addNew = async () => {
                 if (document.documentElement.scrollTop === 0) {
                     await FetchNext();
                 }
             }
-            addNew();
+            startTransition(() => {         
+                addNew();
+            });
         }
     }, [searchParams]);
     useEffect(() => {
@@ -74,17 +79,17 @@ export const TracksResult : React.FC = () => {
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Tracks All</h1>
                         <div className="flex flex-col gap-[15px] flex-wrap">
-                            {
-                                rx.tracks?.map(item => {
-                                    return (
-                                        <SoundItem key={Guid.create().toString()}
-                                            onClick={() => { onSelectInstanceTrack(item) }}
-                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            isLiked={false} item={item}
-                                        />
-                                    )
-                                })
-                            }
+                                {
+                                    rx.tracks?.map(item => {
+                                        return (
+                                            <SoundItem key={Guid.create().toString()}
+                                                onClick={() => { onSelectInstanceTrack(item) }}
+                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                                isLiked={false} item={item}
+                                            />
+                                        )
+                                    })
+                                }
                         </div>
                     </div>
                     :

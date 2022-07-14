@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { baseUrl } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
 import "./style.scss";
@@ -41,8 +42,11 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                         <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={onClick} />
                         :
                         <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={onClick} />
-                        // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
+                    // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
+                <div>
+                    <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} />
+                </div>
                 <h1 className="text-medium">
                     {
                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
@@ -62,10 +66,10 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 }
                 {/* <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all" translate-y-[-1px]`} icon={faHeart} /> */}
                 {
-                    isLiked ? 
-                    <img alt="icon" className="w-[25px] cursor-pointer" src={icon_likered} />
-                    :
-                    <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_like} />
+                    isLiked ?
+                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_likered} />
+                        :
+                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_like} />
                 }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
