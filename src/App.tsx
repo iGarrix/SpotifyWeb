@@ -22,13 +22,11 @@ import { StorageVariables, TempTake } from "./types";
 import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
-import { StudioIntro } from "./Components/IntroView/StudioIntro";
 import { UploadIntro } from "./Components/IntroView/UploadIntro";
 import { History } from "./Components/Views/History";
 import { PasswordSendEmail } from "./Components/Views/Auth/ForgotPassword/SendEmail";
 import { PasswordVerifyCode } from "./Components/Views/Auth/ForgotPassword/VerifyCode";
 import { NewPasswordChange } from "./Components/Views/Auth/ForgotPassword/NewPasswordChange";
-import { LayAnalytics } from "./Components/Layout/LayAnalytics";
 import { OverviewProfile } from "./Components/Views/OverViewProfile";
 import { LayAccountSettings } from "./Components/Layout/LayAccountSettings";
 import { VerifyEmail } from "./Components/Views/AccountSettings/VerifyEmail/SendCode";
@@ -139,7 +137,6 @@ function App() {
               <Route path="playlists" element={<MyMediaLibraryPlaylists />} />
               <Route path="creators" element={<MyMediaLibraryCreators />} />
             </Route>
-            {/* <Route path=":name" element={<GenreDetails />} /> */}
           </Route>
         </Route>
 
@@ -163,15 +160,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="s&a" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
-          <Route index element={<StudioIntro />} />
-          <Route path="creativestudio" element={<div>studio</div>} />
-          <Route path="analytics" element={<LayAnalytics />}>
-            <Route index element={<Welcome />} />
-            <Route path="audience" element={<Welcome />} />
-            <Route path="research" element={<Welcome />} />
-          </Route>
-        </Route>
+        <Route path="creativestudio" element={<div>studio</div>} />
 
         <Route path="upload" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route index element={<UploadIntro />} />
