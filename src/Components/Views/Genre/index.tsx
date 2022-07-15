@@ -64,7 +64,7 @@ export const Genres: React.FC = () => {
             </Helmet>
             <div className="w-full flex flex-col gap-5">
                 <h1 className="font-semibold text-2xl">Genres</h1>
-                <div className="flex items-center gap-6 flex-wrap justify-between">
+                <div className="flex items-center gap-[18px] flex-wrap">
                     {
                         genre?.map(item => {
                             return (

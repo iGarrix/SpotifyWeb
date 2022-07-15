@@ -7,10 +7,11 @@ import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { IHistory, StorageVariables, TempTake } from "../../../types";
+import { FilterButton } from "../../Commons/Buttons/FilterButton";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const History: React.FC = () => {
-    const { initHistory, initQueue } = useActions();
+    const { initHistory, initQueue, clearHistory } = useActions();
     let rx = useTypedSelector(state => state.playingReducer);
     let page = TempTake;
     const scrollHadler = () => {
@@ -57,6 +58,12 @@ export const History: React.FC = () => {
             AddToHistory(item);
         }
     }
+
+    const onClearHistory = () => {
+        clearHistory();
+        localStorage.removeItem(StorageVariables.History);
+    }
+
     return (
         <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 bg-no-repeat h-full">
             <Helmet>
@@ -64,7 +71,10 @@ export const History: React.FC = () => {
             </Helmet>
             {rx && rx.history && rx.history.soundobjs.length > 0 ?
                 <div className="flex flex-col gap-8 w-full">
-                    <h1 className="font-semibold text-2xl">Listening history</h1>
+                    <div className="flex flex-col items-start gap-2">
+                        <h1 className="font-semibold text-2xl">Listening history</h1>
+                        <FilterButton onClick={onClearHistory} text={"Clear all history"} />
+                    </div>
                     <div className="flex flex-col gap-10 w-full">
                         {
                             rx.history.soundobjs?.map((item: ITrackResponse, index: number) => {

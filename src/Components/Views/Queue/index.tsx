@@ -8,6 +8,7 @@ import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IQueue, ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { StorageVariables, TempTake } from "../../../types";
+import { FilterButton } from "../../Commons/Buttons/FilterButton";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const Queue: React.FC = () => {
@@ -54,6 +55,11 @@ export const Queue: React.FC = () => {
             AddToHistory(item);
         }
     }
+
+    const onClearQueue = () => {
+        clearQueue();
+        localStorage.removeItem(StorageVariables.Queue);
+    }
     
     return (
         <div className="w-full flex flex-col gap-6 items-start text-dark-200 px-[3%] py-[2%]">
@@ -67,7 +73,10 @@ export const Queue: React.FC = () => {
                             rx.queue.soundobjs[0] &&
                             <>
                                 <div className="flex flex-col gap-6 w-full">
-                                    <h1 className="font-semibold text-2xl">In queue</h1>
+                                    <div className="flex flex-col items-start gap-2">
+                                        <h1 className="font-semibold text-2xl">In queue</h1>
+                                        <FilterButton onClick={onClearQueue} text={"Clear all queue"} />
+                                    </div>
                                     <div className="flex flex-col gap-6 w-full">
                                         {
                                             rx.queue.soundobjs.map((item: ITrackResponse, index: number) => {
