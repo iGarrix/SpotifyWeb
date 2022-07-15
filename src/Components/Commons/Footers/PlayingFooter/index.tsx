@@ -6,7 +6,7 @@ import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
-import { baseUrl, StorageVariables } from "../../../../types";
+import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { Slider } from "../../Slider";
 
 const bg = require('../../../../Assets/Background2.png');
@@ -194,15 +194,12 @@ export const PlayingFooter: React.FC = () => {
             {
                 rx && rx.soundobjs && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
-                        {/* <Helmet>
-                            <title>{rx.soundobjs[rx.playedIndex].track?.name + " - " + rx.soundobjs[rx.playedIndex].trackCreators[0].username}</title>
-                        </Helmet> */}
                         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image}')` }}></div>
                         <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
                         <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
                             <div className="flex items-center gap-3 overflow-hidden">
                                 <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"
-                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} />
+                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage}} />
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
                                             <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => {nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username)}}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>

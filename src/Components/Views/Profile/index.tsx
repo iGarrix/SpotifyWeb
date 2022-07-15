@@ -80,8 +80,9 @@ export const Profile: React.FC = () => {
             <RenameBioModal onSave={onSaveChanges} onClose={onCloseModal} />
           </FullScreenModal> : null
       }
-      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${GetUserBackground(user)}")` }}>
-        <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
+      <div className="w-full flex relative">
+        <img alt="bg" className="absolute top-0 left-0 w-full h-full object-cover" src={GetUserBackground(user)} />
+        <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
         <div className="flex flex-col w-full px-20 pt-16 z-[2]">
           <div className="flex gap-6 w-full">
             {
