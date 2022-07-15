@@ -8,11 +8,15 @@ import { Provider } from "react-redux";
 
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 import setupInterceptors from "./setupInterceptors";
-import { StorageVariables } from "./types";
+import { StorageVariables, Theme } from "./types";
 
-const theme = localStorage.getItem("theme");
+const theme = localStorage.getItem(StorageVariables.Theme);
 if (theme === null || theme === undefined) {
-  localStorage.setItem("theme", "light");
+  localStorage.setItem(StorageVariables.Theme, Theme.light);
+}
+const lang = localStorage.getItem(StorageVariables.Language);
+if (lang === null || lang === undefined) {
+  localStorage.setItem(StorageVariables.Language, "English");
 }
 const volume = localStorage.getItem(StorageVariables.Volume);
 if (!volume) {

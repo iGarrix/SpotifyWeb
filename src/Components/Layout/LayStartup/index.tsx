@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
+import { DefaultButton } from "../../Commons/Buttons/DefaultButton";
+import { FilterButton } from "../../Commons/Buttons/FilterButton";
+import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
+import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
 import { PlayingFooter } from "../../Commons/Footers/PlayingFooter";
 import { Header } from "../../Commons/Header";
 import { SideBar } from "../../Commons/SideBar";
@@ -12,6 +16,7 @@ const icon_settings = require('../../../Assets/Icons/Settings.png');
 export const LayStartup: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
   const rx = useTypedSelector(state => state.playingReducer);
+  const user = useTypedSelector(state => state.userReducer.profile);
   const load = useTypedSelector(state => state);
   useEffect(() => {
     if (rx.queue) {
@@ -33,14 +38,24 @@ export const LayStartup: React.FC = () => {
         <Outlet />
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-20 z-[100]">
-        <div className={`col-[span_3] w-full ${isVisible ? "mb-6" : "mb-6"}`}>
-          <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("settings") }} />
+        <div className={`col-[span_3] w-full mb-6`}>
+          <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("websettings") }} />
         </div>
         {
-          isVisible ?
+          isVisible && user ?
             <div className="col-[span_20]">
               <PlayingFooter />
-            </div> : null
+            </div> : 
+            !user &&
+            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-100 text-light-100 col-[span_17] flex justify-between items-center px-[2%]">
+              <div className="flex flex-col">
+                <p className="text-lg font-['Lexend'] font-bold]">TEMPORALITY USING SOUNDWAVE</p>
+                <p>Sign up to listen to playlists, albums and songs for free</p>
+              </div>
+              <div className="flex ml-auto">
+                <RedirectButton onClick={() => nav('/authorizate')} text={"Register & Login - Free"}/>
+              </div>
+            </div>
         }
       </div>
 

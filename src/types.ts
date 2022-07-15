@@ -21,7 +21,9 @@ export enum StorageVariables {
   Track = "selectTrack",
   ForgotUser = "ForgotUser",
   VerifyResponse = "VerifyResponse",
-  Volume = "vol"
+  Volume = "vol",
+  Language = "language",
+  Theme = "theme",
 }
 
 export enum BestResultTypes {

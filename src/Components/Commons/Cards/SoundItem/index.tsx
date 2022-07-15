@@ -23,6 +23,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
     const { initQueue } = useActions();
     const nav = useNavigate();
     const play = useTypedSelector(state => state.playingReducer.queue?.isPlay);
+    const user = useTypedSelector(state => state.userReducer.profile);
     const addtoqueue = async (isPlay: any) => {
         const response = AddToQueue(item, isPlay);
         if (response) {
@@ -39,9 +40,9 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 {
                     isPlay ?
                         // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPause} onClick={onClick} />
-                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={onClick} />
+                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={() => {user && onClick()}} />
                         :
-                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={onClick} />
+                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={() => {user && onClick()}} />
                     // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
                 <div>

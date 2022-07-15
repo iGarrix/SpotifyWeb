@@ -18,7 +18,7 @@ import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 import { IQueue } from "./Redux/Reducers/PlayingReducer/types";
-import { StorageVariables, TempTake } from "./types";
+import { StorageVariables, TempTake, Theme } from "./types";
 import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
@@ -60,9 +60,16 @@ import { PlaylistResult } from "./Components/Views/Search/PlaylistResult";
 import { TracksResult } from "./Components/Views/Search/TracksResult";
 import { ProfileResult } from "./Components/Views/Search/ProfileResult";
 import { CreatorsResult } from "./Components/Views/Search/CreatorsResult";
+import { WebSettings } from "./Components/Views/WebSettings";
 
 function App() {
-  const [isDark, setDark] = useState(false);
+  const [isDark, setDark] = useState(() => {
+    const theme = localStorage.getItem(StorageVariables.Theme);
+    if (theme === null || theme === undefined) {
+        return Theme.light;
+    }
+    return theme;
+});
 
   const { initQueue } = useActions();
 
@@ -87,8 +94,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller bg-light-100/90 ${isDark ? "dark" : ""
-        }`}
+      className={`w-full min-h-screen flex scroller bg-light-100/90 ${isDark === Theme.dark ? "dark" : ""}`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>
@@ -141,6 +147,8 @@ function App() {
             </Route>
             {/* <Route path=":name" element={<GenreDetails />} /> */}
           </Route>
+
+          <Route path="websettings" element={<WebSettings />} />
         </Route>
 
         <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
