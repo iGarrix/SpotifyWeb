@@ -37,17 +37,12 @@ export const VerifyCodEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full pt-[12%] text-dark-200">
+        <div className="w-full h-full text-dark-200">
             <Helmet>
                 <title>Soundwave | Enter Code</title>
             </Helmet>
-            <div className="grid grid-cols-5">
-                <div className="flex col-span-2 justify-end items-center">
-                    <div className="flex flex-col">
-                        <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
-                    </div>
-                </div>
-                <div className="flex justify-start items-center w-full col-span-3">
+            <div className="grid grid-cols-5 h-full">       
+                <div className="flex justify-end items-center w-full col-span-3">
                     <div className="flex flex-col gap-4 w-[80%]">
                         <div className="flex justify-center">
                             <h1 className="text-3xl font-bold">Verify Email</h1>
@@ -97,6 +92,11 @@ export const VerifyCodEmail: React.FC = () => {
                                 }
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="flex col-span-2 justify-start items-center">
+                    <div className="flex flex-col">
+                        <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
                     </div>
                 </div>
             </div>

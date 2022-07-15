@@ -30,39 +30,37 @@ export const VerifyEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full text-dark-200 flex items-center justify-center">
+        <div className="w-full h-full text-dark-200 flex flex-col py-[50px] px-[150px] gap-10">
             <Helmet>
                 <title>Soundwave | Verify Email</title>
             </Helmet>
-            <div className="flex gap-[190px]">
-                <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
-                <div className="flex flex-col justify-center gap-2 w-full">
-                    <h1 className="text-3xl font-bold text-center">Verify Email</h1>
-                    <h2 className="text-center">We will send a code to your mail for verification</h2>
-                    {user?.emailconfirm ? <div className="flex items-center justify-center"><h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : <Formik
-                        initialValues={initialValues}
-                        validationSchema={emailForgotValidate}
-                        onSubmit={onHandleSubmit}>
-                        <Form>
-                            <div className="flex flex-col w-full h-full mt-7">
-                                {
-                                    error &&
-                                    <div className="flex flex-col gap-3 items-center">
-                                        <div className="my-4 rounded-xl bg-red-500/80 py-3 px-4">
-                                            <h1 className="text-light-100 font-semibold">{error}</h1>
-                                        </div>
-                                    </div>
-                                }
-                                <Field placeholder="Email" value={user?.email} onChange={() => { }} />
-                                <div className="flex justify-end mt-7">
-                                    <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
-                                </div>
-                            </div>
-                        </Form>
-                    </Formik>}
-                </div>
+            <div className="flex flex-col gap-2">
+                <h1 className="text-3xl font-bold">Verify Email</h1>
+                <h2 className="">We will send a code to your mail for verification</h2>
             </div>
-
+                {
+                    error &&
+                    <div className="flex flex-col gap-3 items-center bg-red-500/80 rounded-xl py-6 px-4">
+                        <h1 className="text-light-100 font-semibold text-center">{error}</h1>
+                    </div>
+                }
+            {user?.emailconfirm ? <div className="flex items-center justify-center">
+                <h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : 
+                <Formik
+                initialValues={initialValues}
+                validationSchema={emailForgotValidate}
+                onSubmit={onHandleSubmit}>
+                <Form>
+                    <div className="grid grid-rows-1 grid-cols-3 w-full px-[20%] gap-[20px]">
+                        <div className="col-span-2">
+                            <Field placeholder="Email" value={user?.email} onChange={() => { }} />
+                        </div>
+                        <div className="flex items-end col-span-1">
+                            <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
+                        </div>
+                    </div>
+                </Form>
+            </Formik>}
         </div>
     );
 };
