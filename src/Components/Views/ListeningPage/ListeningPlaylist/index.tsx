@@ -4,7 +4,7 @@ import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
+import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
@@ -22,14 +22,17 @@ const icon_pause = require('../../../../Assets/Icons/Pause.png');
 export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
+    const user = useTypedSelector(state => state.userReducer.profile);
     const { findPlaylist, initQueue, getPlaylistTracks } = useActions();
     const [isInited, setInited] = useState(false);
+    const [upt, setUpt] = useState(false);
     const nav = useNavigate();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (playingReducer.nextPage && !playingReducer.loading) {
                 await FetchNext();
                 InitQueueAlbum();
+                setUpt(true);
             }
         }
     }
@@ -52,18 +55,20 @@ export const ListeningPlaylist: React.FC = () => {
         }
         work();
     }, []);
-    // useEffect(() => {
-    //     const fetchData = async (page: any) => {
-    //         if (id && !playingReducer.tracks) {
-    //             const rq: IGetPlaylistTracksRequest = {
-    //                 returnId: id,
-    //                 page: page,
-    //             }
-    //             await getPlaylistTracks(rq);
-    //         }
-    //     }
-    //     fetchData(1);
-    // }, []);
+    
+    const toggleForward = () => {
+        const newQueue = ForwardQueue();
+        if (newQueue) {
+            initQueue(newQueue);
+        }
+    }
+    const toggleBackward = () => {
+        const newQueue = BackwardQueue();
+        if (newQueue) {
+            initQueue(newQueue);
+        }
+    }
+
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -95,24 +100,34 @@ export const ListeningPlaylist: React.FC = () => {
         }
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
-        InitQueueAlbum();
-        const response = SetPlayingTrack(item);
-        if (response) {
-            initQueue(response);
-            AddToHistory(item);
+        if (user) {          
+            InitQueueAlbum();
+            setUpt(true);
+            const response = SetPlayingTrack(item);
+            if (response) {
+                initQueue(response);
+                AddToHistory(item);
+            }
+        }
+        else {
+            nav("/authorizate");
         }
     }
     const onPause = async () => {
-        // let storage_queue = localStorage.getItem(StorageVariables.Queue);
-        // if (storage_queue) {
-        //     let queue = JSON.parse(storage_queue) as IQueue;
-        //     queue.isPlay = !queue.isPlay;
-        //     localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-        //     await initQueue(queue);
-        //     return;
-        // }
-        if (playingReducer.tracks) {
-            await onSelectTrack(playingReducer.tracks[0]);
+        if (user) {       
+            if (!upt) {       
+                if (playingReducer.tracks) {
+                    await onSelectTrack(playingReducer.tracks[0]);
+                }
+            }
+            else {
+                if (playingReducer.queue) {
+                    await onSelectTrack(playingReducer.queue.soundobjs[playingReducer.queue.playedIndex]);
+                }
+            }
+        }
+        else {
+            nav("/authorizate");
         }
     }
     return (
@@ -127,12 +142,12 @@ export const ListeningPlaylist: React.FC = () => {
                 playingReducer.playlist ?
                     <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
                         <div className="flex justify-end col-span-2">
-                            <div className="flex flex-col fixed">
+                            <div className="flex flex-col fixed select-none">
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                                     className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
                                     <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
-                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
                                     <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
@@ -146,7 +161,7 @@ export const ListeningPlaylist: React.FC = () => {
 
                                         }
                                     </div>
-                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200">
+                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleForward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
                                     </div>
                                     <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} />

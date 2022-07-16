@@ -1,19 +1,22 @@
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faMusic, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react"
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 import { AddToHistory, RemoveWithQueue, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { IQueue, ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { StorageVariables, TempTake } from "../../../types";
+import { DefaultButton } from "../../Commons/Buttons/DefaultButton";
 import { FilterButton } from "../../Commons/Buttons/FilterButton";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
 export const Queue: React.FC = () => {
     let rx = useTypedSelector(state => state.playingReducer);
     const { initQueue, clearQueue } = useActions();
+    const nav = useNavigate();
     let page = TempTake;
     const RmWithQueue = (id: any, isPlay: boolean | any) => {
         if (id) {
@@ -81,7 +84,7 @@ export const Queue: React.FC = () => {
                                         {
                                             rx.queue.soundobjs.map((item: ITrackResponse, index: number) => {
                                                 return (
-                                                    <SoundHistoryItem key={Guid.create().toString()} index={index} selected={rx.queue?.playedIndex === index}
+                                                    <SoundHistoryItem key={Guid.create().toString()} index={index + 1} selected={rx.queue?.playedIndex === index}
                                                         options={[{
                                                             title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
                                                         }]}
@@ -95,10 +98,18 @@ export const Queue: React.FC = () => {
                         }
                     </div>
                     :
-                    <div className="rounded-xl bg-light-200 px-12 py-6 flex flex-col gap-6">
-                        <h1 className="font-semibold text-3xl">No playing song</h1>
-                        <p className="text-xl">Turn on a song to add it to the queue</p>
+                    <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
+                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
+                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                        <div className="flex flex-col gap-3 items-center">
+                            <h1 className="font-medium text-3xl">Queue is empty</h1>
+                            <p className="font-medium text-xl">You can also listening your favorite songs using search</p>
+                        </div>
+                        <div>
+                            <DefaultButton onClick={() => { nav("/search") }} text={"Search songs"} />
+                        </div>
                     </div>
+                </div>
 
             }
         </div>

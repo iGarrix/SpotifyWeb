@@ -1,8 +1,8 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
+import { BackwardQueue, ForwardQueue } from "../../../../Helpers/QueueHelper";
+//import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
@@ -81,14 +81,14 @@ export const PlayingFooter: React.FC = () => {
             audioPlayer.current.currentTime = 0;
             if (!isRepeat) {
                 togglePlay(false);
-                let newQueue = NextTrackInQeueue();
-                if (newQueue) {
-                    newQueue.isPlay = true;
-                    initQueue(newQueue);
-                    if (rx && rx.soundobjs) {
-                        audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
-                    }
-                }
+                // let newQueue = NextTrackInQeueue();
+                // if (newQueue) {
+                //     newQueue.isPlay = true;
+                //     initQueue(newQueue);
+                //     if (rx && rx.soundobjs) {
+                //         audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
+                //     }
+                // }
             }
         }
     }
@@ -141,10 +141,16 @@ export const PlayingFooter: React.FC = () => {
         }
     }
     const toggleForward = () => {
-        
+        const newQueue = ForwardQueue();
+        if (newQueue) {
+            initQueue(newQueue);
+        }
     }
     const toggleBackward = () => {
-        
+        const newQueue = BackwardQueue();
+        if (newQueue) {
+            initQueue(newQueue);
+        }
     }
     const onMute = () => {
         if (audioPlayer.current) {

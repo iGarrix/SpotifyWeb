@@ -1,12 +1,14 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faMusic, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 import { AddToHistory, RemoveWithHistory, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { IHistory, StorageVariables, TempTake } from "../../../types";
+import { DefaultButton } from "../../Commons/Buttons/DefaultButton";
 import { FilterButton } from "../../Commons/Buttons/FilterButton";
 import { SoundHistoryItem } from "../../Commons/Cards/SoundHistoryItem";
 
@@ -14,6 +16,7 @@ export const History: React.FC = () => {
     const { initHistory, initQueue, clearHistory } = useActions();
     let rx = useTypedSelector(state => state.playingReducer);
     let page = TempTake;
+    const nav = useNavigate();
     const scrollHadler = () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             const storage_history = localStorage.getItem(StorageVariables.History);
@@ -81,7 +84,7 @@ export const History: React.FC = () => {
                                 return (
                                     <div key={index} className="grid grid-cols-12 w-full">
                                         <div className="col-span-12 w-full">
-                                            <SoundHistoryItem index={index} options={[{
+                                            <SoundHistoryItem index={index + 1} options={[{
                                                 title: "Remove", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RemovingItemWithHistory(item.track?.returnId) }
                                             }]} track={item.track} trackCreators={item.trackCreators} onClick={() => {
                                                 onSelectTrack(item)
@@ -94,9 +97,17 @@ export const History: React.FC = () => {
                     </div>
                 </div>
                 :
-                <div className="border border-gray-400 rounded-xl px-6 py-2 flex flex-col gap-2 items-center justify-center">
-                    <h1 className="font-semibold text-3xl">History is empty</h1>
-                    <p className="text-xl">Listen to songs to add to the story</p>
+                <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
+                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
+                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                        <div className="flex flex-col gap-3 items-center">
+                            <h1 className="font-medium text-3xl">History is empty</h1>
+                            <p className="font-medium text-xl">You can also listening your favorite songs using search</p>
+                        </div>
+                        <div>
+                            <DefaultButton onClick={() => { nav("/search") }} text={"Search songs"} />
+                        </div>
+                    </div>
                 </div>
 
             }

@@ -11,6 +11,7 @@ import { IPagableMyAlbumItem } from "../../../Redux/Reducers/MyAlbumReducer/type
 import { ITrackResponse } from "../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, defaultAvatarImage, GetUserAvatar, IHistory, StorageVariables } from "../../../types";
 import { AlbumCard } from "../../Commons/Cards/AlbumCard";
+import { SingleCard } from "../../Commons/Cards/SingleCard";
 import { SoundItem } from "../../Commons/Cards/SoundItem";
 
 const icon_play = require('../../../Assets/Icons/Play.png');
@@ -187,7 +188,7 @@ export const Welcome: React.FC = () => {
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (
-                        <AlbumCard key={Guid.create().toString()} name={item.track?.name} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); }} />
+                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); } } title={item.track?.name} />
                       )
                     })
                   }
