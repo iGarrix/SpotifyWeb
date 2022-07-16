@@ -1,0 +1,10 @@
+.redirectdefbtn {
+    .redirectdefbtn_icon {
+        @apply transition-all;
+    }
+    &:hover {
+        .redirectdefbtn_icon {
+            @apply invert-0;
+        }
+    }
+}
