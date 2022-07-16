@@ -139,7 +139,7 @@ export const ListeningPlaylist: React.FC = () => {
                     null
             }
             {
-                playingReducer.playlist ?
+                playingReducer && playingReducer.playlist && playingReducer.queue && playingReducer.queue.soundobjs[playingReducer.queue.playedIndex] ?
                     <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
                         <div className="flex justify-end col-span-2">
                             <div className="flex flex-col fixed select-none">

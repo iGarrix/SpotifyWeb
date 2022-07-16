@@ -216,7 +216,7 @@ export const PlayingFooter: React.FC = () => {
     return (
         <>
             {
-                rx && rx.soundobjs && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
+                rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image}')` }}></div>
                         <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
