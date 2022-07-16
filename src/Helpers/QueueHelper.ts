@@ -1,5 +1,5 @@
 import { IQueue, ITrackResponse } from "../Redux/Reducers/PlayingReducer/types";
-import { IHistory, StorageVariables } from "../types";
+import { IHistory, shuffle, StorageVariables } from "../types";
 
 
 export const SetPlayingTrack = (item: ITrackResponse | null) => {
@@ -95,6 +95,24 @@ export const BackwardQueue = () => {
             }
         }
     }
+}
+
+export const ShuffleQueue = () => {
+    const storageQueue = localStorage.getItem(StorageVariables.Queue);
+    if (storageQueue) {
+        let queue: IQueue = JSON.parse(storageQueue) as IQueue;
+        const playedObj = queue.soundobjs[queue.playedIndex];
+        if (queue && playedObj) {
+            const objs = queue.soundobjs;
+            const shuffle_objs = shuffle<ITrackResponse>(objs);
+            const findIndex = shuffle_objs.findIndex(f => f.track?.returnId === playedObj.track?.returnId);
+            queue.playedIndex = findIndex;
+            queue.soundobjs = shuffle_objs;
+            localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+            return queue;      
+        }
+    }
+    return null;
 }
 
 // export const NextTrackInQeueue = () => {

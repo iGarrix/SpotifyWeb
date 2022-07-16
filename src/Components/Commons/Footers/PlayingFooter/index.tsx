@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BackwardQueue, ForwardQueue } from "../../../../Helpers/QueueHelper";
+import { BackwardQueue, ForwardQueue, ShuffleQueue } from "../../../../Helpers/QueueHelper";
 //import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -57,7 +57,7 @@ export const PlayingFooter: React.FC = () => {
             setElapsed(_elapsed);
         }
         else {
-            if (audioPlayer.current) {  
+            if (audioPlayer.current) {
                 audioPlayer.current.volume = 0;
             }
             togglePlay(false);
@@ -81,14 +81,25 @@ export const PlayingFooter: React.FC = () => {
             audioPlayer.current.currentTime = 0;
             if (!isRepeat) {
                 togglePlay(false);
-                // let newQueue = NextTrackInQeueue();
-                // if (newQueue) {
-                //     newQueue.isPlay = true;
-                //     initQueue(newQueue);
-                //     if (rx && rx.soundobjs) {
-                //         audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
-                //     }
-                // }
+                if (rx && rx.soundobjs.length - 1 !== rx?.playedIndex) {                   
+                    let newQueue = ForwardQueue();
+                    if (newQueue) {
+                        newQueue.isPlay = true;
+                        initQueue(newQueue);
+                        if (rx && rx.soundobjs) {
+                            audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
+                        }
+                    }
+                }
+                else {
+                    let newQueue = ForwardQueue();
+                    if (newQueue) {
+                        initQueue(newQueue);
+                        if (rx && rx.soundobjs) {
+                            audioPlayer.current.src = baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[0].track?.tracknameid;
+                        }
+                    }
+                }
             }
         }
     }
@@ -152,6 +163,13 @@ export const PlayingFooter: React.FC = () => {
             initQueue(newQueue);
         }
     }
+    const shuffleTracks = () => {
+        const newQueue = ShuffleQueue();
+        if (newQueue) {
+            initQueue(newQueue);
+        }
+    }
+
     const onMute = () => {
         if (audioPlayer.current) {
             if (volume > 0) {
@@ -205,10 +223,10 @@ export const PlayingFooter: React.FC = () => {
                         <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
                             <div className="flex items-center gap-3 overflow-hidden">
                                 <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"
-                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage}} />
+                                    src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
-                                            <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => {nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username)}}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
+                                        <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => { nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username) }}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
                                         <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share} />
                                     </div>
                                     <p className="text-gray-300">{rx.soundobjs[rx.playedIndex].track?.name.substring(0, 30)}</p>
@@ -218,7 +236,7 @@ export const PlayingFooter: React.FC = () => {
                         <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
                             <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[rx.playedIndex].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200">
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200" onClick={shuffleTracks}>
                                     <img alt="icon" className="w-[18px]" src={icon_shuffle} />
                                 </div>
                                 <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 active:bg-blue-500" onClick={toggleBackward}>
