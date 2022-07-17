@@ -78,7 +78,7 @@ export const ProfileSingles: React.FC = () => {
                 rx.loading ?
                     <QuadraticLoader isVisisble={true} />
                     :
-                    singles && rx.error.length === 0 && playingReducer && playingReducer.queue && playingReducer.queue.soundobjs[playingReducer.queue.playedIndex] ?
+                    singles && rx.error.length === 0 ?
                         <div className="w-full h-full flex flex-col gap-[15px] px-[330px]">
                             {
                                 singles.map(item => {

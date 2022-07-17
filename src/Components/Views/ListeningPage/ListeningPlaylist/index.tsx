@@ -157,7 +157,7 @@ export const ListeningPlaylist: React.FC = () => {
                     null
             }
             {
-                playingReducer && playingReducer.playlist && playingReducer.queue && playingReducer.queue.soundobjs[playingReducer.queue.playedIndex] ?
+                playingReducer.playlist ?
                     <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
                         <FullScreenModal visible={shareModal} center >
                             <ShareModal
