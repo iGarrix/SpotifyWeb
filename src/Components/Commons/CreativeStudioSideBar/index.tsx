@@ -22,7 +22,7 @@ export const CreativeStudioSideBar: React.FC = () => {
                 <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/creativestudio") }} />
             </div>
             <div className="flex flex-col h-full z-10">
-                <SettingsBarItem text="Playlist" isSelect={history.pathname === "/creativestudio"} icon={icon_playlist}
+                <SettingsBarItem text="Playlist" isSelect={history.pathname === "/creativestudio" || history.pathname.includes("overviewplaylist")} icon={icon_playlist}
                     onClick={() => { nav("") }} />
                 <SettingsBarItem text="Single" isSelect={history.pathname.includes("/creativestudio/single")} icon={icon_music}
                     onClick={() => { nav("single") }} />

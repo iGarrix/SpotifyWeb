@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import axios, { AxiosError } from "axios";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
-import { IGetPlaylistTracksRequest, IGetTracksRequest, IGetTracksResponse, IQueue, PlayingAction, PlayingActionTypes } from "./types";
+import { IAddTrackToPlaylistRequest, IGetPlaylistTracksRequest, IGetTracksRequest, IGetTracksResponse, IQueue, PlayingAction, PlayingActionTypes } from "./types";
 import { IHistory, IPagableResponse } from "../../../types";
 import { IChangePlaylistImageRequest, IChangePlaylistRequest, IPagableMyPlaylistItem, IPlaylistFindRequest, IRemoveTrackPlaylistRequest } from "../MyPlaylistReducer/types";
 
@@ -263,6 +263,33 @@ export const removeTrackByPlaylist = (data: IRemoveTrackPlaylistRequest) => {
         data: data
       }
       );
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+
+export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+    try {
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.post<IPagableResponse<IGetTracksResponse>>(
+        `api/Playlist/AddTrack`, data,
+        AuthorizateHeader(token)
+      );
+
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

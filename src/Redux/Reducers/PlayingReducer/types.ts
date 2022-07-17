@@ -1,6 +1,6 @@
 import { IHistory, IPagableResponse, IUser } from "../../../types";
 import { IPagableMyAlbumItem } from "../MyAlbumReducer/types";
-import { IPagableMyPlaylistItem } from "../MyPlaylistReducer/types";
+import { IPagableMyPlaylistItem, IPlaylistFindRequest } from "../MyPlaylistReducer/types";
 
 export enum PlayingActionTypes {
     INITSELECTALBUM = "INITSELECTALBUM",
@@ -123,3 +123,10 @@ export type PlayingAction =
     ClearHistoryAction |
     SetPlayingAction |
     InitPlayingPlaylistAction;
+
+
+
+export interface IAddTrackToPlaylistRequest {
+    playlistFind: IPlaylistFindRequest,
+    trackId: string,
+}

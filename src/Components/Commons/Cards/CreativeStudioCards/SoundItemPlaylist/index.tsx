@@ -1,5 +1,8 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
+import { on } from "process";
 import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../../Hooks/useActions";
@@ -7,11 +10,10 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { baseUrl } from "../../../../../types";
 import { ISoundItemPlaylist } from "./types";
 
-const icon_pause = require('../../../../../Assets/Icons/Pause.png');
-const icon_play = require('../../../../../Assets/Icons/Play.png');
 const icon_trash = require('../../../../../Assets/Icons/Trash.png');
+const icon_add = require('../../../../../Assets/Icons/Add.png');
 
-export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete }) => {
+export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete, onAdd }) => {
 
     const { initQueue } = useActions();
     const nav = useNavigate();
@@ -65,6 +67,10 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
                 }
                 {
                     <img alt="icon" className="invert w-[25px] cursor-pointer" src={icon_trash} onClick={onDelete} />
+                }
+                {
+                    onAdd &&
+                    <img alt="icon" className="invert w-[25px] cursor-pointer" src={icon_add} onClick={onAdd} />
                 }
             </div>
         </div>

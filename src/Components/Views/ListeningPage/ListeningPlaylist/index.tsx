@@ -20,6 +20,7 @@ const icon_like = require('../../../../Assets/Icons/Like.png');
 const icon_share = require('../../../../Assets/Icons/Share.png');
 const icon_play = require('../../../../Assets/Icons/Play.png');
 const icon_pause = require('../../../../Assets/Icons/Pause.png');
+const icon_cs = require('../../../../Assets/Icons/Studio.png');
 
 export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
@@ -40,15 +41,12 @@ export const ListeningPlaylist: React.FC = () => {
             }
         }
     }
-    console.log(id)
     useEffect(() => {
         const work = async () => {
             if (id) {
-                if (me) {
-                    const isme = me.get("me");
-                    if (isme) {
-                        await findPlaylist(id, true);               
-                    }
+                const isme = me.get("me");
+                if (isme) {
+                    await findPlaylist(id, true);               
                 }
                 else {
                     await findPlaylist(id);
@@ -217,7 +215,10 @@ export const ListeningPlaylist: React.FC = () => {
                         <div className="flex justify-start w-full col-span-3 mb-32 z-10">
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col gap-1">
-                                    <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                    <div className="flex justify-between w-full items-center">
+                                        <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                        <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
+                                    </div>
                                     {
                                         playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
                                         <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")}</p>

@@ -14,7 +14,7 @@ import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
 
 export const StudioPlaylist: React.FC = () => {
-    const { getMyPlaylists, addMyPlaylists, removePlaylist } = useActions();
+    const { getMyPlaylists, addMyPlaylists, removePlaylist, clearTracks } = useActions();
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
@@ -67,6 +67,7 @@ export const StudioPlaylist: React.FC = () => {
 
     const onSelectPlaylist = (item: IPagableMyPlaylistItem | null) => {
         if (item) {
+            clearTracks();
             nav("overviewplaylist/" + item.playlistDto?.returnId);
         }
     }
