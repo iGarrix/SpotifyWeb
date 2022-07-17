@@ -34,7 +34,7 @@ export const OverviewProfile: React.FC = () => {
     if (user.profile?.username === nickname) {
       nav('/profile', {replace: true})
     }
-  }, [user.profile])
+  }, [user.profile, nickname])
   return (
     <div className="overflow-x-hidden text-light-100 flex flex-col h-full">
       <Helmet>

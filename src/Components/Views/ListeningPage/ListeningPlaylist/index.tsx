@@ -3,13 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
+import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
+import { ShareModal } from "../../../Commons/Modals/FullScreenModal/Shares/ShareModal";
 
 const bg = require('../../../../Assets/Background2.png');
 const icon_skip_forward = require('../../../../Assets/Icons/SkipForward.png');
@@ -21,11 +23,13 @@ const icon_pause = require('../../../../Assets/Icons/Pause.png');
 
 export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
+    const [me, setMe] = useSearchParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const { findPlaylist, initQueue, getPlaylistTracks } = useActions();
     const [isInited, setInited] = useState(false);
     const [upt, setUpt] = useState(false);
+    const [shareModal, setShareModal] = useState(false);
     const nav = useNavigate();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -36,10 +40,19 @@ export const ListeningPlaylist: React.FC = () => {
             }
         }
     }
+    console.log(id)
     useEffect(() => {
         const work = async () => {
             if (id) {
-                await findPlaylist(id);
+                if (me) {
+                    const isme = me.get("me");
+                    if (isme) {
+                        await findPlaylist(id, true);               
+                    }
+                }
+                else {
+                    await findPlaylist(id);
+                }
                 if (!playingReducer.tracks) {
                     const rq: IGetPlaylistTracksRequest = {
                         returnId: id,
@@ -130,6 +143,11 @@ export const ListeningPlaylist: React.FC = () => {
             nav("/authorizate");
         }
     }
+
+    const onShare = () => {
+        setShareModal(true);
+    }
+
     return (
         <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
             {
@@ -141,12 +159,40 @@ export const ListeningPlaylist: React.FC = () => {
             {
                 playingReducer && playingReducer.playlist && playingReducer.queue && playingReducer.queue.soundobjs[playingReducer.queue.playedIndex] ?
                     <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
+                        <FullScreenModal visible={shareModal} center >
+                            <ShareModal
+                                onClose={() => { setShareModal(false) }}
+                                title={"Share playlist"}
+                                link={document.location.origin + "/playlist/" + playingReducer.playlist?.playlistDto?.returnId}
+                                banner={
+                                    <div className="flex w-full gap-2">
+                                        <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
+                                            className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                                        <div className="flex flex-col">
+                                            <div className="flex gap-2 items-center">
+                                                <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                                <p className="bg-light-300 rounded-2xl px-3">
+                                                    <span className="text-center text-sm">Sharing</span>
+                                                </p>
+                                            </div>
+                                            {
+                                                playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
+                                                <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")}</p>
+                                            }
+                                            <p className="font-thin flex gap-2">Creators:
+                                                <span className="cursor-pointer hover:text-blue-400"
+                                                    onClick={() => { nav("/overview/" + playingReducer.playlist?.playlistCreator?.username, { replace: false }) }}>{playingReducer.playlist?.playlistCreator?.username}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                } />
+                        </FullScreenModal>               
                         <div className="flex justify-end col-span-2">
                             <div className="flex flex-col fixed select-none">
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                                     className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                    <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} />
+                                <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert transition-all hover:scale-105" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>

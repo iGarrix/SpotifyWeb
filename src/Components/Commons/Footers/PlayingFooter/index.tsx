@@ -7,6 +7,8 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
+import { FullScreenModal } from "../../Modals/FullScreenModal";
+import { ShareModal } from "../../Modals/FullScreenModal/Shares/ShareModal";
 import { Slider } from "../../Slider";
 
 const bg = require('../../../../Assets/Background2.png');
@@ -40,6 +42,7 @@ export const PlayingFooter: React.FC = () => {
     const audioPlayer = useRef<any>();
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRepeat, setRepeat] = useState(false);
+    const [shareModal, setShareModal] = useState(false);
     const [volume, setVolume] = useState(() => {
         const vol = localStorage.getItem(StorageVariables.Volume);
         if (vol) {
@@ -81,7 +84,7 @@ export const PlayingFooter: React.FC = () => {
             audioPlayer.current.currentTime = 0;
             if (!isRepeat) {
                 togglePlay(false);
-                if (rx && rx.soundobjs.length - 1 !== rx?.playedIndex) {                   
+                if (rx && rx.soundobjs.length - 1 !== rx?.playedIndex) {
                     let newQueue = ForwardQueue();
                     if (newQueue) {
                         newQueue.isPlay = true;
@@ -213,11 +216,40 @@ export const PlayingFooter: React.FC = () => {
             }
         }
     }
+
+    const onShare = () => {
+        setShareModal(true);
+    }
+
     return (
-        <>
+        <div className="select-none">
             {
                 rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
+                        <FullScreenModal visible={shareModal} center >
+                            <ShareModal
+                                onClose={() => { setShareModal(false) }}
+                                title={"Share track"}
+                                link={document.location.origin + "/search?query=" + rx?.soundobjs[rx?.playedIndex].track?.name}
+                                banner={
+                                    <div className="flex w-full gap-2">
+                                        <img alt="singleImage" src={`${baseUrl}Images/Tracks/${rx?.soundobjs[rx?.playedIndex].track?.image}`}
+                                            className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                                        <div className="flex flex-col">
+                                            <div className="flex gap-2 items-center">
+                                                <h1 className="font-['Lexend'] text-xl">{rx?.soundobjs[rx?.playedIndex].track?.name}</h1>
+                                                <p className="bg-light-300 rounded-2xl px-3">
+                                                    <span className="text-center text-sm">Sharing</span>
+                                                </p>
+                                            </div>
+                                            <p className="font-thin flex gap-2">Creators:
+                                                <span className="cursor-pointer hover:text-blue-400"
+                                                    onClick={() => { setShareModal(false); nav("/overview/" + rx?.soundobjs[rx?.playedIndex].trackCreators[0]?.username, { replace: false }) }}>{rx?.soundobjs[rx.playedIndex].trackCreators[0]?.username}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                } />
+                        </FullScreenModal>
                         <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image}')` }}></div>
                         <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
                         <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
@@ -227,7 +259,7 @@ export const PlayingFooter: React.FC = () => {
                                 <div className="flex flex-col">
                                     <div className="flex gap-3 items-center">
                                         <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => { nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username) }}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
-                                        <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat" src={icon_share} />
+                                        <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat transition-all hover:scale-105" src={icon_share} onClick={() => { onShare() }} />
                                     </div>
                                     <p className="text-gray-300">{rx.soundobjs[rx.playedIndex].track?.name.substring(0, 30)}</p>
                                 </div>
@@ -301,6 +333,6 @@ export const PlayingFooter: React.FC = () => {
                     </div>
                     : null
             }
-        </>
+        </div>
     )
 }

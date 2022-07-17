@@ -78,7 +78,7 @@ export const Welcome: React.FC = () => {
     }
   }
   return (
-    <div className="flex flex-col text-white">
+    <div className="flex flex-col text-white z-10">
       <Helmet>
         <title>Soundwave</title>
       </Helmet>
