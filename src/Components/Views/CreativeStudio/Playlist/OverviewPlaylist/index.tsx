@@ -8,8 +8,8 @@ import { AddToHistory, SetPlayingTrack } from "../../../../../Helpers/QueueHelpe
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangePlaylistImageRequest, IPagableMyPlaylistItem, IRemoveTrackPlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../../Redux/Reducers/PlayingReducer/types";
-import { baseUrl, defaultAvatarImage, StorageVariables } from "../../../../../types";
+import { IGetPlaylistTracksRequest, ITrackResponse } from "../../../../../Redux/Reducers/PlayingReducer/types";
+import { baseUrl, defaultAvatarImage } from "../../../../../types";
 import { SoundItemPlaylist } from "../../../../Commons/Cards/CreativeStudioCards/SoundItemPlaylist";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
@@ -18,7 +18,7 @@ const icon_search = require('../../../../../Assets/Icons/Search.png');
 
 export const OverViewPlaylist: React.FC = () => {
     const { id } = useParams();
-    const { findPlaylist, updateImagePlaylist, getPlaylistTracks, initQueue, removeTrackByPlaylist, } = useActions();
+    const { findPlaylist, updateImagePlaylist, getPlaylistTracks, clearTracks, removeTrackByPlaylist, } = useActions();
     const [openModal, setOpenModal] = useState(false);
     const rx = useTypedSelector(state => state.playingReducer);
     const playlist = useTypedSelector(state => state.playingReducer.playlist);
@@ -55,7 +55,8 @@ export const OverViewPlaylist: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (user && id) {
-                await findPlaylist(id);
+                await findPlaylist(id, true);
+                document.documentElement.scrollTo(0, 0);
             }
         }
         fetchData();
@@ -91,7 +92,7 @@ export const OverViewPlaylist: React.FC = () => {
                         returnId: id,
                         page: 1,
                     }
-                    await getPlaylistTracks(rq);
+                    await getPlaylistTracks(rq);           
                 }
                 return;
             }
@@ -101,30 +102,27 @@ export const OverViewPlaylist: React.FC = () => {
         }
         work();
     }, []);
-    const onSelectTrack = (item: ITrackResponse | null) => {
-        const response = SetPlayingTrack(item);
-        if (response) {
-            initQueue(response);
-            AddToHistory(item);
-        }
-    }
-    const onPause = async () => {
-        if (rx.tracks) {
-            await onSelectTrack(rx.tracks[0]);
-        }
-    }
 
     const onRemoveTrackPlaylist = async (item: IPagableMyPlaylistItem | null, trackId: any) => {
         try {
             if (item && item.playlistCreator && item.playlistDto && trackId) {
                 var request: IRemoveTrackPlaylistRequest = {
-                    response: {
+                    playlistFind: {
                         findPlaylistName: item.playlistDto.name,
                         findPlaylistCreatorEmail: item.playlistCreator.email,
                     },
                     trackId: trackId,
                 };
                 await removeTrackByPlaylist(request);
+                clearTracks();
+                if (id) {
+                    const rq: IGetPlaylistTracksRequest = {
+                        returnId: id,
+                        page: 1,
+                    }
+                    await getPlaylistTracks(rq);
+                }
+
             }
         } catch (error) {
         }
@@ -176,9 +174,7 @@ export const OverViewPlaylist: React.FC = () => {
                                     rx.tracks?.map((item) => {
                                         return (
                                             <SoundItemPlaylist key={Guid.create().toString()} item={item}
-                                                onDelete={() => {onRemoveTrackPlaylist(playlist, item.track?.returnId)}}
-                                                isPlay={rx.queue && item.track ? rx.queue.soundobjs[rx.queue.playedIndex].track?.returnId === item.track.returnId && rx.queue?.isPlay : false}
-                                                onClick={() => { onSelectTrack(item) }} />
+                                                onDelete={() => {onRemoveTrackPlaylist(playlist, item.track?.returnId)}} />
                                         )
                                     })
                                 }

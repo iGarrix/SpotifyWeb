@@ -90,6 +90,6 @@ export type MyPlaylistAction =
     findPlaylistCreatorEmail: string,
   }
   export interface IRemoveTrackPlaylistRequest {
-    response: IPlaylistFindRequest,
+    playlistFind: IPlaylistFindRequest,
     trackId: string,
   }

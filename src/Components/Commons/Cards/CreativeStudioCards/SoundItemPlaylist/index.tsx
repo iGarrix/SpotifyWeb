@@ -11,7 +11,7 @@ const icon_pause = require('../../../../../Assets/Icons/Pause.png');
 const icon_play = require('../../../../../Assets/Icons/Play.png');
 const icon_trash = require('../../../../../Assets/Icons/Trash.png');
 
-export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete, isPlay, onClick }) => {
+export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete }) => {
 
     const { initQueue } = useActions();
     const nav = useNavigate();
@@ -27,18 +27,26 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
     }
 
     return (
-        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 text-dark-200"}`}>
-            <div className="flex gap-6 items-center">
-                {
-                    isPlay ?
-                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={onClick} />
-                        :
-                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={onClick} />
-                }
+        <div className={`flex items-center gap-3 rounded-md bg-light-200 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
+            <div className="flex gap-6">
                 <div>
-                    <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} />
+                    <img alt="icon" className="w-[96px] h-[96px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} />
                 </div>
-                <h1 className="text-medium">
+                <div className="flex flex-col">
+                    <h1 className="text-lg">{item.track?.name}</h1>
+                    <h3 className="flex gap-1">
+                        Creators: 
+                    {
+                        item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
+                            return (
+                                <span key={Guid.create().toString()}
+                                    className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: false }) }}>{i}{item.trackCreators?.length && index < item.trackCreators.length - 1 ? ", " : " "}</span>
+                            )
+                        })
+                    }
+                    </h3>
+                </div>
+                {/* <h1 className="text-medium">
                     {
                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                             return (
@@ -48,7 +56,7 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
                         })
                     }
                     <span>- {item.track?.name}</span>
-                </h1>
+                </h1> */}
             </div>
             <div className="flex gap-4 items-center justify-between ml-auto">
                 {

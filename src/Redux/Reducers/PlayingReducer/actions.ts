@@ -236,7 +236,6 @@ export const removePlaylist = (data: IPlaylistFindRequest) => {
         data: data
       }
       );
-      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_CLEAR });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -258,13 +257,12 @@ export const removeTrackByPlaylist = (data: IRemoveTrackPlaylistRequest) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       const token = localStorage.getItem("token");
-      await http.delete<String>(
+      await http.delete<string>(
         "api/Playlist/RemoveTrack", {
         headers: AuthorizateHeader(token).headers,
         data: data
       }
       );
-      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_CLEAR });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

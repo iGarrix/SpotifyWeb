@@ -53,9 +53,12 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
         onClose();
     }
     return (
-        <div className="rounded-md py-12 flex flex-col items-center gap-6 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
-            <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
-            <h1 className="text-3xl font-medium font-['Lexend']">Change</h1>
+        <div className="rounded-md py-12 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
+            <div className="flex justify-between w-full">
+                <h1 className="text-xl font-['Lexend']">Change</h1>
+                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
+            </div>
+            <hr className="w-full mb-4" />
             {
                 enterError && enterError.length !== 0 ?
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null

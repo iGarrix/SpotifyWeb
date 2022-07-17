@@ -101,9 +101,11 @@ export const StudioPlaylist: React.FC = () => {
     const onSaveChanges = () => {
         setOpenModal(false);
     }
+
     const onCloseModal = () => {
         setOpenModal(false);
     }
+
     return (
         <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 bg-no-repeat h-full">
             <Helmet>
@@ -117,7 +119,7 @@ export const StudioPlaylist: React.FC = () => {
             }
             <div className="flex flex-col gap-8 w-full h-full">
                 <h1 className="font-semibold text-2xl">Create new Playlist</h1>
-                <div className="flex items-center justify-center w-[96px] h-[96px] bg-light-200">
+                <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-200 transition-all hover:bg-dark-200/40">
                     <FontAwesomeIcon onClick={() => { console.log("first") }} className="text-white text-[64px]" icon={faPlus} />
                 </div>
                 <div className="flex flex-col gap-10 w-full">
@@ -138,6 +140,7 @@ export const StudioPlaylist: React.FC = () => {
                                                     image={item.playlistDto?.image}
                                                     name={item.playlistDto?.name}
                                                     date={item.playlistDto?.create}
+                                                    type={item.playlistDto?.accessStatus}
                                                     listening={10000}
                                                     onEdit={() => onEditPlaylist(item)}
                                                     onDelete={async () => await onRemovePlaylist(item)} />

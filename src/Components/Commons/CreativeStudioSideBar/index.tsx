@@ -6,12 +6,9 @@ import { SettingsBarItem } from "../AccountSettingsSideBar/SettingsBarItem";
 
 const logo = require("../../../Assets/LogoLight.png");
 
-const icon_pdaccount = require('../../../Assets/Icons/PDAccount.png');
-const icon_verifyemail = require('../../../Assets/Icons/VerifyEmail.png');
-const icon_sendappelation = require('../../../Assets/Icons/SendAppelation.png');
-const icon_protected = require('../../../Assets/Icons/Protected.png');
-const icon_notify = require('../../../Assets/Icons/Notifications.png');
-const icon_trash = require('../../../Assets/Icons/Trash.png');
+const icon_playlist = require('../../../Assets/Icons/Playlist.png');
+const icon_music = require('../../../Assets/Icons/Music.png');
+const icon_disc = require('../../../Assets/Icons/Disc.png');
 
 export const CreativeStudioSideBar: React.FC = () => {
 
@@ -25,11 +22,11 @@ export const CreativeStudioSideBar: React.FC = () => {
                 <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/creativestudio") }} />
             </div>
             <div className="flex flex-col h-full z-10">
-                <SettingsBarItem text="Playlist" isSelect={history.pathname === "/creativestudio"} icon={icon_sendappelation}
+                <SettingsBarItem text="Playlist" isSelect={history.pathname === "/creativestudio"} icon={icon_playlist}
                     onClick={() => { nav("") }} />
-                <SettingsBarItem text="Single" isSelect={history.pathname.includes("/creativestudio/single")} icon={icon_notify}
+                <SettingsBarItem text="Single" isSelect={history.pathname.includes("/creativestudio/single")} icon={icon_music}
                     onClick={() => { nav("single") }} />
-                <SettingsBarItem text="Album" isSelect={history.pathname.includes("/creativestudio/album")} icon={icon_trash}
+                <SettingsBarItem text="Album" isSelect={history.pathname.includes("/creativestudio/album")} icon={icon_disc}
                     onClick={() => { nav("album") }} />
             </div>
         </div>
