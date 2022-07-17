@@ -1,4 +1,4 @@
-import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
+import { IChangePlaylistRequest, IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, IPlaylist, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
 import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";

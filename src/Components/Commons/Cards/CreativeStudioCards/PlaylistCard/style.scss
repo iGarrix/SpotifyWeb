@@ -1,0 +1,18 @@
+.playlistCardMain {
+    .plCardMailSelect {
+        @apply transition-all;
+    }
+
+    .playlistCardMailOptions {
+        @apply hidden z-[22];
+    }
+
+    &:hover {
+        .plCardMailSelect {
+            @apply bg-light-200 shadow-xl rounded-xl;
+        }
+        .playlistCardMailOptions {
+            @apply flex;
+        }
+    }
+}

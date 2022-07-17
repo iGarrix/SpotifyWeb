@@ -67,3 +67,29 @@ export type MyPlaylistAction =
   | InitMyPlaylistErrorAction
   | InitMyPlaylistClearAction
   | AddMyPlaylistAction;
+
+  export interface IChangePlaylistForm {
+    newName: string,
+    newStatus: string,
+    newImage: string,
+  }
+  
+  export interface IChangePlaylistRequest {
+    response: IPlaylistFindRequest,
+    newName: string,
+    newStatus: string,
+  }
+
+  export interface IChangePlaylistImageRequest {
+    response: IPlaylistFindRequest,
+    image: string,
+  }
+
+  export interface IPlaylistFindRequest{
+    findPlaylistName: string,
+    findPlaylistCreatorEmail: string,
+  }
+  export interface IRemoveTrackPlaylistRequest {
+    response: IPlaylistFindRequest,
+    trackId: string,
+  }

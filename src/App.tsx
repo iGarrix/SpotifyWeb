@@ -58,6 +58,9 @@ import { PlaylistResult } from "./Components/Views/Search/PlaylistResult";
 import { TracksResult } from "./Components/Views/Search/TracksResult";
 import { ProfileResult } from "./Components/Views/Search/ProfileResult";
 import { CreatorsResult } from "./Components/Views/Search/CreatorsResult";
+import { StudioPlaylist } from "./Components/Views/CreativeStudio/Playlist/StudioPlaylist";
+import { LayCreativeStudio } from "./Components/Layout/LayCreativeStudio";
+import { OverViewPlaylist } from "./Components/Views/CreativeStudio/Playlist/OverviewPlaylist";
 
 function App() {
   const [isDark, setDark] = useState(false);
@@ -160,7 +163,14 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="creativestudio" element={<div>studio</div>} />
+        <Route path="creativestudio" element={<AuthorizateRoute user={user}><LayCreativeStudio /></AuthorizateRoute>}>
+          <Route index element={<StudioPlaylist />}/>
+          <Route path="overviewplaylist" element={<Outlet />} >
+            <Route path=":id" element={<OverViewPlaylist />}/>
+          </Route>
+          <Route path="single" element={<div>Single</div>} />
+          <Route path="album" element={<div>Album</div>} />
+        </Route>
 
         <Route path="upload" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
           <Route index element={<UploadIntro />} />
