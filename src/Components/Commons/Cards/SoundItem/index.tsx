@@ -60,7 +60,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                                     </p>
                                 </div>
                                 <h1 className="text-medium flex gap-1">
-                                    Creators: 
+                                    Creators:
                                     {
                                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                                             return (
