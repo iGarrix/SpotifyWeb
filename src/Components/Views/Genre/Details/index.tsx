@@ -10,6 +10,7 @@ import { IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistRed
 import { clearTracks } from "../../../../Redux/Reducers/PlayingReducer/actions";
 import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
+import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const GenreDetails: React.FC = () => {
@@ -64,34 +65,39 @@ export const GenreDetails: React.FC = () => {
             </Helmet>
             {
                 playlist ?
-                <div className="w-full flex flex-col gap-5">
-                    <h1 className="font-semibold text-5xl my-10">{name}</h1>
-                    <div className="w-full flex justify-between items-center">
-                        <h1 className="font-medium text-2xl text-dark-200">Weekly top playlists</h1>
+                    <div className="w-full flex flex-col gap-5">
+                        <h1 className="font-semibold text-5xl my-10">{name}</h1>
+                        <div className="w-full flex justify-between items-center">
+                            <h1 className="font-medium text-2xl text-dark-200">Weekly top playlists</h1>
+                        </div>
+                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                            {
+                                playlist?.map(item => {
+                                    return (
+                                        <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} imageSrc={item.playlistDto?.image} title={`${item.songs} songs`} />
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                    <div className="flex items-center gap-6 flex-wrap justify-between">
-                        {
-                            playlist?.map(item => {
-                                return (
-                                    <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} imageSrc={item.playlistDto?.image} title={`${item.songs} songs`} />
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-                :
-                <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Save you first playlist</h1>
-                                    <p className="font-medium text-xl">You can also login your account</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={"Search playlists"} />
-                                </div>
+                    :
+                    !rx.loading ?
+                    <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
+                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="font-medium text-3xl">No playlists found in genre '{name}'</h1>
+                                <p className="font-medium text-xl">You can also search your favorite playlists</p>
+                                <p className="font-medium text-xl">"{rx.error}"</p>
                             </div>
-                </div>
+                            <div>
+                                <DefaultButton onClick={() => { nav("/search") }} text={"Search playlists"} />
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="w-full h-full absolute top-0 left-0 bg-dark-200/60 flex justify-center items-center z-[8500]" >
+                        <QuadraticLoader isVisisble={true} />
+                    </div>
 
             }
         </div>

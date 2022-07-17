@@ -67,7 +67,10 @@ export const ProfilePlaylists: React.FC = () => {
         if (item) {
             await clearTracks();
             await initSelectPlaylist(null);
-            nav("/playlist/" + item?.playlistDto?.returnId);
+            nav({
+                pathname: "/playlist/" + item?.playlistDto?.returnId,
+                search: "?me=myplaylist"
+            });
         }
     }
     return (

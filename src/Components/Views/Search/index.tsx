@@ -67,14 +67,17 @@ export const Search: React.FC = () => {
                             setSearchQuery(e.target.value)
                         }} icon={<img alt="icon" className="invert w-[28px]" src={icon_search} />} />
                     </div>
-                    <div className="flex gap-4">
-                        <FilterButton text="All result" isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
-                        <FilterButton text="Albums" isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
-                        <FilterButton text="Playlists" isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
-                        <FilterButton text="Tracks" isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
-                        <FilterButton text="Artists" isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
-                        <FilterButton text="Profiles" isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
-                    </div>
+                    {
+                        searchQuery && 
+                        <div className="flex gap-4">
+                            <FilterButton text="All result" isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
+                            <FilterButton text="Albums" isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
+                            <FilterButton text="Playlists" isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
+                            <FilterButton text="Tracks" isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
+                            <FilterButton text="Artists" isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
+                            <FilterButton text="Profiles" isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
+                        </div>
+                    }
                 </div>
                 <Outlet />
             </div>

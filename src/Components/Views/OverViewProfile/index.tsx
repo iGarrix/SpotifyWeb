@@ -23,18 +23,26 @@ export const OverviewProfile: React.FC = () => {
 
     func();
   }, []);
+
+  useEffect(() => {
+    if (user.overviewer != null) {
+      setVerifyImage(user.overviewer.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
+      user.overviewer.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
+    }
+  }, [user.overviewer]);
   useEffect(() => {
     if (user.profile?.username === nickname) {
       nav('/profile', {replace: true})
     }
-  }, [user.profile])
+  }, [user.profile, nickname])
   return (
     <div className="overflow-x-hidden text-light-100 flex flex-col h-full">
       <Helmet>
         <title>Soundwave | {user.overviewer? user.overviewer.username : "Unknown"}</title>
       </Helmet>
-      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative" style={{ backgroundImage: `url("${GetUserBackground(user.overviewer)}")` }}>
-        <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
+      <div className="w-full flex bg-cover bg-no-repeat object-cover bg-fixed relative">
+      <img alt="bg" className="absolute top-0 left-0 w-full h-full object-cover" src={GetUserBackground(user.overviewer)} />
+        <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
         <div className="flex flex-col w-full px-20 py-16 z-[2]">
           <div className="flex gap-6 w-full">
             {

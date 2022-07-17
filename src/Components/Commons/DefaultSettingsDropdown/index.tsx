@@ -9,9 +9,9 @@ export const DefaultSettingsDropdown: React.FC<DefaultSettingsDropdownProps> = (
 }) => {
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="bg-light-200 pr-2 rounded-xl">
       <select defaultValue={value}
-        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-dark-200 bg-light-200 autofill:bg-light-100"
+        className="outline-0 w-full pr-20 text-dark-200 flex flex-col bg-light-200 autofill:bg-light-100 rounded-xl py-3 px-5"
         onChange={onChange}
       >
         <option value="" disabled className="text-dark-200">
