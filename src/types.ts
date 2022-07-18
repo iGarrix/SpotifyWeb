@@ -68,7 +68,7 @@ export interface IPagableResponse<T = any> {
   pageables: T[] | null,
 }
 
-export const baseUrl = "soundwaveapi-001-site1.ctempurl.com"; //"https://localhost:7286/";
+export const baseUrl = "http://soundwaveapi-001-site1.ctempurl.com"; //"https://localhost:7286/";
 
 export interface IRefreshModel {
   accessToken: string,
