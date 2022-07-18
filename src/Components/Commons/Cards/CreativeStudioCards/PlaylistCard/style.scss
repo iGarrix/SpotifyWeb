@@ -4,7 +4,8 @@
     }
 
     .playlistCardMailOptions {
-        @apply hidden z-[22];
+        @apply hidden;
+        z-index: 22;
     }
 
     &:hover {
