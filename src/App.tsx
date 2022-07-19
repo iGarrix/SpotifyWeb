@@ -62,6 +62,7 @@ import { StudioPlaylist } from "./Components/Views/CreativeStudio/Playlist/Studi
 import { LayCreativeStudio } from "./Components/Layout/LayCreativeStudio";
 import { OverViewPlaylist } from "./Components/Views/CreativeStudio/Playlist/OverviewPlaylist";
 import { WebSettings } from "./Components/Views/WebSettings";
+import { StudioSingle } from "./Components/Views/CreativeStudio/Single";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -176,7 +177,7 @@ function App() {
           <Route path="overviewplaylist" element={<Outlet />} >
             <Route path=":id" element={<OverViewPlaylist />}/>
           </Route>
-          <Route path="single" element={<div>Single</div>} />
+          <Route path="single" element={<StudioSingle />} />
           <Route path="album" element={<div>Album</div>} />
         </Route>
 
