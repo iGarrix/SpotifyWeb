@@ -75,7 +75,7 @@ export const PlaylistResult : React.FC = () => {
                 rx.playlists && rx.playlists.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Playlist All</h1>
-                        <div className="flex items-center gap-6 flex-wrap">
+                        <div className="flex gap-6 flex-wrap">
                             {
                                 rx.playlists?.map(item => {
                                     return (

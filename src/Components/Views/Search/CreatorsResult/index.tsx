@@ -74,7 +74,7 @@ export const CreatorsResult : React.FC = () => {
                 rx.artists && rx.artists.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Artists All</h1>
-                        <div className="flex items-center gap-6 flex-wrap">
+                        <div className="flex gap-6 flex-wrap">
                             {
                                 rx.artists?.map(item => {
                                     return (

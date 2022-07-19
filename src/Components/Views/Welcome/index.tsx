@@ -112,7 +112,7 @@ export const Welcome: React.FC = () => {
               <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
             </div>
           }
-          <div className="flex items-center justify-between w-full flex-wrap">
+          <div className="flex justify-between w-full flex-wrap">
             {
               mainReducer.albums &&
               mainReducer.albums.slice(0, 8).map(item => {
@@ -162,7 +162,7 @@ export const Welcome: React.FC = () => {
               <h1 className="font-medium text-2xl text-dark-200">Weekly top artist</h1>
               <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>See all</p>
             </div>
-            <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap">
               {
                 mainReducer.artists &&
                 mainReducer.artists.slice(0, 6).map(item => {
@@ -184,7 +184,7 @@ export const Welcome: React.FC = () => {
                   <h1 className="font-medium text-2xl text-dark-200">Recent played</h1>
                   <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>See all</p>
                 </div>
-                <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex gap-4 flex-wrap">
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (

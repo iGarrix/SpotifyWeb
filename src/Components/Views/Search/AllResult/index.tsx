@@ -15,6 +15,8 @@ import { TrackResultCard } from "../../../Commons/Cards/SearchBestResults/TrackR
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export const AllResultSearch: React.FC = () => {
@@ -164,6 +166,7 @@ export const AllResultSearch: React.FC = () => {
                         <h1 className="font-medium text-2xl">Songs</h1>
                         <div className="flex flex-col justify-between w-full h-full flex-wrap gap-[15px]">
                             {
+                                reducer.searchall.tracks && reducer.searchall.tracks.length > 0 ?
                                 reducer.searchall.tracks?.map(item => {
                                     return (
                                         <SoundItem key={Guid.create().toString()}
@@ -173,7 +176,28 @@ export const AllResultSearch: React.FC = () => {
                                         />
                                     )
                                 })
+                                :
+                                <div className="flex flex-col gap-6 w-full h-full">
+                                    <hr className="w-full" />
+                                    <FontAwesomeIcon className="text-3xl font-medium text-dark-200" icon={faMusic} />
+                                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                                        <div className="flex flex-col gap-3 items-center">
+                                            <h1 className="font-medium text-xl">No tracks</h1>
+                                        </div>
+                                    </div>
+                                </div>
                             }
+                            {/* {
+                                reducer.searchall.tracks?.map(item => {
+                                    return (
+                                        <SoundItem key={Guid.create().toString()}
+                                            onClick={() => { onSelectInstanceTrack(item) }}
+                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                            isLiked={false} item={item}
+                                        />
+                                    )
+                                })
+                            } */}
                         </div>
                     </div>
                 </div>
@@ -182,7 +206,7 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.albums && reducer.searchall.albums.length > 0 &&
                 <div className="flex flex-col gap-6">
                     <h1 className="font-medium text-2xl">Albums</h1>
-                    <div className="flex items-center w-full flex-wrap gap-6">
+                    <div className="flex w-full flex-wrap gap-6">
                         {
                             reducer.searchall.albums.map(item => {
                                 return (
@@ -197,7 +221,7 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
                 <div className="flex flex-col gap-6">
                     <h1 className="font-medium text-2xl">Playlists</h1>
-                    <div className="flex items-center w-full flex-wrap gap-6">
+                    <div className="flex w-full flex-wrap gap-6">
                         {
                             reducer.searchall.playlists.map(item => {
                                 return (
@@ -212,7 +236,7 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.artists && reducer.searchall.artists.length > 0 &&
                 <div className="flex flex-col gap-3">
                     <h1 className="font-medium text-2xl">Creators</h1>
-                    <div className="flex items-center w-full flex-wrap gap-3">
+                    <div className="flex w-full flex-wrap gap-3">
                         {
                             reducer.searchall.artists.map(item => {
                                 return (
@@ -227,7 +251,7 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.profiles && reducer.searchall.profiles.length > 0 &&
                 <div className="flex flex-col gap-3">
                     <h1 className="font-medium text-2xl">Profiles</h1>
-                    <div className="flex items-center w-full flex-wrap gap-3">
+                    <div className="flex w-full flex-wrap gap-3">
                         {
                             reducer.searchall.profiles.map(item => {
                                 return (
