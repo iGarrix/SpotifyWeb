@@ -2,6 +2,6 @@ import { ITrackResponse } from "../../../../../Redux/Reducers/PlayingReducer/typ
 
 export interface ISoundItemPlaylist {
     item: ITrackResponse,
-    onDelete: () => void,
+    onDelete?: () => void,
     onAdd?: () => void,
 }

@@ -66,6 +66,7 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
                     <h1 className="text-thin w-[48px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>
                 }
                 {
+                    onDelete &&
                     <img alt="icon" className="invert w-[25px] cursor-pointer" src={icon_trash} onClick={onDelete} />
                 }
                 {

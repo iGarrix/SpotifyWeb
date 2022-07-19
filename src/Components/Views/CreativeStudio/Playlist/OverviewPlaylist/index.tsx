@@ -260,7 +260,6 @@ export const OverViewPlaylist: React.FC = () => {
                                 searchrx.tracks?.slice(0, 3).map(item => {
                                     return (
                                         <SoundItemPlaylist key={Guid.create().toString()} item={item}
-                                            onDelete={() => { onRemoveTrackPlaylist(playlist, item.track?.returnId) }}
                                             onAdd={() => { AddTrackToPlaylist(item) }} />
                                     )
                                 })
