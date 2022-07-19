@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { StorageVariables } from "../types";
 import { MyGenreActionTypes } from "./Reducers/GenreReducer/types";
 import { MyAlbumActionTypes } from "./Reducers/MyAlbumReducer/types";
 import { MyMediaLibraryActionTypes } from "./Reducers/MyMediaLibraryReducer/types";
@@ -19,3 +20,15 @@ export function ClearRedux (dispatch: Dispatch<any>) {
     localStorage.removeItem("refreshtoken");
     localStorage.removeItem("expiredin");
 };
+
+export function ClearStorage (dispatch: Dispatch<any>) {
+    ClearRedux(dispatch);
+    localStorage.removeItem(StorageVariables.ForgotUser);
+    localStorage.removeItem(StorageVariables.History);
+    localStorage.removeItem(StorageVariables.Language);
+    localStorage.removeItem(StorageVariables.Queue);
+    localStorage.removeItem(StorageVariables.Theme);
+    localStorage.removeItem(StorageVariables.Volume);
+    localStorage.removeItem(StorageVariables.Track);
+    localStorage.removeItem(StorageVariables.VerifyResponse);
+}

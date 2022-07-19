@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { baseUrl, defaultAlbumImage } from "../../../../types";
+import { baseUrl, defaultAlbumImage, defaultMusicImage } from "../../../../types";
 import { FullScreenModal } from "../../Modals/FullScreenModal";
 import { ShareModal } from "../../Modals/FullScreenModal/Shares/ShareModal";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
@@ -84,7 +84,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                     // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
                 <div>
-                    <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} />
+                    <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                 </div>
                 <h1 className="text-medium">
                     {
