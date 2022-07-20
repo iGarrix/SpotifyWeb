@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
-import { baseUrl } from "../../../../../types";
+import { baseUrl, defaultAlbumImage } from "../../../../../types";
 import { ISoundItemPlaylist } from "./types";
 
 const icon_trash = require('../../../../../Assets/Icons/Trash.png');
@@ -32,7 +32,7 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
         <div className={`flex items-center gap-3 rounded-md bg-light-200 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
             <div className="flex gap-6">
                 <div>
-                    <img alt="icon" className="w-[96px] h-[96px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} />
+                    <img alt="icon" className="w-[96px] h-[96px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage}} />
                 </div>
                 <div className="flex flex-col">
                     <h1 className="text-lg">{item.track?.name}</h1>
