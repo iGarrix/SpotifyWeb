@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { IAlbum, IGetAllMyAlbumRequest, IPagableMyAlbumItem, MyAlbumAction, MyAlbumActionTypes } from "./types";
+import { IAlbum, IChangeAlbumRequest, IChangeImageAlbumRequest, IChangeTemplateImageAlbumRequest, IGetAllMyAlbumRequest, IPagableMyAlbumItem, MyAlbumAction, MyAlbumActionTypes } from "./types";
 
 export const getMyAlbum = (data: IGetAllMyAlbumRequest) => {
   return async (dispatch: Dispatch<MyAlbumAction>) => {
@@ -43,6 +43,116 @@ export const addMyAlbum = (data: IGetAllMyAlbumRequest) => {
         AuthorizateHeader(token)
       );
       dispatch({ type: MyAlbumActionTypes.ADDMYALBUM, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateAlbum = (data: IChangeAlbumRequest) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+      dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.put<IPagableMyAlbumItem>(
+        "api/Albom/Update",
+        data, AuthorizateHeader(token)
+      );
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const removeAlbum = (id: string) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+      dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.delete<String>(
+        "api/Albom/Remove?returnId=" + id, {
+        headers: AuthorizateHeader(token).headers
+      }
+      );
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateImageAlbum = (data: IChangeImageAlbumRequest) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+      dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const form = new FormData();
+      form.append("FindReturnId", data.findReturnId);
+      form.append("NewImage", data.newImage);
+      const response = await http.put<IPagableMyAlbumItem>(
+        "api/Albom/UpdateImage",
+        form, AuthorizateHeader(token)
+      );
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const updateTemplateImageAlbum = (data: IChangeTemplateImageAlbumRequest) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+      dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const form = new FormData();
+      form.append("FindReturnId", data.findReturnId);
+      form.append("NewTemplateimage", data.newTemplateimage);
+      const response = await http.put<IPagableMyAlbumItem>(
+        "api/Albom/UpdateTemplateImage",
+        form, AuthorizateHeader(token)
+      );
 
       return Promise.resolve();
     } catch (error) {
