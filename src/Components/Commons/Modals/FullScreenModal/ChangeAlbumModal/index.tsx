@@ -5,6 +5,7 @@ import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangeAlbumRequest, IChangeImageAlbumRequest, IChangeTemplateImageAlbumRequest, IGetAllMyAlbumRequest } from "../../../../../Redux/Reducers/MyAlbumReducer/types";
 import { baseUrl, defaultAvatarImage } from "../../../../../types";
+import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { Field } from "../../../Inputs/Field";
 import { IChangeAlbumModal } from "./types";
 
@@ -13,7 +14,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
     const user = useTypedSelector(state => state.userReducer.profile);
     const { updateAlbum, updateImageAlbum, getMyAlbum, updateTemplateImageAlbum } = useActions();
     useEffect(() => {
-        if (error && error !== "") {         
+        if (error && error !== "") {
             setEnterError(error);
         }
     }, [error]);
@@ -57,7 +58,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
             const file = e.target.files[0];
             if (user && file && album && album.albomDto) {
                 const request: IChangeImageAlbumRequest = {
-                    findReturnId: album.albomDto.returnId, 
+                    findReturnId: album.albomDto.returnId,
                     newImage: file,
                 }
                 await updateImageAlbum(request);
@@ -79,7 +80,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
             const file = e.target.files[0];
             if (user && file && album && album.albomDto) {
                 const request: IChangeTemplateImageAlbumRequest = {
-                    findReturnId: album.albomDto.returnId, 
+                    findReturnId: album.albomDto.returnId,
                     newTemplateimage: file,
                 }
                 await updateTemplateImageAlbum(request);
@@ -99,7 +100,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
     return (
         <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
             <div className="flex justify-between w-full">
-                <h1 className="text-xl font-['Lexend']">Change</h1>
+                <h1 className="whitespace-nowrap text-xl font-['Lexend']">Change data</h1>
                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4" />
@@ -107,40 +108,48 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
                 enterError && enterError.length !== 0 ?
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
             }
-            <form onSubmit={onSubmit}>
-                {
-                    album ?
-                        <div className="w-64 h-64 relative overflow-hidden rounded-xl">  
-                            <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
-                                <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
-                                <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+            <form className="flex gap-[18px]" onSubmit={onSubmit}>
+                <div className="flex flex-col gap-2">
+                    {
+                        album ?
+                            <div className="w-48 h-48 relative overflow-hidden rounded-xl">
+                                <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
+                                    <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
+                                    <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                </div>
+                                <img alt="avatar" src={baseUrl + "Images/AlbomImages/" + album?.albomDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                            </div> :
+                            <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
+                                <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
                             </div>
-                            <img alt="avatar" src={baseUrl + "Images/AlbomImages/" + album?.albomDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
-                        </div> :
-                        <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
-                            <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
-                        </div>
-                }
-                {
-                    album ?
-                        <div className="w-32 h-32 relative overflow-hidden rounded-xl">  
-                            <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
-                                <input type="file" id="tempFile" accept="image/*" onChange={onChangeTemplateImage} className="hidden" />
-                                <label htmlFor="tempFile"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                    }
+                    {
+                        album ?
+                            <div className="flex flex-col gap-1">
+                                <p>Background image</p>
+                                <div className="w-32 h-32 relative overflow-hidden rounded-xl">
+                                    <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
+                                        <input type="file" id="tempFile" accept="image/*" onChange={onChangeTemplateImage} className="hidden" />
+                                        <label htmlFor="tempFile"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                    </div>
+                                    <img alt="avatar" src={baseUrl + "Images/AlbomTemplates/" + album?.albomDto?.templateimage} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                </div>
                             </div>
-                            <img alt="avatar" src={baseUrl + "Images/AlbomTemplates/" + album?.albomDto?.templateimage} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
-                        </div> :
-                        <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
-                            <FontAwesomeIcon onClick={onChangeTemplateImage} className="text-white text-[64px]" icon={faPlus} />
-                        </div>
-                }
+                            :
+                            <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
+                                <FontAwesomeIcon onClick={onChangeTemplateImage} className="text-white text-[64px]" icon={faPlus} />
+                            </div>
+                    }
+                </div>
                 {
                     album ?
-                    <div className="flex flex-col gap-3 px-20">
-                        <Field placeholder="Enter new name" value={album.albomDto?.name} onChange={(e: any) => { }} />
-                        <Field value={album.albomDto?.description} onChange={(e: any) => { } } placeholder={"Enter new description"} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">Save</button>
-                    </div> : null
+                        <div className="flex flex-col gap-5 w-full">
+                            <Field placeholder="Enter new name" value={album.albomDto?.name} onChange={(e: any) => { }} />
+                            <Field value={album.albomDto?.description} onChange={(e: any) => { }} placeholder={"Enter new description"} />
+                            <div className="mt-auto w-full flex justify-end">
+                                <ProfileButton text={"Save"} isSelect onClick={() => { }}></ProfileButton>
+                            </div>
+                        </div> : null
                 }
             </form>
         </div>
