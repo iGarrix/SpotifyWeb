@@ -280,7 +280,7 @@ export const removeTrackByPlaylist = (data: IRemoveTrackPlaylistRequest) => {
 };
 
 
-export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest) => {
+export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest, isAddingError?: boolean) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
@@ -294,10 +294,12 @@ export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
-        dispatch({
-          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
-          payload: serverError.response?.data,
-        });
+        if (!isAddingError) {       
+          dispatch({
+            type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+            payload: serverError.response?.data,
+          });
+        }
         if (serverError && serverError.response) {
           return Promise.reject(serverError.response.data);
         }

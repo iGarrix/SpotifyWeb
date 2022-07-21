@@ -62,6 +62,11 @@ import { StudioPlaylist } from "./Components/Views/CreativeStudio/Playlist/Studi
 import { LayCreativeStudio } from "./Components/Layout/LayCreativeStudio";
 import { OverViewPlaylist } from "./Components/Views/CreativeStudio/Playlist/OverviewPlaylist";
 import { WebSettings } from "./Components/Views/WebSettings";
+import { StudioSingle } from "./Components/Views/CreativeStudio/Single";
+import { StudioAlbum } from "./Components/Views/CreativeStudio/Album";
+import { OverviewProfileSingles } from "./Components/Views/OverViewProfile/OverviewProfileSingles";
+import { OverviewProfilePlaylists } from "./Components/Views/OverViewProfile/OverviewProfilePlaylists";
+import { OverviewProfileAlbums } from "./Components/Views/OverViewProfile/OverviewProfileAlbums";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -114,7 +119,7 @@ function App() {
             <Route index element={<Genres />} />
             <Route path=":name" element={<GenreDetails />} />
           </Route>
-          <Route path="createplaylist" element={<Settings />} />
+          {/* <Route path="createplaylist" element={<Settings />} /> */}
           <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
@@ -127,7 +132,11 @@ function App() {
           </Route>
 
           <Route path="overview" element={<Outlet />}>
-            <Route path=":nickname" element={<OverviewProfile />} />
+            <Route path=":nickname" element={<OverviewProfile />} >
+              <Route index element={<OverviewProfileSingles />} />
+              <Route path="playlists" element={<OverviewProfilePlaylists />} />
+              <Route path="albums" element={<OverviewProfileAlbums />} />
+            </Route>
           </Route>
 
           <Route path="profile" element={<LayProfile />}>
@@ -176,8 +185,8 @@ function App() {
           <Route path="overviewplaylist" element={<Outlet />} >
             <Route path=":id" element={<OverViewPlaylist />}/>
           </Route>
-          <Route path="single" element={<div>Single</div>} />
-          <Route path="album" element={<div>Album</div>} />
+          <Route path="single" element={<StudioSingle />} />
+          <Route path="album" element={<StudioAlbum />} />
         </Route>
 
         <Route path="upload" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>

@@ -184,7 +184,6 @@ export const OverViewPlaylist: React.FC = () => {
 
     const AddTrackToPlaylist = async (item: IPagableMyPlaylistItem | any) => {
         if (item && playlist && playlist.playlistDto && playlist.playlistCreator) {
-            console.log(item.track.returnId);
             const rq : IAddTrackToPlaylistRequest = {
                 playlistFind: {
                     findPlaylistName: playlist?.playlistDto.name,
@@ -260,7 +259,6 @@ export const OverViewPlaylist: React.FC = () => {
                                 searchrx.tracks?.slice(0, 3).map(item => {
                                     return (
                                         <SoundItemPlaylist key={Guid.create().toString()} item={item}
-                                            onDelete={() => { onRemoveTrackPlaylist(playlist, item.track?.returnId) }}
                                             onAdd={() => { AddTrackToPlaylist(item) }} />
                                     )
                                 })

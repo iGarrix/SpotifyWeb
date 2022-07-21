@@ -62,3 +62,17 @@ export type MyAlbumAction =
   | InitMyAlbumWaitAction
   | InitMyAlbumErrorAction
   | InitMyAlbumClearAction;
+
+  export interface IChangeAlbumRequest {
+    findReturnId: string,
+    newName: string,
+    newDescription: string,
+  }
+  export interface IChangeImageAlbumRequest {
+    findReturnId: string,
+    newImage: string,
+  }
+  export interface IChangeTemplateImageAlbumRequest {
+    findReturnId: string,
+    newTemplateimage: string,
+  }

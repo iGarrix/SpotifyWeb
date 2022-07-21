@@ -4,6 +4,7 @@ import { DeviceType, IUser, MinPasswordLenght, minYears } from "../../../types";
 export enum UserActionTypes {
   INITUSER = "INITUSER",
   INITOVERWIEVER = "INITOVERWIEVER",
+  INITOVERWIEVERSUBSCRIBE = "INITOVERWIEVERSUBSCRIBE",
   INITUSER_WAITING = "INITUSER_WAITING",
   INITUSER_ERROR = "INITUSER_ERROR",
   INITUSER_CLEAR = "INITUSER_CLEAR",
@@ -124,6 +125,7 @@ export const changeEmojieAccountValidate = Yup.object({
 export interface IUserState {
   profile: IUser | null;
   overviewer: IUser | null,
+  isSubscribe: boolean,
   loading: boolean;
   error: string;
 }
@@ -223,6 +225,10 @@ export interface InitOverviewerAction {
   type: UserActionTypes.INITOVERWIEVER;
   payload: IUser | null;
 }
+export interface InitOverviewerSubscribeAction {
+  type: UserActionTypes.INITOVERWIEVERSUBSCRIBE;
+  payload: boolean;
+}
 export interface InitUserWaitAction {
   type: UserActionTypes.INITUSER_WAITING;
   payload: boolean;
@@ -238,6 +244,7 @@ export interface InitUserClearAction {
 export type UserAction =
   | InitUserAction
   | InitOverviewerAction
+  | InitOverviewerSubscribeAction
   | InitUserWaitAction
   | InitUserErrorAction
   | InitUserClearAction;
@@ -356,4 +363,15 @@ export interface ISendAppelationForm {
 export interface ISendAppelationRequest {
   Message: string,
   FindEmail: string,
+}
+
+export interface ISubscribeRequest {
+  fromEmail: string,
+  toEmail: string,
+}
+
+export interface ISubscribe {
+  status: string,
+  fromUser: IUser | null,
+  toUser: IUser | null,
 }

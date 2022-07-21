@@ -98,7 +98,7 @@ export const ProfileSingles: React.FC = () => {
                             <div className="flex flex-col items-center gap-8 text-dark-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-3xl">Create you first single song</h1>
-                                    <p className="font-medium text-xl">You can also apply to verify your account as an artist</p>
+                                    <p className="font-medium text-xl">You can also uploading new singles</p>
                                 </div>
                                 <div>
                                     <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single song"} />

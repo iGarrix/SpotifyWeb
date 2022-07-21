@@ -60,3 +60,29 @@ export const addMySingle = (data: IGetAllMySingleRequest) => {
     }
   };
 };
+
+export const removeTrack = (id: string) => {
+  return async (dispatch: Dispatch<MySingleAction>) => {
+    try {
+      dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.delete<String>(
+        "api/Track/Remove?trackId=" + id, {
+        headers: AuthorizateHeader(token).headers
+      }
+      );
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MySingleActionTypes.INITMYSINGLE_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};

@@ -4,6 +4,7 @@ import { IUserState, UserAction, UserActionTypes } from "./types";
 const inialState: IUserState = {
   profile: null,
   overviewer: null,
+  isSubscribe: false,
   loading: false,
   error: "",
 };
@@ -19,6 +20,7 @@ export const userReducer = (
         profile: action.payload,
         loading: false,
         error: "",
+        isSubscribe: false,
       };
     }
     case UserActionTypes.INITOVERWIEVER: {
@@ -27,6 +29,14 @@ export const userReducer = (
         overviewer: action.payload,
         loading: false,
         error: "",
+      };
+    }
+    case UserActionTypes.INITOVERWIEVERSUBSCRIBE: {
+      return {
+        ...state,
+        isSubscribe: action.payload,
+        error: "",
+        loading: false,
       };
     }
     case UserActionTypes.INITUSER_WAITING: {
@@ -52,6 +62,7 @@ export const userReducer = (
         profile: null,
         loading: false,
         error: "",
+        isSubscribe: false,
       };
     }
 

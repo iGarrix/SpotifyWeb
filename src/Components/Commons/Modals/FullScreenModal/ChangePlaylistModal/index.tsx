@@ -1,9 +1,11 @@
-import { faClose, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faImage, faPlus, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
-import { IChangePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { IChangePlaylistImageRequest, IChangePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { baseUrl, defaultAvatarImage } from "../../../../../types";
+import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { DefaultSettingsDropdown } from "../../../DefaultSettingsDropdown";
 import { Field } from "../../../Inputs/Field";
 import { IChangePlaylistModal } from "./types";
@@ -11,9 +13,10 @@ import { IChangePlaylistModal } from "./types";
 
 export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, onClose, playlist }) => {
     const error = useTypedSelector(state => state.userReducer.error);
-    const {updatePlaylist} = useActions();
+    const { updatePlaylist, updateImagePlaylist } = useActions();
+    const user = useTypedSelector(state => state.userReducer.profile);
     useEffect(() => {
-        if (error && error !== "") {         
+        if (error && error !== "") {
             setEnterError(error);
         }
     }, [error]);
@@ -21,19 +24,19 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
     const onSubmit = async (event: any) => {
         event.preventDefault();
         try {
-            if (event.target[0].value.length === 0) {
+            if (event.target[1].value.length === 0) {
                 setEnterError("Field 'Name' is empty")
                 return;
             }
-            else if (event.target[1].value.length === 0) {
+            else if (event.target[2].value.length === 0) {
                 setEnterError("Field 'AccessType' is empty")
                 return;
             }
             if (playlist && playlist.playlistDto && playlist.playlistCreator) {
                 const request: IChangePlaylistRequest = {
                     response: { findPlaylistCreatorEmail: playlist.playlistCreator?.email, findPlaylistName: playlist.playlistDto?.name },
-                    newName: event.target[0].value,
-                    newStatus: event.target[1].value,
+                    newName: event.target[1].value,
+                    newStatus: event.target[2].value,
                 }
                 await updatePlaylist(request);
                 setEnterError("");
@@ -52,6 +55,21 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
         setEnterError("");
         onClose();
     }
+    const onChangeImage = async (e: any) => {
+        try {
+            const file = e.target.files[0];
+            if (user && file && playlist && playlist.playlistDto && playlist.playlistCreator) {
+                const request: IChangePlaylistImageRequest = {
+                    response: { findPlaylistCreatorEmail: playlist.playlistCreator?.email, findPlaylistName: playlist.playlistDto?.name },
+                    image: file,
+                }
+                await updateImagePlaylist(request);
+            }
+            onCloseSubmit();
+        } catch (error) {
+
+        }
+    }
     return (
         <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
             <div className="flex justify-between w-full">
@@ -63,14 +81,31 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                 enterError && enterError.length !== 0 ?
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
             }
-            <form onSubmit={onSubmit}>
+            <form className="flex gap-[18px]" onSubmit={onSubmit}>
+                <div className="flex flex-col gap-2">
+                    {
+                        playlist ?
+                            <div className="w-48 h-48 relative overflow-hidden rounded-xl">
+                                <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
+                                    <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
+                                    <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                </div>
+                                <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                            </div> :
+                            <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
+                                <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
+                            </div>
+                    }
+                </div>
                 {
                     playlist ?
-                    <div className="flex flex-col gap-3 px-20">
-                        <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
-                        <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { } } title={"Chose new access type"} options={["Public", "Private"]} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to rename pib?</button>
-                    </div> : null
+                        <div className="flex flex-col gap-5 w-full">
+                            <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
+                            <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { }} title={"Chose new access type"} options={["Public", "Private"]} />
+                            <div className="mt-auto w-full flex justify-end">
+                                <ProfileButton text={"Save"} isSelect onClick={() => { }}></ProfileButton>
+                            </div>
+                        </div> : null
                 }
             </form>
         </div>

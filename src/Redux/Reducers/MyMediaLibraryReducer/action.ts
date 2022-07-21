@@ -20,7 +20,6 @@ export const getMyMediaLibrarySingle = (data: IGetAllMySingleRequest) => {
         dispatch({ type: MyMediaLibraryActionTypes.INITMYMEDIALIBRARYSINGLE, payload: response.data });
         return Promise.resolve();
       } catch (error) {
-        console.log(error);
         if (axios.isAxiosError(error)) {
           const serverError = error as AxiosError<any>;
           dispatch({

@@ -1,4 +1,4 @@
-import { IChangePlaylistRequest, IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, IPlaylist, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
+import { ICreatePlaylistRequest, IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
 import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
@@ -42,6 +42,65 @@ export const addMyPlaylists = (data: IGetAllMyPlaylistRequest) => {
         AuthorizateHeader(token)
       );
       dispatch({ type: MyPlaylistActionTypes.ADDMYPLAYLIST, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyPlaylistActionTypes.INITMYPLAYLIST_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const createPlaylist = (data: ICreatePlaylistRequest) => {
+  return async (dispatch: Dispatch<MyPlaylistAction>) => {
+    try {
+      dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const form = new FormData();
+      form.append("UserEmail", data.userEmail);
+      form.append("Name", data.name);
+      form.append("Image", data.image);
+      form.append("AccessStatus", data.accessStatus);
+      await http.post<IPagableMyPlaylistItem>(
+        "api/Playlist/CreatePlaylist",
+        form, AuthorizateHeader(token)
+      );
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyPlaylistActionTypes.INITMYPLAYLIST_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+
+export const searchMyPlaylists = (query: string) => {
+  return async (dispatch: Dispatch<MyPlaylistAction>) => {
+    try {
+      dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.get<Array<IPagableMyPlaylistItem>>(
+        `api/Playlist/SearchPlaylist?query=${query}`,
+        AuthorizateHeader(token)
+      );
+      dispatch({ type: MyPlaylistActionTypes.INITMYSEARCHPLAYLIST, payload: response.data });
 
       return Promise.resolve();
     } catch (error) {
