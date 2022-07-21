@@ -3,6 +3,7 @@ import { IPagableResponse, IUser } from "../../../types";
 export enum MyPlaylistActionTypes {
   INITMYPLAYLIST = "INITMYPLAYLIST",
   ADDMYPLAYLIST = "ADDMYPLAYLIST",
+  INITMYSEARCHPLAYLIST = "INITMYSEARCHPLAYLIST",
   INITMYPLAYLIST_WAITING = "INITMYPLAYLIST_WAITING",
   INITMYPLAYLIST_ERROR = "INITMYPLAYLIST_ERROR",
   INITMYPLAYLIST_CLEAR = "INITMYPLAYLIST_CLEAR",
@@ -30,6 +31,7 @@ export interface IPagableMyPlaylistItem {
 
 export interface IMyPlaylistStateState {
   playlists: IPagableMyPlaylistItem[] | null;
+  searchPlaylists: IPagableMyPlaylistItem[] | null,
   prevPage: number | null,
   nextPage: number | null,
   loading: boolean;
@@ -49,6 +51,10 @@ export interface AddMyPlaylistAction {
   type: MyPlaylistActionTypes.ADDMYPLAYLIST;
   payload: IPagableResponse<IPagableMyPlaylistItem> | null;
 }
+export interface InitMySearchPlaylistAction {
+  type: MyPlaylistActionTypes.INITMYSEARCHPLAYLIST;
+  payload: Array<IPagableMyPlaylistItem> | null;
+}
 export interface InitMyPlaylistWaitAction {
   type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING;
   payload: boolean;
@@ -64,6 +70,7 @@ export interface InitMyPlaylistClearAction {
 export type MyPlaylistAction =
   | InitMyPlaylistAction
   | InitMyPlaylistWaitAction
+  | InitMySearchPlaylistAction
   | InitMyPlaylistErrorAction
   | InitMyPlaylistClearAction
   | AddMyPlaylistAction;

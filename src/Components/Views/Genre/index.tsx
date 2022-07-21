@@ -61,7 +61,7 @@ export const Genres: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 pl-[5%] pr-[2%] items-center relative">
             <Helmet>
                 <title>Soundwave | Genres all</title>
             </Helmet>
@@ -69,7 +69,7 @@ export const Genres: React.FC = () => {
                 <h1 className="font-semibold text-2xl">Genres</h1>
                 {
                     genre ?
-                    <div className="flex items-center gap-[18px] flex-wrap">
+                    <div className="flex  gap-[18px] flex-wrap">
                         {
                             genre?.map(item => {
                                 return (

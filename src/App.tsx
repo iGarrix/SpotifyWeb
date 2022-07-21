@@ -62,6 +62,9 @@ import { StudioPlaylist } from "./Components/Views/CreativeStudio/Playlist/Studi
 import { LayCreativeStudio } from "./Components/Layout/LayCreativeStudio";
 import { OverViewPlaylist } from "./Components/Views/CreativeStudio/Playlist/OverviewPlaylist";
 import { WebSettings } from "./Components/Views/WebSettings";
+import { OverviewProfileSingles } from "./Components/Views/OverViewProfile/OverviewProfileSingles";
+import { OverviewProfilePlaylists } from "./Components/Views/OverViewProfile/OverviewProfilePlaylists";
+import { OverviewProfileAlbums } from "./Components/Views/OverViewProfile/OverviewProfileAlbums";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -127,7 +130,11 @@ function App() {
           </Route>
 
           <Route path="overview" element={<Outlet />}>
-            <Route path=":nickname" element={<OverviewProfile />} />
+            <Route path=":nickname" element={<OverviewProfile />} >
+              <Route index element={<OverviewProfileSingles />} />
+              <Route path="playlists" element={<OverviewProfilePlaylists />} />
+              <Route path="albums" element={<OverviewProfileAlbums />} />
+            </Route>
           </Route>
 
           <Route path="profile" element={<LayProfile />}>

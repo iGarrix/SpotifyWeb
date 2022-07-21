@@ -91,14 +91,14 @@ export const Welcome: React.FC = () => {
               className="bg-no-repeat object-cover bg-cover rounded-xl shadow-xl w-[264px] h-[264px]"
               src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
           </div>
-          <div className="flex flex-col gap-2 col-start-6 col-span-7 z-[2]">
-            <p className="font-medium text-xl">The best of week</p>
+          <div className="flex flex-col gap-4 col-start-6 col-span-7 z-[2]">
+            <p className="font-medium text-xl select-none">The best of week</p>
             <h1 className="font-semibold font-['Lexend'] text-4xl">{mainReducer.albums[0].albomDto?.name}</h1>
-            <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">{mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom[0].username}</p>
+            <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">Creators: {mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom.map(item => item.username).join(", ")}</p>
             <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
-              onClick={() => { }}
+              onClick={onRedirectToAlbum}
               style={{ backgroundImage: `url(${bg})` }}>
-              <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} onClick={onRedirectToAlbum} />
+              <img alt="icon" className="w-[30px] -translate-x-[0.8px] select-none" src={icon_play} />
             </div>
           </div>
         </div>

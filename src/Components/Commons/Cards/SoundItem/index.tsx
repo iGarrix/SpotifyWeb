@@ -1,4 +1,4 @@
-import { faEllipsisVertical, faHeart, faPause, faPlay, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faClose, faEllipsisVertical, faHeart, faPause, faPlay, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
@@ -8,7 +8,10 @@ import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { baseUrl, defaultAlbumImage, defaultMusicImage } from "../../../../types";
+import { ProfileButton } from "../../Buttons/ProfileButton";
+import { SearchField } from "../../Inputs/SearchField";
 import { FullScreenModal } from "../../Modals/FullScreenModal";
+import { AddTrackToPlaylistModal } from "../../Modals/FullScreenModal/AddTrackToPlaylistModal";
 import { ShareModal } from "../../Modals/FullScreenModal/Shares/ShareModal";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
 
@@ -27,6 +30,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
     const play = useTypedSelector(state => state.playingReducer.queue?.isPlay);
     const user = useTypedSelector(state => state.userReducer.profile);
     const [shareModal, setShareModal] = useState(false);
+    const [addtrackModal, setAddtrackModal] = useState(false);
     const addtoqueue = async (isPlay: any) => {
         const response = AddToQueue(item, isPlay);
         if (response) {
@@ -74,6 +78,9 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                         </div>
                     } />
             </FullScreenModal>
+            <FullScreenModal visible={addtrackModal} center >
+                <AddTrackToPlaylistModal onClose={() => { setAddtrackModal(false)}} trackId={item.track?.returnId} />
+            </FullScreenModal>
             <div className="flex gap-6 items-center">
                 {
                     isPlay ?
@@ -103,19 +110,21 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                     item.track &&
                     <h1 className="text-thin w-[48px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>
                 }
-                {/* <FontAwesomeIcon className={`text-2xl ${isLiked ? "text-red-500" : "hover:text-blue-500"} cursor-pointer transition-all" translate-y-[-1px]`} icon={faHeart} /> */}
                 {
                     isLiked ?
                         <img alt="icon" className="w-[25px] cursor-pointer" src={icon_likered} />
                         :
-                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_like} />
+                        <img alt="icon" className={`w-[25px] cursor-pointer ${isPlay ? "" : "invert"}`} src={icon_like} />
                 }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
                 },
                 {
+                    title: "Add to playlist", icon: <FontAwesomeIcon icon={faCirclePlus} />, onClick: () => { setAddtrackModal(true) }
+                },
+                {
                     title: "Share", icon: <FontAwesomeIcon icon={faShare} />, onClick: () => { onShare() }
-                }]}
+                },]}
                     trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
             </div>
         </div>

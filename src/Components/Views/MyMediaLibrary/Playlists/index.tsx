@@ -67,7 +67,14 @@ export const MyMediaLibraryPlaylists: React.FC = () => {
         if (item) {
             await clearTracks();
             await initSelectPlaylist(null);
-            nav("/playlist/" + item?.playlistDto?.returnId);
+            if (item.playlistCreator?.username === user?.username) {
+                nav({
+                    pathname: "/playlist/" + item?.playlistDto?.returnId,
+                }); 
+            }
+            else {
+                nav("/playlist/" + item?.playlistDto?.returnId);
+            }
         }
     }
   return (

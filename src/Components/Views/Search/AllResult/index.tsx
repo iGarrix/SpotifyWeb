@@ -24,6 +24,7 @@ export const AllResultSearch: React.FC = () => {
     const { SearchAllXHR, clearTracks, initQueue, setPlayingTrack, initSelectPlaylist, initSelectAlbum, SearchAllWithoutBestResultXHR } = useActions();
     const [searchParams, setSearchParams] = useSearchParams();
     const [upt, setUpt] = useState(false);
+    const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
     const reducer = useTypedSelector(state => state.searchReducer);
     const playingReducer = useTypedSelector(state => state.playingReducer);
@@ -81,11 +82,18 @@ export const AllResultSearch: React.FC = () => {
         }
     }
 
-    const onSelectPlaylist = async (id: string | null) => {
-        if (id) {
+    const onSelectPlaylist = async (id: string | null, username: string | any) => {
+        if (id && username) {
             await clearTracks();
             await initSelectPlaylist(null);
-            nav("/playlist/" + id);
+            if (user?.username === username) {
+                nav({
+                    pathname: "/playlist/" + id,
+                });           
+            }
+            else {
+                nav("/playlist/" + id);
+            }
         }
     }
 
@@ -153,7 +161,7 @@ export const AllResultSearch: React.FC = () => {
                                                 creators={(reducer.searchall?.bestResult as ITrackResponse).trackCreators?.map(i => i.username)} />
                                             :
                                             <PlaylistResultCard
-                                                onNavigate={() => { onSelectPlaylist((reducer.searchall?.bestResult as IPlaylistSearch).id) }}
+                                                onNavigate={() => { onSelectPlaylist((reducer.searchall?.bestResult as IPlaylistSearch).id, (reducer.searchall?.bestResult as IPlaylistSearch).creator.username) }}
                                                 onSelect={() => { upt ? onSelectTrack(reducer.searchall?.tracks[0]) : onSelectInstanceTrack(playingReducer.queue?.soundobjs[playingReducer.queue.playedIndex]) }}
                                                 isPlay={playingReducer.queue?.isPlay}
                                                 name={(reducer.searchall?.bestResult as IPlaylistSearch).name}
@@ -225,7 +233,7 @@ export const AllResultSearch: React.FC = () => {
                         {
                             reducer.searchall.playlists.map(item => {
                                 return (
-                                    <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => { onSelectPlaylist(item.id) }} />
+                                    <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => { onSelectPlaylist(item.id, item.creator.username) }} />
                                 )
                             })
                         }

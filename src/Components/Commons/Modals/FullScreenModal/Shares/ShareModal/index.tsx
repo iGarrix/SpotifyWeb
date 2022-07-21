@@ -25,12 +25,12 @@ export const ShareModal : React.FC<IShareAlbumModal> = ({...props}) => {
             {props.banner}
             <div className="flex flex-col gap-1 w-full">
                 <h1 className="text-lg font-medium">{isCopy ? "Link copied!" : "Share link"}</h1>
-                <div className="flex w-full bg-green-500">
-                    <div className="flex w-full justify-between bg-light-200 shadow-sm rounded-sm items-center gap-[64px]">
+                <div className="flex w-full">
+                    <div className="flex w-full justify-between bg-light-200 shadow-sm rounded-md items-center gap-[64px] overflow-hidden">
                         <a href={props.link} className="text-md px-4 hover:text-primary-100" target={"_blank"}>{props.link}</a>
                         <CopyToClipboard text={props.link ? props.link : ""} onCopy={() => {setCopy(true)}}>
                             <p className="text-light-100 flex items-center justify-center text-center
-                            text-lg font-medium bg-blue-500 px-[24px] py-[6px] cursor-pointer">{isCopy ? "Copied" : "Copy"}</p>            
+                            text-lg font-medium bg-blue-500 hover:bg-sky-500 px-[24px] py-[6px] cursor-pointer">{isCopy ? "Copied" : "Copy"}</p>            
                         </CopyToClipboard>
                     </div>
                 </div>

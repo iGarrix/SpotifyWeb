@@ -13,6 +13,7 @@ export const PlaylistResult : React.FC = () => {
     const { getAllSearchPlaylist, addAllSearchPlaylist, initSelectPlaylist, clearTracks} = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    const user = useTypedSelector(state => state.userReducer.profile);
     const [isPending, startTransition] = useTransition();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -59,11 +60,18 @@ export const PlaylistResult : React.FC = () => {
             await addAllSearchPlaylist(query, rx.nextPage);
         }
     }
-    const onSelectPlaylist = async (id: string | null) => {
-        if (id) {
+    const onSelectPlaylist = async (id: string | null, username: string | any) => {
+        if (id && username) {
             await clearTracks();
             await initSelectPlaylist(null);
-            nav("/playlist/" + id);
+            if (user?.username === username) {
+                nav({
+                    pathname: "/playlist/" + id,
+                });           
+            }
+            else {
+                nav("/playlist/" + id);
+            }
         }
     }
     return (
@@ -79,7 +87,7 @@ export const PlaylistResult : React.FC = () => {
                             {
                                 rx.playlists?.map(item => {
                                     return (
-                                        <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id)}} />
+                                        <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id, item.creator.username)}} />
                                     )
                                 })
                             }

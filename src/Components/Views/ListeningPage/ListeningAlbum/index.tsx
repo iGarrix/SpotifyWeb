@@ -12,6 +12,7 @@ import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types"
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 import { ShareModal } from "../../../Commons/Modals/FullScreenModal/Shares/ShareModal";
+
 const bg = require('../../../../Assets/Background2.png');
 const icon_skip_forward = require('../../../../Assets/Icons/SkipForward.png');
 const icon_skip_next = require('../../../../Assets/Icons/SkipNext.png');
@@ -19,6 +20,7 @@ const icon_like = require('../../../../Assets/Icons/Like.png');
 const icon_share = require('../../../../Assets/Icons/Share.png');
 const icon_play = require('../../../../Assets/Icons/Play.png');
 const icon_pause = require('../../../../Assets/Icons/Pause.png');
+const icon_cs = require('../../../../Assets/Icons/Studio.png');
 
 export const ListeningAlbum: React.FC = () => {
 
@@ -211,7 +213,13 @@ export const ListeningAlbum: React.FC = () => {
                         <div className="flex justify-start w-full col-span-3 mb-32 z-10">
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col gap-1">
-                                    <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
+                                    <div className="flex gap-4 w-full items-center">
+                                        <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
+                                        {
+                                            user && playingReducer.album?.creatorsAlbom?.map(i => i.username).includes(user.username) &&
+                                            <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewalbum/' + id)}} />
+                                        }
+                                    </div>
                                     {
                                         playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
                                         <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")}</p>

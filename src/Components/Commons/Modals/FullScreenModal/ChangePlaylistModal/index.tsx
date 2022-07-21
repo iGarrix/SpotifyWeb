@@ -69,7 +69,7 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                     <div className="flex flex-col gap-3 px-20">
                         <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
                         <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { } } title={"Chose new access type"} options={["Public", "Private"]} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to rename pib?</button>
+                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to update playlist?</button>
                     </div> : null
                 }
             </form>

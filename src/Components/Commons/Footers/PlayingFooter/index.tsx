@@ -261,7 +261,7 @@ export const PlayingFooter: React.FC = () => {
                                         <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => { nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username) }}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
                                         <img alt="icon" className="w-[20px] h-[20px] cursor-pointer object-cover bg-cover bg-no-repeat transition-all hover:scale-105" src={icon_share} onClick={() => { onShare() }} />
                                     </div>
-                                    <p className="text-gray-300">{rx.soundobjs[rx.playedIndex].track?.name.substring(0, 30)}</p>
+                                    <p className="text-gray-300 whitespace-normal max-h-[70px]">{rx.soundobjs[rx.playedIndex].track?.name}</p>
                                 </div>
                             </div>
                         </div>
