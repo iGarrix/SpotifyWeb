@@ -93,3 +93,10 @@ export type MyPlaylistAction =
     playlistFind: IPlaylistFindRequest,
     trackId: string,
   }
+
+  export interface ICreatePlaylistRequest {
+    userEmail: string,
+    name: string,
+    image: string, 
+    accessStatus: string,
+  }

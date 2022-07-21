@@ -12,6 +12,7 @@ import { CreatePlaylistItem } from "../../../../Commons/Cards/CreativeStudioCard
 import { QuadraticLoader } from "../../../../Commons/Loaders/QuadraticLoader";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
+import { CreatePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/CreatePlaylistModal";
 
 export const StudioPlaylist: React.FC = () => {
     const { getMyPlaylists, addMyPlaylists, removePlaylist, clearTracks } = useActions();
@@ -21,6 +22,8 @@ export const StudioPlaylist: React.FC = () => {
     const nav = useNavigate();
     const [openModal, setOpenModal] = useState(false);
     const [selectedPlaylist, setselectedPlaylist] = useState<any>(null);
+    const [createPlaylist, setcreatePlaylist] = useState<any>(null);
+    const [openModal2, setOpenModal2] = useState(false);
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -30,16 +33,16 @@ export const StudioPlaylist: React.FC = () => {
             }
         }
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            if (user && !openModal) {
-                const rq: IGetAllMyPlaylistRequest = {
-                    email: user.email,
-                    page: 1
-                }
-                await getMyPlaylists(rq);
+    const fetchData = async () => {
+        if (user && !openModal) {
+            const rq: IGetAllMyPlaylistRequest = {
+                email: user.email,
+                page: 1
             }
+            await getMyPlaylists(rq);
         }
+    }
+    useEffect(() => {
         fetchData();
     }, [user, openModal]);
 
@@ -79,6 +82,11 @@ export const StudioPlaylist: React.FC = () => {
         }
     }
 
+    const onCreatePlaylist = () => {
+        setcreatePlaylist(true);
+        setOpenModal2(true);
+    }
+
     const onRemovePlaylist = async (item: IPagableMyPlaylistItem | null) => {
         try {
             if (item && item.playlistCreator && item.playlistDto) {
@@ -99,12 +107,22 @@ export const StudioPlaylist: React.FC = () => {
         }
     };
 
-    const onSaveChanges = () => {
+    const onSaveChanges = async () => {
         setOpenModal(false);
+        await fetchData();
     }
 
     const onCloseModal = () => {
         setOpenModal(false);
+    }
+
+    const onSaveChanges2 = async () => {
+        setOpenModal2(false);
+        await fetchData();
+    }
+
+    const onCloseModal2 = () => {
+        setOpenModal2(false);
     }
 
     return (
@@ -118,10 +136,16 @@ export const StudioPlaylist: React.FC = () => {
                         <ChangePlaylistModal playlist={selectedPlaylist} onSave={onSaveChanges} onClose={onCloseModal} />
                     </FullScreenModal> : null
             }
+            {
+                createPlaylist && openModal2 ?
+                    <FullScreenModal visible center>
+                        <CreatePlaylistModal  onSave={onSaveChanges2} onClose={onCloseModal2} />
+                    </FullScreenModal> : null
+            }
             <div className="flex flex-col gap-8 w-full h-full">
                 <h1 className="font-semibold text-2xl">Create new Playlist</h1>
                 <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-200 transition-all hover:bg-dark-200/40">
-                    <FontAwesomeIcon onClick={() => { console.log("first") }} className="text-white text-[64px]" icon={faPlus} />
+                    <FontAwesomeIcon onClick={() => onCreatePlaylist()} className="text-white text-[64px]" icon={faPlus} />
                 </div>
                 <div className="flex flex-col gap-10 w-full">
                     {

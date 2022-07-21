@@ -26,7 +26,7 @@ export const SideBar: React.FC = () => {
                 <div className="py-3">
                     <hr className="border-light-300" />
                 </div>
-                <SideBarItem text="Create playlist" isSelect={history.pathname.includes("/createplaylist")} icon={icon_playlist} onClick={() => { nav("createplaylist") }} />
+                <SideBarItem text="Create playlist" isSelect={history.pathname.includes("/creativestudio")} icon={icon_playlist} onClick={() => { nav("creativestudio") }} />
                 <SideBarItem text="My media library" isSelect={history.pathname.includes("/medialibrary")} icon={icon_library} onClick={() => { nav("medialibrary") }} />
             </div>
         </div>

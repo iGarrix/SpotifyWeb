@@ -116,7 +116,7 @@ function App() {
             <Route index element={<Genres />} />
             <Route path=":name" element={<GenreDetails />} />
           </Route>
-          <Route path="createplaylist" element={<StudioPlaylist />} />
+          {/* <Route path="createplaylist" element={<Settings />} /> */}
           <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />
           <Route path="settings" element={<Settings />} />
