@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangeAlbumRequest, IChangeImageAlbumRequest, IChangeTemplateImageAlbumRequest, IGetAllMyAlbumRequest } from "../../../../../Redux/Reducers/MyAlbumReducer/types";
-import { baseUrl, defaultAvatarImage } from "../../../../../types";
+import { baseUrl, defaultAlbumImage } from "../../../../../types";
 import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { Field } from "../../../Inputs/Field";
 import { IChangeAlbumModal } from "./types";
@@ -117,7 +117,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
                                     <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
                                     <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
                                 </div>
-                                <img alt="avatar" src={baseUrl + "Images/AlbomImages/" + album?.albomDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                <img alt="avatar" src={baseUrl + "Images/AlbomImages/" + album?.albomDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                             </div> :
                             <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
                                 <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
@@ -132,7 +132,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
                                         <input type="file" id="tempFile" accept="image/*" onChange={onChangeTemplateImage} className="hidden" />
                                         <label htmlFor="tempFile"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
                                     </div>
-                                    <img alt="avatar" src={baseUrl + "Images/AlbomTemplates/" + album?.albomDto?.templateimage} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                    <img alt="avatar" src={baseUrl + "Images/AlbomTemplates/" + album?.albomDto?.templateimage} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 </div>
                             </div>
                             :

@@ -5,6 +5,7 @@ export interface IAlbumCard {
     date: Date | any,
     type?: boolean | any,
     listening: number | any,
+    id: string | any,
     onEdit: () => void,
     onDelete: () => void,
 }

@@ -36,6 +36,7 @@ export const userReducer = (
         ...state,
         isSubscribe: action.payload,
         error: "",
+        loading: false,
       };
     }
     case UserActionTypes.INITUSER_WAITING: {

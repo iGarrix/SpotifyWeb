@@ -62,14 +62,11 @@ import { StudioPlaylist } from "./Components/Views/CreativeStudio/Playlist/Studi
 import { LayCreativeStudio } from "./Components/Layout/LayCreativeStudio";
 import { OverViewPlaylist } from "./Components/Views/CreativeStudio/Playlist/OverviewPlaylist";
 import { WebSettings } from "./Components/Views/WebSettings";
-<<<<<<< HEAD
 import { StudioSingle } from "./Components/Views/CreativeStudio/Single";
 import { StudioAlbum } from "./Components/Views/CreativeStudio/Album";
-=======
 import { OverviewProfileSingles } from "./Components/Views/OverViewProfile/OverviewProfileSingles";
 import { OverviewProfilePlaylists } from "./Components/Views/OverViewProfile/OverviewProfilePlaylists";
 import { OverviewProfileAlbums } from "./Components/Views/OverViewProfile/OverviewProfileAlbums";
->>>>>>> AddUpdatesUI
 
 function App() {
   const [isDark, setDark] = useState(() => {

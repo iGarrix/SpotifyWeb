@@ -69,12 +69,10 @@ export const createPlaylist = (data: ICreatePlaylistRequest) => {
       form.append("Name", data.name);
       form.append("Image", data.image);
       form.append("AccessStatus", data.accessStatus);
-      const response = await http.post<IPagableMyPlaylistItem>(
+      await http.post<IPagableMyPlaylistItem>(
         "api/Playlist/CreatePlaylist",
         form, AuthorizateHeader(token)
       );
-      console.log(response);
-      //dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST, payload: response.data });
 
       return Promise.resolve();
     } catch (error) {

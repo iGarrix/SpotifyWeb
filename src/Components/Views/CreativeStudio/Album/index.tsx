@@ -123,6 +123,7 @@ export const StudioAlbum: React.FC = () => {
                                         <div key={Guid.create().toString()} className="grid grid-cols-12 w-full">
                                             <div className="col-span-12 w-full">
                                                 <AlbumStudioItem
+                                                    id={item.albomDto?.returnId}
                                                     image={item.albomDto?.image}
                                                     name={item.albomDto?.name}
                                                     description={item.albomDto?.description}

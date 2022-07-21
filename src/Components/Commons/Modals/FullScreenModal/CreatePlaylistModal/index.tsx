@@ -1,11 +1,11 @@
 import { faImage } from "@fortawesome/free-regular-svg-icons";
-import { faClose, faPlus, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { ICreatePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { baseUrl, defaultAlbumImage, defaultAvatarImage } from "../../../../../types";
+import { defaultAlbumImage } from "../../../../../types";
 import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { DefaultSettingsDropdown } from "../../../DefaultSettingsDropdown";
 import { Field } from "../../../Inputs/Field";
@@ -45,8 +45,6 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
                     name: event.target[1].value,
                     accessStatus: event.target[2].value,
                 }
-                console.log(event);
-                console.log(request);
                 await createPlaylist(request);
                 setEnterError("");
                 onSaveSubmit();
