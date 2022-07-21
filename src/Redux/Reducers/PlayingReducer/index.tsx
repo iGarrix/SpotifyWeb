@@ -45,7 +45,7 @@ export const playingReducer = (
       }
       return {
         ...state,
-        tracks: action.payload ? arr : [],
+        tracks: action.payload ? arr.reverse() : [],
         nextPage: action.payload ? action.payload.nextPage : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         loading: false,
