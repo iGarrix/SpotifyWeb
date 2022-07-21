@@ -13,12 +13,12 @@ import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
-export const ProfileSingles: React.FC = () => {
+export const OverviewProfileSingles : React.FC = () => {
     const nav = useNavigate();
     const { getMySingle, addMySingle, initQueue } = useActions();
     const rx = useTypedSelector(state => state.mySingleReducer);
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
-    const user = useTypedSelector(state => state.userReducer.profile);
+    const user = useTypedSelector(state => state.userReducer.overviewer);
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -72,7 +72,7 @@ export const ProfileSingles: React.FC = () => {
     return (
         <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
             <Helmet>
-                <title>Soundwave | My Singles</title>
+                <title>Soundwave | Singles</title>
             </Helmet>
             {
                 rx.loading ?
@@ -94,19 +94,12 @@ export const ProfileSingles: React.FC = () => {
                         </div>
                         :
                         <>
+                            <hr className="w-full" />
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Create you first single song</h1>
-                                    <p className="font-medium text-xl">You can also uploading new singles</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single song"} />
-                                </div>
-                            </div>
+                            <h1 className="font-medium text-2xl text-dark-200">Singles not found</h1>
                         </>
             }
 
         </div>
     )
-}
+} 

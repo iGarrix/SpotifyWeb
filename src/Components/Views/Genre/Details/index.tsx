@@ -59,7 +59,7 @@ export const GenreDetails: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 pl-[5%] pr-[2%] items-center relative">
             <Helmet>
                 <title>Soundwave | Genres Details</title>
             </Helmet>
@@ -70,7 +70,7 @@ export const GenreDetails: React.FC = () => {
                         <div className="w-full flex justify-between items-center">
                             <h1 className="font-medium text-2xl text-dark-200">Weekly top playlists</h1>
                         </div>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-[18px] flex-wrap">
                             {
                                 playlist?.map(item => {
                                     return (

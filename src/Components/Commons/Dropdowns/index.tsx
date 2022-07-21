@@ -13,9 +13,15 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="h-5">
+      <div className="flex gap-2 flex-wrap">
+                <p className="text-dark-200 font-medium">{title}</p>
+                <ErrorMessage component="p" name={field.name} render={(errorMessage: string) => {
+                    return <p className="text-red-500 font-medium">{errorMessage}</p>;
+                }} />
+            </div>
+      {/* <div className="h-5">
         <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />
-      </div>
+      </div> */}
       <select defaultValue={value}
         className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-dark-200 bg-light-200"
         onChange={field.onChange}

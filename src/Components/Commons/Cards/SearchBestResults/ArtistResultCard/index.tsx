@@ -11,7 +11,7 @@ export const ArtistResultCard: React.FC<IArtistResultCard> = ({ ...props }) => {
         <div className="w-full h-full rounded-xl bg-light-200 flex flex-col gap-6 py-6 px-8 overflow-hidden cursor-pointer transition-all mainresultcard relative">
             <div className="absolute top-0 left-0 w-full h-full" onClick={props.onNavigate}></div>
             <img alt="image" src={props.image}
-                className="rounded-xl w-[164px] h-[164px] shadow-xl select-none" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                className="rounded-xl w-[164px] h-[164px] bg-cover object-cover shadow-xl select-none" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
             <div className="flex justify-between gap-[128px]">
                 <div className="flex flex-col justify-between">
                     <div className="flex flex-col">

@@ -23,6 +23,8 @@ import {
   IVerifyEmailRequest,
   UserAction,
   UserActionTypes,
+  ISubscribeRequest,
+  ISubscribe,
 } from "./types";
 
 import jwt_decode from "jwt-decode";
@@ -678,6 +680,90 @@ export const DeleteProfile = (data: IDeleteProfileRequest) => {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
         dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const getSubscribeUser = (fromUsername: string, toUsername: string) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const response = await http.get<boolean>(
+        `api/Subscribe/GetSubscribe?fromUsername=${fromUsername}&toUsername=${toUsername}`
+      );
+      dispatch({ type: UserActionTypes.INITOVERWIEVERSUBSCRIBE, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const DeleteSubscribe = (data: ISubscribeRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.delete<any>(
+        "api/Subscribe/Unsubscribe", {
+        headers: AuthorizateHeader(token).headers,
+        data: data
+      }
+      );
+      dispatch({ type: UserActionTypes.INITOVERWIEVERSUBSCRIBE, payload: false });
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
+        dispatch({
+          type: UserActionTypes.INITUSER_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+
+export const SubscribeUser = (data: ISubscribeRequest) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.post<ISubscribe>(
+        "api/Subscribe/Subscribe",
+        data,
+        AuthorizateHeader(token),
+      );
+      if (response.data) {
+        dispatch({ type: UserActionTypes.INITOVERWIEVERSUBSCRIBE, payload: true });
+      }
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
         dispatch({
           type: UserActionTypes.INITUSER_ERROR,
           payload: serverError.response?.data,

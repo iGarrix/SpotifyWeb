@@ -16,7 +16,7 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
     const { updatePlaylist, updateImagePlaylist } = useActions();
     const user = useTypedSelector(state => state.userReducer.profile);
     useEffect(() => {
-        if (error && error !== "") {         
+        if (error && error !== "") {
             setEnterError(error);
         }
     }, [error]);
@@ -82,8 +82,8 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
             }
             <form className="flex gap-[18px]" onSubmit={onSubmit}>
-            <div className="flex flex-col gap-2">
-            {
+                <div className="flex flex-col gap-2">
+                    {
                         playlist ?
                             <div className="w-48 h-48 relative overflow-hidden rounded-xl">
                                 <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
@@ -96,16 +96,16 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                                 <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
                             </div>
                     }
-            </div>
+                </div>
                 {
                     playlist ?
-                    <div className="flex flex-col gap-5 w-full">
-                        <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
-                        <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { } } title={"Chose new access type"} options={["Public", "Private"]} />
-                        <div className="mt-auto w-full flex justify-end">
+                        <div className="flex flex-col gap-5 w-full">
+                            <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
+                            <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { }} title={"Chose new access type"} options={["Public", "Private"]} />
+                            <div className="mt-auto w-full flex justify-end">
                                 <ProfileButton text={"Save"} isSelect onClick={() => { }}></ProfileButton>
                             </div>
-                    </div> : null
+                        </div> : null
                 }
             </form>
         </div>

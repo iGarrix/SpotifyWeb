@@ -182,7 +182,7 @@ export const RemoveWithQueue = (trackId: string, isPlay: boolean) => {
             const newQueue: IQueue = {
                 soundobjs: newObjs,
                 isPlay,
-                playedIndex: playedIndex >= 0 ? playedIndex : 0,
+                playedIndex: playedIndex > 0 ? playedIndex : 0,
             };
             if (newQueue.soundobjs.length === 0) {
                 localStorage.removeItem(StorageVariables.Queue);

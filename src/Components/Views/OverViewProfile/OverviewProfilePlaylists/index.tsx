@@ -7,17 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
-export const ProfilePlaylists: React.FC = () => {
+export const OverviewProfilePlaylists : React.FC = () => {
     const nav = useNavigate();
     const { getMyPlaylists, addMyPlaylists, clearTracks, initSelectPlaylist } = useActions();
 
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
-    const user = useTypedSelector(state => state.userReducer.profile);
+    const user = useTypedSelector(state => state.userReducer.overviewer);
 
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -68,15 +67,14 @@ export const ProfilePlaylists: React.FC = () => {
             await clearTracks();
             await initSelectPlaylist(null);
             nav({
-                pathname: "/playlist/" + item?.playlistDto?.returnId,
-                search: "?me=myplaylist"
+                pathname: "/playlist/" + item?.playlistDto?.returnId
             });
         }
     }
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative text-dark-200">
             <Helmet>
-                <title>Soundwave | My Playlist</title>
+                <title>Soundwave | Playlist</title>
             </Helmet>
             {
                 rx.loading ?
@@ -96,16 +94,9 @@ export const ProfilePlaylists: React.FC = () => {
                         </div>
                         :
                         <>
+                            <hr className="w-full" />
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Create you first playlist</h1>
-                                    <p className="font-medium text-xl">You can also creating new playlist</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/createplaylist") }} text={"Create you first playlist"} />
-                                </div>
-                            </div>
+                            <h1 className="font-medium text-2xl text-dark-200">Playlists not found</h1>
                         </>
             }
         </div>

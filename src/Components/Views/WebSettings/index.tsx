@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import { ClearStorage } from "../../../Redux/GlobalReduxFunc";
+import { store } from "../../../Redux/store";
 import { StorageVariables, Theme } from "../../../types";
+import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { ToggleButton } from "../../Commons/Buttons/ToggleButton";
 import { DefaultSettingsDropdown } from "../../Commons/DefaultSettingsDropdown";
 
@@ -52,6 +55,11 @@ export const WebSettings: React.FC = () => {
         }
     }
 
+    const clearAllStorage = () => {
+        ClearStorage(store.dispatch);
+        window.location.reload();
+    }
+
     return (
         <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200 gap-10">
             <Helmet>
@@ -74,6 +82,15 @@ export const WebSettings: React.FC = () => {
                 </div>
                 <div>
                    <ToggleButton onCheck={onChangeTheme} isSelected={dark === Theme.dark ? true : false} text={"Active light"} checkedText={"Active dark"}/>
+                </div>
+            </div>
+            <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                    <p className="text-2xl font-medium">Storage & Cookies</p>
+                    <p>Clear all data in storage and cookies</p>
+                </div>
+                <div className="">
+                   <ProfileButton text={"Clear All"} isSelect={false} onClick={clearAllStorage} />
                 </div>
             </div>
             <div className="flex flex-col gap-6">

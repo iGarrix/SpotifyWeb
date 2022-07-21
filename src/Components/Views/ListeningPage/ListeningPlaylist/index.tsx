@@ -24,7 +24,6 @@ const icon_cs = require('../../../../Assets/Icons/Studio.png');
 
 export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
-    const [me, setMe] = useSearchParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const { findPlaylist, initQueue, getPlaylistTracks } = useActions();
@@ -44,8 +43,7 @@ export const ListeningPlaylist: React.FC = () => {
     useEffect(() => {
         const work = async () => {
             if (id) {
-                const isme = me.get("me");
-                if (isme) {
+                if (playingReducer?.playlist?.playlistCreator?.username === user?.username) {
                     await findPlaylist(id, true);               
                 }
                 else {
@@ -218,7 +216,7 @@ export const ListeningPlaylist: React.FC = () => {
                                     <div className="flex gap-4 w-full items-center">
                                         <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
-                                            me.get("me") &&
+                                            playingReducer.playlist.playlistCreator?.username === user?.username &&
                                             <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
                                         }
                                     </div>

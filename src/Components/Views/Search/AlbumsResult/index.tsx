@@ -75,7 +75,7 @@ export const AlbumsResult : React.FC = () => {
                 rx.albums && rx.albums.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Albums All</h1>
-                        <div className="flex items-center gap-[15px] flex-wrap">
+                        <div className="flex gap-[15px] flex-wrap">
                             {
                                 rx.albums?.map(item => {
                                     return (

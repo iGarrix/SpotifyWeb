@@ -91,14 +91,14 @@ export const Welcome: React.FC = () => {
               className="bg-no-repeat object-cover bg-cover rounded-xl shadow-xl w-[264px] h-[264px]"
               src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
           </div>
-          <div className="flex flex-col gap-2 col-start-6 col-span-7 z-[2]">
-            <p className="font-medium text-xl">The best of week</p>
+          <div className="flex flex-col gap-4 col-start-6 col-span-7 z-[2]">
+            <p className="font-medium text-xl select-none">The best of week</p>
             <h1 className="font-semibold font-['Lexend'] text-4xl">{mainReducer.albums[0].albomDto?.name}</h1>
-            <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">{mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom[0].username}</p>
+            <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">Creators: {mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom.map(item => item.username).join(", ")}</p>
             <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
-              onClick={() => { }}
+              onClick={onRedirectToAlbum}
               style={{ backgroundImage: `url(${bg})` }}>
-              <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} onClick={onRedirectToAlbum} />
+              <img alt="icon" className="w-[30px] -translate-x-[0.8px] select-none" src={icon_play} />
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ export const Welcome: React.FC = () => {
               <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
             </div>
           }
-          <div className="flex items-center justify-between w-full flex-wrap">
+          <div className="flex justify-between w-full flex-wrap">
             {
               mainReducer.albums &&
               mainReducer.albums.slice(0, 8).map(item => {
@@ -162,7 +162,7 @@ export const Welcome: React.FC = () => {
               <h1 className="font-medium text-2xl text-dark-200">Weekly top artist</h1>
               <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>See all</p>
             </div>
-            <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap">
               {
                 mainReducer.artists &&
                 mainReducer.artists.slice(0, 6).map(item => {
@@ -184,7 +184,7 @@ export const Welcome: React.FC = () => {
                   <h1 className="font-medium text-2xl text-dark-200">Recent played</h1>
                   <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>See all</p>
                 </div>
-                <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex gap-4 flex-wrap">
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (

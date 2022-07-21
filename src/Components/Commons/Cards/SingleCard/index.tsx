@@ -13,7 +13,7 @@ export const SingleCard: React.FC<ISingleCard> = ({ ...props }) => {
             <img alt="albumimage" className="rounded-xl w-[164px] h-[164px] bg-no-repeat bg-cover object-cover transition-all hover:shadow-lg" 
             src={props.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
             <div className="flex flex-col gap-1">
-                <h2 className="text-lg font-medium">{props.title}</h2>
+                <h2 className="text-md font-medium">{props.title}</h2>
             </div>
         </button>
     )

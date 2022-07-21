@@ -8,16 +8,14 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyAlbumRequest, IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
 import { AlbumItem } from "../../../Commons/AlbumItem";
-import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
-export const ProfileAlbums: React.FC = () => {
-
+export const OverviewProfileAlbums: React.FC = () => {
     const nav = useNavigate();
     const { getMyAlbum, addMyAlbum, clearTracks, initSelectAlbum } = useActions();
     const rx = useTypedSelector(state => state.myAlbumsReducer);
     const albums = useTypedSelector(state => state.myAlbumsReducer.albums);
-    const user = useTypedSelector(state => state.userReducer.profile);
+    const user = useTypedSelector(state => state.userReducer.overviewer);
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -69,7 +67,7 @@ export const ProfileAlbums: React.FC = () => {
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
             <Helmet>
-                <title>Soundwave | My Albums</title>
+                <title>Soundwave | Albums</title>
             </Helmet>
             {
                 rx.loading ?
@@ -89,16 +87,9 @@ export const ProfileAlbums: React.FC = () => {
                         </div>
                         :
                         <>
+                            <hr className="w-full" />
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faCompactDisc} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Create you first album</h1>
-                                    <p className="font-medium text-xl">You can also uploading a new album</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/upload") }} text={"Create you first album"} />
-                                </div>
-                            </div>
+                            <h1 className="font-medium text-2xl text-dark-200">Singles not found</h1>
                         </>
             }
         </div>

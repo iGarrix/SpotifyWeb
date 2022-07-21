@@ -4,10 +4,11 @@ import { IMyPlaylistStateState, MyPlaylistAction, MyPlaylistActionTypes } from "
 
 const inialState: IMyPlaylistStateState = {
   playlists: null,
+  searchPlaylists: null,
   loading: false,
   error: "",
   prevPage: null,
-  nextPage: null
+  nextPage: null,
 };
 
 export const myPlaylistReducer = (
@@ -39,6 +40,14 @@ export const myPlaylistReducer = (
         playlists: action.payload ? arr : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case MyPlaylistActionTypes.INITMYSEARCHPLAYLIST: {
+      return {
+        ...state,
+        searchPlaylists: action.payload,
         loading: false,
         error: "",
       };
