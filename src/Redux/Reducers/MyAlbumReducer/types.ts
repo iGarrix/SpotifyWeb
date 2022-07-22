@@ -15,6 +15,7 @@ export interface IAlbum {
   image: string,
   templateimage: string,
   description: string,
+  views: number,
 }
 
 export interface IPagableMyAlbumItem {

@@ -9,7 +9,6 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyAlbumRequest, IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
 import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const MyMediaLibraryAlbums: React.FC = () => {
   const nav = useNavigate();
@@ -71,9 +70,6 @@ export const MyMediaLibraryAlbums: React.FC = () => {
         <title>Soundwave | MyMediaLibraryAlbums</title>
       </Helmet>
       {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     albums && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
                             <div className="grid grid-cols-4 gap-16">

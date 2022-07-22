@@ -9,7 +9,6 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItemSingle } from "../../../Commons/Cards/CreativeStudioCards/SingleCard";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const StudioSingle: React.FC = () => {
     const nav = useNavigate();
@@ -83,12 +82,6 @@ export const StudioSingle: React.FC = () => {
                 <h1 className="font-semibold text-2xl">Manage my single</h1>
                 <div className="flex flex-col gap-10 w-full">
                 {
-                        rx.loading ?
-                            <div className="w-full h-full flex justify-center items-center">
-
-                                <QuadraticLoader isVisisble={true} />
-                            </div>
-                            :
                             singles && rx.error.length === 0 ?
                                 singles?.map(item => {
                                     return (

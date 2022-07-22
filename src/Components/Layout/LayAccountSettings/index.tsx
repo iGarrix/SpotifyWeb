@@ -3,14 +3,13 @@ import { Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { AccountSettingsSideBar } from "../../Commons/AccountSettingsSideBar";
 import { Header } from "../../Commons/Header";
-import { QuadraticLoader } from "../../Commons/Loaders/QuadraticLoader";
 
 export const LayAccountSettings: React.FC = () => {
-    const loading = useTypedSelector(state => state.userReducer.loading);
+    const loading = useTypedSelector(state => state);
     return (
         <div className="grid grid-cols-12 w-full nin-h-screen">
             {
-                loading &&
+                loading.notificationReducer.loading || loading.userReducer.loading &&
                 <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
             }
             <div className="col-span-2 w-full h-full z-[100]">

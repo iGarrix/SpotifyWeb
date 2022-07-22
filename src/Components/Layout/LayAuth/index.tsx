@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { QuadraticLoader } from "../../Commons/Loaders/QuadraticLoader";
 import { ProtectedRoute } from "../../ProtectedRoutes/ProtectedRoute";
 
 export const LayAuth: React.FC = () => {
@@ -10,10 +9,10 @@ export const LayAuth: React.FC = () => {
   return (
     <ProtectedRoute user={user}>
       <div className="w-full min-h-screen relative">
-        <div className={`absolute w-full h-full overflow-hidden flex-col justify-center items-center gap-10 transition-all ${load ? "flex opacity-100 z-50" : "hidden opacity-0"}`}>
-          <div className="absolute bg-black w-full h-full opacity-80 overflow-hidden flex justify-center items-center"></div>
-          <QuadraticLoader isVisisble={load} />
-        </div>
+        {
+          load &&
+          <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
+        }
         <Outlet />
       </div>
     </ProtectedRoute>

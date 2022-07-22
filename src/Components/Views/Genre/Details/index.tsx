@@ -10,7 +10,6 @@ import { IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistRed
 import { clearTracks } from "../../../../Redux/Reducers/PlayingReducer/actions";
 import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const GenreDetails: React.FC = () => {
@@ -29,12 +28,12 @@ export const GenreDetails: React.FC = () => {
     }
     useEffect(() => {
         const fetchData = async () => {
-            if (user && name) {
+            if (name) {
                 await getAllGenrePlaylist(name, 1);
             }
         }
         fetchData();
-    }, [user, name]);
+    }, [name]);
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -81,7 +80,7 @@ export const GenreDetails: React.FC = () => {
                         </div>
                     </div>
                     :
-                    !rx.loading ?
+                    !rx.loading &&
                     <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
                         <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200">
@@ -94,9 +93,6 @@ export const GenreDetails: React.FC = () => {
                                 <DefaultButton onClick={() => { nav("/search") }} text={"Search playlists"} />
                             </div>
                         </div>
-                    </div> :
-                    <div className="w-full h-full absolute top-0 left-0 bg-dark-200/60 flex justify-center items-center z-[8500]" >
-                        <QuadraticLoader isVisisble={true} />
                     </div>
 
             }

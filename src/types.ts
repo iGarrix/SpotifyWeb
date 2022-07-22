@@ -52,6 +52,7 @@ export interface IUser {
   country: string;
   verify: string;
   emojie: string;
+  views: number,
 }
 
 export interface IHistory {
@@ -77,8 +78,10 @@ export interface IRefreshModel {
 
 export const TempTake = 20;
 export const minYears = 12;
-export const defaultMusicImage = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png";
-export const defaultAlbumImage = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png";
+export const defaultPlaylistImage = "https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg";
+export const defaultGenreImage = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png";
+export const defaultMusicImage = "https://cdn4.vectorstock.com/i/1000x1000/55/13/sound-wave-abstract-colored-equalizer-personal-vector-32115513.jpg";
+export const defaultAlbumImage = "https://cdn5.vectorstock.com/i/1000x1000/94/84/glowing-neon-vinyl-disk-icon-isolated-on-blue-vector-29459484.jpg";
 export const defaultAvatarImage = "https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg";
 export const defaultBackgroundImage = "https://static.vecteezy.com/system/resources/previews/005/185/276/original/abstract-man-avatar-pattern-background-free-vector.jpg";
 

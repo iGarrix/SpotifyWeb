@@ -9,7 +9,6 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, IPlaylistFindRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
 import { CreatePlaylistItem } from "../../../../Commons/Cards/CreativeStudioCards/PlaylistCard";
-import { QuadraticLoader } from "../../../../Commons/Loaders/QuadraticLoader";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
 import { CreatePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/CreatePlaylistModal";
@@ -149,12 +148,6 @@ export const StudioPlaylist: React.FC = () => {
                 </div>
                 <div className="flex flex-col gap-10 w-full">
                     {
-                        rx.loading ?
-                            <div className="w-full h-full flex justify-center items-center">
-
-                                <QuadraticLoader isVisisble={true} />
-                            </div>
-                            :
                             playlists && rx.error.length === 0 ?
                                 playlists?.map(item => {
                                     return (

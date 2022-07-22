@@ -10,7 +10,7 @@ import {
     IChangeEmojieRequest, IChangeOtherDataAccountForm, IChangePasswordAccountForm, IChangePasswordAccountRequest,
     IChangePhoneAccountRequest, IUpdatePersonalData
 } from '../../../../Redux/Reducers/UserReducer/types';
-import { baseUrl, defaultAvatarImage, defaultBackgroundImage, DeviceType, GetUserAvatar, GetUserBackground } from '../../../../types';
+import { defaultAvatarImage, defaultBackgroundImage, DeviceType, GetUserAvatar, GetUserBackground } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
 import { FormikField } from '../../../Commons/Inputs/FormikField';

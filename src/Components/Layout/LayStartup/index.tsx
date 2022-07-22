@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { DefaultButton } from "../../Commons/Buttons/DefaultButton";
-import { FilterButton } from "../../Commons/Buttons/FilterButton";
-import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
 import { PlayingFooter } from "../../Commons/Footers/PlayingFooter";
 import { Header } from "../../Commons/Header";
@@ -27,8 +24,12 @@ export const LayStartup: React.FC = () => {
   return (
     <div className="grid grid-cols-20 w-full nin-h-screen">
       {
-        load.mySingleReducer.loading || load.myAlbumsReducer.loading || load.playingReducer.loading &&
-        <div className="bg-blue-400 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
+        load.mySingleReducer.loading || load.myAlbumsReducer.loading || 
+        load.playingReducer.loading || load.userReducer.loading || 
+        load.searchReducer.loading || load.myPlaylistReducer.loading
+        || load.myMediaLibraryReducer.loading || load.mainReducer.loading ||
+        load.genreReducer.loading &&
+        <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-100 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
       }
       <div className="col-span-3 w-full h-full z-[100]">
         <SideBar />

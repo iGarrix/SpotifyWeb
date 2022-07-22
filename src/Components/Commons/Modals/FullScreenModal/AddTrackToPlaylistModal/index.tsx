@@ -88,21 +88,7 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
                                 <p className="text-center text-lg">No Result</p>
                             </div>
                     }
-                    {/* <FoundPlaylistCard onClick={() => { } } image={""} name={"Phonk"}/> */}
                 </div>
-                {/* {
-                    error ?
-                    <div className="flex border rounded-lg border-red-500/90 items-center justify-center py-3 bg-red-500/90 text-light-100">
-                        <p className="text-center">{error}</p>
-                    </div> :
-                    isAdded ?
-                        <div className="flex border rounded-lg border-blue-500 items-center justify-center py-3 bg-blue-500 text-light-100">
-                            <p className="text-center">Adding successfull</p>
-                        </div> :
-                        <div className="flex border rounded-lg items-center justify-center py-3">
-                            <p className="text-center">No addings</p>
-                        </div>
-                } */}
             </div>
         </div>
     )

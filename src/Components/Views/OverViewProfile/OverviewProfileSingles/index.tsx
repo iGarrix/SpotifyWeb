@@ -9,9 +9,7 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
-import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const OverviewProfileSingles : React.FC = () => {
     const nav = useNavigate();
@@ -75,9 +73,6 @@ export const OverviewProfileSingles : React.FC = () => {
                 <title>Soundwave | Singles</title>
             </Helmet>
             {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     singles && rx.error.length === 0 ?
                         <div className="w-full h-full flex flex-col gap-[15px] px-[330px]">
                             {

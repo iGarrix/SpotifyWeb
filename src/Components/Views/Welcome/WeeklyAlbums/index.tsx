@@ -71,10 +71,6 @@ export const WeeklyAlbums: React.FC = () => {
 
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
-            {
-                mainReducer.albums &&
-                <img alt="bg" src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} className="absolute object-cover top-0 bg-repeat left-0 w-full opacity-30 h-full" />
-            }
             <Helmet>
                 <title>Soundwawe | Top albums</title>
             </Helmet>
@@ -82,7 +78,7 @@ export const WeeklyAlbums: React.FC = () => {
                 mainReducer.albums ?
                     <div className="w-full h-full flex flex-col gap-5 z-10">
                         <h1 className="font-semibold text-2xl">Weekly albums</h1>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-6 flex-wrap">
                             {
                                 mainReducer.albums.map(item => {
                                     return (

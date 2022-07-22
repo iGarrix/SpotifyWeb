@@ -7,7 +7,6 @@ import { LayAuth } from "./Components/Layout/LayAuth";
 import { LayStartup } from "./Components/Layout/LayStartup";
 import { Login } from "./Components/Views/Auth/Login";
 import { Register } from "./Components/Views/Auth/Register";
-import { Settings } from "./Components/Views/Settings";
 import { Profile } from "./Components/Views/Profile";
 import { LayProfile } from "./Components/Layout/LayProfile";
 import { Welcome } from "./Components/Views/Welcome";
@@ -122,7 +121,6 @@ function App() {
           {/* <Route path="createplaylist" element={<Settings />} /> */}
           <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />
-          <Route path="settings" element={<Settings />} />
 
           <Route path="album" element={<Outlet />}>
             <Route path=":id" element={<ListeningAlbum />} />

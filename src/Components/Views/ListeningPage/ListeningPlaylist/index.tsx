@@ -8,7 +8,7 @@ import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../.
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
-import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
+import { baseUrl, defaultAlbumImage, defaultPlaylistImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 import { ShareModal } from "../../../Commons/Modals/FullScreenModal/Shares/ShareModal";
@@ -148,7 +148,7 @@ export const ListeningPlaylist: React.FC = () => {
         <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
             {
                 playingReducer.playlist ?
-                    <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/002/026/original/disc.png" }} />
+                    <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                     :
                     null
             }
@@ -163,7 +163,7 @@ export const ListeningPlaylist: React.FC = () => {
                                 banner={
                                     <div className="flex w-full gap-2">
                                         <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
-                                            className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                                            className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
@@ -173,7 +173,7 @@ export const ListeningPlaylist: React.FC = () => {
                                             </div>
                                             {
                                                 playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
-                                                <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")}</p>
+                                                <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
                                             }
                                             <p className="font-thin flex gap-2">Creators:
                                                 <span className="cursor-pointer hover:text-blue-400"
@@ -186,7 +186,7 @@ export const ListeningPlaylist: React.FC = () => {
                         <div className="flex justify-end col-span-2">
                             <div className="flex flex-col fixed select-none">
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
-                                    className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                                    className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
                                 <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert transition-all hover:scale-105" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
@@ -222,7 +222,7 @@ export const ListeningPlaylist: React.FC = () => {
                                     </div>
                                     {
                                         playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
-                                        <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")}</p>
+                                        <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
                                     }
                                     <p className="font-thin flex gap-2">Creators:
                                         <span className="cursor-pointer hover:text-blue-400"

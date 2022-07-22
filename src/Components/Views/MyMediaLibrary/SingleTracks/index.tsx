@@ -12,7 +12,6 @@ import { IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReduce
 import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const MyMediaLibrarySingle: React.FC = () => {
     const { getMyMediaLibrarySingle, addMyMediaLibrarySingle, initQueue } = useActions();
@@ -96,9 +95,6 @@ export const MyMediaLibrarySingle: React.FC = () => {
                 <title>Soundwave | MyMediaLibrarySingle</title>
             </Helmet>
             {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     singles && rx.error.length === 0 ?
                         <div className="w-full h-full flex flex-col gap-[18px] px-[330px]">
                             {

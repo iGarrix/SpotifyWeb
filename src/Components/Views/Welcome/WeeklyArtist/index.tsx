@@ -71,7 +71,6 @@ export const WeeklyArtist: React.FC = () => {
 
     return (
         <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
-            <img alt="bg" src={defaultBackgroundImage} className="absolute top-0 left-0 w-full h-full bg-repeat object-cover opacity-30" />
             <Helmet>
                 <title>Soundwawe | Top artist</title>
             </Helmet>
@@ -79,7 +78,7 @@ export const WeeklyArtist: React.FC = () => {
                 mainReducer.artists ?
                     <div className="w-full h-full flex flex-col gap-5 z-10">
                         <h1 className="font-semibold text-2xl">Weekly artists & creators</h1>
-                        <div className="flex items-center gap-6 flex-wrap justify-between">
+                        <div className="flex items-center gap-6 flex-wrap">
                             {
                                 mainReducer.artists.map(item => {
                                     return (
@@ -103,12 +102,6 @@ export const WeeklyArtist: React.FC = () => {
                         </div>
                     </div>
             }
-            {/* <div className="w-full flex flex-col gap-5">
-                <h1 className="font-semibold text-2xl">Weekly artists & creators</h1>
-                <div className="flex items-center gap-6 flex-wrap justify-between">
-                    
-                </div>
-            </div> */}
         </div>
     )
 }

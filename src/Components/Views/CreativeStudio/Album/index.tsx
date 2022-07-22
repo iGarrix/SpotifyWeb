@@ -9,7 +9,6 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyAlbumRequest, IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { AlbumStudioItem } from "../../../Commons/Cards/CreativeStudioCards/AlbumCard";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 import { ChangeAlbumModal } from "../../../Commons/Modals/FullScreenModal/ChangeAlbumModal";
 
@@ -110,44 +109,38 @@ export const StudioAlbum: React.FC = () => {
             <div className="flex flex-col gap-8 w-full h-full">
                 <h1 className="font-semibold text-2xl">Manage my albums</h1>
                 <div className="flex flex-col gap-10 w-full">
-                {
-                        rx.loading ?
-                            <div className="w-full h-full flex justify-center items-center">
-
-                                <QuadraticLoader isVisisble={true} />
-                            </div>
-                            :
-                            album && rx.error.length === 0 ?
-                                album?.map(item => {
-                                    return (
-                                        <div key={Guid.create().toString()} className="grid grid-cols-12 w-full">
-                                            <div className="col-span-12 w-full">
-                                                <AlbumStudioItem
-                                                    id={item.albomDto?.returnId}
-                                                    image={item.albomDto?.image}
-                                                    name={item.albomDto?.name}
-                                                    description={item.albomDto?.description}
-                                                    date={item.albomDto?.releasealbom}
-                                                    listening={10000}
-                                                    onEdit={() => onEditAlbum(item)}
-                                                    onDelete={async () => await onRemoveAlbum(item.albomDto?.returnId)} />
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                                :
-                                <>
-                                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
-                                    <div className="flex flex-col items-center gap-8 text-dark-200">
-                                        <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-3xl">Create you first albums</h1>
-                                            <p className="font-medium text-xl">You can also apply to verify your account</p>
-                                        </div>
-                                        <div>
-                                            <DefaultButton onClick={() => { nav("/uploads") }} text={"Create you first album"} />
+                    {
+                        album && rx.error.length === 0 ?
+                            album?.map(item => {
+                                return (
+                                    <div key={Guid.create().toString()} className="grid grid-cols-12 w-full">
+                                        <div className="col-span-12 w-full">
+                                            <AlbumStudioItem
+                                                id={item.albomDto?.returnId}
+                                                image={item.albomDto?.image}
+                                                name={item.albomDto?.name}
+                                                description={item.albomDto?.description}
+                                                date={item.albomDto?.releasealbom}
+                                                listening={10000}
+                                                onEdit={() => onEditAlbum(item)}
+                                                onDelete={async () => await onRemoveAlbum(item.albomDto?.returnId)} />
                                         </div>
                                     </div>
-                                </>
+                                )
+                            })
+                            :
+                            <>
+                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
+                                <div className="flex flex-col items-center gap-8 text-dark-200">
+                                    <div className="flex flex-col gap-3 items-center">
+                                        <h1 className="font-medium text-3xl">Create you first albums</h1>
+                                        <p className="font-medium text-xl">You can also apply to verify your account</p>
+                                    </div>
+                                    <div>
+                                        <DefaultButton onClick={() => { nav("/uploads") }} text={"Create you first album"} />
+                                    </div>
+                                </div>
+                            </>
                     }
                 </div>
             </div>
