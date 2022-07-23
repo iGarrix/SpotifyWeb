@@ -8,7 +8,7 @@ import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangePlaylistImageRequest, IPagableMyPlaylistItem, IRemoveTrackPlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { IAddTrackToPlaylistRequest, IGetPlaylistTracksRequest } from "../../../../../Redux/Reducers/PlayingReducer/types";
-import { baseUrl, defaultAvatarImage } from "../../../../../types";
+import { baseUrl, defaultPlaylistImage } from "../../../../../types";
 import { SoundItemPlaylist } from "../../../../Commons/Cards/CreativeStudioCards/SoundItemPlaylist";
 import { SoundItem } from "../../../../Commons/Cards/SoundItem";
 import { SearchField } from "../../../../Commons/Inputs/SearchField";
@@ -222,7 +222,7 @@ export const OverViewPlaylist: React.FC = () => {
                                 <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
                                 <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
                             </div>
-                            <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                            <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                         </div> :
                         <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
                             <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />

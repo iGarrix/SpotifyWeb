@@ -47,33 +47,13 @@ export const History: React.FC = () => {
 
     const GetHistory = (query: string | any) => {
         startTransition(() => {
-            const storage_history = localStorage.getItem(StorageVariables.History);
-            // if (query && query.length != 0 && storage_history) {       
-            //     let stor_history = JSON.parse(storage_history) as IHistory;
-            //     const size = stor_history.soundobjs.length;
-            //     stor_history.soundobjs.splice(TempTake, size);
-            //     const filtererHistory = stor_history.soundobjs.filter(f => f.track?.name.includes(query) 
-            //     || f.trackCreators[0].username.includes(query) || f.trackCreators[0].name.includes(query) || f.trackCreators[0].surname.includes(query));
-            //     if (filtererHistory.length != 0) {   
-            //         stor_history.soundobjs = filtererHistory;
-            //     }
-            //     initHistory(stor_history);
-            //     return
-            // }
-            // if (storage_history) {
-            //     let stor_history = JSON.parse(storage_history) as IHistory;
-            //     const size = stor_history.soundobjs.length;
-            //     stor_history.soundobjs.splice(TempTake, size);
-            //     initHistory(stor_history);
-            // }     
+            const storage_history = localStorage.getItem(StorageVariables.History);   
             if (storage_history) {
                 let stor_history = JSON.parse(storage_history) as IHistory;
                 const size = stor_history.soundobjs.length;
-                stor_history.soundobjs.splice(TempTake, size);
-
                 if (query && query.length != 0) {       
-                    const filtererHistory = stor_history.soundobjs.filter(f => f.track?.name.includes(query)
-                    || f.trackCreators[0].username.includes(query) || f.trackCreators[0].name.includes(query) || f.trackCreators[0].surname.includes(query));
+                    const filtererHistory = stor_history.soundobjs.filter(f => f.track?.name.includes(query));
+                    filtererHistory.splice(TempTake, size);
                     if (filtererHistory.length != 0) {   
                         setFoundedHistory(filtererHistory);
                     }

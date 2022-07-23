@@ -1,4 +1,4 @@
-import { faCheck, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEye, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -121,18 +121,22 @@ export const OverviewProfile: React.FC = () => {
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
                 </div>
             }
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4">{user.overviewer?.username}
                 <p className="translate-y-[-5px]">{verifyImage}</p>
               </h1>
-              <p className="font-medium text-lg">{user?.overviewer?.name} {user?.overviewer?.surname}</p>
-              <p className="font-medium text-lg">{user?.overviewer?.emojie}</p>
+              <p className="text-light-100/80">{user?.overviewer?.emojie}</p>        
             </div>
           </div>
-          <div className="flex items-center gap-4 justify-end">
-            <FontAwesomeIcon className={`text-xl p-3 rounded-lg border border-light-100 cursor-pointer 
-            hover:border-blue-500 hover:text-blue-500 active:bg-blue-500 active:text-light-100 ${shareModal && "bg-blue-500 border-blue-500 text-light-100"}`} icon={faShare} onClick={onShare} />
-            <SubscribeButton isSubscribe={user.isSubscribe || isSubs} onClick={onSubscribe} subscribedText="Unsubscribe" text="Subscribe" />
+          <div className="flex items-center gap-4 justify-between">
+          <p className="mt-auto text-[18px] tracking-wide gap-2 font-['Lexend']">{ user.overviewer && user.overviewer.views > 0 ?
+          user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
+          "NO"} Views for all time</p>
+            <div className="flex gap-2">
+              <FontAwesomeIcon className={`text-xl p-3 rounded-lg border border-light-100 cursor-pointer
+              hover:border-blue-500 hover:text-blue-500 active:bg-blue-500 active:text-light-100 ${shareModal && "bg-blue-500 border-blue-500 text-light-100"}`} icon={faShare} onClick={onShare} />
+              <SubscribeButton isSubscribe={user.isSubscribe || isSubs} onClick={onSubscribe} subscribedText="Unsubscribe" text="Subscribe" />
+            </div>
           </div>
         </div>
       </div>

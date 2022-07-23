@@ -8,7 +8,6 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const ProfilePlaylists: React.FC = () => {
@@ -79,9 +78,6 @@ export const ProfilePlaylists: React.FC = () => {
                 <title>Soundwave | My Playlist</title>
             </Helmet>
             {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     playlists && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
                             <div className="grid grid-cols-4 gap-16">
@@ -103,7 +99,7 @@ export const ProfilePlaylists: React.FC = () => {
                                     <p className="font-medium text-xl">You can also creating new playlist</p>
                                 </div>
                                 <div>
-                                    <DefaultButton onClick={() => { nav("/createplaylist") }} text={"Create you first playlist"} />
+                                    <DefaultButton onClick={() => { nav("/creativestudio") }} text={"Create you first playlist"} />
                                 </div>
                             </div>
                         </>

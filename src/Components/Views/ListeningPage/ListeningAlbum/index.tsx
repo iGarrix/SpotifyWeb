@@ -168,7 +168,7 @@ export const ListeningAlbum: React.FC = () => {
                                             </div>
                                             {
                                                 playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                                <p className="">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")}</p>
+                                                <p className="">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
                                             }
                                             <p className="flex gap-2 mt-auto flex-wrap">Creators:
                                                 {
@@ -217,12 +217,12 @@ export const ListeningAlbum: React.FC = () => {
                                         <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.album?.albomDto?.name}</h1>
                                         {
                                             user && playingReducer.album?.creatorsAlbom?.map(i => i.username).includes(user.username) &&
-                                            <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewalbum/' + id)}} />
+                                            <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/album')}} />
                                         }
                                     </div>
                                     {
                                         playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                        <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")}</p>
+                                        <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
                                     }
                                     <p className="font-thin flex gap-2">Creators:
                                         {

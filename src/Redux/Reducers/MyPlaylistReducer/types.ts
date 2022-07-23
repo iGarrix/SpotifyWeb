@@ -15,6 +15,7 @@ export interface IPlaylist {
   image: string,
   accessStatus: string,
   create: Date | null,
+  views: number,
 }
 
 export interface IGenre {

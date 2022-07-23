@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { baseUrl, defaultAlbumImage } from "../../../../../types";
+import { baseUrl, defaultPlaylistImage } from "../../../../../types";
 import { IPlaylistCard } from "./types";
 import "./style.scss"
 
@@ -14,7 +14,7 @@ export const CreatePlaylistItem: React.FC<IPlaylistCard> = ({ image, name, date,
             <div className="flex w-full gap-4 ">
                 <div className={`p-3 grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden plCardMailSelect`}>
                         <img alt="Desc image" src={baseUrl + "Images/Playlist/" + image}
-                            className="w-[96px] h-[96px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
+                            className="w-[96px] h-[96px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} onClick={onClick} />
                     <div className="flex flex-col items-start justify-between col-span-3">
                         <h1 className="text-xl whitespace-nowrap">{name}</h1>
                         <div className="flex gap-2 playlistCardMailOptions">

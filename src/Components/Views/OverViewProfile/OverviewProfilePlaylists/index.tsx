@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const OverviewProfilePlaylists : React.FC = () => {
@@ -77,9 +76,6 @@ export const OverviewProfilePlaylists : React.FC = () => {
                 <title>Soundwave | Playlist</title>
             </Helmet>
             {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     playlists && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
                             <div className="grid grid-cols-4 gap-16">

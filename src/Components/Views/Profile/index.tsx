@@ -105,11 +105,16 @@ export const Profile: React.FC = () => {
               <p className="font-medium text-lg">{user?.emojie}</p>
             </div>
           </div>
-          <div className="flex items-end justify-end pb-6">
-            <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
-            <ProfileButton text={
-              <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"><img alt="crop" src={icon_crop} /> <h1 className="text-lg">Change image</h1></div></label>
-            } onClick={() => { }} isSelect={true} />
+          <div className="flex items-end justify-between pb-6">
+            <p className="mt-auto text-[18px] tracking-wide gap-2 font-['Lexend']">{ user && user.views > 0 ?
+            user.views.toLocaleString(undefined, { maximumFractionDigits: 2 }):
+            "NO"} Views for all time</p>
+            <div className="flex">
+              <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
+              <ProfileButton text={
+                <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"><img alt="crop" src={icon_crop} /> <h1 className="text-lg">Change image</h1></div></label>
+              } onClick={() => { }} isSelect={true} />
+            </div>
           </div>
         </div>
       </div>

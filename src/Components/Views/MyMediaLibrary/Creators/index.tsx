@@ -1,4 +1,4 @@
-import { faCircleUser, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
@@ -6,14 +6,12 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
-import { IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
-import { defaultAvatarImage, GetUserAvatar, StorageVariables } from "../../../../types";
+import { defaultAvatarImage, GetUserAvatar } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const MyMediaLibraryCreators: React.FC = () => {
   const nav = useNavigate();
-  const { getMyMediaLibraryArtists, addMyMediaLibraryArtists, clearTracks } = useActions();
+  const { getMyMediaLibraryArtists, addMyMediaLibraryArtists } = useActions();
   const rx = useTypedSelector(state => state.myMediaLibraryReducer);
   const artists = useTypedSelector(state => state.myMediaLibraryReducer.artists);
   const user = useTypedSelector(state => state.userReducer.profile);
@@ -29,10 +27,6 @@ export const MyMediaLibraryCreators: React.FC = () => {
   useEffect(() => {
       const fetchData = async () => {
           if (user) {
-              // const rq: IGetAllMyAlbumRequest = {
-              //     email: user.email,
-              //     page: 1
-              // }
               await getMyMediaLibraryArtists(1, user.email);
           }
       }
@@ -51,10 +45,6 @@ export const MyMediaLibraryCreators: React.FC = () => {
   }, [rx.nextPage && rx.loading])
   const FetchNext = async () => {
       if (rx.albums && rx.nextPage && user) {
-          // const rq: IGetAllMyAlbumRequest = {
-          //     email: user?.email,
-          //     page: rx.nextPage,
-          // }
           await addMyMediaLibraryArtists(1, user.email);
       }
   }
@@ -64,20 +54,9 @@ export const MyMediaLibraryCreators: React.FC = () => {
         <title>Soundwave | MyMediaLibraryCreators</title>
       </Helmet>
       {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     artists && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
                             <div className="grid grid-cols-4 gap-16">
-                                {/* {
-                                    artists.map(item => {
-                                        return (
-                                          <h1></h1>
-                                            // <ArtistsItem key={Guid.create().toString()} onClick={() => { onSelectArtists(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
-                                        )
-                                    })
-                                } */}
                                 {
                                 artists.map(item => {
                                     return (

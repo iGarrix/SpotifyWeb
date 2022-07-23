@@ -72,8 +72,6 @@ export const DeleteProfile: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                        {/* <div className="flex w-screen h-full justify-center items-center">
-                        </div> */}
                     </Form>
                 </Formik>
             </FullScreenModal>

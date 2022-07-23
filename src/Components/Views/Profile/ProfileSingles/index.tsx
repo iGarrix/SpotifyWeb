@@ -11,7 +11,6 @@ import { IGetAllMySingleRequest } from "../../../../Redux/Reducers/MySingleReduc
 import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
-import { QuadraticLoader } from "../../../Commons/Loaders/QuadraticLoader";
 
 export const ProfileSingles: React.FC = () => {
     const nav = useNavigate();
@@ -75,9 +74,6 @@ export const ProfileSingles: React.FC = () => {
                 <title>Soundwave | My Singles</title>
             </Helmet>
             {
-                rx.loading ?
-                    <QuadraticLoader isVisisble={true} />
-                    :
                     singles && rx.error.length === 0 ?
                         <div className="w-full h-full flex flex-col gap-[15px] px-[330px]">
                             {
