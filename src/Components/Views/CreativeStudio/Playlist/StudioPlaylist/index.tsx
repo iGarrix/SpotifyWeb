@@ -43,7 +43,7 @@ export const StudioPlaylist: React.FC = () => {
     }
     useEffect(() => {
         fetchData();
-    }, [user, openModal]);
+    }, [user, openModal, openModal2]);
 
     useEffect(() => {
         const listener = () => {
@@ -172,10 +172,7 @@ export const StudioPlaylist: React.FC = () => {
                                     <div className="flex flex-col items-center gap-8 text-dark-200">
                                         <div className="flex flex-col gap-3 items-center">
                                             <h1 className="font-medium text-3xl">Create you first playlist</h1>
-                                            <p className="font-medium text-xl">You can also apply to verify your account</p>
-                                        </div>
-                                        <div>
-                                            <DefaultButton onClick={() => { nav("/createplaylist") }} text={"Create you first playlist"} />
+                                            <p className="font-medium text-xl">You can also upload a new single or album</p>
                                         </div>
                                     </div>
                                 </>

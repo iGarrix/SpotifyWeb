@@ -101,10 +101,10 @@ export const StudioSingle: React.FC = () => {
                                     <div className="flex flex-col items-center gap-8 text-dark-200">
                                         <div className="flex flex-col gap-3 items-center">
                                             <h1 className="font-medium text-3xl">Create you first single</h1>
-                                            <p className="font-medium text-xl">You can also apply to verify your account</p>
+                                            <p className="font-medium text-xl">You can also upload a new album or create new playlist</p>
                                         </div>
                                         <div>
-                                            <DefaultButton onClick={() => { nav("/uploads") }} text={"Upload you first single"} />
+                                            <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single"} />
                                         </div>
                                     </div>
                                 </>

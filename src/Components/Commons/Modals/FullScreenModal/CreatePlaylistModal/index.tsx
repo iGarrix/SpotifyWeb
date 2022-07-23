@@ -48,6 +48,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
                 await createPlaylist(request);
                 setEnterError("");
                 onSaveSubmit();
+                onClose();
             }
         } catch (err) {
             setEnterError(error);
