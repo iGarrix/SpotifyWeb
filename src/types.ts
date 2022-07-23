@@ -68,7 +68,8 @@ export interface IPagableResponse<T = any> {
   pageables: T[] | null,
 }
 
-export const baseUrl = "https://soundwaveapi.herokuapp.com/"; //"https://localhost:7286/";
+export const baseUrl = "https://soundwave.gq/"; 
+//export const baseUrl = "https://localhost:7286/";
 
 export interface IRefreshModel {
   accessToken: string,
