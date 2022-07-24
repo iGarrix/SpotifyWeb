@@ -116,14 +116,14 @@ export const addMainAlbums = (page: number) => {
 };
 
 
-export const getMainTracks = (albomId: any, page: number) => {
+export const getMainTracks = (albomId: any, page: number, emailClient: string) => {
   return async (dispatch: Dispatch<MainAction>) => {
     if (albomId) {
       try {
         dispatch({ type: MainActionTypes.MAIN_WAITING, payload: true });
         const token = localStorage.getItem("token");
         const response = await http.get<IPagableResponse<ITrackResponse>>(
-          `api/Albom/GetTracks?albomId=${albomId}&page=${page}`,
+          `api/Albom/GetTracks?albomId=${albomId}&emailClient=${emailClient}&page=${page}`,
           AuthorizateHeader(token)
         );
         dispatch({ type: MainActionTypes.INITWEEKLYSONGSALBUM, payload: response.data });

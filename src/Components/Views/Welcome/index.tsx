@@ -23,6 +23,7 @@ export const Welcome: React.FC = () => {
 
   const playingReducer = useTypedSelector(state => state.playingReducer);
   const mainReducer = useTypedSelector(state => state.mainReducer);
+  const user = useTypedSelector(state => state.userReducer.profile);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export const Welcome: React.FC = () => {
     if (album && album[0]) {
       startTransition(() => {
         const initLocalTracksAsync = async (page: number) => {
-          await getMainTracks(album[0].albomDto?.returnId, page);
+          await getMainTracks(album[0].albomDto?.returnId, page, user ? user.email : "");
         }
         initLocalTracksAsync(1);
       })
