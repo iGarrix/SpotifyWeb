@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { ICreatePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { defaultAlbumImage } from "../../../../../types";
+import { defaultPlaylistImage } from "../../../../../types";
 import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { DefaultSettingsDropdown } from "../../../DefaultSettingsDropdown";
 import { Field } from "../../../Inputs/Field";
@@ -14,7 +14,7 @@ import { ICreatePlaylistModal } from "./types";
 export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, onClose }) => {
     const error = useTypedSelector(state => state.userReducer.error);
     const { createPlaylist } = useActions();
-    const [file, setFile] = useState<any>("");
+    const [file, setFile] = useState<any>(defaultPlaylistImage);
     const [targetFile, settargetFile] = useState<any>(null);
     const user = useTypedSelector(state => state.userReducer.profile);
     useEffect(() => {
@@ -91,7 +91,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
                             <input type="file" id="file" accept="image/*" onChange={(event: any) => { onLoadingImage(event) }} className="hidden" />
                             <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
                         </div>
-                        <img alt="avatar" src={file} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
+                        <img alt="avatar" src={file} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                     </div>
                 </div>
                 <div className="flex flex-col gap-5 w-full">

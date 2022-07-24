@@ -92,15 +92,11 @@ export const ProfilePlaylists: React.FC = () => {
                         </div>
                         :
                         <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Create you first playlist</h1>
-                                    <p className="font-medium text-xl">You can also creating new playlist</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/creativestudio") }} text={"Create you first playlist"} />
-                                </div>
+                            <hr className="w-full" />
+                            <div className="flex flex-col items-center gap-6">
+                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
+                                <h1 className="font-medium text-2xl text-dark-200">Playlist not found</h1>
+                                <DefaultButton onClick={() => { nav("/creativestudio") }} text={"Create you first playlist song"} />
                             </div>
                         </>
             }

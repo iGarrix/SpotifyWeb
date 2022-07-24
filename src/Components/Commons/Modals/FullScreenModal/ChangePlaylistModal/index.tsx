@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangePlaylistImageRequest, IChangePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
-import { baseUrl, defaultAvatarImage } from "../../../../../types";
+import { baseUrl, defaultPlaylistImage } from "../../../../../types";
 import { ProfileButton } from "../../../Buttons/ProfileButton";
 import { DefaultSettingsDropdown } from "../../../DefaultSettingsDropdown";
 import { Field } from "../../../Inputs/Field";
@@ -90,7 +90,7 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                                     <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
                                     <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
                                 </div>
-                                <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                             </div> :
                             <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
                                 <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />

@@ -101,7 +101,7 @@ export const OverViewPlaylist: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (user && id) {
-                await findPlaylist(id, true);
+                await findPlaylist(id, user.email, true);
                 document.documentElement.scrollTo(0, 0);
             }
         }

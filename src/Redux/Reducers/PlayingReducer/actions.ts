@@ -139,13 +139,13 @@ export const findAlbum = (id: string) => {
   };
 };
 
-export const findPlaylist = (id: string, isMe: boolean = false) => {
+export const findPlaylist = (id: string, clientEmail: string, isMe: boolean = false) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       const token = localStorage.getItem("token");
       const response = await http.get<IPagableMyPlaylistItem>(
-        `api/Playlist/Find?returnId=${id}&isMe=${isMe}`,
+        `api/Playlist/Find?returnId=${id}&clientEmail=${clientEmail}&isMe=${isMe}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: PlayingActionTypes.INITSELECTPLAYLIST, payload: response.data });

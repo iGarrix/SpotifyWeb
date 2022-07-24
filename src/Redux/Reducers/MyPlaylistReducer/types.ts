@@ -27,7 +27,8 @@ export interface IPagableMyPlaylistItem {
   playlistDto: IPlaylist | null,
   playlistGenres: IGenre | null,
   playlistCreator: IUser | null,
-  songs: number
+  songs: number,
+  isLiked: boolean,
 }
 
 export interface IMyPlaylistStateState {
@@ -76,35 +77,45 @@ export type MyPlaylistAction =
   | InitMyPlaylistClearAction
   | AddMyPlaylistAction;
 
-  export interface IChangePlaylistForm {
-    newName: string,
-    newStatus: string,
-    newImage: string,
-  }
-  
-  export interface IChangePlaylistRequest {
-    response: IPlaylistFindRequest,
-    newName: string,
-    newStatus: string,
-  }
+export interface IChangePlaylistForm {
+  newName: string,
+  newStatus: string,
+  newImage: string,
+}
 
-  export interface IChangePlaylistImageRequest {
-    response: IPlaylistFindRequest,
-    image: string,
-  }
+export interface IChangePlaylistRequest {
+  response: IPlaylistFindRequest,
+  newName: string,
+  newStatus: string,
+}
 
-  export interface IPlaylistFindRequest{
-    findPlaylistName: string,
-    findPlaylistCreatorEmail: string,
-  }
-  export interface IRemoveTrackPlaylistRequest {
-    playlistFind: IPlaylistFindRequest,
-    trackId: string,
-  }
+export interface IChangePlaylistImageRequest {
+  response: IPlaylistFindRequest,
+  image: string,
+}
 
-  export interface ICreatePlaylistRequest {
-    userEmail: string,
-    name: string,
-    image: string, 
-    accessStatus: string,
-  }
+export interface IPlaylistFindRequest {
+  findPlaylistName: string,
+  findPlaylistCreatorEmail: string,
+}
+export interface IRemoveTrackPlaylistRequest {
+  playlistFind: IPlaylistFindRequest,
+  trackId: string,
+}
+
+export interface ICreatePlaylistRequest {
+  userEmail: string,
+  name: string,
+  image: string,
+  accessStatus: string,
+}
+
+export interface ISubscribePlaylistRequest {
+  userEmail: string,
+  playlistFind: IPlaylistFindRequest,
+}
+
+export interface IUnsubscribePlaylistRequest {
+  findSubscriberEmail: string,
+  playlistFind: IPlaylistFindRequest,
+} 

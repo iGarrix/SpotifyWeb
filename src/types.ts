@@ -69,7 +69,10 @@ export interface IPagableResponse<T = any> {
   pageables: T[] | null,
 }
 
+// RELEASE
 //export const baseUrl = "https://soundwave.gq/"; 
+// DEVELOPMENT
+//export const baseUrl = "https://localhost:5001/"; 
 export const baseUrl = "https://localhost:7286/";
 
 export interface IRefreshModel {

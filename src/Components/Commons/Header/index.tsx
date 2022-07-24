@@ -9,18 +9,27 @@ import { FixedModal } from "../Modals/FixedModal";
 
 const bg = require('../../../Assets/Background1.png');
 const icon_upload = require('../../../Assets/Icons/Upload.png');
+const logo = require("../../../Assets/LogoLight.png");
 
-export const Header: React.FC = () => {
+export interface IHeaderProps {
+isHead?: boolean,
+}
+
+export const Header: React.FC<IHeaderProps> = ({...props}) => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
     return (
-        <div className="py-2 px-10 bg-light-200 flex justify-end overflow-x-hidden sticky top-0 z-[100]">
-            <div className="flex gap-7 items-center">
+        <div className={`py-2 px-10 bg-light-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
+            <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
                 {
                     user ?
-                        user.avatar.length !== 0 ?
-                            <div className="flex items-center gap-6">
+                    user.avatar.length !== 0 ?
+                    <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
+                                {
+                                    props.isHead &&
+                                        <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
+                                }
                                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
                                     onClick={() => { nav('/upload') }}
                                     style={{ backgroundImage: `url('${bg}')` }}>

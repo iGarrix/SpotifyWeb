@@ -1,4 +1,4 @@
-import { ICreatePlaylistRequest, IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
+import { ICreatePlaylistRequest, IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, ISubscribePlaylistRequest, IUnsubscribePlaylistRequest, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
 import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
@@ -101,6 +101,61 @@ export const searchMyPlaylists = (query: string) => {
         AuthorizateHeader(token)
       );
       dispatch({ type: MyPlaylistActionTypes.INITMYSEARCHPLAYLIST, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyPlaylistActionTypes.INITMYPLAYLIST_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const subscribePlaylist = (data: ISubscribePlaylistRequest) => {
+  return async (dispatch: Dispatch<MyPlaylistAction>) => {
+    try {
+      dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.post<any>(
+        "api/Playlist/AddSubscriber",
+        data, AuthorizateHeader(token)
+      );
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyPlaylistActionTypes.INITMYPLAYLIST_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const unsubscribePlaylist = (data: IUnsubscribePlaylistRequest) => {
+  return async (dispatch: Dispatch<MyPlaylistAction>) => {
+    try {
+      dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.delete<any>(
+        "api/Playlist/RemoveUser",
+        {
+          headers: AuthorizateHeader(token).headers,
+          data: data
+        }
+      );
 
       return Promise.resolve();
     } catch (error) {
