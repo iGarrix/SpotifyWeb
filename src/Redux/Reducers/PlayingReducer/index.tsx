@@ -1,5 +1,5 @@
 import { DefaultServerError } from "../../../types";
-import { IPlayingStateState, PlayingAction, PlayingActionTypes } from "./types";
+import { IPlayingStateState, ITrackResponse, PlayingAction, PlayingActionTypes } from "./types";
 
 const inialState: IPlayingStateState = {
   album: null,
@@ -38,7 +38,7 @@ export const playingReducer = (
       let arr = state.tracks ? state.tracks : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
-          action.payload.pageables.forEach(e => {
+          action.payload.pageables.forEach(e => {   
             arr.push(e);
           })
         }
@@ -46,6 +46,16 @@ export const playingReducer = (
       return {
         ...state,
         tracks: action.payload ? arr.reverse() : [],
+        nextPage: action.payload ? action.payload.nextPage : null,
+        prevPage: action.payload ? action.payload.prevPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case PlayingActionTypes.INITEDALBUMTRACKS: {
+      return {
+        ...state,
+        tracks: action.payload? action.payload.pageables : [],
         nextPage: action.payload ? action.payload.nextPage : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         loading: false,

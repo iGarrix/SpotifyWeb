@@ -64,3 +64,14 @@ export type MySingleAction =
   | InitMySingleWaitAction
   | InitMySingleErrorAction
   | InitMySingleClearAction;
+
+
+  export interface ISubscribeSingleRequest {
+    findSubscriberEmail: string,
+    findTrackId: string,
+  }
+  
+  export interface IUnsubscribeSingleRequest {
+    trackId: string,
+    subscribeEmail: string,
+  } 

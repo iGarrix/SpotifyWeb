@@ -58,13 +58,13 @@ export const clearTracks = () => {
   };
 };
 
-export const getTracks = (data: IGetTracksRequest) => {
+export const getTracks = (data: IGetTracksRequest, emailClient: string) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       const token = localStorage.getItem("token");
       const response = await http.get<IPagableResponse<IGetTracksResponse>>(
-        `api/Albom/GetTracks?albomId=${data.albomId}&page=${data.page}`,
+        `api/Albom/GetTracks?albomId=${data.albomId}&emailClient=${emailClient}&page=${data.page}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMTRACKS, payload: response.data });
@@ -85,13 +85,13 @@ export const getTracks = (data: IGetTracksRequest) => {
   };
 };
 
-export const getPlaylistTracks = (data: IGetPlaylistTracksRequest) => {
+export const getPlaylistTracks = (data: IGetPlaylistTracksRequest, emailClient: string) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       const token = localStorage.getItem("token");
       const response = await http.get<IPagableResponse<IGetTracksResponse>>(
-        `api/Playlist/GetAllTracks?returnId=${data.returnId}&page=${data.page}`,
+        `api/Playlist/GetAllTracks?returnId=${data.returnId}&emailClient=${emailClient}&page=${data.page}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMTRACKS, payload: response.data });
@@ -112,13 +112,69 @@ export const getPlaylistTracks = (data: IGetPlaylistTracksRequest) => {
   };
 };
 
-export const findAlbum = (id: string) => {
+
+export const initedTracks = (data: IGetTracksRequest, emailClient: string) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+    try {
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.get<IPagableResponse<IGetTracksResponse>>(
+        `api/Albom/GetTracks?albomId=${data.albomId}&emailClient=${emailClient}&page=${data.page}`,
+        AuthorizateHeader(token)
+      );
+      dispatch({ type: PlayingActionTypes.INITEDALBUMTRACKS, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const initedPlaylistTracks = (data: IGetPlaylistTracksRequest, emailClient: string) => {
+  return async (dispatch: Dispatch<PlayingAction>) => {
+    try {
+      dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      const response = await http.get<IPagableResponse<IGetTracksResponse>>(
+        `api/Playlist/GetAllTracks?returnId=${data.returnId}&emailClient=${emailClient}&page=${data.page}`,
+        AuthorizateHeader(token)
+      );
+      dispatch({ type: PlayingActionTypes.INITEDALBUMTRACKS, payload: response.data });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+
+export const findAlbum = (id: string, clientEmail: string) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
       dispatch({ type: PlayingActionTypes.INITSELECTALBUMS_WAITING, payload: true });
       const token = localStorage.getItem("token");
       const response = await http.get<IPagableMyAlbumItem>(
-        `api/Albom/Find?returnId=${id}`,
+        `api/Albom/Find?returnId=${id}&clientEmail=${clientEmail}`,
         AuthorizateHeader(token)
       );
       dispatch({ type: PlayingActionTypes.INITSELECTALBUM, payload: response.data });

@@ -22,6 +22,7 @@ export interface IPagableMyAlbumItem {
   albomDto: IAlbum | null,
   creatorsAlbom: IUser[] | null,
   songs: number,
+  isLiked: boolean,
 }
 
 export interface IMyAlbumStateState {
@@ -64,16 +65,26 @@ export type MyAlbumAction =
   | InitMyAlbumErrorAction
   | InitMyAlbumClearAction;
 
-  export interface IChangeAlbumRequest {
-    findReturnId: string,
-    newName: string,
-    newDescription: string,
-  }
-  export interface IChangeImageAlbumRequest {
-    findReturnId: string,
-    newImage: string,
-  }
-  export interface IChangeTemplateImageAlbumRequest {
-    findReturnId: string,
-    newTemplateimage: string,
-  }
+export interface IChangeAlbumRequest {
+  findReturnId: string,
+  newName: string,
+  newDescription: string,
+}
+export interface IChangeImageAlbumRequest {
+  findReturnId: string,
+  newImage: string,
+}
+export interface IChangeTemplateImageAlbumRequest {
+  findReturnId: string,
+  newTemplateimage: string,
+}
+
+export interface ISubscribeAlbumRequest {
+  findSubscriberEmail: string,
+  findAlbomId: string,
+}
+
+export interface IUnsubscribeAlbumRequest {
+  albomId: string,
+  email: string,
+}

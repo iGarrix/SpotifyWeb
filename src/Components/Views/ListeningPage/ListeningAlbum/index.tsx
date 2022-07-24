@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { ISubscribeAlbumRequest, IUnsubscribeAlbumRequest } from "../../../../Redux/Reducers/MyAlbumReducer/types";
 import { IGetTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
@@ -17,6 +18,7 @@ const bg = require('../../../../Assets/Background2.png');
 const icon_skip_forward = require('../../../../Assets/Icons/SkipForward.png');
 const icon_skip_next = require('../../../../Assets/Icons/SkipNext.png');
 const icon_like = require('../../../../Assets/Icons/Like.png');
+const icon_likeRed = require('../../../../Assets/Icons/LikeRed.png');
 const icon_share = require('../../../../Assets/Icons/Share.png');
 const icon_play = require('../../../../Assets/Icons/Play.png');
 const icon_pause = require('../../../../Assets/Icons/Pause.png');
@@ -26,11 +28,12 @@ export const ListeningAlbum: React.FC = () => {
 
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
-    const { initQueue, getTracks, findAlbum } = useActions();
+    const { initQueue, getTracks, findAlbum, subscribeAlbum, unsubscribeAlbum, initedTracks } = useActions();
     const user = useTypedSelector(state => state.userReducer.profile);
     const [isInited, setInited] = useState(false);
     const [upt, setUpt] = useState(false);
     const [shareModal, setShareModal] = useState(false);
+    const [isLiked, setLiked] = useState(false);
     const nav = useNavigate();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -43,15 +46,13 @@ export const ListeningAlbum: React.FC = () => {
     }
     useEffect(() => {
         const work = async () => {
-            if (id) {
-                await findAlbum(id);
-                if (!playingReducer.tracks) {
-                    const rq: IGetTracksRequest = {
-                        albomId: id,
-                        page: 1,
-                    }
-                    await getTracks(rq);
+            if (id) {      
+                await findAlbum(id, user ? user.email : "");
+                const rq: IGetTracksRequest = {
+                    albomId: id,
+                    page: 1,
                 }
+                await initedTracks(rq, user ? user.email : "");
                 return;
             }
             else {
@@ -59,7 +60,13 @@ export const ListeningAlbum: React.FC = () => {
             }
         }
         work();
-    }, []);
+    }, [user]);
+
+    useEffect(() => {
+        if (playingReducer.album) {
+            setLiked(playingReducer.album.isLiked);
+        }
+    }, [playingReducer.album])
 
     const toggleForward = () => {
         const newQueue = ForwardQueue();
@@ -100,7 +107,7 @@ export const ListeningAlbum: React.FC = () => {
                 albomId: id,
                 page: playingReducer.nextPage,
             }
-            await getTracks(rq);
+            await getTracks(rq, user ? user.email : "");
         }
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
@@ -137,6 +144,40 @@ export const ListeningAlbum: React.FC = () => {
 
     const onShare = () => {
         setShareModal(true);
+    }
+
+    const onSubscribe = async () => {
+        try {
+            if (user && id) {        
+                const rq : ISubscribeAlbumRequest = {
+                    findSubscriberEmail: user.email,
+                    findAlbomId: id
+                }
+                await subscribeAlbum(rq);
+                if (!isLiked) {          
+                    setLiked(true);
+                }
+            }
+        } catch (error) {
+            
+        }
+    }
+
+    const onUnsubscribe = async () => {
+        try {
+            if (user && id) {        
+                const rq : IUnsubscribeAlbumRequest = {
+                    albomId: id,
+                    email: user.email
+                }
+                await unsubscribeAlbum(rq);
+                if (isLiked) {   
+                    setLiked(false);
+                }
+            }
+        } catch (error) {
+            
+        }
     }
 
     return (
@@ -188,7 +229,7 @@ export const ListeningAlbum: React.FC = () => {
                                 <img alt="singleImage" src={`${baseUrl}Images/AlbomImages/${playingReducer.album?.albomDto?.image}`}
                                     className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                    <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert transition-all hover:scale-105" src={icon_share} onClick={onShare} />
+                                    <img alt="icon" className="w-[26px] cursor-pointer invert" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
@@ -206,7 +247,11 @@ export const ListeningAlbum: React.FC = () => {
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleForward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
                                     </div>
-                                    <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} />
+                                    {
+                                        isLiked ?
+                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
+                                        <img alt="icon" className="w-[26px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none" src={icon_like} onClick={onSubscribe} />
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -252,7 +297,6 @@ export const ListeningAlbum: React.FC = () => {
                                             playingReducer.tracks?.map((item) => {
                                                 return (
                                                     <SoundItem key={Guid.create().toString()} item={item}
-                                                        isLiked={true}
                                                         isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
                                                         onClick={() => { onSelectTrack(item) }} />
                                                 )
@@ -264,13 +308,7 @@ export const ListeningAlbum: React.FC = () => {
                         </div>
                     </div>
                     :
-                    <div className="flex flex-col items-center w-full gap-5">
-                        <FontAwesomeIcon className="text-6xl font-medium text-dark-200" icon={faCompactDisc} />
-                        <div className="flex flex-col items-center gap-8 text-dark-200">
-                            <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-2xl">{playingReducer.error}</h1>
-                            </div>
-                        </div>
+                    <div className="">
                     </div>
             }
         </div>

@@ -56,7 +56,7 @@ export const OverViewPlaylist: React.FC = () => {
         const query = searchParams.get('query');
         if (query) {
             const fetchData = async () => {
-                await getAllSearchTrack(query, 1);
+                await getAllSearchTrack(query, user ? user.email : "", 1);
             }
             startTransition(() => {
                 fetchData();
@@ -92,7 +92,7 @@ export const OverViewPlaylist: React.FC = () => {
             }
             startTransition(() => {
                 const work = async () => {
-                    await getPlaylistTracks(rq);
+                    await getPlaylistTracks(rq, user ? user.email : "");
                 }
                 work();
             });
@@ -140,7 +140,7 @@ export const OverViewPlaylist: React.FC = () => {
                         returnId: id,
                         page: 1,
                     }
-                    await getPlaylistTracks(rq);
+                    await getPlaylistTracks(rq, user ? user.email : "");
                 }
                 return;
             }
@@ -170,7 +170,7 @@ export const OverViewPlaylist: React.FC = () => {
                         returnId: id,
                         page: 1,
                     }
-                    await getPlaylistTracks(rq);
+                    await getPlaylistTracks(rq, user ? user.email : "");
                 }
 
             }
@@ -198,7 +198,7 @@ export const OverViewPlaylist: React.FC = () => {
                     returnId: id,
                     page: 1,
                 }
-                await getPlaylistTracks(rq);
+                await getPlaylistTracks(rq, user ? user.email : "");
             }
         }
     }
@@ -285,10 +285,10 @@ export const OverViewPlaylist: React.FC = () => {
                         </div>
                         :
                         <div className="flex flex-col gap-6">
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
+                            <FontAwesomeIcon className="text-5xl font-medium text-dark-200" icon={faMusic} />
                             <div className="flex flex-col items-center gap-8 text-dark-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Tracks not found</h1>
+                                    <h1 className="font-medium text-2xl">Tracks not found</h1>
                                 </div>
                             </div>
                         </div>

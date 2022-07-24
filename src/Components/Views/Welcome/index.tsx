@@ -77,6 +77,7 @@ export const Welcome: React.FC = () => {
       onSelectAlbum(album[0]);
     }
   }
+
   return (
     <div className="flex flex-col text-white z-10">
       <Helmet>
@@ -139,8 +140,9 @@ export const Welcome: React.FC = () => {
                   {
                     mainReducer.tracks.map(item => {
                       return (
-                        <SoundItem key={Guid.create().toString()} isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                          isLiked={false} item={item} onClick={() => { onSelectTrack(item) }} />
+                        <SoundItem key={Guid.create().toString()} 
+                        isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                        item={item} onClick={() => { onSelectTrack(item) }} />
                       )
                     })
                   }

@@ -9,6 +9,7 @@ export enum PlayingActionTypes {
     INITSELECTALBUMS_ERROR = "INITSELECTALBUMS_ERROR",
     INITSELECTALBUMS_CLEAR = "INITSELECTALBUMS_CLEAR",
     INITSELECTALBUMTRACKS = "INITSELECTALBUMTRACKS",
+    INITEDALBUMTRACKS = "INITEDALBUMTRACKS",
     INITQUEUE = "INITQUEUE",
     SETPLAYING = "SETPLAYING",
     CLEARQUEUE = "CLEARQUEUE",
@@ -29,6 +30,7 @@ export interface ITrack {
 export interface ITrackResponse {
     track: ITrack | null,
     trackCreators: IUser[],
+    isLiked: boolean,
 }
 
 export interface IQueue {
@@ -76,6 +78,10 @@ export interface InitPlayingTrackAction {
     type: PlayingActionTypes.INITSELECTALBUMTRACKS;
     payload: IPagableResponse | null;
 }
+export interface InitedPlayingTrackAction {
+    type: PlayingActionTypes.INITEDALBUMTRACKS;
+    payload: IPagableResponse | null;
+}
 export interface InitQueueAction {
     type: PlayingActionTypes.INITQUEUE;
     payload: IQueue | null;
@@ -113,6 +119,7 @@ export interface SetPlayingAction {
 export type PlayingAction =
     InitPlayingAction |
     InitPlayingTrackAction |
+    InitedPlayingTrackAction |
     InitQueueAction |
     InitPlayingWaitAction |
     InitPlayingErrorAction |

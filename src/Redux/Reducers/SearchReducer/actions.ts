@@ -5,12 +5,12 @@ import { IPagableResponse } from "../../../types";
 import { ITrackResponse } from "../PlayingReducer/types";
 import { IAlbumSearch, IPlaylistSearch, ISearchAllModel, IUserSearch, SearchAction, SearchActionTypes } from "./types";
 
-export const SearchAllXHR = (searchQuery: string) => {
+export const SearchAllXHR = (searchQuery: string, emailClient: string) => {
     return async (dispatch: Dispatch<SearchAction>) => {
         try {
             dispatch({ type: SearchActionTypes.SEARCH_WAITING, payload: true });
             const response = await http.get<ISearchAllModel>(
-                `api/Search/SearchAll?searchQuery=${searchQuery}`
+                `api/Search/SearchAll?searchQuery=${searchQuery}&emailClient=${emailClient}`
             );
             dispatch({ type: SearchActionTypes.INITSEARCHALL, payload: response.data });
 
@@ -262,12 +262,12 @@ export const getAllSearchProfile = (searchQuery: string, page: number) => {
     };
   };
 
-  export const getAllSearchTrack = (searchQuery: string, page: number) => {
+  export const getAllSearchTrack = (searchQuery: string, emailClient: string, page: number) => {
     return async (dispatch: Dispatch<SearchAction>) => {
       try {
         dispatch({ type: SearchActionTypes.SEARCH_WAITING, payload: true });
         const response = await http.get<IPagableResponse<ITrackResponse>>(
-          `api/Search/SearchFilterTrack?searchQuery=${searchQuery}&page=${page}`
+          `api/Search/SearchFilterTrack?searchQuery=${searchQuery}&emailClient=${emailClient}&page=${page}`
         );
         dispatch({ type: SearchActionTypes.INITSEARCHTRACK, payload: response.data });
   

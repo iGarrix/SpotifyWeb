@@ -9,7 +9,7 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { ISubscribePlaylistRequest, IUnsubscribePlaylistRequest } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { IGetPlaylistTracksRequest, IQueue, ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
-import { baseUrl, defaultAlbumImage, defaultPlaylistImage, StorageVariables } from "../../../../types";
+import { baseUrl, defaultPlaylistImage, StorageVariables } from "../../../../types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 import { FullScreenModal } from "../../../Commons/Modals/FullScreenModal";
 import { ShareModal } from "../../../Commons/Modals/FullScreenModal/Shares/ShareModal";
@@ -28,7 +28,7 @@ export const ListeningPlaylist: React.FC = () => {
     const { id } = useParams();
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
-    const { findPlaylist, initQueue, getPlaylistTracks, subscribePlaylist, unsubscribePlaylist } = useActions();
+    const { findPlaylist, initQueue, getPlaylistTracks, subscribePlaylist, unsubscribePlaylist, initedPlaylistTracks } = useActions();
     const [isInited, setInited] = useState(false);
     const [upt, setUpt] = useState(false);
     const [shareModal, setShareModal] = useState(false);
@@ -46,19 +46,17 @@ export const ListeningPlaylist: React.FC = () => {
     useEffect(() => {
         const work = async () => {
             if (id) {
-                if (playingReducer?.playlist?.playlistCreator?.username === user?.username) {
-                    await findPlaylist(id, user ? user.email : "", true);               
+                if (user && playingReducer?.playlist && playingReducer?.playlist.playlistCreator?.username === user.username) {
+                    await findPlaylist(id, user.email, true);               
                 }
-                else {
+                else{
                     await findPlaylist(id, user ? user.email : "");
                 }
-                if (!playingReducer.tracks) {
-                    const rq: IGetPlaylistTracksRequest = {
-                        returnId: id,
-                        page: 1,
-                    }
-                    await getPlaylistTracks(rq);
+                const rq: IGetPlaylistTracksRequest = {
+                    returnId: id,
+                    page: 1,
                 }
+                await initedPlaylistTracks(rq, user ? user.email : "");
                 return;
             }
             else {
@@ -114,7 +112,7 @@ export const ListeningPlaylist: React.FC = () => {
                 returnId: id,
                 page: playingReducer.nextPage,
             }
-            await getPlaylistTracks(rq);
+            await getPlaylistTracks(rq, user ? user.email : "");
         }
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
@@ -192,7 +190,7 @@ export const ListeningPlaylist: React.FC = () => {
             
         }
     }
-
+ 
     return (
         <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
             {
@@ -237,7 +235,7 @@ export const ListeningPlaylist: React.FC = () => {
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                                     className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                <img alt="icon" className="w-[30px] translate-y-1 cursor-pointer invert" src={icon_share} onClick={onShare} />
+                                <img alt="icon" className="w-[26px] cursor-pointer invert" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
@@ -257,8 +255,8 @@ export const ListeningPlaylist: React.FC = () => {
                                     </div>
                                     {
                                         isLiked ?
-                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer" src={icon_likeRed} onClick={onUnsubscribe} /> :
-                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer invert" src={icon_like} onClick={onSubscribe} />
+                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
+                                        <img alt="icon" className="w-[26px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none" src={icon_like} onClick={onSubscribe} />
                                     }
                                 </div>
                             </div>
@@ -300,7 +298,6 @@ export const ListeningPlaylist: React.FC = () => {
                                             playingReducer.tracks?.map((item) => {
                                                 return (
                                                     <SoundItem key={Guid.create().toString()} item={item}
-                                                        isLiked={true}
                                                         isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
                                                         onClick={() => { onSelectTrack(item) }} />
                                                 )
@@ -312,13 +309,7 @@ export const ListeningPlaylist: React.FC = () => {
                         </div>
                     </div>
                     :
-                    <div className="flex flex-col items-center w-full gap-5">
-                        <FontAwesomeIcon className="text-6xl font-medium text-dark-200" icon={faSquarePlus} />
-                        <div className="flex flex-col items-center gap-8 text-dark-200">
-                            <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-2xl">{playingReducer.error}</h1>
-                            </div>
-                        </div>
+                    <div className="">
                     </div>
             }
         </div>

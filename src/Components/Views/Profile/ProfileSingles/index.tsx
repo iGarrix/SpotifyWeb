@@ -68,6 +68,7 @@ export const ProfileSingles: React.FC = () => {
             AddToHistory(item);
         }
     }
+
     return (
         <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
             <Helmet>
@@ -82,7 +83,7 @@ export const ProfileSingles: React.FC = () => {
                                         <SoundItem key={Guid.create().toString()}
                                             onClick={() => { onSelectTrack(item) }}
                                             isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            isLiked={false} item={item}
+                                            item={item}
                                         />
                                     )
                                 })

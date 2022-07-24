@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { IAlbum, IChangeAlbumRequest, IChangeImageAlbumRequest, IChangeTemplateImageAlbumRequest, IGetAllMyAlbumRequest, IPagableMyAlbumItem, MyAlbumAction, MyAlbumActionTypes } from "./types";
+import { IAlbum, IChangeAlbumRequest, IChangeImageAlbumRequest, IChangeTemplateImageAlbumRequest, IGetAllMyAlbumRequest, IPagableMyAlbumItem, ISubscribeAlbumRequest, IUnsubscribeAlbumRequest, MyAlbumAction, MyAlbumActionTypes } from "./types";
 
 export const getMyAlbum = (data: IGetAllMyAlbumRequest) => {
   return async (dispatch: Dispatch<MyAlbumAction>) => {
@@ -153,6 +153,64 @@ export const updateTemplateImageAlbum = (data: IChangeTemplateImageAlbumRequest)
         "api/Albom/UpdateTemplateImage",
         form, AuthorizateHeader(token)
       );
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const subscribeAlbum = (data: ISubscribeAlbumRequest) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+     // dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.post<any>(
+        "api/Albom/SaveAlbom",
+        data, AuthorizateHeader(token)
+      );
+
+      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: false });
+
+      return Promise.resolve();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<any>;
+        dispatch({
+          type: MyAlbumActionTypes.INITMYALBUM_ERROR,
+          payload: serverError.response?.data,
+        });
+        if (serverError && serverError.response) {
+          return Promise.reject(serverError.response.data);
+        }
+      }
+    }
+  };
+};
+
+export const unsubscribeAlbum = (data: IUnsubscribeAlbumRequest) => {
+  return async (dispatch: Dispatch<MyAlbumAction>) => {
+    try {
+      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
+      const token = localStorage.getItem("token");
+      await http.delete<any>(
+        "api/Albom/RemoveSaveAlbom",
+        {
+          headers: AuthorizateHeader(token).headers,
+          data: data
+        }
+      );
+      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: false });
 
       return Promise.resolve();
     } catch (error) {

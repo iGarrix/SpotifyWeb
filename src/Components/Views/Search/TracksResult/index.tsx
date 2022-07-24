@@ -15,6 +15,7 @@ export const TracksResult : React.FC = () => {
     const { getAllSearchTrack, addAllSearchTrack, initQueue} = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    const user = useTypedSelector(state => state.userReducer.profile);
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const [isPending, startTransition] = useTransition();
     const scrollHadler = async () => {
@@ -30,7 +31,7 @@ export const TracksResult : React.FC = () => {
         const query = searchParams.get('query');
         if (query) {
             const fetchData = async () => {
-                await getAllSearchTrack(query, 1);
+                await getAllSearchTrack(query, user ? user.email : "", 1);
             }
             startTransition(() => {          
                 fetchData();
@@ -44,7 +45,7 @@ export const TracksResult : React.FC = () => {
                 addNew();
             });
         }
-    }, [searchParams]);
+    }, [searchParams, user]);
     useEffect(() => {
         const listener = () => {
             document.addEventListener("scroll", scrollHadler);
@@ -69,6 +70,7 @@ export const TracksResult : React.FC = () => {
             AddToHistory(item);
         }
     }
+
     return (
         <div className="w-full h-full flex flex-col justify-start items-center relative">
             <Helmet>
@@ -85,7 +87,7 @@ export const TracksResult : React.FC = () => {
                                             <SoundItem key={Guid.create().toString()}
                                                 onClick={() => { onSelectInstanceTrack(item) }}
                                                 isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                                isLiked={false} item={item}
+                                                item={item}
                                             />
                                         )
                                     })

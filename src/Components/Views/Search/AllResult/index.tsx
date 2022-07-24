@@ -30,8 +30,8 @@ export const AllResultSearch: React.FC = () => {
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const [isPending, startTransition] = useTransition();
 
-    const fetchData = async (query: string) => {
-        await SearchAllXHR(query);
+    const fetchData = async (query: string, email: string) => {
+        await SearchAllXHR(query, email);
     }
 
     useEffect(() => {
@@ -47,13 +47,13 @@ export const AllResultSearch: React.FC = () => {
         const query = searchParams.get('query');
         if (query) {
             startTransition(() => {
-                fetchData(query);
+                fetchData(query, user ? user.email : "");
             });
             if (upt != true) {
                 setUpt(true);
             }
         }
-    }, [searchParams]);
+    }, [searchParams, user]);
 
     const TypeOfInstance = (obj: IUserSearch | ITrackResponse | IPlaylistSearch | IAlbumSearch | any) => {
         if (obj) {
@@ -180,7 +180,7 @@ export const AllResultSearch: React.FC = () => {
                                         <SoundItem key={Guid.create().toString()}
                                             onClick={() => { onSelectInstanceTrack(item) }}
                                             isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            isLiked={false} item={item}
+                                            item={item}
                                         />
                                     )
                                 })
@@ -195,17 +195,6 @@ export const AllResultSearch: React.FC = () => {
                                     </div>
                                 </div>
                             }
-                            {/* {
-                                reducer.searchall.tracks?.map(item => {
-                                    return (
-                                        <SoundItem key={Guid.create().toString()}
-                                            onClick={() => { onSelectInstanceTrack(item) }}
-                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            isLiked={false} item={item}
-                                        />
-                                    )
-                                })
-                            } */}
                         </div>
                     </div>
                 </div>

@@ -2,11 +2,12 @@ import { faCirclePlus, faClose, faEllipsisVertical, faHeart, faPause, faPlay, fa
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { ISubscribeSingleRequest, IUnsubscribeSingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { baseUrl, defaultAlbumImage, defaultMusicImage } from "../../../../types";
 import { ProfileButton } from "../../Buttons/ProfileButton";
 import { SearchField } from "../../Inputs/SearchField";
@@ -23,12 +24,14 @@ const icon_play = require('../../../../Assets/Icons/Play.png');
 const icon_like = require('../../../../Assets/Icons/Like.png');
 const icon_likered = require('../../../../Assets/Icons/LikeRed.png');
 
-export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick }) => {
+export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
     const { initQueue } = useActions();
+    const {subscribeSingle, unsubscribeSingle} = useActions();
     const nav = useNavigate();
     const play = useTypedSelector(state => state.playingReducer.queue?.isPlay);
     const user = useTypedSelector(state => state.userReducer.profile);
+    const [isLiked, setLiked] = useState(false);
     const [shareModal, setShareModal] = useState(false);
     const [addtrackModal, setAddtrackModal] = useState(false);
     const addtoqueue = async (isPlay: any) => {
@@ -37,13 +40,47 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
             await initQueue(response);
         }
     }
-    const save = () => {
-
-    }
+    
+    useEffect(() => {
+        if (item) {
+           setLiked(item.isLiked);
+        }
+    }, [item])
 
     const onShare = () => {
         setShareModal(true);
     }
+
+    const onSubscribeTrack = async () => {
+        try {
+            if (item && item.track) {        
+                const rq : ISubscribeSingleRequest = {
+                    findSubscriberEmail: user ? user.email : "",
+                    findTrackId: item.track.returnId
+                }
+                await subscribeSingle(rq);
+                setLiked(true);
+            }
+        } catch (error) {
+            
+        }
+    }
+  
+    const onUnsubscribeTrack = async () => {
+        try {
+            if (item && item.track) {        
+                const rq : IUnsubscribeSingleRequest = {
+                    trackId: item.track.returnId,
+                    subscribeEmail: user ? user.email : ""
+                }
+                await unsubscribeSingle(rq);
+                setLiked(false);
+            }
+        } catch (error) {
+            
+        }
+    }
+
 
     return (
         <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 text-dark-200"}`}>
@@ -112,9 +149,9 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isLiked, isPlay, onClick
                 }
                 {
                     isLiked ?
-                        <img alt="icon" className="w-[25px] cursor-pointer" src={icon_likered} />
+                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
                         :
-                        <img alt="icon" className={`w-[25px] cursor-pointer ${isPlay ? "" : "invert"}`} src={icon_like} />
+                        <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "invert"}`} src={icon_like} onClick={onSubscribeTrack} />
                 }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
