@@ -8,6 +8,7 @@ import * as GenreActions from "../Reducers/GenreReducer/actions";
 import * as MainActions from "../Reducers/MainReducer/actions";
 import * as MyMediaLibraryAction from "../Reducers/MyMediaLibraryReducer/action";
 import * as SearchActions from "../Reducers/SearchReducer/actions";
+import * as Uploadctions from "../Reducers/UploadReducer/actions";
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   ...UserActions,
@@ -20,4 +21,5 @@ export default {
   ...MainActions,
   ...MyMediaLibraryAction,
   ...SearchActions,
+  ...Uploadctions,
 };

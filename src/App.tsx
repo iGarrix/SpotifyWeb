@@ -66,6 +66,10 @@ import { StudioAlbum } from "./Components/Views/CreativeStudio/Album";
 import { OverviewProfileSingles } from "./Components/Views/OverViewProfile/OverviewProfileSingles";
 import { OverviewProfilePlaylists } from "./Components/Views/OverViewProfile/OverviewProfilePlaylists";
 import { OverviewProfileAlbums } from "./Components/Views/OverViewProfile/OverviewProfileAlbums";
+import { LayUpload } from "./Components/Layout/LayUpload";
+import { UploadSinglePage } from "./Components/Views/UploadingPages/UploadSinglePage";
+import { UploadSingleStepOne } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepOne";
+import { UploadSingleStepTwo } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepTwo";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -187,10 +191,13 @@ function App() {
           <Route path="album" element={<StudioAlbum />} />
         </Route>
 
-        <Route path="upload" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+        <Route path="upload" element={<LayUpload />}>
           <Route index element={<UploadIntro />} />
           <Route path="album" element={<div>album</div>} />
-          <Route path="single" element={<div>single</div>} />
+          <Route path="single" element={<UploadSinglePage />}>
+            <Route index element={<UploadSingleStepOne />} />
+            <Route path="information" element={<UploadSingleStepTwo />}/>
+          </Route>
         </Route>
 
         <Route path="authorizate" element={<LayAuth />}>

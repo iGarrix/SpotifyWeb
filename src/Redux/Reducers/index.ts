@@ -9,6 +9,7 @@ import { notificationReducer } from "./NotificationReducer";
 import { searchReducer } from "./SearchReducer";
 import { playingReducer } from "./PlayingReducer";
 import { userReducer } from "./UserReducer";
+import { uploadReducer } from "./UploadReducer";
 
 export const rootReducer = combineReducers({
   userReducer: userReducer,
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
   mainReducer: mainReducer,
   myMediaLibraryReducer: myMediaLibraryReducer,
   searchReducer: searchReducer,
+  uploadReducer: uploadReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
