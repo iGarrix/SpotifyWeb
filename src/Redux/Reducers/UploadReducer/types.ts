@@ -12,6 +12,7 @@ export enum UploadActionTypes {
 
 export interface ISingleData {
     title: string,
+    image: string,
 }
 export interface IAlbumData {
 
@@ -67,5 +68,12 @@ export type UploadingAction =
 
 
 export const singleDataValidate = Yup.object({
-    title: Yup.string().required("Title is required").max(20, "Title too large"),
+    title: Yup.string().required("Title is required").min(3, "Title too small, 3 symbols required").max(30, "Title too large"),
 });
+
+export interface ISingleCreateRequest {
+    name: string,
+    image: File,
+    sound: File,
+    creatorEmail: string,
+}

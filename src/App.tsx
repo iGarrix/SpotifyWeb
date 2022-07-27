@@ -70,6 +70,7 @@ import { LayUpload } from "./Components/Layout/LayUpload";
 import { UploadSinglePage } from "./Components/Views/UploadingPages/UploadSinglePage";
 import { UploadSingleStepOne } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepOne";
 import { UploadSingleStepTwo } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepTwo";
+import { UploadSingleStepThree } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepThree";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -197,6 +198,7 @@ function App() {
           <Route path="single" element={<UploadSinglePage />}>
             <Route index element={<UploadSingleStepOne />} />
             <Route path="information" element={<UploadSingleStepTwo />}/>
+            <Route path="overview" element={<UploadSingleStepThree />}/>
           </Route>
         </Route>
 

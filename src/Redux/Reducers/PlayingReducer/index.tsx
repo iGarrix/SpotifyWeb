@@ -55,7 +55,7 @@ export const playingReducer = (
     case PlayingActionTypes.INITEDALBUMTRACKS: {
       return {
         ...state,
-        tracks: action.payload? action.payload.pageables : [],
+        tracks: action.payload && action.payload.pageables ? action.payload.pageables?.reverse() : [],
         nextPage: action.payload ? action.payload.nextPage : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         loading: false,

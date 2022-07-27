@@ -15,8 +15,6 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
 
     const [isPending, startTransition] = useTransition();
     const [searchQuery, setSearchQuery] = useState<string>("");
-    //const [isAdded, setAdded] = useState(false);
-    //const error = useTypedSelector(state => state.playingReducer.error);
 
     const { searchMyPlaylists, addTrackToPlaylist } = useActions();
 
@@ -32,7 +30,9 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
             await searchMyPlaylists(query);
         }
         if (searchQuery && searchQuery.length > 0) {
-            work(searchQuery);
+            startTransition(() => {
+                work(searchQuery);
+            })
         }
     }, [searchQuery])
 
@@ -58,7 +58,6 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
     }
 
     const onCloseHandle = () => {
-        //setAdded(false);
         props.onClose();
     }
 

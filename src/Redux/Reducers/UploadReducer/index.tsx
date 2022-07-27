@@ -6,7 +6,7 @@ const inialState: IUploadStateState = {
     albumdata: null,
     singlefile: null,
     albumfiles: null,
-    loading: false,
+    loading: true,
     error: ""
 };
 

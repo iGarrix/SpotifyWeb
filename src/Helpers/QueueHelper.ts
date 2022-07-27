@@ -7,7 +7,7 @@ export const SetPlayingTrack = (item: ITrackResponse | null) => {
         const storageQueue = localStorage.getItem(StorageVariables.Queue);
         if (storageQueue) {
             const convertQueue = (JSON.parse(storageQueue) as IQueue);
-            let findIndex = convertQueue.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId);
+            let findIndex = convertQueue.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId && f.track?.tracknameid === item.track?.tracknameid);
             if (findIndex >= 0) {
                 const newQueue: IQueue = { soundobjs: convertQueue.soundobjs, isPlay: convertQueue.isPlay && findIndex === convertQueue.playedIndex ? false : true, playedIndex: findIndex, };
                 localStorage.setItem(StorageVariables.Queue, JSON.stringify(newQueue));
@@ -29,7 +29,7 @@ export const AddToQueue = (item: ITrackResponse | null, isPlay: boolean | any) =
         const storageQueue = localStorage.getItem(StorageVariables.Queue);
         if (storageQueue) {
             const queue: IQueue = JSON.parse(storageQueue) as IQueue;
-            const index = queue.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId);
+            const index = queue.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId && f.track?.tracknameid === item.track?.tracknameid);
             if (index >= 0) {
                 const newQueue: IQueue = {
                     soundobjs: [...(JSON.parse(storageQueue) as IQueue).soundobjs],
@@ -134,7 +134,7 @@ export const AddToHistory = (item: ITrackResponse | null) => {
         const storageHistory = localStorage.getItem(StorageVariables.History);
         if (storageHistory) {
             const history: IHistory = JSON.parse(storageHistory) as IHistory;
-            const index = history.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId);
+            const index = history.soundobjs.findIndex(f => f.track?.returnId === item.track?.returnId && f.track?.tracknameid === item.track?.tracknameid);
             if (index >= 0) {
                 const newHistory: IHistory = {
                     soundobjs: [item, ...(JSON.parse(storageHistory) as IHistory).soundobjs.filter(f => f.track?.returnId !== item.track?.returnId)]

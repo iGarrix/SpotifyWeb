@@ -38,6 +38,14 @@ export const Welcome: React.FC = () => {
     startTransition(() => {
       const initLocalAsync = async (page: number) => {
         await getMainAlbums(page);
+      }
+      initLocalAsync(1);
+    })
+  }, []);
+
+  useEffect(() => {
+    startTransition(() => {
+      const initLocalAsync = async (page: number) => {
         await getMainArtist(page);
       }
       initLocalAsync(1);

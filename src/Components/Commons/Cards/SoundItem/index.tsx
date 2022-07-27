@@ -84,7 +84,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
     return (
         <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 text-dark-200"}`}>
-            <FullScreenModal visible={shareModal} center >
+            <FullScreenModal visible={shareModal} center>
                 <ShareModal
                     onClose={() => { setShareModal(false) }}
                     title={"Share track"}
@@ -116,7 +116,10 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                     } />
             </FullScreenModal>
             <FullScreenModal visible={addtrackModal} center >
-                <AddTrackToPlaylistModal onClose={() => { setAddtrackModal(false)}} trackId={item.track?.returnId} />
+                {
+                    addtrackModal &&
+                    <AddTrackToPlaylistModal onClose={() => { setAddtrackModal(false)}} trackId={item.track?.returnId} />
+                }
             </FullScreenModal>
             <div className="flex gap-6 items-center">
                 {

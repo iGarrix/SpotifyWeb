@@ -12,10 +12,10 @@ const icon_upload = require('../../../Assets/Icons/Upload.png');
 const logo = require("../../../Assets/LogoLight.png");
 
 export interface IHeaderProps {
-isHead?: boolean,
+    isHead?: boolean,
 }
 
-export const Header: React.FC<IHeaderProps> = ({...props}) => {
+export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
@@ -24,23 +24,27 @@ export const Header: React.FC<IHeaderProps> = ({...props}) => {
             <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
                 {
                     user ?
-                    user.avatar.length !== 0 ?
-                    <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
+                        user.avatar.length !== 0 ?
+                            <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
-                                        <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
+                                    <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
                                 }
                                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
                                     onClick={() => { nav('/upload') }}
                                     style={{ backgroundImage: `url('${bg}')` }}>
                                     <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
                                 </div>
-                                <FixedModal trigger={GetUserAvatar(user) !== "" ? <div className="w-12 h-12 overflow-hidden"><img alt="avatar" src={GetUserAvatar(user)} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full" 
-                                onError={(tg: any) => { tg.target.src = defaultAvatarImage}} /></div> :
+                                <FixedModal trigger={GetUserAvatar(user) !== "" ? <div className="w-12 h-12 overflow-hidden"><img alt="avatar" src={GetUserAvatar(user)} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full"
+                                    onError={(tg: any) => { tg.target.src = defaultAvatarImage }} /></div> :
                                     <div className="bg-gray-600 w-10 h-10 animate-pulse rounded-lg px-3 py-1 cursor-pointer">
                                     </div>} />
                             </div> :
-                            <div className="flex items-center gap-6">
+                            <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
+                                {
+                                    props.isHead &&
+                                    <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
+                                }
                                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
                                     onClick={() => { nav('/upload') }}
                                     style={{ backgroundImage: `url('${bg}')` }}>
@@ -51,7 +55,13 @@ export const Header: React.FC<IHeaderProps> = ({...props}) => {
                                 </div>} />
                             </div>
                         :
-                        <FontAwesomeIcon className="text-dark-200 rounded-lg py-1.5 text-2xl cursor-pointer" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
+                        <div className="flex items-center w-full">
+                            {
+                                props.isHead &&
+                                <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all" height={170} width={170} onClick={() => { nav("/") }} />
+                            }
+                            <FontAwesomeIcon className="text-dark-200 rounded-lg py-1.5 text-2xl cursor-pointer ml-auto" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
+                        </div>
                 }
             </div>
         </div>
