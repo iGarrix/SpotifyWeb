@@ -11,6 +11,7 @@ import { FormikTextArea } from "../../../../Commons/Inputs/FormikTextArea";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 
 const defaultBg = require('../../../../../Assets/Background1.png');
+const loader = require('../../../../../Assets/Icons/Loader.png');
 
 export const UploadSingleStepTwo: React.FC = () => {
 
@@ -20,7 +21,7 @@ export const UploadSingleStepTwo: React.FC = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
     const user = useTypedSelector(state => state.userReducer.profile);
 
-    const {setUploadError, initSingleData, uploadSingleApi} = useActions();
+    const { setUploadError, initSingleData, uploadSingleApi } = useActions();
 
     const inititalSingleDataValues: ISingleData = {
         title: "",
@@ -29,20 +30,20 @@ export const UploadSingleStepTwo: React.FC = () => {
 
     useEffect(() => {
         if (!reducer.singlefile) {
-          nav(-1);  
+            nav(-1);
         }
     }, [reducer.singlefile]);
 
     const onChangeSingleDataHandle = async (values: ISingleData) => {
         if (user && reducer.singlefile) {
-            try {   
-                if (imageFile) {           
-                    const data : ISingleData = {
+            try {
+                if (imageFile) {
+                    const data: ISingleData = {
                         title: values.title,
                         image: image,
                     }
                     initSingleData(data);
-                    const rq : ISingleCreateRequest = {
+                    const rq: ISingleCreateRequest = {
                         name: values.title,
                         image: imageFile,
                         sound: reducer.singlefile,
@@ -55,7 +56,7 @@ export const UploadSingleStepTwo: React.FC = () => {
                     setUploadError("Please, choose image for single song");
                 }
             } catch (error) {
-    
+
             }
         }
     };
@@ -93,12 +94,14 @@ export const UploadSingleStepTwo: React.FC = () => {
                                 <FormikTextArea name={"title"} label={"Title"} minHeight={100} />
                             </div>
                         </div>
-                        {
-                            true &&
-                            <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">
-                                <ProfileButton text={reducer.loading ? <FontAwesomeIcon className="animate-spin text-2xl px-2" icon={faSpinner} /> : "Publish"} isSelect onClick={() => { }} />
-                            </div>
-                        }
+                        <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">
+                            {
+                                reducer.loading ?
+                                    <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
+                                    <ProfileButton text={"Publish"} isSelect onClick={() => { }} />
+                            }
+                            {/* <ProfileButton text={reducer.loading ? <FontAwesomeIcon className="animate-spin text-2xl px-2" icon={faSpinner} /> : "Publish"} isSelect onClick={() => { }} /> */}
+                        </div>
                     </Form>
                 </Formik>
             </div>
