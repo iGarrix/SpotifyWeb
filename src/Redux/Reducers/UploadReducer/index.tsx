@@ -1,4 +1,5 @@
-import { IUploadStateState, UploadActionTypes, UploadingAction } from "./types";
+
+import { ISongData, IUploadStateState, UploadActionTypes, UploadingAction } from "./types";
 
 
 const inialState: IUploadStateState = {
@@ -6,8 +7,9 @@ const inialState: IUploadStateState = {
     albumdata: null,
     singlefile: null,
     albumfiles: null,
-    loading: true,
-    error: ""
+    uploadedAlbumId: null,
+    loading: false,
+    error: "",
 };
 
 export const uploadReducer = (
@@ -39,10 +41,42 @@ export const uploadReducer = (
                 error: "",
             };
         }
+        case UploadActionTypes.INITALBUMID: {
+            return {
+                ...state,
+                uploadedAlbumId: action.payload,
+                loading: false,
+                error: "",
+            };
+        }
         case UploadActionTypes.INITALBUMFILES: {
             return {
                 ...state,
                 albumfiles: action.payload,
+                loading: false,
+                error: "",
+            };
+        }
+        case UploadActionTypes.UPLOADREMOVEALBUMFILE: {
+            return {
+                ...state,
+                albumfiles: state.albumfiles ? state.albumfiles.filter(f => f.name !== action.payload.name) : [],
+                loading: false,
+                error: "",
+            };
+        }
+        case UploadActionTypes.INITALBUMMOREFILES: {
+            const tmpPayload : ISongData[]  = [];
+            console.log(state.albumfiles)
+            action.payload?.forEach(f => {
+                if (state.albumfiles && state.albumfiles.findIndex(ff => ff.file.name === f.name) < 0) {
+                    tmpPayload.push(f);
+                }
+            })
+            const arr = state.albumfiles && tmpPayload ? [...state.albumfiles, ...tmpPayload] : [];
+            return {
+                ...state,
+                albumfiles: arr,     
                 loading: false,
                 error: "",
             };
@@ -70,6 +104,7 @@ export const uploadReducer = (
                 singledata: null,
                 albumdata: null,
                 albumfiles: null,
+                uploadedAlbumId: null,
                 singlefile: null,
                 loading: false,
                 error: "",

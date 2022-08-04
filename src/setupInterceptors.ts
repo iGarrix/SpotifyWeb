@@ -8,7 +8,7 @@ import { IRefreshModel } from "./types";
 
 const setup = () => {
     const { dispatch } = store;
-    axios.interceptors.response.use(
+    axiosInstance.interceptors.response.use(
         (res) => {
             return res;
         },

@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import http, { AuthorizateHeader } from "../../../axios_creator";
 import { IPagableResponse } from "../../../types";
-import { IGetAppelationRequest, IGetNotificationsRequest, IGetStatusUserRequest, INotification, IUserStatusResponse, NotificateAction, NotificationActionTypes } from "./types";
+import { IGetAppelationRequest, IGetInviteRequest, IGetNotificationsRequest, IGetStatusUserRequest, INotification, IUserStatusResponse, NotificateAction, NotificationActionTypes } from "./types";
 
 export const getLogins = (data: IGetNotificationsRequest) => {
     return async (dispatch: Dispatch<NotificateAction>) => {
@@ -203,6 +203,112 @@ export const addStatuses = (data: IGetStatusUserRequest) => {
                 AuthorizateHeader(token)
             );
             dispatch({ type: NotificationActionTypes.ADDSTATUSES, payload: response.data });
+
+            return Promise.resolve();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const serverError = error as AxiosError<any>;
+                dispatch({
+                    type: NotificationActionTypes.INITNOTIFICATION_ERROR,
+                    payload: serverError.response?.data,
+                });
+                if (serverError && serverError.response) {
+                    return Promise.reject(serverError.response.data);
+                }
+            }
+        }
+    };
+};
+
+export const getInvite = (data: IGetInviteRequest) => {
+    return async (dispatch: Dispatch<NotificateAction>) => {
+        try {
+            dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
+            const token = localStorage.getItem("token");
+            const response = await http.get<IPagableResponse<IUserStatusResponse>>(
+                `api/Invite/GetAllInvite?email=${data.email}&page=${data.page}`,
+                AuthorizateHeader(token)
+            );
+            dispatch({ type: NotificationActionTypes.INITINVITE, payload: response.data });
+
+            return Promise.resolve();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const serverError = error as AxiosError<any>;
+                dispatch({
+                    type: NotificationActionTypes.INITNOTIFICATION_ERROR,
+                    payload: serverError.response?.data,
+                });
+                if (serverError && serverError.response) {
+                    return Promise.reject(serverError.response.data);
+                }
+            }
+        }
+    };
+};
+
+export const addInvite = (data: IGetInviteRequest) => {
+    return async (dispatch: Dispatch<NotificateAction>) => {
+        try {
+            dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
+            const token = localStorage.getItem("token");
+            const response = await http.get<IPagableResponse<IUserStatusResponse>>(
+                `api/Invite/GetAllInvite?email=${data.email}&page=${data.page}`,
+                AuthorizateHeader(token)
+            );
+            dispatch({ type: NotificationActionTypes.ADDINVITE, payload: response.data });
+
+            return Promise.resolve();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const serverError = error as AxiosError<any>;
+                dispatch({
+                    type: NotificationActionTypes.INITNOTIFICATION_ERROR,
+                    payload: serverError.response?.data,
+                });
+                if (serverError && serverError.response) {
+                    return Promise.reject(serverError.response.data);
+                }
+            }
+        }
+    };
+};
+
+export const acceptInvite = (data: string) => {
+    return async (dispatch: Dispatch<NotificateAction>) => {
+        try {
+            dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
+            const token = localStorage.getItem("token");
+            const response = await http.post<string>(
+                `api/Invite/AcceptInvite`, data, AuthorizateHeader(token)        
+            );
+            dispatch({ type: NotificationActionTypes.REJECTINVITE, payload: data });
+
+            return Promise.resolve();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const serverError = error as AxiosError<any>;
+                dispatch({
+                    type: NotificationActionTypes.INITNOTIFICATION_ERROR,
+                    payload: serverError.response?.data,
+                });
+                if (serverError && serverError.response) {
+                    return Promise.reject(serverError.response.data);
+                }
+            }
+        }
+    };
+};
+
+export const rejectInvite = (data: string) => {
+    return async (dispatch: Dispatch<NotificateAction>) => {
+        try {
+            dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
+            const token = localStorage.getItem("token");
+            const response = await http.delete<string>(
+                `api/Invite/RejectInvite`, {data: data, headers: AuthorizateHeader(token).headers}       
+            );
+            dispatch({ type: NotificationActionTypes.REJECTINVITE, payload: data });
 
             return Promise.resolve();
         } catch (error) {

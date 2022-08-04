@@ -8,6 +8,7 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { ISingleCreateRequest, ISingleData, singleDataValidate } from "../../../../../Redux/Reducers/UploadReducer/types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 import { FormikTextArea } from "../../../../Commons/Inputs/FormikTextArea";
+import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 
 const defaultBg = require('../../../../../Assets/Background1.png');
 

@@ -122,7 +122,7 @@ export const Welcome: React.FC = () => {
               <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
             </div>
           }
-          <div className="flex justify-between w-full flex-wrap">
+          <div className="flex gap-[18px] w-full flex-wrap">
             {
               mainReducer.albums &&
               mainReducer.albums.slice(0, 8).map(item => {

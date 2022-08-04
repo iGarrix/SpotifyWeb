@@ -69,7 +69,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <p className="font-medium text-lg flex items-center gap-2 select-none">{user?.name} {user?.surname} {verifyImage}</p>
-                        <p className="text-sm select-none">{user?.email}</p>
+                        <p className="text-sm">{user?.email}</p>
                     </div>
                 </div>
                 <div className="flex flex-col mb-1">

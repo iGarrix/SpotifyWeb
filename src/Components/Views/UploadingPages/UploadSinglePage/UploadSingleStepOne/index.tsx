@@ -6,6 +6,7 @@ import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { formatBytes } from "../../../../../types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
+import { UploadFileCard } from "../../../../Commons/Cards/UploadFileCard";
 
 const icon_trash = require('../../../../../Assets/Icons/Trash.png');
 
@@ -43,12 +44,12 @@ export const UploadSingleStepOne: React.FC = () => {
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
                         <h1 className="text-4xl font-bold font-['Lexend'] text-center">Uploading is complete</h1>
                         <div className="w-full px-[35%]">
-                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 p-2">
-                                <div className="flex gap-3 items-center">
+                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 p-2 pr-4">
+                                <div className="flex gap-3 items-center w-full">
                                     <FontAwesomeIcon className="text-4xl text-dark-200/90" icon={faFileArrowUp} />
                                     <p className="whitespace-nowrap text-lg">{file.name}</p>
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center ml-auto gap-2">
                                     <p className="whitespace-nowrap">{formatBytes(file.size)}</p>
                                     <img className="invert w-[25px] cursor-pointer" alt="trash" src={icon_trash} onClick={onDelete} />
                                 </div>

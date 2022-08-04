@@ -71,6 +71,11 @@ import { UploadSinglePage } from "./Components/Views/UploadingPages/UploadSingle
 import { UploadSingleStepOne } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepOne";
 import { UploadSingleStepTwo } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepTwo";
 import { UploadSingleStepThree } from "./Components/Views/UploadingPages/UploadSinglePage/UploadSingleStepThree";
+import { UploadAlbumPage } from "./Components/Views/UploadingPages/UploadAlbumPage";
+import { UploadAlbumStepOne } from "./Components/Views/UploadingPages/UploadAlbumPage/UploadAlbumStepOne";
+import { UploadAlbumStepTwo } from "./Components/Views/UploadingPages/UploadAlbumPage/UploadAlbumStepTwo";
+import { UploadAlbumStepThree } from "./Components/Views/UploadingPages/UploadAlbumPage/UploadAlbumStepThree";
+import { Invites } from "./Components/Views/AccountSettings/Notifications/Invites";
 
 function App() {
   const [isDark, setDark] = useState(() => {
@@ -179,6 +184,7 @@ function App() {
               <Route path="actions" element={<ActionsAccount />} />
               <Route path="appeal" element={<AppelationLogs />} />
               <Route path="status" element={<StatusAccount />} />
+              <Route path="invites" element={<Invites />} />
             </Route>
           </Route>
         </Route>
@@ -194,7 +200,11 @@ function App() {
 
         <Route path="upload" element={<LayUpload />}>
           <Route index element={<UploadIntro />} />
-          <Route path="album" element={<div>album</div>} />
+          <Route path="album" element={<UploadAlbumPage />}>
+            <Route index element={<UploadAlbumStepOne />} />
+            <Route path="information" element={<UploadAlbumStepTwo />}/>
+            <Route path="overview" element={<UploadAlbumStepThree />}/>
+          </Route>
           <Route path="single" element={<UploadSinglePage />}>
             <Route index element={<UploadSingleStepOne />} />
             <Route path="information" element={<UploadSingleStepTwo />}/>

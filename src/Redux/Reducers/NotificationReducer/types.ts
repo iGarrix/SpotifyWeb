@@ -1,4 +1,5 @@
 import { IPagableResponse, IUser } from "../../../types";
+import { IAlbum } from "../MyAlbumReducer/types";
 
 
 export enum NotificationActionTypes {
@@ -8,6 +9,9 @@ export enum NotificationActionTypes {
   ADDAPPELATIONS = "ADDAPPELATIONS",
   INITSTATUSES = "INITSTATUSES",
   ADDSTATUSES = "ADDSTATUSES",
+  INITINVITE = "INITINVITE",
+  ADDINVITE = "ADDINVITE",
+  REJECTINVITE = "REJECTINVITE",
   INITSELECTSTATUS = "INITSELECTSTATUS",
   INITNOTIFICATION_WAITING = "INITNOTIFICATION_WAITING",
   INITNOTIFICATION_ERROR = "INITNOTIFICATION_ERROR",
@@ -26,6 +30,13 @@ export interface IAppelation {
   returnId: string,
   sendDate: Date,
   message: string,
+}
+
+export interface IInvite {
+  id: string,
+  receiverDto: IUser,
+  albomDto: IAlbum,
+  create: Date,
 }
 
 export interface IUserStatus {
@@ -52,11 +63,17 @@ export interface IGetNotificationsRequest {
   page: number,
 }
 
+export interface IGetInviteRequest {
+  email: string,
+  page: number,
+}
+
 export interface INotificationStateState {
   notifications: INotification[] | null;
   appelations: IAppelation[] | null,
   statuses: IUserStatusResponse[] | null,
   selectedStatus: IUserStatusResponse | null,
+  invites: IInvite [] | null,
   prevPage: number | null,
   nextPage: number | null,
   loading: boolean;
@@ -93,6 +110,18 @@ export interface AddStatusesAction {
   type: NotificationActionTypes.ADDSTATUSES;
   payload: IPagableResponse | null;
 }
+export interface InitInvitesAction {
+  type: NotificationActionTypes.INITINVITE;
+  payload: IPagableResponse | null;
+}
+export interface AddInvitesAction {
+  type: NotificationActionTypes.ADDINVITE;
+  payload: IPagableResponse | null;
+}
+export interface RejectInvitesAction {
+  type: NotificationActionTypes.REJECTINVITE;
+  payload: string,
+}
 export interface InitSelectStatusAction {
   type: NotificationActionTypes.INITSELECTSTATUS;
   payload: IUserStatusResponse | null;
@@ -116,6 +145,9 @@ export type NotificateAction =
   | AddAppelationsAction
   | InitStatusesAction 
   | AddStatusesAction
+  | InitInvitesAction
+  | AddInvitesAction
+  | RejectInvitesAction
   | InitSelectStatusAction
   | InitNotificationWaitAction
   | InitNotificationErrorAction

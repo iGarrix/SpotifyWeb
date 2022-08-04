@@ -6,7 +6,7 @@ export const Field: React.FC<IField> = ({ placeholder, value, onChange, icon, vi
         <div className="flex flex-col gap-1">
             {
                 visiblePlaceholder &&
-                <p className="text-dark-200 font-medium">{placeholder}</p>
+                <p className="text-dark-200 font-medium text-lg">{placeholder}</p>
             }
             <div className="flex">
                 <input placeholder={placeholder} defaultValue={value} onChange={(e: any) => { onChange(e) }}

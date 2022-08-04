@@ -1,37 +1,53 @@
+import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
-import { defaultMusicImage } from "../../../../../types";
+import { defaultMusicImage, formatBytes } from "../../../../../types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 
 const copy_icon = require('../../../../../Assets/Icons/Copy.png');
 
-export const UploadSingleStepThree: React.FC = () => {
+export const UploadAlbumStepThree: React.FC = () => {
 
     const nav = useNavigate();
     const reducer = useTypedSelector(state => state.uploadReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const [copy, setCopy] = useState(false);
-    const [link, setLink] = useState(document.location.origin + "/search?query=" + reducer.singledata?.title);
+    const [link, setLink] = useState(document.location.origin + "/search?query=" + reducer.albumdata?.title);
     const history = useLocation();
 
     useEffect(() => {
-        if (!reducer.singlefile) {
+        if (!reducer.albumfiles) {
             nav(-2);
         }
-    }, [reducer.singlefile]);
+    }, [reducer.albumfiles]);
 
     return (
         <div className="w-full flex flex-col items-center gap-10 h-full relative">
             <div className="flex flex-col pt-[4%] gap-[6%] w-full h-full px-[30%]">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 bg-light-200 rounded-lg p-4">
                     <h1 className="text-xl font-medium">Preview</h1>
-                    <div className="p-4 bg-light-200 w-full rounded-lg flex gap-3">
-                        <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[120px] w-[120px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
-                        <div className="flex flex-col justify-center">
-                            <h1 className="text-2xl font-['Lexend'] font-bold">{reducer.singledata?.title}</h1>
-                            <h1 className="text-xl font-['Lexend'] font-nornal">{user?.username}</h1>
+                    <div className="w-full flex gap-[50px]">
+                        <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[200px] w-[200px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
+                        <div className="flex flex-col gap-2 w-full">
+                            <div>
+                                <h1 className="text-2xl font-bold">{reducer.albumdata?.title}</h1>
+                                <h1 className="text-md">{reducer.albumfiles?.length} songs</h1>
+                            </div>
+                            <div className="flex flex-col gap-3 w-full">
+                                {
+                                    reducer.albumfiles &&
+                                    reducer.albumfiles.map(f => {
+                                        return (
+                                            <div key={Guid.create().toString()} className="bg-light-300 w-full py-2 px-3 rounded-lg flex justify-between items-center">
+                                                <h1 className="text-lg">{user?.username} - {f.name}</h1>
+                                                <p>{formatBytes(f.file.size)}</p>
+                                            </div>
+                                        )
+                                    })  
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

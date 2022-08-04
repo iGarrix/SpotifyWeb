@@ -6,6 +6,7 @@ const inialState: INotificationStateState = {
   appelations: null,
   statuses: null,
   selectedStatus: null,
+  invites: null,
   prevPage: null,
   nextPage: null,
   loading: false,
@@ -99,6 +100,43 @@ export const notificationReducer = (
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
         error: "",
+      };
+    }
+    case NotificationActionTypes.INITINVITE: {
+      return {
+        ...state,
+        invites: action.payload ? action.payload.pageables : [],
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "",
+      };
+    }
+    case NotificationActionTypes.ADDINVITE: {
+      let arr = state.invites ? state.invites : [];
+      if (action.payload && arr) {
+        if (action.payload.pageables) {
+          action.payload.pageables.forEach(e => {
+            arr.push(e);
+          })
+        }
+      }
+      return {
+        ...state,
+        invites: action.payload ? arr : null,
+        prevPage: action.payload ? action.payload.prevPage : null,
+        nextPage: action.payload ? action.payload.nextPage : null,
+        loading: false,
+        error: "Invite not found",
+      };
+    }
+    case NotificationActionTypes.REJECTINVITE: {
+      const arr = state.invites?.filter(f => f.id !== action.payload);
+      return {
+        ...state,
+        invites: arr ? arr : [],
+        loading: false,
+        error: "Invite not found",
       };
     }
     case NotificationActionTypes.INITSELECTSTATUS: {
