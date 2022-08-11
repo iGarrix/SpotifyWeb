@@ -74,12 +74,12 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
         onClose();
     }
     return (
-        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
+        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-10 border border-light-200 dark:border-dark-200">
             <div className="flex justify-between w-full">
                 <h1 className="whitespace-nowrap text-xl font-['Lexend']">Create playlist</h1>
-                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
+                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
-            <hr className="w-full mb-4" />
+            <hr className="w-full mb-4 dark:border-dark-100" />
             {
                 enterError && enterError.length !== 0 ?
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
@@ -89,7 +89,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
                     <div className="w-48 h-48 relative overflow-hidden rounded-xl">
                         <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                             <input type="file" id="file" accept="image/*" onChange={(event: any) => { onLoadingImage(event) }} className="hidden" />
-                            <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                            <label htmlFor="file"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
                         </div>
                         <img alt="avatar" src={file} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                     </div>

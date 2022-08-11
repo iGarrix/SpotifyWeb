@@ -94,7 +94,6 @@ export const History: React.FC = () => {
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
         const response = SetPlayingTrack(item);
-        console.log(response)
         if (response) {
             initQueue(response);
             AddToHistory(item);
@@ -112,7 +111,7 @@ export const History: React.FC = () => {
     }
 
     return (
-        <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 bg-no-repeat h-full">
+        <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 bg-no-repeat h-full">
             <Helmet>
                 <title>Soundwave | Your history</title>
             </Helmet>
@@ -123,7 +122,7 @@ export const History: React.FC = () => {
                         <div className="flex w-[40%]">
                             <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
                                 setSearchQuery(e.target.value)
-                            }} icon={<img alt="icon" className="invert w-[28px]" src={icon_search} />} />
+                            }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                         </div>
                         <FilterButton onClick={onClearHistory} text={"Clear all history"} />
                     </div>
@@ -132,7 +131,7 @@ export const History: React.FC = () => {
                             searchQuery && foundedHistory &&
                             <div className="flex flex-col gap-4">
                                 <h1 className="text-medium text-xl">Found by '{searchQuery}'</h1>
-                                <hr className="w-full border" />
+                                <hr className="w-full border dark:border-dark-100" />
                                 {
                                     foundedHistory.map((item: ITrackResponse, index: number) => {
                                         return (
@@ -148,7 +147,7 @@ export const History: React.FC = () => {
                                         )
                                     })
                                 }
-                                <hr className="w-full border" />
+                                <hr className="w-full border dark:border-dark-100" />
                             </div>
                         }
                         {
@@ -174,8 +173,8 @@ export const History: React.FC = () => {
                 </div>
                 :
                 <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                    <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="font-medium text-3xl">History is empty</h1>
                             <p className="font-medium text-xl">You can also listening your favorite songs using search</p>

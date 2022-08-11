@@ -93,8 +93,8 @@ export const ProfileSingles: React.FC = () => {
                         <>
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                                <h1 className="font-medium text-2xl text-dark-200">Singles not found</h1>
+                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Singles not found</h1>
                                 <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single song"} />
                             </div>
                         </>

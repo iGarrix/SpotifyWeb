@@ -56,7 +56,7 @@ export const Search: React.FC = () => {
     }
 
     return (
-        <div className="w-full h-full text-dark-200">
+        <div className="w-full h-full text-dark-200 dark:text-light-200">
             <Helmet>
                 <title>Soundwave | Search all</title>
             </Helmet>
@@ -65,7 +65,7 @@ export const Search: React.FC = () => {
                     <div className="flex w-[40%]">
                         <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
                             setSearchQuery(e.target.value)
-                        }} icon={<img alt="icon" className="invert w-[28px]" src={icon_search} />} />
+                        }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     </div>
                     {
                         searchQuery && 

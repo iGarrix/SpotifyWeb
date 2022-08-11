@@ -82,6 +82,8 @@ export const OverviewProfile: React.FC = () => {
     }
   }
 
+  console.log(history.pathname);
+
   return (
     <div className="overflow-x-hidden text-light-100 flex flex-col h-full">
       <Helmet>
@@ -141,8 +143,8 @@ export const OverviewProfile: React.FC = () => {
         </div>
       </div>
       <div className={`h-full w-full flex flex-col items-center mt-5`}>
-        <div className="bg-light-200/100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
-          <ProfileButton text="Singles" isSelect={history.pathname === "/overview/" + user.overviewer?.username} onClick={() => { nav("") }} />
+        <div className="bg-light-200 dark:bg-dark-100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
+          <ProfileButton text="Singles" isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums") } onClick={() => { nav("") }} />
           <ProfileButton text="Playlists" isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
           <ProfileButton text="Albums" isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
         </div>

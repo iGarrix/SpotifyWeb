@@ -9,7 +9,7 @@ export const Notifications: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
-        <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 gap-[20px]">
+        <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 dark:text-light-200 gap-[20px]">
             <h1 className="font-bold text-3xl">Notification</h1>
             {
                 user?.verify === VerifyType.profile &&

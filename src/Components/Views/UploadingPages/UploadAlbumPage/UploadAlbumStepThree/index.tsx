@@ -24,9 +24,9 @@ export const UploadAlbumStepThree: React.FC = () => {
     }, [reducer.albumfiles]);
 
     return (
-        <div className="w-full flex flex-col items-center gap-10 h-full relative">
+        <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">
             <div className="flex flex-col pt-[4%] gap-[6%] w-full h-full px-[30%]">
-                <div className="flex flex-col gap-2 bg-light-200 rounded-lg p-4">
+                <div className="flex flex-col gap-2 bg-light-200 dark:bg-dark-100 rounded-lg p-4">
                     <h1 className="text-xl font-medium">Preview</h1>
                     <div className="w-full flex gap-[50px]">
                         <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[200px] w-[200px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
@@ -40,7 +40,7 @@ export const UploadAlbumStepThree: React.FC = () => {
                                     reducer.albumfiles &&
                                     reducer.albumfiles.map(f => {
                                         return (
-                                            <div key={Guid.create().toString()} className="bg-light-300 w-full py-2 px-3 rounded-lg flex justify-between items-center">
+                                            <div key={Guid.create().toString()} className="bg-light-300 dark:bg-dark-200/30 w-full py-2 px-3 rounded-lg flex justify-between items-center">
                                                 <h1 className="text-lg">{user?.username} - {f.name}</h1>
                                                 <p>{formatBytes(f.file.size)}</p>
                                             </div>
@@ -54,11 +54,11 @@ export const UploadAlbumStepThree: React.FC = () => {
                 <div className="flex flex-col gap-1 w-full">
                     <h1 className="text-lg font-medium">{copy ? "Link copied!" : "Share link"}</h1>
                     <div className="flex w-full">
-                        <div className="flex w-full justify-between bg-light-200 shadow-sm rounded-md items-center gap-[64px] overflow-hidden py-2 pr-4 pl-0">
-                            <a href={link} className="text-md px-4 hover:text-primary-100">{link}</a>
+                        <div className="flex w-full justify-between bg-light-200 dark:bg-dark-100 shadow-sm rounded-md items-center gap-[64px] overflow-hidden py-2 pr-4 pl-0">
+                            <a href={link} className="text-md px-4 hover:text-primary-100 dark:hover:text-blue-500">{link}</a>
                             <CopyToClipboard text={link ? link : ""} onCopy={() => { setCopy(true) }}>
-                                <p className="text-primary-100 flex items-center justify-center text-center
-                                text-lg font-medium hover:text-blue-500 cursor-pointer"><img alt="icon" src={copy_icon} className="object-cover bg-cover" /></p>
+                                <p className=" flex items-center justify-center text-center
+                                text-lg font-medium cursor-pointer"><img alt="icon" src={copy_icon} className="object-cover bg-cover" /></p>
                             </CopyToClipboard>
                         </div>
                     </div>

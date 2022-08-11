@@ -88,7 +88,7 @@ export const Welcome: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col text-white z-10">
+    <div className="flex flex-col text-dark-200 dark:text-light-200 z-10">
       <Helmet>
         <title>Soundwave</title>
       </Helmet>
@@ -118,8 +118,8 @@ export const Welcome: React.FC = () => {
           {
             mainReducer.albums &&
             <div className="w-full flex justify-between items-center">
-              <h1 className="font-medium text-2xl text-dark-200">Weekly top albums</h1>
-              <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
+              <h1 className="font-medium text-2xl">Weekly top albums</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
             </div>
           }
           <div className="flex gap-[18px] w-full flex-wrap">
@@ -140,8 +140,8 @@ export const Welcome: React.FC = () => {
         <div className="w-full grid grid-rows-1 grid-cols-2 mt-4 gap-10">
           <div className="w-full gap-2 flex flex-col">
             <div className="w-full flex justify-between">
-              <h1 className="font-medium text-2xl text-dark-200">Weekly top tracks</h1>
-              <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={onRedirectToAlbum}>See all</p>
+              <h1 className="font-medium text-2xl">Weekly top tracks</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={onRedirectToAlbum}>See all</p>
             </div>
             {
               mainReducer.tracks ?
@@ -158,8 +158,8 @@ export const Welcome: React.FC = () => {
                 </div>
                 :
                 <div className="flex flex-col justify-center w-full gap-5 mt-[5%]">
-                  <FontAwesomeIcon className="text-4xl font-medium text-dark-200" icon={faMusic} />
-                  <div className="flex flex-col items-center gap-8 text-dark-200">
+                  <FontAwesomeIcon className="text-4xl font-medium" icon={faMusic} />
+                  <div className="flex flex-col items-center gap-8">
                     <div className="flex flex-col gap-3 items-center">
                       <h1 className="font-medium text-xl">Tracks not found</h1>
                     </div>
@@ -170,15 +170,15 @@ export const Welcome: React.FC = () => {
           </div>
           <div className="w-full gap-2 flex flex-col">
             <div className="w-full flex justify-between items-center">
-              <h1 className="font-medium text-2xl text-dark-200">Weekly top artist</h1>
-              <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>See all</p>
+              <h1 className="font-medium text-2xl">Weekly top artist</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>See all</p>
             </div>
             <div className="flex gap-4 flex-wrap">
               {
                 mainReducer.artists &&
                 mainReducer.artists.slice(0, 6).map(item => {
                   return (
-                    <div key={Guid.create().toString()} className="flex flex-col cursor-pointer text-dark-200 gap-1" onClick={() => { nav("/overview/" + item.username) }}>
+                    <div key={Guid.create().toString()} className="flex flex-col cursor-pointer gap-1" onClick={() => { nav("/overview/" + item.username) }}>
                       <img alt="artist" src={GetUserAvatar(item)}
                         onError={(tg: any) => { tg.target.src = defaultAvatarImage }}
                         className="w-[110px] h-[110px] bg-cover object-cover bg-no-repeat rounded-xl transition-all hover:shadow-xl" />
@@ -192,8 +192,8 @@ export const Welcome: React.FC = () => {
               playingReducer.history &&
               <div className="flex flex-col gap-2">
                 <div className="w-full flex justify-between mt-6 items-center">
-                  <h1 className="font-medium text-2xl text-dark-200">Recent played</h1>
-                  <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>See all</p>
+                  <h1 className="font-medium text-2xl">Recent played</h1>
+                  <p className=" hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>See all</p>
                 </div>
                 <div className="flex gap-4 flex-wrap">
                   {

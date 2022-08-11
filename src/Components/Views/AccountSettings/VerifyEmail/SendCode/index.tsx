@@ -30,7 +30,7 @@ export const VerifyEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full text-dark-200 flex flex-col py-[50px] px-[150px] gap-10">
+        <div className="w-full h-full text-dark-200 dark:text-light-200 flex flex-col py-[50px] px-[150px] gap-10">
             <Helmet>
                 <title>Soundwave | Verify Email</title>
             </Helmet>

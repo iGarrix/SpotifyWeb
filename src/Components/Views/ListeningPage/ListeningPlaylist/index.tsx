@@ -192,7 +192,7 @@ export const ListeningPlaylist: React.FC = () => {
     }
  
     return (
-        <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 relative">
+        <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 dark:text-light-200 relative">
             {
                 playingReducer.playlist ?
                     <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
@@ -235,7 +235,7 @@ export const ListeningPlaylist: React.FC = () => {
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                                     className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                <img alt="icon" className="w-[26px] cursor-pointer invert" src={icon_share} onClick={onShare} />
+                                <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
@@ -256,7 +256,7 @@ export const ListeningPlaylist: React.FC = () => {
                                     {
                                         isLiked ?
                                         <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
-                                        <img alt="icon" className="w-[26px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none" src={icon_like} onClick={onSubscribe} />
+                                        <img alt="icon" className="w-[26px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
                                     }
                                 </div>
                             </div>
@@ -268,7 +268,7 @@ export const ListeningPlaylist: React.FC = () => {
                                         <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
                                             playingReducer.playlist.playlistCreator?.username === user?.username &&
-                                            <img alt="icon" className="w-[26px] cursor-pointer invert hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
+                                            <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
                                         }
                                     </div>
                                     {
@@ -285,9 +285,9 @@ export const ListeningPlaylist: React.FC = () => {
                                         {
                                             playingReducer.error &&
                                             <div className="flex flex-col justify-center w-full gap-5">
-                                                <hr className="w-full border-dark-200" />
-                                                <FontAwesomeIcon className="text-4xl font-medium text-dark-200 mt-[2%]" icon={faMusic} />
-                                                <div className="flex flex-col items-center gap-8 text-dark-200">
+                                                <hr className="w-full border-dark-200 dark:border-light-200" />
+                                                <FontAwesomeIcon className="text-4xl font-medium text-dark-200 dark:text-light-200 mt-[2%]" icon={faMusic} />
+                                                <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                                     <div className="flex flex-col gap-3 items-center">
                                                         <h1 className="font-medium text-xl">{playingReducer.error}</h1>
                                                     </div>

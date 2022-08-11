@@ -36,13 +36,14 @@ export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options
             <div onClick={() => { setOpen(!isOpen) }}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-light-200 absolute top-[100%] right-0 flex flex-col text-dark-200 bg-light-300 rounded-sm overflow-hidden z-[50]"
+            <div ref={fixeddropdown} className={`${isOpen ? "border-light-200 dark:border-dark-200 absolute top-[100%] right-0 flex flex-col text-dark-200 bg-light-300 dark:bg-dark-100 rounded-sm overflow-hidden z-[50]"
                 : "hidden"}`}>
                 <div className="flex flex-col">
                     {
                         options?.map(item => {
                             return (
-                                <button key={Guid.create().toString()} className={`w-full h-full py-2 text-dark-200 px-4 gap-2 items-center transition-all select-none hover:bg-primary-100 hover:text-light-100 flex`} onClick={() => { Addqueue(item) }}>
+                                <button key={Guid.create().toString()} className={`w-full h-full py-2 text-dark-200 dark:text-light-200 px-4 gap-2 items-center
+                                 transition-all select-none hover:bg-primary-100 hover:text-light-100 flex`} onClick={() => { Addqueue(item) }}>
                                     {item.icon}
                                     <p className="text-[1.05rem] whitespace-nowrap">{item.title}</p>
                                 </button>

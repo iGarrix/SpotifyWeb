@@ -226,7 +226,7 @@ export const PlayingFooter: React.FC = () => {
             {
                 rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
                     <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
-                        <FullScreenModal visible={shareModal} center >
+                        <FullScreenModal visible={shareModal} center>
                             <ShareModal
                                 onClose={() => { setShareModal(false) }}
                                 title={"Share track"}
@@ -238,7 +238,7 @@ export const PlayingFooter: React.FC = () => {
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{rx?.soundobjs[rx?.playedIndex].track?.name}</h1>
-                                                <p className="bg-light-300 rounded-2xl px-3">
+                                                <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
                                                     <span className="text-center text-sm">Sharing</span>
                                                 </p>
                                             </div>
@@ -268,11 +268,11 @@ export const PlayingFooter: React.FC = () => {
                         <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
                             <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[rx.playedIndex].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200" onClick={shuffleTracks}>
-                                    <img alt="icon" className="w-[18px]" src={icon_shuffle} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100" onClick={shuffleTracks}>
+                                    <img alt="icon" className="w-[18px] dark:invert" src={icon_shuffle} />
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 active:bg-blue-500" onClick={toggleBackward}>
-                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100 active:bg-blue-500" onClick={toggleBackward}>
+                                    <img alt="icon" className="w-[18px] invert dark:invert-0" src={icon_skip_forward} />
                                 </div>
                                 <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[40px] h-[40px] rounded-full cursor-pointer"
                                     onClick={() => { togglePlay(!isPlaying) }}
@@ -285,11 +285,11 @@ export const PlayingFooter: React.FC = () => {
 
                                     }
                                 </div>
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 active:bg-blue-500" onClick={toggleForward}>
-                                    <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100 active:bg-blue-500" onClick={toggleForward}>
+                                    <img alt="icon" className="w-[18px] invert dark:invert-0" src={icon_skip_next} />
                                 </div>
-                                <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all ${isRepeat ? "bg-blue-500" : "bg-white"}`} onClick={() => { setRepeat(!isRepeat) }}>
-                                    <img alt="icon" className="w-[18px]" src={icon_repeat} />
+                                <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all ${isRepeat ? "bg-blue-500" : "bg-white dark:bg-dark-100"}`} onClick={() => { setRepeat(!isRepeat) }}>
+                                    <img alt="icon" className="w-[18px] dark:invert" src={icon_repeat} />
                                 </div>
                             </div>
                             {
@@ -314,17 +314,17 @@ export const PlayingFooter: React.FC = () => {
                             }
                         </div>
                         <div className="flex items-end pb-4 px-10 py-2 gap-3 z-10 col-span-2">
-                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_queue} onClick={() => { onNav("queue") }} />
+                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_queue} onClick={() => { onNav("queue") }} />
                             <div className="flex items-center gap-2">
                                 {
                                     volume > 60 ?
-                                        <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volfull} onClick={() => { onMute() }} />
+                                        <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volfull} onClick={() => { onMute() }} />
                                         : volume > 40 && volume <= 60 ?
-                                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmedium} onClick={() => { onMute() }} />
+                                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volmedium} onClick={() => { onMute() }} />
                                             : volume > 0 && volume <= 40 ?
-                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_vollow} onClick={() => { onMute() }} />
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_vollow} onClick={() => { onMute() }} />
                                                 :
-                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white rounded-[50%] p-1" src={icon_volmute} onClick={() => { onMute() }} />
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volmute} onClick={() => { onMute() }} />
 
                                 }
                                 <Slider min={0} max={100} value={volume} onChange={(e: any) => { ChangeVolume(e.target.value) }} />

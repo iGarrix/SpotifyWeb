@@ -10,7 +10,7 @@ export const NotFound: React.FC = () => {
         <title>Soundwave | Not found, go back</title>
       </Helmet>
       <div className="flex items-center flex-col gap-6">
-        <h1 className="font-bold text-3xl">Result not found</h1>
+        <h1 className="font-bold text-3xl dark:text-light-200">Result not found</h1>
         <img alt="foundlogo" src={foundLogo} className="bg-cover object-cover" />
       </div>
     </div>

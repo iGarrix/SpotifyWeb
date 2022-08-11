@@ -9,11 +9,16 @@ import { Provider } from "react-redux";
 import { InitUser } from "./Redux/Reducers/UserReducer/actions";
 import setupInterceptors from "./setupInterceptors";
 import { StorageVariables, Theme } from "./types";
+import { initTheme } from "./Redux/Reducers/GlobalReducer/action";
 
 const theme = localStorage.getItem(StorageVariables.Theme);
 if (theme === null || theme === undefined) {
   localStorage.setItem(StorageVariables.Theme, Theme.light);
 }
+else {
+  initTheme(theme, store.dispatch);
+}
+
 const lang = localStorage.getItem(StorageVariables.Language);
 if (lang === null || lang === undefined) {
   localStorage.setItem(StorageVariables.Language, "English");

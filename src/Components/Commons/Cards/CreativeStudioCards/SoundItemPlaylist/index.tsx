@@ -29,7 +29,7 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
     }
 
     return (
-        <div className={`flex items-center gap-3 rounded-md bg-light-200 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
+        <div className={`flex items-center gap-3 rounded-md bg-light-200 dark:bg-dark-100 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
             <div className="flex gap-6">
                 <div>
                     <img alt="icon" className="w-[96px] h-[96px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage}} />
@@ -48,17 +48,6 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
                     }
                     </h3>
                 </div>
-                {/* <h1 className="text-medium">
-                    {
-                        item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
-                            return (
-                                <span key={Guid.create().toString()}
-                                    className="cursor-pointer hover:text-blue-400" onClick={() => { nav("/overview/" + i, { replace: false }) }}>{i}{item.trackCreators?.length && index < item.trackCreators.length - 1 ? ", " : " "}</span>
-                            )
-                        })
-                    }
-                    <span>- {item.track?.name}</span>
-                </h1> */}
             </div>
             <div className="flex gap-4 items-center justify-between ml-auto">
                 {
@@ -67,11 +56,11 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
                 }
                 {
                     onDelete &&
-                    <img alt="icon" className="invert w-[25px] cursor-pointer" src={icon_trash} onClick={onDelete} />
+                    <img alt="icon" className="invert dark:invert-0 w-[25px] cursor-pointer" src={icon_trash} onClick={onDelete} />
                 }
                 {
                     onAdd &&
-                    <img alt="icon" className="invert w-[25px] cursor-pointer" src={icon_add} onClick={onAdd} />
+                    <img alt="icon" className="invert dark:invert-0 w-[25px] cursor-pointer" src={icon_add} onClick={onAdd} />
                 }
             </div>
         </div>

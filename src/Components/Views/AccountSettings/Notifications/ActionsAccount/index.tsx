@@ -65,7 +65,7 @@ export const ActionsAccount: React.FC = () => {
                     return (
                         <NotifyCard key={Guid.create().toString()} 
                         message={
-                            <p className="w-full flex justify-between items-center"><span>Action {item.message}</span> <span className="font-medium text-dark-200/80 whitespace-nowrap">{item.device}</span></p>
+                            <p className="w-full flex justify-between items-center"><span>Action {item.message}</span> <span className="font-medium text-dark-200/80 dark:text-light-200/80 whitespace-nowrap">{item.device}</span></p>
                         } type={item.transaction === "Success" ? "success" : "error"} date={new Date(item.date)} />
                     )
                 })

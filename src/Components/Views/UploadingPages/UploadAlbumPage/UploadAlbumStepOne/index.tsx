@@ -87,7 +87,7 @@ export const UploadAlbumStepOne: React.FC = () => {
     }
 
     return (
-        <div className="w-full flex flex-col items-center gap-10 h-full relative">
+        <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">
             {
                 !files || files.length === 0 ?
                     <div className="w-full pt-[4%] flex flex-col items-center gap-4 h-full">

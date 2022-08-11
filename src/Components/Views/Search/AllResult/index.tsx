@@ -187,10 +187,10 @@ export const AllResultSearch: React.FC = () => {
                                 :
                                 <div className="flex flex-col gap-6 w-full h-full">
                                     <hr className="w-full" />
-                                    <FontAwesomeIcon className="text-3xl font-medium text-dark-200" icon={faMusic} />
-                                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                                    <FontAwesomeIcon className="text-3xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                                    <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                         <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-xl">No tracks</h1>
+                                            <h1 className="font-medium text-xl dark:text-light-200">No tracks</h1>
                                         </div>
                                     </div>
                                 </div>

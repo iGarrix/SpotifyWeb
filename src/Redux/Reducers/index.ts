@@ -10,6 +10,7 @@ import { searchReducer } from "./SearchReducer";
 import { playingReducer } from "./PlayingReducer";
 import { userReducer } from "./UserReducer";
 import { uploadReducer } from "./UploadReducer";
+import { globalReducer } from "./GlobalReducer";
 
 export const rootReducer = combineReducers({
   userReducer: userReducer,
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   myMediaLibraryReducer: myMediaLibraryReducer,
   searchReducer: searchReducer,
   uploadReducer: uploadReducer,
+  globalReducer: globalReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

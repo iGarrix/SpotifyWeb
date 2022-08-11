@@ -78,13 +78,16 @@ import { UploadAlbumStepThree } from "./Components/Views/UploadingPages/UploadAl
 import { Invites } from "./Components/Views/AccountSettings/Notifications/Invites";
 
 function App() {
-  const [isDark, setDark] = useState(() => {
-    const theme = localStorage.getItem(StorageVariables.Theme);
-    if (theme === null || theme === undefined) {
-        return Theme.light;
-    }
-    return theme;
-});
+
+  const { theme } = useTypedSelector(state => state.globalReducer);
+
+//   const [isDark, setDark] = useState(() => {
+//     const theme = localStorage.getItem(StorageVariables.Theme);
+//     if (theme === null || theme === undefined) {
+//         return Theme.light;
+//     }
+//     return theme;
+// });
 
   const { initQueue } = useActions();
 
@@ -109,7 +112,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller bg-light-100/90 ${isDark === Theme.dark ? "dark" : ""}`}
+      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark bg-dark-200/90" : "bg-light-100/90"}`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>

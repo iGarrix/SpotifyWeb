@@ -65,7 +65,7 @@ export const AppelationLogs: React.FC = () => {
                 reducer.appelations?.map(item => {
                     return (
                         <NotifyCard key={Guid.create().toString()} message={
-                            <p className="w-full flex justify-between items-center"><span>Your message: {item.message}</span> <span className="font-medium text-dark-200/80 whitespace-nowrap">{DeviceType.desktop}</span></p>
+                            <p className="w-full flex justify-between items-center"><span>Your message: {item.message}</span> <span className="font-medium text-dark-200/80 dark:text-light-200/80 whitespace-nowrap">{DeviceType.desktop}</span></p>
                         } type={"wait"} date={new Date(item.sendDate)} />
                     )
                 })

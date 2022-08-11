@@ -1,4 +1,4 @@
-import { faPlus, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";

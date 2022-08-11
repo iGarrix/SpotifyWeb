@@ -62,16 +62,16 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
     }
 
     return (
-        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-8 border border-light-200">
+        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-8 border border-light-200 dark:border-dark-200">
             <div className="flex justify-between w-full">
                 <h1 className="text-xl font-['Lexend'] whitespace-nowrap">Add track to playlist</h1>
-                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseHandle} /></div>
+                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseHandle} /></div>
             </div>
-            <hr className="w-full" />
+            <hr className="w-full dark:border-dark-100" />
             <div className="flex flex-col gap-4">
                 <SearchField placeholder={"Search playlist"} value={searchQuery} onChange={(e: any) => {
                     setSearchQuery(e.target.value)
-                }} icon={<img alt="icon" className="invert w-[28px]" src={icon_search} />} />
+                }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
 
                 <div className="flex flex-col gap-2">
                     {

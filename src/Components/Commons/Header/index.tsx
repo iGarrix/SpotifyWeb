@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
-import { baseUrl, defaultAvatarImage, GetUserAvatar } from "../../../types";
+import { baseUrl, defaultAvatarImage, GetUserAvatar, Theme } from "../../../types";
 import { FixedModal } from "../Modals/FixedModal";
 
 const bg = require('../../../Assets/Background1.png');
 const icon_upload = require('../../../Assets/Icons/Upload.png');
 const logo = require("../../../Assets/LogoLight.png");
+const logoDark = require("../../../Assets/Logo.png");
 
 export interface IHeaderProps {
     isHead?: boolean,
@@ -19,8 +20,9 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
+    const { theme } = useTypedSelector(state => state.globalReducer);
     return (
-        <div className={`py-2 px-10 bg-light-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
+        <div className={`py-2 px-10 bg-light-200 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
             <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
                 {
                     user ?
@@ -28,7 +30,7 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                             <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
-                                    <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
+                                    <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
                                 }
                                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
                                     onClick={() => { nav('/upload') }}
@@ -43,7 +45,7 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                             <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
-                                    <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
+                                    <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
                                 }
                                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
                                     onClick={() => { nav('/upload') }}
@@ -58,9 +60,9 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                         <div className="flex items-center w-full">
                             {
                                 props.isHead &&
-                                <img alt="logo" src={logo} className="rounded-xl contrast-125 cursor-pointer transition-all" height={170} width={170} onClick={() => { nav("/") }} />
+                                <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all" height={170} width={170} onClick={() => { nav("/") }} />
                             }
-                            <FontAwesomeIcon className="text-dark-200 rounded-lg py-1.5 text-2xl cursor-pointer ml-auto" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
+                            <FontAwesomeIcon className="text-dark-200 dark:text-light-200 rounded-lg py-1.5 text-2xl cursor-pointer ml-auto" width={40} height={40} icon={faUser} onClick={() => { nav("authorizate") }} />
                         </div>
                 }
             </div>

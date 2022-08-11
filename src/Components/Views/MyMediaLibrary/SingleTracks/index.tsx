@@ -112,8 +112,8 @@ export const MyMediaLibrarySingle: React.FC = () => {
                         </div>
                         :
                         <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
+                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-3xl">Save you first single song</h1>
                                     <p className="font-medium text-xl">You can also login your account</p>

@@ -65,7 +65,7 @@ export const ProfilePlaylists: React.FC = () => {
     const onSelectPlaylist = async (item: IPagableMyPlaylistItem | null) => {
         if (item) {
             await clearTracks();
-            await initSelectPlaylist(null);
+            await initSelectPlaylist(item);
             nav({
                 pathname: "/playlist/" + item?.playlistDto?.returnId,
                 search: "?me=myplaylist"
@@ -73,7 +73,7 @@ export const ProfilePlaylists: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative text-dark-200">
+        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative text-dark-200 dark:text-light-200">
             <Helmet>
                 <title>Soundwave | My Playlist</title>
             </Helmet>
@@ -94,8 +94,8 @@ export const ProfilePlaylists: React.FC = () => {
                         <>
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
-                                <h1 className="font-medium text-2xl text-dark-200">Playlist not found</h1>
+                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Playlist not found</h1>
                                 <DefaultButton onClick={() => { nav("/creativestudio") }} text={"Create you first playlist song"} />
                             </div>
                         </>

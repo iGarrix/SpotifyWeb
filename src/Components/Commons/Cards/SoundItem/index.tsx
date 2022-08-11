@@ -83,7 +83,8 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
 
     return (
-        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 text-dark-200"}`}>
+        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
+        ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 dark:bg-dark-200 text-dark-200 dark:text-light-200"}`}>
             <FullScreenModal visible={shareModal} center>
                 <ShareModal
                     onClose={() => { setShareModal(false) }}
@@ -96,7 +97,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                             <div className="flex flex-col">
                                 <div className="flex gap-2 items-center">
                                     <h1 className="font-['Lexend'] text-xl">{item.track?.name}</h1>
-                                    <p className="bg-light-300 rounded-2xl px-3">
+                                    <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
                                         <span className="text-center text-sm">Sharing</span>
                                     </p>
                                 </div>
@@ -127,7 +128,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                         // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPause} onClick={onClick} />
                         <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={() => { user ? onClick() : nav("/authorizate") }} />
                         :
-                        <img alt="icon" className="w-[25px] cursor-pointer invert" src={icon_play} onClick={() => { user ? onClick() : nav("/authorizate") }} />
+                        <img alt="icon" className="w-[25px] cursor-pointer invert dark:invert-0" src={icon_play} onClick={() => { user ? onClick() : nav("/authorizate") }} />
                     // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
                 <div>
@@ -154,7 +155,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                     isLiked ?
                         <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
                         :
-                        <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "invert"}`} src={icon_like} onClick={onSubscribeTrack} />
+                        <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "dark:invert-0 invert"}`} src={icon_like} onClick={onSubscribeTrack} />
                 }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
@@ -165,7 +166,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                 {
                     title: "Share", icon: <FontAwesomeIcon icon={faShare} />, onClick: () => { onShare() }
                 },]}
-                    trigger={<FontAwesomeIcon className="text-2xl hover:text-black cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
+                    trigger={<FontAwesomeIcon className="text-2xl hover:text-black dark:hover:text-light-300 cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
             </div>
         </div>
     )

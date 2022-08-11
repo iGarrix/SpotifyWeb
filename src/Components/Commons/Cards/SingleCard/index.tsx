@@ -9,7 +9,7 @@ export interface ISingleCard {
 
 export const SingleCard: React.FC<ISingleCard> = ({ ...props }) => {
     return (
-        <button className="rounded-xl flex flex-col items-center gap-2 w-[164px] text-dark-200" onClick={props.onClick}>
+        <button className="rounded-xl flex flex-col items-center gap-2 w-[164px] text-dark-200 dark:text-light-200" onClick={props.onClick}>
             <img alt="albumimage" className="rounded-xl w-[164px] h-[164px] bg-no-repeat bg-cover object-cover transition-all hover:shadow-lg" 
             src={props.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
             <div className="flex flex-col gap-1">

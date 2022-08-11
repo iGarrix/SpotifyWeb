@@ -6,6 +6,7 @@ import { StorageVariables, Theme } from "../../../types";
 import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { ToggleButton } from "../../Commons/Buttons/ToggleButton";
 import { DefaultSettingsDropdown } from "../../Commons/DefaultSettingsDropdown";
+import { initTheme } from "../../../Redux/Reducers/GlobalReducer/action"
 
 export const WebSettings: React.FC = () => {
 
@@ -45,10 +46,12 @@ export const WebSettings: React.FC = () => {
             case Theme.dark:
                 localStorage.setItem(StorageVariables.Theme, Theme.dark);
                 setDark(theme);
+                initTheme(theme, store.dispatch);
                 break;
             case Theme.light:
                 localStorage.setItem(StorageVariables.Theme, Theme.light);
                 setDark(theme);
+                initTheme(theme, store.dispatch);
                 break;
             default:
                 break;
@@ -61,7 +64,7 @@ export const WebSettings: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200 gap-10">
+        <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200 dark:text-light-200 gap-10">
             <Helmet>
                 <title>Soundwave | Settings</title>
             </Helmet>

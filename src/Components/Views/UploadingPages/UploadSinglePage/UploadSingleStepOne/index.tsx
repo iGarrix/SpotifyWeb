@@ -28,7 +28,7 @@ export const UploadSingleStepOne: React.FC = () => {
         initSingleFile(null);
     }
     return (
-        <div className="w-full flex flex-col items-center gap-10 h-full relative">
+        <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">
             {
                 !file ?
                     <div className="w-full pt-[4%] flex flex-col items-center gap-4 h-full">
@@ -43,15 +43,15 @@ export const UploadSingleStepOne: React.FC = () => {
                     </div> :
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
                         <h1 className="text-4xl font-bold font-['Lexend'] text-center">Uploading is complete</h1>
-                        <div className="w-full px-[35%]">
-                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 p-2 pr-4">
+                        <div className="w-full px-[30%]">
+                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 dark:bg-dark-100 p-2 pr-4">
                                 <div className="flex gap-3 items-center w-full">
-                                    <FontAwesomeIcon className="text-4xl text-dark-200/90" icon={faFileArrowUp} />
-                                    <p className="whitespace-nowrap text-lg">{file.name}</p>
+                                    <FontAwesomeIcon className="text-4xl text-dark-200/90 dark:text-light-300" icon={faFileArrowUp} />
+                                    <p className=" text-lg">{file.name}</p>
                                 </div>
                                 <div className="flex items-center ml-auto gap-2">
                                     <p className="whitespace-nowrap">{formatBytes(file.size)}</p>
-                                    <img className="invert w-[25px] cursor-pointer" alt="trash" src={icon_trash} onClick={onDelete} />
+                                    <img className="invert dark:invert-0 w-[25px] cursor-pointer" alt="trash" src={icon_trash} onClick={onDelete} />
                                 </div>
                             </div>
                         </div>

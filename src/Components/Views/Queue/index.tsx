@@ -65,7 +65,7 @@ export const Queue: React.FC = () => {
     }
     
     return (
-        <div className="w-full flex flex-col gap-6 items-start text-dark-200 px-[3%] py-[2%]">
+        <div className="w-full flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 px-[3%] py-[2%]">
             <Helmet>
                 <title>Soundwave | Playing Queue</title>
             </Helmet>
@@ -99,8 +99,8 @@ export const Queue: React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faMusic} />
-                    <div className="flex flex-col items-center gap-8 text-dark-200">
+                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                    <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="font-medium text-3xl">Queue is empty</h1>
                             <p className="font-medium text-xl">You can also listening your favorite songs using search</p>

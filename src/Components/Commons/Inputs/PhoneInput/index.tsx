@@ -36,14 +36,14 @@ export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex gap-2 flex-wrap">
-        <p className="text-dark-200 font-medium">{label}</p>
+        <p className="text-dark-200 dark:text-light-200 font-medium">{label}</p>
         <h1 className="text-red-500 font-medium">{localError}</h1>
       </div>
       <PhoneInput
         onChange={onLocalChange}
         name={name}
         value={value}
-        className="defphone bg-light-200 shadow-xl text-dark-200"
+        className="defphone bg-light-200 dark:bg-dark-100 shadow-xl text-dark-200 dark:text-light-200"
         placeholder="Enter phone number" />
     </div>
   )

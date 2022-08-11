@@ -60,7 +60,7 @@ export const MyMediaLibraryCreators: React.FC = () => {
                                 {
                                 artists.map(item => {
                                     return (
-                                        <div key={Guid.create().toString()} className="flex flex-col cursor-pointer text-dark-200 gap-1" onClick={() => { nav("/overview/" + item.username) }}>
+                                        <div key={Guid.create().toString()} className="flex flex-col cursor-pointer text-dark-200 dark:text-light-200 gap-1" onClick={() => { nav("/overview/" + item.username) }}>
                                           <img alt="artist" src={GetUserAvatar(item)}
                                             onError={(tg: any) => { tg.target.src = defaultAvatarImage }}
                                             className="w-[164px] h-[164px] bg-cover object-cover bg-no-repeat rounded-xl transition-all hover:shadow-xl" />
@@ -73,8 +73,8 @@ export const MyMediaLibraryCreators: React.FC = () => {
                         </div>
                         :
                         <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faCircleUser} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
+                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCircleUser} />
+                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-3xl">Save you first artist</h1>
                                     <p className="font-medium text-xl">You can also login your account</p>

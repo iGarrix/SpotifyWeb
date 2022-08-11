@@ -204,7 +204,7 @@ export const OverViewPlaylist: React.FC = () => {
     }
 
     return (
-        <div className="w-full px-[3%] py-[2%] flex flex-col gap-3 items-start text-dark-200 bg-no-repeat h-full">
+        <div className="w-full px-[3%] py-[2%] flex flex-col gap-3 items-start text-dark-200 dark:text-light-200 bg-no-repeat h-full">
             <Helmet>
                 <title>Soundwave | Manage Playlist</title>
             </Helmet>
@@ -240,7 +240,7 @@ export const OverViewPlaylist: React.FC = () => {
                     <h1 className="font-medium text-xl">Add something to your playlist</h1>
                     <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
                         setSearchQuery(e.target.value)
-                    }} icon={<img alt="icon" className="invert w-[28px]" src={icon_search} />} />
+                    }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     {
                         searchrx.tracks && searchrx.tracks.length > 0 && searchQuery &&
                         <div className="flex flex-col gap-4">
@@ -252,8 +252,8 @@ export const OverViewPlaylist: React.FC = () => {
                             }
                             <div className="flex items-center gap-3 mt-2">
                                 <h1 className="text-medium text-xl whitespace-nowrap">Found by '{searchQuery}'</h1>
-                                <hr className="w-full border" />
-                                <p className="text-dark-200/80 hover:text-primary-100 cursor-pointer select-none whitespace-nowrap" onClick={() => { document.documentElement.scrollTo(0, 0); nav("/search/tracks?query=" + searchQuery) }}>See all</p>
+                                <hr className="w-full border dark:border-dark-100" />
+                                <p className="text-dark-200/80 dark:text-light-300 hover:text-primary-100 cursor-pointer select-none whitespace-nowrap" onClick={() => { document.documentElement.scrollTo(0, 0); nav("/search/tracks?query=" + searchQuery) }}>See all</p>
                             </div>
                             {
                                 searchrx.tracks?.slice(0, 3).map(item => {
@@ -263,7 +263,7 @@ export const OverViewPlaylist: React.FC = () => {
                                     )
                                 })
                             }
-                            <hr className="w-full border" />
+                            <hr className="w-full border dark:border-dark-100" />
                         </div>
                     }
 
@@ -285,8 +285,8 @@ export const OverViewPlaylist: React.FC = () => {
                         </div>
                         :
                         <div className="flex flex-col gap-6">
-                            <FontAwesomeIcon className="text-5xl font-medium text-dark-200" icon={faMusic} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200">
+                            <FontAwesomeIcon className="text-5xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-2xl">Tracks not found</h1>
                                 </div>

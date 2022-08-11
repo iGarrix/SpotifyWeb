@@ -95,10 +95,10 @@ export const PlaylistResult : React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faSquarePlus} />
-                        <div className="flex flex-col items-center gap-8 text-dark-200">
+                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl">Playlist not found</h1>
+                                <h1 className="font-medium text-3xl dark:text-light-200">Playlist not found</h1>
                             </div>
                         </div>
                     </div>

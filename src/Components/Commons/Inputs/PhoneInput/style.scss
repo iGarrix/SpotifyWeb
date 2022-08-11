@@ -2,6 +2,6 @@
     @apply font-medium font-['Overpass'] outline-0 py-3 px-5 rounded-xl focus:outline-0;
     
     & input {
-        @apply bg-transparent text-dark-200 border-0 outline-none shadow-none pl-2;
+        @apply bg-transparent text-dark-200 dark:text-light-200 border-0 outline-none shadow-none pl-2;
     }
 }

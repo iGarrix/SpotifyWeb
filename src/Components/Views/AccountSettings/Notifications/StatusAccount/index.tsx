@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetStatusUserRequest, IUserStatusResponse } from "../../../../../Redux/Reducers/NotificationReducer/types";
+import { dayDiff } from "../../../../../types";
 import { NotifyCard } from "../../../../Commons/Cards/NotifyCard";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { StatusDetailModal } from "../../../../Commons/Modals/FullScreenModal/StatusDetailModal";
@@ -15,6 +16,12 @@ export const StatusAccount : React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const [open, setOpen] = useState(false);
 
+    const d1 = new Date(2022, 9, 20);
+    const d2 = new Date(2022, 9, 22);
+
+    const res = dayDiff(d1, d2);
+    console.log(res)
+    
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (reducer.nextPage && !reducer.loading) {
@@ -86,7 +93,7 @@ export const StatusAccount : React.FC = () => {
                             isFunc
                             onClick={() => {onSelect(item)}}
                             message={
-                                <p className="w-full flex gap-1 items-center">You have a <span className="font-medium text-primary-100">{item.userStatusDto.status}</span> status due to: <span className="font-medium text-primary-100">{item.userStatusDto.reason}</span></p>
+                                <p className="w-full flex gap-1 items-center">You have a <span className="font-medium text-primary-100 dark:text-blue-300">{item.userStatusDto.status}</span> status due to: <span className="font-medium text-primary-100 dark:text-blue-300">{item.userStatusDto.reason}</span></p>
                             } type={"error"} date={new Date(item.userStatusDto.create)} />
                     )
                 })

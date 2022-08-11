@@ -11,7 +11,7 @@ import { IPlaylistResultCard } from "./types";
 export const PlaylistResultCard : React.FC<IPlaylistResultCard> = ({...props}) => {
     const nav = useNavigate();
     return (
-        <div className="w-full h-full rounded-xl bg-light-200 overflow-hidden flex flex-col gap-6 py-6 px-8 cursor-pointer transition-all mainresultcard relative">
+        <div className="w-full h-full rounded-xl bg-light-200 dark:bg-dark-200 overflow-hidden flex flex-col gap-6 py-6 px-8 cursor-pointer transition-all mainresultcard relative">
             <div className="absolute top-0 left-0 w-full h-full" onClick={props.onNavigate}></div>
             <img alt="image" src={props.image}
                 className="rounded-xl w-[164px] h-[164px] bg-cover object-cover shadow-xl select-none" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
@@ -21,7 +21,7 @@ export const PlaylistResultCard : React.FC<IPlaylistResultCard> = ({...props}) =
                         <p className="text-2xl font-medium">{props.name}</p>
                     </div>
                     <div className="flex gap-4 items-center select-none">
-                        <p className="flex gap-1 flex-wrap text-dark-200/60">
+                        <p className="flex gap-1 flex-wrap text-dark-200/60 dark:text-light-200">
                             {
                                 props.creators?.splice(0, 2).map((i: any, index: number) => {
                                     return (
@@ -32,11 +32,12 @@ export const PlaylistResultCard : React.FC<IPlaylistResultCard> = ({...props}) =
                                 })
                             }
                         </p>
-                        <p className="text-light-100 bg-dark-200/90 rounded-xl px-4 py-0.5">Playlist</p>
+                        <p className="text-light-100 dark:text-dark-200 bg-dark-200/90 dark:bg-light-200 rounded-xl px-4 py-0.5">Playlist</p>
                     </div>
                 </div>
                 <div className="flex items-end select-none z-10">
-                        <FontAwesomeIcon icon={props.isPlay ? faCirclePause : faCirclePlay} className={`mainresultbutton transition-all cursor-pointer text-5xl text-dark-200/90 ${props.onSelect && "hover:scale-105"}`} onClick={props.onSelect} />
+                        <FontAwesomeIcon icon={props.isPlay ? faCirclePause : faCirclePlay} className={`mainresultbutton transition-all cursor-pointer text-5xl 
+                        text-dark-200/90 dark:text-light-200/90 ${props.onSelect && "hover:scale-105"}`} onClick={props.onSelect} />
                 </div>
             </div>
         </div>

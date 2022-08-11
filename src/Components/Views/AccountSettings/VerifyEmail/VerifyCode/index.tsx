@@ -37,7 +37,7 @@ export const VerifyCodEmail: React.FC = () => {
         }
     };
     return (
-        <div className="w-full h-full text-dark-200">
+        <div className="w-full h-full text-dark-200 dark:text-light-200">
             <Helmet>
                 <title>Soundwave | Enter Code</title>
             </Helmet>
@@ -59,7 +59,7 @@ export const VerifyCodEmail: React.FC = () => {
                                     </div>
                                 </div>
                             }
-                            <div className="flex flex-col w-full items-center">
+                            <div className="flex flex-col w-full items-center dark:text-dark-200">
                                 {
                                     1 === 1 ?
                                     <PinInput

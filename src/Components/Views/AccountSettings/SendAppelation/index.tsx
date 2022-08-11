@@ -41,9 +41,9 @@ export const SendAppelation: React.FC = () => {
             </Helmet>
             {
                 user ?
-                    <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 gap-[20px]">
+                    <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 dark:text-light-200 gap-[20px]">
                         <FullScreenModal visible={open} center>
-                            <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 shadow-xl px-[2%] py-[5%] border border-light-200">
+                            <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 dark:bg-dark-200 shadow-xl px-[2%] py-[5%] border border-light-200 dark:border-dark-200">
                                 <FontAwesomeIcon icon={faCircleCheck} className="text-9xl" />
                                 <div className="flex flex-col items-center mt-[20px] mb-[30px] gap-[10px]">
                                     <h2 className="font-bold text-2xl">Your letter has been sent</h2>
@@ -65,7 +65,7 @@ export const SendAppelation: React.FC = () => {
                         {
                             error &&
                             <div className="w-full flex items-center justify-center rounded-xl py-3 bg-red-500/80">
-                                <h2 className="text-light-100 font-medium">{error}fgfgfgfgf</h2>
+                                <h2 className="text-light-100 font-medium">{error}</h2>
                             </div>
                         }
                         <Formik

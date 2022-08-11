@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IPagableMyAlbumItem } from "../../../../Redux/Reducers/MyAlbumReducer/types";
-import { baseUrl, StorageVariables } from "../../../../types";
+import { baseUrl } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { AlbumCard } from "../../../Commons/Cards/AlbumCard";
 
@@ -70,7 +70,7 @@ export const WeeklyAlbums: React.FC = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 px-12 items-center relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 px-12 text-dark-200 dark:text-light-200 items-center relative">
             <Helmet>
                 <title>Soundwawe | Top albums</title>
             </Helmet>
@@ -94,8 +94,8 @@ export const WeeklyAlbums: React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col items-center justify-center w-full gap-5 h-full">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200" icon={faCompactDisc} />
-                        <div className="flex flex-col items-center gap-8 text-dark-200">
+                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
                                 <h1 className="font-medium text-3xl">Weekly albums not found</h1>
                                 <p className="font-medium text-xl">You can jump to soundwave page</p>

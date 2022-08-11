@@ -18,8 +18,8 @@ export const MyMediaLibrary: React.FC = () => {
 
             <div className={`h-full w-full flex flex-col items-center mt-5`}>
                 <div className="w-full items-center flex flex-col gap-5">
-                    <h1 className="font-semibold text-2xl">Saves</h1>
-                    <div className="bg-light-200/100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
+                    <h1 className="font-semibold text-2xl dark:text-light-200">Saves</h1>
+                    <div className="bg-light-200 dark:bg-dark-100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
                         <ProfileButton text="songs" isSelect={currentItem === "/medialibrary"} onClick={() => { onCurrentItem("/medialibrary") }} />
                         <ProfileButton text="albums" isSelect={currentItem === "/medialibrary/albums"} onClick={() => { onCurrentItem("/medialibrary/albums") }} />
                         <ProfileButton text="playlists" isSelect={currentItem === "/medialibrary/playlists"} onClick={() => { onCurrentItem("/medialibrary/playlists") }} />

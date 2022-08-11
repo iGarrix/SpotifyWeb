@@ -98,10 +98,10 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
         }
     }
     return (
-        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10 border border-light-200">
+        <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-10 border border-light-200 dark:border-dark-200">
             <div className="flex justify-between w-full">
                 <h1 className="whitespace-nowrap text-xl font-['Lexend']">Change data</h1>
-                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
+                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4" />
             {
@@ -115,7 +115,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
                             <div className="w-48 h-48 relative overflow-hidden rounded-xl">
                                 <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                     <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
-                                    <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                    <label htmlFor="file"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
                                 </div>
                                 <img alt="avatar" src={baseUrl + "Images/AlbomImages/" + album?.albomDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                             </div> :
@@ -130,7 +130,7 @@ export const ChangeAlbumModal: React.FC<IChangeAlbumModal> = ({ onSave, onClose,
                                 <div className="w-32 h-32 relative overflow-hidden rounded-xl">
                                     <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                         <input type="file" id="tempFile" accept="image/*" onChange={onChangeTemplateImage} className="hidden" />
-                                        <label htmlFor="tempFile"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                        <label htmlFor="tempFile"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
                                     </div>
                                     <img alt="avatar" src={baseUrl + "Images/AlbomTemplates/" + album?.albomDto?.templateimage} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                 </div>

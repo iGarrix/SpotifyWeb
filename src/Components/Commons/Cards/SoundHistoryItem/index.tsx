@@ -18,7 +18,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
     const nav = useNavigate();
 
     return (
-        <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 relative">
+        <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 dark:text-light-200 relative">
             <div className="absolute top-0 left-0 w-full h-full z-[10]" onClick={onClick}></div>
             <div className="flex w-full gap-4">
                 {
@@ -29,10 +29,10 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                 }
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
                     className="w-[100px] h-[100px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
-                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 shadow-xl rounded-xl"}`}>
+                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 dark:bg-dark-200/60 shadow-xl rounded-xl"}`}>
                     <div className="flex flex-col items-center justify-center col-span-4">
                         <h1 className="text-xl">{track?.name}</h1>
-                        <p className="text-gray-500 font-medium flex gap-2 items-center z-10">
+                        <p className="text-gray-500 dark:text-light-300/80 font-medium flex gap-2 items-center z-10">
                             {
                                 trackCreators?.map(i => i.username).map((i: any, index: number) => {
                                     return (
@@ -48,12 +48,12 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                         <h1 className="text-xl">Realised</h1>
                         {
                             track?.create &&
-                            <p className="text-dark-200/90 font-medium whitespace-nowrap">realised {moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
+                            <p className="text-dark-200/90 dark:text-light-200/80 font-medium whitespace-nowrap">realised {moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
                         }
                     </div>
                     <div className="flex items-center justify-end gap-4 col-span-3">
                         <div className="flex flex-col items-center gap-2">
-                            <img alt="icon" className="invert w-[24px]" src={icon_duration} />
+                            <img alt="icon" className="invert dark:invert-0 w-[24px]" src={icon_duration} />
                             {
                                 track &&
                                 <p>{moment.utc(Number.parseFloat(track?.duration) * 1000).format("mm:ss")}</p>
@@ -62,12 +62,12 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-4 col-span-1">
-                        <img alt="icon" className="invert w-[24px] z-[11]" src={icon_like} onClick={onLike} />
+                        <img alt="icon" className="invert dark:invert-0 w-[24px] z-[11]" src={icon_like} onClick={onLike} />
                     </div>
                 </div>
                 <div className="soundhistory_menu z-[11]">
                     <SoundOptionModal options={options}
-                        trigger={<FontAwesomeIcon className=" w-[20px] h-[20px] text-dark-200" icon={faEllipsisVertical} />} />
+                        trigger={<FontAwesomeIcon className=" w-[20px] h-[20px] text-dark-200 dark:text-light-200" icon={faEllipsisVertical} />} />
                 </div>
             </div>
         </div>

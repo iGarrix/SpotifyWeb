@@ -11,7 +11,7 @@ export const UploadIntro: React.FC = () => {
         nav(path, { replace: true });
     }
     return (
-        <div className="overflow-hidden w-screen h-full text-light-100 flex flex-col justify-center items-center bg-light-100 relative">
+        <div className="overflow-hidden w-screen h-full text-light-100 flex flex-col justify-center items-center bg-light-100 dark:bg-dark-100 relative">
         <Helmet>
             <title>Soundwave | Uploading</title>
         </Helmet>

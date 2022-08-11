@@ -4,13 +4,13 @@
     }
 
     .playlistCardMailOptions {
-        @apply hidden;
+        @apply hidden transition-all;
         z-index: 22;
     }
 
     &:hover {
         .plCardMailSelect {
-            @apply bg-light-200 shadow-xl rounded-xl;
+            @apply bg-light-200 shadow-xl rounded-xl dark:bg-dark-100;
         }
         .playlistCardMailOptions {
             @apply flex;

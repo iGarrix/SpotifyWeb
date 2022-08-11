@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React from "react";
+import { Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
 import { CreativeStudioSideBar } from "../../Commons/CreativeStudioSideBar";
-import { PlayingFooter } from "../../Commons/Footers/PlayingFooter";
 import { Header } from "../../Commons/Header";
-
-const icon_settings = require('../../../Assets/Icons/Settings.png');
 
 export const LayCreativeStudio: React.FC = () => {
     const loading = useTypedSelector(state => state.userReducer.loading);

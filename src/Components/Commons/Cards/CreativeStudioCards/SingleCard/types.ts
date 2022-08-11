@@ -2,6 +2,5 @@ import { ITrackResponse } from "../../../../../Redux/Reducers/PlayingReducer/typ
 
 export interface ISoundItemSingle {
     item: ITrackResponse,
-    listening: number,
     onDelete: () => void
 }
