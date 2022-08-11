@@ -20,7 +20,7 @@ export const FormikDefaultDropdown: React.FC<FormikDefaultDropdownProps> = ({
                 }} />
             </div>
       <select defaultValue={value}
-        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-dark-200 bg-light-200 dark:text-light-200 dark:bg-dark-100" 
+        className="outline-0 rounded-xl py-3 px-5 pr-20 w-full text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-100" 
         onChange={field.onChange}
         name={field.name}
       >

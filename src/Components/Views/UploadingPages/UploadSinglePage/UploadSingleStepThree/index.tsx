@@ -26,7 +26,7 @@ export const UploadSingleStepThree: React.FC = () => {
             <div className="flex flex-col pt-[4%] gap-[6%] w-full h-full px-[30%]">
                 <div className="flex flex-col gap-2">
                     <h1 className="text-xl font-medium">Preview</h1>
-                    <div className="p-4 bg-light-200 dark:bg-dark-100 w-full rounded-lg flex gap-3">
+                    <div className="p-4 bg-light-100 dark:bg-dark-100 w-full rounded-lg flex gap-3">
                         <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[120px] w-[120px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                         <div className="flex flex-col justify-center">
                             <h1 className="text-2xl font-['Lexend'] font-bold">{reducer.singledata?.title}</h1>
@@ -37,7 +37,7 @@ export const UploadSingleStepThree: React.FC = () => {
                 <div className="flex flex-col gap-1 w-full">
                     <h1 className="text-lg font-medium">{copy ? "Link copied!" : "Share link"}</h1>
                     <div className="flex w-full">
-                        <div className="flex w-full justify-between bg-light-200 dark:bg-dark-100 shadow-sm rounded-md items-center gap-[64px] overflow-hidden py-2 pr-4 pl-0">
+                        <div className="flex w-full justify-between bg-light-100 dark:bg-dark-100 shadow-sm rounded-md items-center gap-[64px] overflow-hidden py-2 pr-4 pl-0">
                             <a href={link} className="text-md px-4 hover:text-primary-100 dark:hover:text-blue-500">{link}</a>
                             <CopyToClipboard text={link ? link : ""} onCopy={() => { setCopy(true) }}>
                                 <p className="flex items-center justify-center text-center

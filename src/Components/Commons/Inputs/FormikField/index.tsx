@@ -16,7 +16,7 @@ export const FormikField: React.FC<IFormikField> = ({ placeholder, value, type, 
             <input placeholder={placeholder} disabled={props.disable} type={type} defaultValue={value} onSubmit={onSumbit}
                 onChange={field.onChange}
                 name={field.name}
-                className={`text-dark-200 dark:text-light-200 rounded-lg py-2.5 px-4 outline-none border-0 bg-light-200 dark:bg-dark-100
+                className={`text-dark-200 dark:text-light-200 rounded-lg py-2.5 px-4 outline-none border-0 bg-light-100 dark:bg-dark-100
                 shadow-xl dark:shadow-none ${isOutline ? "border-[1px] border-dark-200" : ""} ${props.className}`} />
         </div>
     )

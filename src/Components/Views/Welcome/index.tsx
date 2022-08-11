@@ -102,8 +102,8 @@ export const Welcome: React.FC = () => {
               src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
           </div>
           <div className="flex flex-col gap-4 col-start-6 col-span-7 z-[2]">
-            <p className="font-medium text-xl select-none">The best of week</p>
-            <h1 className="font-semibold font-['Lexend'] text-4xl">{mainReducer.albums[0].albomDto?.name}</h1>
+            <p className="font-medium text-xl select-none text-light-200">The best of week</p>
+            <h1 className="font-semibold font-['Lexend'] text-4xl text-light-200">{mainReducer.albums[0].albomDto?.name}</h1>
             <p className="text-xl grid-cols-4 font-['Lexend'] text-gray-200">Creators: {mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom.map(item => item.username).join(", ")}</p>
             <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
               onClick={onRedirectToAlbum}

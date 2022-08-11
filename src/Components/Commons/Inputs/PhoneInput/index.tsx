@@ -43,7 +43,7 @@ export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({
         onChange={onLocalChange}
         name={name}
         value={value}
-        className="defphone bg-light-200 dark:bg-dark-100 shadow-xl text-dark-200 dark:text-light-200"
+        className="defphone bg-light-100 dark:bg-dark-100 shadow-xl text-dark-200 dark:text-light-200"
         placeholder="Enter phone number" />
     </div>
   )

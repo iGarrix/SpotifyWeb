@@ -142,7 +142,7 @@ export const StudioPlaylist: React.FC = () => {
             }
             <div className="flex flex-col gap-8 w-full h-full">
                 <h1 className="font-semibold text-2xl">Create new Playlist</h1>
-                <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-200 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
+                <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-300 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
                     <FontAwesomeIcon className="text-white text-[64px]" icon={faPlus} />
                 </div>
                 <div className="flex flex-col gap-10 w-full">

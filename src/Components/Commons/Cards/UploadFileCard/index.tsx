@@ -8,7 +8,7 @@ const icon_trash = require('../../../../Assets/Icons/Trash.png');
 
 export const UploadFileCard: React.FC<IUploadFileCard> = ({...props}) => {
     return (
-        <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 dark:bg-dark-100 p-2 pr-4">
+        <div className="flex justify-between items-center rounded-lg gap-2 bg-light-100 dark:bg-dark-100 p-2 pr-5">
             <div className="flex gap-3 items-center w-full">
                 <FontAwesomeIcon className="text-4xl text-dark-200/90 dark:text-light-300" icon={faFileArrowUp} />
                 <input type={"text"} disabled={props.disable} className="whitespace-nowrap text-lg bg-transparent w-full border-0 outline-none" defaultValue={props.file.name} onChange={(e: any) => {props.onChange(e)}}/>

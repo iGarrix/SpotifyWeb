@@ -84,7 +84,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
     return (
         <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
-        ${isPlay ? `bg_select_sound text-light-200` : "bg-light-200 dark:bg-dark-200 text-dark-200 dark:text-light-200"}`}>
+        ${isPlay ? `bg_select_sound text-light-200` : "bg-light-100 dark:bg-dark-100 text-dark-200 dark:text-light-200"}`}>
             <FullScreenModal visible={shareModal} center>
                 <ShareModal
                     onClose={() => { setShareModal(false) }}

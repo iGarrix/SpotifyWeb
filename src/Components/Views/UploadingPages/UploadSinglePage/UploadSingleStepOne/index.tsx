@@ -44,7 +44,7 @@ export const UploadSingleStepOne: React.FC = () => {
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
                         <h1 className="text-4xl font-bold font-['Lexend'] text-center">Uploading is complete</h1>
                         <div className="w-full px-[30%]">
-                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-200 dark:bg-dark-100 p-2 pr-4">
+                            <div className="flex justify-between items-center rounded-lg gap-2 bg-light-100 dark:bg-dark-100 p-2 pr-4">
                                 <div className="flex gap-3 items-center w-full">
                                     <FontAwesomeIcon className="text-4xl text-dark-200/90 dark:text-light-300" icon={faFileArrowUp} />
                                     <p className=" text-lg">{file.name}</p>

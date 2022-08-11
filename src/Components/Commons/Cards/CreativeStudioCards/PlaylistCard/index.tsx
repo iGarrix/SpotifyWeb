@@ -33,7 +33,7 @@ export const CreatePlaylistItem: React.FC<IPlaylistCard> = ({ image, name, date,
                         <h1 className="text-xl">Type</h1>
                         {
                             type &&
-                            <p className="bg-dark-200/90 dark:bg-light-200 dark:text-dark-200 px-3 rounded-xl font-medium whitespace-nowrap flex items-center justify-center">{type}</p>
+                            <p className="bg-dark-200/90 text-light-200 dark:bg-light-200 dark:text-dark-200 px-3 rounded-xl font-medium whitespace-nowrap flex items-center justify-center">{type}</p>
                         }
                     </div>
                     <div className="flex flex-col items-center justify-center col-span-1">

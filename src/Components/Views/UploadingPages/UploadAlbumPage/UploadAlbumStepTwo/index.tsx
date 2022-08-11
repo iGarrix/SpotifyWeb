@@ -187,7 +187,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                 onSubmit={onUploadAlbumDataHandle}>
                 <Form className="flex flex-col pt-[4%] gap-12 w-full h-full">
                     <div className="px-[27%] pb-[5%]">
-                        <div className="flex flex-col h-full p-[30px] shadow-2xl bg-light-100 dark:bg-dark-200/30 gap-6 rounded-xl overflow-hidden relative">
+                        <div className="flex flex-col h-full p-[30px] shadow-2xl bg-light-200 dark:bg-dark-200/30 gap-6 rounded-xl overflow-hidden relative">
                             <img alt="bgimage" className="absolute top-0 left-0 w-full h-[25%] object-cover bg-cover"
                                 src={imageBack} onError={(tg: any) => { tg.target.src = defaultBg }} />
                             <div className="w-full gap-6 flex z-10">

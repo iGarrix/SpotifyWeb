@@ -11,7 +11,7 @@ import { IPlaylistResultCard } from "./types";
 export const PlaylistResultCard : React.FC<IPlaylistResultCard> = ({...props}) => {
     const nav = useNavigate();
     return (
-        <div className="w-full h-full rounded-xl bg-light-200 dark:bg-dark-200 overflow-hidden flex flex-col gap-6 py-6 px-8 cursor-pointer transition-all mainresultcard relative">
+        <div className="w-full h-full rounded-xl bg-light-100 dark:bg-dark-200 overflow-hidden flex flex-col gap-6 py-6 px-8 cursor-pointer transition-all mainresultcard relative">
             <div className="absolute top-0 left-0 w-full h-full" onClick={props.onNavigate}></div>
             <img alt="image" src={props.image}
                 className="rounded-xl w-[164px] h-[164px] bg-cover object-cover shadow-xl select-none" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />

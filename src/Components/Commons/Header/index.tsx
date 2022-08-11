@@ -22,7 +22,7 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
     const nav = useNavigate();
     const { theme } = useTypedSelector(state => state.globalReducer);
     return (
-        <div className={`py-2 px-10 bg-light-200 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
+        <div className={`py-2 px-10 bg-light-100 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
             <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
                 {
                     user ?

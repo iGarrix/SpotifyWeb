@@ -16,7 +16,7 @@ export const FormikTextArea: React.FC<FormikTextAreaProps> = ({
             </div>
             <textarea
                 placeholder={label}
-                className={`outline-0 border-0 rounded-lg py-3 px-5 min-h-[${minHeight}px] text-dark-200 dark:text-light-200 bg-light-200 dark:bg-dark-100
+                className={`outline-0 border-0 rounded-lg py-3 px-5 min-h-[${minHeight}px] text-dark-200 dark:text-light-200 bg-light-100 dark:bg-dark-100
                  autofill:bg-light-100 dark:autofill:bg-dark-100`}
                 onChange={field.onChange}
                 name={field.name}

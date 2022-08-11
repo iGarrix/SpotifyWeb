@@ -23,7 +23,7 @@ export const AccountSettingsSideBar: React.FC = () => {
     const { theme } = useTypedSelector(state => state.globalReducer);
 
     return (
-        <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-200 to-light-200/100 dark:from-dark-200 dark:to-dark-200">
+        <div className="w-full h-screen sticky top-0 pb-12 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-100 to-light-200/100 dark:from-dark-200 dark:to-dark-200">
             <div className="w-full flex justify-center">
                 <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/accountsettings") }} />
             </div>

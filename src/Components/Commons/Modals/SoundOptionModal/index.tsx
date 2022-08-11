@@ -36,7 +36,7 @@ export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options
             <div onClick={() => { setOpen(!isOpen) }}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-light-200 dark:border-dark-200 absolute top-[100%] right-0 flex flex-col text-dark-200 bg-light-300 dark:bg-dark-100 rounded-sm overflow-hidden z-[50]"
+            <div ref={fixeddropdown} className={`${isOpen ? "border-light-200 dark:border-dark-200 absolute top-[100%] right-0 flex flex-col text-dark-200 bg-light-200 dark:bg-dark-100 rounded-sm overflow-hidden z-[50]"
                 : "hidden"}`}>
                 <div className="flex flex-col">
                     {

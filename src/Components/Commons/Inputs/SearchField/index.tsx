@@ -7,10 +7,10 @@ export const SearchField: React.FC<ISearchField> = ({ placeholder, value, onChan
             <div className="flex">
                 <input placeholder={placeholder} defaultValue={value} onChange={(e: any) => { onChange(e) }}
                     className={`text-dark-200 dark:text-light-200 text-md py-3 px-6 w-full outline-none 
-                    border-0 bg-light-200/60 dark:bg-dark-100/60 ${icon ? 'rounded-l-xl' : 'rounded-xl'}`} />
+                    border-0 bg-light-100 dark:bg-dark-100/60 ${icon ? 'rounded-l-xl' : 'rounded-xl'}`} />
                 {
                     icon ?
-                        <div className="bg-light-200/60 dark:bg-dark-100/60 rounded-r-xl flex items-center px-4">
+                        <div className="bg-light-100 dark:bg-dark-100/60 rounded-r-xl flex items-center px-4">
                             {icon}
                         </div> : null
 
