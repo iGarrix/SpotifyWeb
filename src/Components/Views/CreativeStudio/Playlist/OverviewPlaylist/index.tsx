@@ -220,7 +220,7 @@ export const OverViewPlaylist: React.FC = () => {
                         <div className="w-64 h-64 relative overflow-hidden rounded-xl">  
                             <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                 <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
-                                <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faImage} /> </label>
+                                <label htmlFor="file"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
                             </div>
                             <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                         </div> :

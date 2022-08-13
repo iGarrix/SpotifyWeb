@@ -52,6 +52,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
             }
         } catch (err) {
             setEnterError(error);
+            onClose();
         }
     }
     const onLoadingImage = (e: any) => {

@@ -30,7 +30,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
                     className="w-[100px] h-[100px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
                 <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 dark:bg-dark-200/60 shadow-xl rounded-xl"}`}>
-                    <div className="flex flex-col items-center justify-center col-span-4">
+                    <div className="flex flex-col items-start justify-center col-span-4 pl-[10%]">
                         <h1 className="text-xl">{track?.name}</h1>
                         <p className="text-gray-500 dark:text-light-300/80 font-medium flex gap-2 items-center z-10">
                             {
@@ -44,7 +44,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                             <FontAwesomeIcon className="w-[16px] h-[16px] flex items-center text-primary-100 -translate-y-[12%]" icon={trackCreators ? trackCreators[0].verify === VerifyType.verify ? faCheck :
                                 trackCreators[0].verify === VerifyType.verify ? faCheck : faUser : faUser} /></p>
                     </div>
-                    <div className="flex flex-col items-center justify-center col-span-4">
+                    <div className="flex flex-col items-center justify-center col-span-5">
                         <h1 className="text-xl">Realised</h1>
                         {
                             track?.create &&
@@ -60,9 +60,6 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
 
                             }
                         </div>
-                    </div>
-                    <div className="flex items-center justify-center gap-4 col-span-1">
-                        <img alt="icon" className="invert dark:invert-0 w-[24px] z-[11]" src={icon_like} onClick={onLike} />
                     </div>
                 </div>
                 <div className="soundhistory_menu z-[11]">

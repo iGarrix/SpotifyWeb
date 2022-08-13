@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetStatusUserRequest, IUserStatusResponse } from "../../../../../Redux/Reducers/NotificationReducer/types";
-import { dayDiff } from "../../../../../types";
 import { NotifyCard } from "../../../../Commons/Cards/NotifyCard";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { StatusDetailModal } from "../../../../Commons/Modals/FullScreenModal/StatusDetailModal";
@@ -15,12 +14,6 @@ export const StatusAccount : React.FC = () => {
     const reducer = useTypedSelector(state => state.notificationReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const [open, setOpen] = useState(false);
-
-    const d1 = new Date(2022, 9, 20);
-    const d2 = new Date(2022, 9, 22);
-
-    const res = dayDiff(d1, d2);
-    console.log(res)
     
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {

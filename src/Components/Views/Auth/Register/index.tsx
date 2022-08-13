@@ -117,7 +117,7 @@ export const Register: React.FC = () => {
           style={{ backgroundImage: `url(${background2})` }}></div>
       </div>
       <div className="flex flex-col h-full justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
-        <div className="absolute w-full h-full rounded-xl p-2 opacity-98 bg-gradient-to-r from-blue-600 to-blue-400"></div>
+        <div className="absolute w-full h-full object-cover bg-cover rounded-xl p-2 bg-gradient-to-r from-primary-100 to-sky-400" style={{ backgroundImage: `url(${background1})` }}></div>
         <div className="z-10 flex flex-col gap-6">
           {
             localError !== "" ?

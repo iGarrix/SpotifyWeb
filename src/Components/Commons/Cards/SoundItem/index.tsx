@@ -1,4 +1,4 @@
-import { faCirclePlus, faClose, faEllipsisVertical, faHeart, faPause, faPlay, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faEllipsisVertical, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
@@ -8,9 +8,8 @@ import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { ISubscribeSingleRequest, IUnsubscribeSingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
-import { baseUrl, defaultAlbumImage, defaultMusicImage } from "../../../../types";
-import { ProfileButton } from "../../Buttons/ProfileButton";
-import { SearchField } from "../../Inputs/SearchField";
+import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
+import { baseUrl, defaultAlbumImage, defaultMusicImage, StorageVariables } from "../../../../types";
 import { FullScreenModal } from "../../Modals/FullScreenModal";
 import { AddTrackToPlaylistModal } from "../../Modals/FullScreenModal/AddTrackToPlaylistModal";
 import { ShareModal } from "../../Modals/FullScreenModal/Shares/ShareModal";
@@ -60,6 +59,14 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                 }
                 await subscribeSingle(rq);
                 setLiked(true);
+                let storage_queue = localStorage.getItem(StorageVariables.Queue);
+                if (storage_queue) {
+                    let queue = JSON.parse(storage_queue) as IQueue;
+                    let newarr = queue.soundobjs;
+                    newarr[queue.playedIndex].isLiked = true;
+                    queue.soundobjs = newarr;
+                    localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                }
             }
         } catch (error) {
             
@@ -75,6 +82,14 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                 }
                 await unsubscribeSingle(rq);
                 setLiked(false);
+                let storage_queue = localStorage.getItem(StorageVariables.Queue);
+                if (storage_queue) {
+                    let queue = JSON.parse(storage_queue) as IQueue;
+                    let newarr = queue.soundobjs;
+                    newarr[queue.playedIndex].isLiked = false;
+                    queue.soundobjs = newarr;
+                    localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                }
             }
         } catch (error) {
             

@@ -2,9 +2,9 @@ import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BackwardQueue, ForwardQueue, ShuffleQueue } from "../../../../Helpers/QueueHelper";
-//import { NextTrackInQeueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
+import { ISubscribeSingleRequest, IUnsubscribeSingleRequest } from "../../../../Redux/Reducers/MySingleReducer/types";
 import { IQueue } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultAlbumImage, StorageVariables } from "../../../../types";
 import { FullScreenModal } from "../../Modals/FullScreenModal";
@@ -24,11 +24,13 @@ const icon_shuffle = require('../../../../Assets/Icons/Shuffle.png');
 const icon_repeat = require('../../../../Assets/Icons/Repeat.png');
 const icon_play = require('../../../../Assets/Icons/Play.png');
 const icon_pause = require('../../../../Assets/Icons/Pause.png');
+const icon_like = require('../../../../Assets/Icons/Like.png');
+const icon_likered = require('../../../../Assets/Icons/LikeRed.png');
 
 
 export const PlayingFooter: React.FC = () => {
 
-    const { setPlayingTrack, initQueue } = useActions();
+    const { setPlayingTrack, initQueue, subscribeSingle, unsubscribeSingle } = useActions();
     const rx = useTypedSelector(state => state.playingReducer.queue);
     const nav = useNavigate();
     const onNav = (path: string) => {
@@ -39,10 +41,19 @@ export const PlayingFooter: React.FC = () => {
             nav(-1);
         }
     }
+
+    useEffect(() => {
+        if (rx?.soundobjs[rx.playedIndex]) {
+           setLiked(rx.soundobjs[rx.playedIndex].isLiked);    
+        }
+    }, [rx?.soundobjs[rx?.playedIndex]])
+
     const audioPlayer = useRef<any>();
+    const user = useTypedSelector(state => state.userReducer.profile);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRepeat, setRepeat] = useState(false);
     const [shareModal, setShareModal] = useState(false);
+    const [isLiked, setLiked] = useState(false);
     const [volume, setVolume] = useState(() => {
         const vol = localStorage.getItem(StorageVariables.Volume);
         if (vol) {
@@ -138,6 +149,7 @@ export const PlayingFooter: React.FC = () => {
     useEffect(() => {
         if (rx) {
             togglePlay(rx.isPlay);
+            
         }
     }, [rx]);
     const togglePlay = (play: boolean) => {
@@ -219,6 +231,58 @@ export const PlayingFooter: React.FC = () => {
 
     const onShare = () => {
         setShareModal(true);
+    }
+
+    const onSubscribeTrack = async () => {
+        try {
+            if (rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].track && user) {  
+                const id = rx.soundobjs[rx.playedIndex].track?.returnId;
+                if (id) {                
+                    const rq : ISubscribeSingleRequest = {
+                        findSubscriberEmail: user.email,
+                        findTrackId: id
+                    }
+                    await subscribeSingle(rq);
+                    setLiked(true);
+                    let storage_queue = localStorage.getItem(StorageVariables.Queue);
+                    if (storage_queue) {
+                        let queue = JSON.parse(storage_queue) as IQueue;
+                        let newarr = rx.soundobjs;
+                        newarr[rx.playedIndex].isLiked = true;
+                        queue.soundobjs = newarr;
+                        localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                    }
+                }
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const onUnsubscribeTrack = async () => {
+        try {
+            if (rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].track && user) { 
+                const id = rx.soundobjs[rx.playedIndex].track?.returnId;
+                if (id) {          
+                    const rq : IUnsubscribeSingleRequest = {
+                        trackId: id,
+                        subscribeEmail:  user.email
+                    }
+                    await unsubscribeSingle(rq);
+                    setLiked(false);
+                    let storage_queue = localStorage.getItem(StorageVariables.Queue);
+                    if (storage_queue) {
+                        let queue = JSON.parse(storage_queue) as IQueue;
+                        let newarr = rx.soundobjs;
+                        newarr[rx.playedIndex].isLiked = false;
+                        queue.soundobjs = newarr;
+                        localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
+                    }
+                }       
+            }
+        } catch (error) {
+
+        }
     }
 
     return (
@@ -314,6 +378,12 @@ export const PlayingFooter: React.FC = () => {
                             }
                         </div>
                         <div className="flex items-end pb-4 px-10 py-2 gap-3 z-10 col-span-2">
+                            {
+                                isLiked ?
+                                    <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
+                                    :
+                                    <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none`} src={icon_like} onClick={onSubscribeTrack} />
+                            }
                             <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_queue} onClick={() => { onNav("queue") }} />
                             <div className="flex items-center gap-2">
                                 {
