@@ -81,20 +81,20 @@ export const Login: React.FC = () => {
       <Helmet>
         <title>Soundwave | Authorizate</title>
       </Helmet>
-      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
+      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39 mm:hidden sm:hidden md:hidden lg:hidden xl:grid">
         <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-span-6">
           <img alt="logo" className="w-[270px]" src={logo} />
         </div>
         <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[7] row-[span_9/span_24] bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background2})` }}></div>
       </div>
-      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39">
+      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-39 mm:hidden sm:hidden md:hidden lg:hidden xl:grid">
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[12] row-[span_9/span_24] bg-no-repeat bg-cover"
           style={{ backgroundImage: `url(${background1})` }}></div>
       </div>
-      <div className="col-span-4 col-start-5 z-10 relative">
-        <div className="flex flex-col justify-center py-10 border-4 shadow-xl rounded-2xl text-white col-span-4 col-start-5 relative overflow-hidden">
+      <div className="col-span-4 col-start-5 mm:col-span-12 sm:col-span-8 sm:col-start-3 md:col-span-6 md:col-start-4 lg:col-span-6 lg:col-start-4 z-10 relative">
+        <div className="flex flex-col justify-center py-10 border-4 mm:border-0 sm:border-0 shadow-xl rounded-2xl mm:rounded-none text-white col-span-4 col-start-5 relative overflow-hidden">
           <div className="absolute w-[300%] h-[300%] blur-[20px] rounded-xl p-2 opacity-98 bg-no-repeat bg-cover -translate-x-[25%] translate-y-[10%]" style={{ backgroundImage: `url(${background1})` }}></div>
-          <div className="w-full flex flex-col px-32 z-20">
+          <div className="w-full flex mm:h-full flex-col px-32 mm:px-6 sm:px-8 md:px-8 lg:px-8 xl:px-16 2xl:px-32 z-20">
             <h1 className="font-bold text-3xl z-10 text-center">Log in</h1>
             <div className="z-10 flex flex-col gap-6">
               <Formik
@@ -138,10 +138,10 @@ export const Login: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="border-4 absolute bottom-[200%] w-full p-2"></div>
+          <div className="border-4 mm:border-0 sm:border-0 absolute bottom-[200%] w-full p-2"></div>
         </div>
         <div className="absolute w-full flex justify-center px-12">
-          <div className="border-4 border-t-0 rounded-br-xl rounded-bl-xl w-full py-3 flex justify-center">
+          <div className="border-4 mm:border-0 sm:border-0 border-t-0 rounded-br-xl rounded-bl-xl w-full py-3 flex justify-center">
             <GoogleLogin
               clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
               onSuccess={responseGoogle}

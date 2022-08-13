@@ -16,7 +16,7 @@ export const LinearStepper: React.FC<ILinearStepper> = ({ ...props }) => {
     const { theme } = useTypedSelector(state => state.globalReducer);
 
     return (
-        <div className={`w-full grid grid-flow-col grid-rows-1 px-[${props.paddingX}%]`}>
+        <div className={`w-full grid grid-flow-col grid-rows-1 px-[${props.paddingX}%] mm:px-2 sm:px-2 md:px-4 lg:px-[${props.paddingX}%]`}>
             {
                 props.stepsItem.map(item => {
                     return (

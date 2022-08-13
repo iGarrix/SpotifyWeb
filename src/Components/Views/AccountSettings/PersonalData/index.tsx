@@ -153,22 +153,22 @@ export const PersonalData: React.FC = () => {
             </Helmet>
             {
                 user ?
-                    <div className="flex flex-col items-center h-full py-[50px] px-[25%] gap-[40px] text-dark-200 dark:text-light-200">
+                    <div className="flex flex-col items-center h-full py-[50px] px-[25%] mm:px-[5%] sm:px-[10%] md:px-[15%] lg:px-[15%] xl:px-[20%] gap-[40px] text-dark-200 dark:text-light-200">
                         <div className='flex flex-col h-full gap-[40px]'>
                             <div className='flex w-full justify-center'>
-                                <div className="rounded-xl shadow-2xl flex flex-col items-center bg-light-200 dark:bg-dark-200/80 gap-[20px] relative overflow-hidden">
+                                <div className="rounded-xl shadow-2xl flex flex-col items-center bg-light-200 dark:bg-dark-200/80 gap-[20px] relative overflow-hidden mm:w-full sm:w-full">
                                     <div className="absolute top-0 left-0 w-full h-full grid grid-rows-10">
-                                        <div className="row-span-3 overflow-hidden relative w-full h-full">
+                                        <div className="row-span-2 overflow-hidden relative w-full h-full">
                                             <div className="absolute w-full h-full bg-black/30"></div>
-                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover" src={GetUserBackground(user)} onError={(tg: any) => { tg.target.src = defaultBackgroundImage}} />
+                                            <img alt="backgroundimage" className="bg-cover bg-no-repeat object-cover w-full h-full" src={GetUserBackground(user)} onError={(tg: any) => { tg.target.src = defaultBackgroundImage}} />
                                         </div>
                                     </div>
-                                    <div className="p-[50px] pb-[20px] z-10 flex flex-col gap-[20px]">
-                                        <div className="flex justify-between gap-[43px] items-end">
+                                    <div className="p-[50px] pb-[20px] z-10 flex flex-col gap-[20px] mm:gap-[5px] sm:gap-[15px] md:gap-[15px]">
+                                        <div className="flex mm:flex-col md:flex-col lg:flex-col justify-between gap-[43px] mm:gap-[20px] sm:gap-[20px] md:gap-[20px] items-end lg:items-center md:items-center sm:items-center mm:items-center">
                                             <img alt="avatar" src={GetUserAvatar(user)} className="transition-all bg-cover bg-no-repeat object-cover rounded-lg w-[150px] h-[150px] shadow-2xl"
                                             onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
-                                            <div className="pb-[20px]">
-                                                <h2 className="text-dark-200 dark:text-light-200 font-bold text-2xl">{user.name} {user.surname}</h2>
+                                            <div className="pb-[20px] flex flex-col">
+                                                <h2 className="text-dark-200 dark:text-light-200 font-bold text-2xl whitespace-nowrap">{user.name} {user.surname}</h2>
                                                 <p className="text-dark-200/80 dark:text-light-200/80 font-medium">{user.username}</p>
                                             </div>
                                         </div>
@@ -201,7 +201,7 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeDataAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl text-center'>Change data account</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change data account</h1>
                                         <div className='grid grid-cols-2 gap-[30px]'>
                                             <FormikField placeholder='Name' type="text" value={user.name} onSumbit={() => { }} name={'name'} />
                                             <FormikField placeholder='Surname' type="text" value={user.surname} onSumbit={() => { }} name={'surname'} />
@@ -219,7 +219,7 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeOtherDataAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl text-center'>Change other data</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change other data</h1>
                                         <div className='grid grid-cols-3 gap-[30px]'>
                                             <FormikField placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()} onSumbit={() => { }} name={'date'} />
                                             <FormikField placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { }} name={'month'} />
@@ -242,7 +242,7 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeEmailAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl text-center'>Change email</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change email</h1>
                                         <FormikField placeholder='Email' type="email" onSumbit={() => { }} value={user.email} name={'email'} />
                                         <div className='flex w-full justify-end'>
                                             <ProfileButton text="Save changes" onClick={() => { }} isSelect />
@@ -256,7 +256,7 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangePasswordAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl text-center'>Change password</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change password</h1>
                                         <FormikField placeholder='Old password' type='password' onSumbit={() => { }} name={'oldPassword'} />
                                         <FormikField placeholder='New password' type='password' onSumbit={() => { }} name={'password'} />
                                         <FormikField placeholder='Confirm new password' type='password' onSumbit={() => { }} name={'passwordConfirm'} />

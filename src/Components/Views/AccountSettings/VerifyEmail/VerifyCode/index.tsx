@@ -42,10 +42,10 @@ export const VerifyCodEmail: React.FC = () => {
                 <title>Soundwave | Enter Code</title>
             </Helmet>
             <div className="grid grid-cols-5 h-full">       
-                <div className="flex justify-end items-center w-full col-span-3">
-                    <div className="flex flex-col gap-4 w-[80%]">
+                <div className="flex justify-end mm:justify-center sm:justify-center md:justify-center items-center w-full col-span-3 mm:col-span-full sm:col-span-full md:col-span-full">
+                    <div className="flex flex-col gap-4 w-full mm:py-[20%] sm:py-[20%]">
                         <div className="flex justify-center">
-                            <h1 className="text-3xl font-bold">Verify Email</h1>
+                            <h1 className="text-3xl mm:text-2xl font-bold">Verify Email</h1>
                         </div>
                         <div className="flex justify-center">
                             <h2 className="text-center">Please enter the 4 digit code sent to <br /> {localStorage.getItem(StorageVariables.ForgotUser)}</h2>
@@ -59,7 +59,7 @@ export const VerifyCodEmail: React.FC = () => {
                                     </div>
                                 </div>
                             }
-                            <div className="flex flex-col w-full items-center dark:text-dark-200">
+                            <div className="flex flex-col items-center dark:text-dark-200">
                                 {
                                     1 === 1 ?
                                     <PinInput
@@ -94,9 +94,9 @@ export const VerifyCodEmail: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex col-span-2 justify-start items-center">
+                <div className="flex col-span-2 justify-start items-center mm:hidden sm:hidden md:hidden lg:flex xl:flex 2xl:flex">
                     <div className="flex flex-col">
-                        <img alt="verifyImage" src={require("../../../../../Assets/Envelope.png")} />
+                        <img alt="verifyImage" className="scale-[1] lg:scale-[0.7]" src={require("../../../../../Assets/Envelope.png")} />
                     </div>
                 </div>
             </div>

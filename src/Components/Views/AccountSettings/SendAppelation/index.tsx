@@ -56,8 +56,8 @@ export const SendAppelation: React.FC = () => {
                             </div>
                         </FullScreenModal>
                         <div>
-                            <h1 className="font-bold text-3xl">Appelations</h1>
-                            <p className="font-medium">
+                            <h1 className="font-bold text-3xl mm:text-2xl md:text-center">Appelations</h1>
+                            <p className="font-medium md:text-center">
                                 If you have a problem with your account, you can file an appeal <br></br>
                                 and the administration will review it within 3 business days.
                             </p>
@@ -74,7 +74,7 @@ export const SendAppelation: React.FC = () => {
                             onSubmit={onSendAppelationHandle}>
                             <Form>
                                 <div className="flex flex-col w-full gap-[20px]">
-                                    <FormikTextArea name={"message"} label={"Message"} />
+                                    <FormikTextArea name={"message"} label={"Message"}/>
                                     <div className='flex w-full justify-end'>
                                         <ProfileButton text="Send appelation" onClick={() => { }} isSelect />
                                     </div>

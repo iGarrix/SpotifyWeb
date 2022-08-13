@@ -102,23 +102,23 @@ export const Register: React.FC = () => {
   }
 
   return (
-    <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200 flex justify-center items-center relative">
+    <div className="overflow-x-hidden w-full min-h-screen mm:h-full bg-gradient-to-b from-dark-200/80 to-dark-200 flex justify-center items-center mm:items-start relative">
       <Helmet>
         <title>Soundwave | Register</title>
       </Helmet>
-      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">
+      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51 mm:hidden sm:hidden md:hidden lg:hidden xl:grid">
         <div className="w-full h-full rounded-tr-2xl rounded-br-2xl col-[span_10] row-start-[15] row-[span_9/span_30] bg-no-repeat bg-cover" style={{ backgroundImage: `url(${background1})` }}></div>
       </div>
-      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51">
+      <div className="fixed w-full h-full overflow-hidden grid grid-cols-15 grid-rows-51 mm:hidden sm:hidden md:hidden lg:hidden xl:grid">
         <div className="col-span-full h-full flex flex-col items-center justify-end pb-[20px] row-[span_10/span_10]">
           <img alt="logo" className="w-[260px]" src={logo} />
         </div>
         <div className="w-full h-full loginbackground rounded-tl-2xl rounded-bl-2xl col-start-[6] col-[span_10/span_10] row-start-[11] row-[span_9/span_27] bg-no-repeat bg-cover"
           style={{ backgroundImage: `url(${background2})` }}></div>
       </div>
-      <div className="flex flex-col h-full justify-center py-10 border-4 shadow-xl rounded-2xl text-white w-full relative mx-96 z-20">
-        <div className="absolute w-full h-full object-cover bg-cover rounded-xl p-2 bg-gradient-to-r from-primary-100 to-sky-400" style={{ backgroundImage: `url(${background1})` }}></div>
-        <div className="z-10 flex flex-col gap-6">
+      <div className="flex flex-col h-full justify-center py-10 border-4 mm:border-0 shadow-xl rounded-2xl text-white w-full relative mx-96 lg:mx-80 md:mx-40 sm:mx-16 mm:mx-0 z-20">
+        <div className="absolute w-full h-full object-cover bg-cover rounded-xl mm:rounded-none sm:rounded-xl md:rounded-xl p-2 bg-gradient-to-r from-primary-100 to-sky-400" style={{ backgroundImage: `url(${background1})` }}></div>
+        <div className="z-10 flex flex-col gap-6 mm:justify-center mm:h-full sm:h-full">
           {
             localError !== "" ?
               <div className="flex flex-col gap-3 items-center">
@@ -132,8 +132,11 @@ export const Register: React.FC = () => {
             initialValues={initialValues}
             validationSchema={registerValidate}
             onSubmit={onHandleSubmit}>
-            <Form>
-              <div className="flex flex-col gap-6">
+            <Form className="mm:h-full sm:h-full">
+              <div className="flex flex-col h-full mm:pt-[15%] mm:justify-between gap-6 mm:gap-12 sm:gap-6">
+                <div className="w-full flex justify-center mm:flex sm:hidden">
+                  <img alt="logo" className="w-[200px]" src={logo} />
+                </div>
                 <SignUpSteps selectedIndex={step} children={[
                   {
                     title: "Step 1",
@@ -178,15 +181,15 @@ export const Register: React.FC = () => {
                     title: "Step 4",
                     description: "Enter your nickname",
                     index: 4,
-                    children: <>
+                    children: <div className="flex flex-col gap-2 px-10">
                       <FormikField placeholder="Username" name="username" type="text" />
-                      <div className='grid grid-cols-3 gap-3'>
-                        <FormikField placeholder='Day' type="text" name={'date'} />
-                        <FormikField placeholder='Month' type="text" name={'month'} />
-                        <FormikField placeholder='Years' type="text" name={'years'} />
+                      <div className='grid grid-cols-3 mm:grid-cols-1 mm:grid-rows-3 sm:grid-cols-1 sm:grid-rows-3 md:grid-cols-1 md:grid-rows-3 lg:grid-cols-1 lg:grid-rows-3 gap-3'>
+                          <FormikField placeholder='Day' type="text" name={'date'} />
+                          <FormikField placeholder='Month' type="text" name={'month'} />
+                          <FormikField placeholder='Years' type="text" name={'years'} />
                       </div>
                       {/* <FormikField placeholder="Age" name="age" type="text" /> */}
-                    </>
+                    </div>
                   },
                   {
                     title: "Step 5",
@@ -206,7 +209,7 @@ export const Register: React.FC = () => {
                     </>
                   },
                 ]} />
-                <div className="flex items-center justify-between w-full py-2 px-40">
+                <div className="flex items-center justify-between w-full mm:mt-auto sm:mt-auto py-2 px-40 mm:px-8 sm:px-8 md:px-10 lg:px-10">
                   <button type="button" onClick={onPrevious}>
                     <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
                   </button>

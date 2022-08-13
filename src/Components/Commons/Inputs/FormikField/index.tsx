@@ -7,10 +7,10 @@ export const FormikField: React.FC<IFormikField> = ({ placeholder, value, type, 
     const [field] = useField(props);
     return (
         <div className="flex flex-col gap-1">
-            <div className="flex gap-2 flex-wrap">
-                <p className="text-dark-200 dark:text-light-200 font-medium">{placeholder}</p>
+            <div className="flex gap-2 flex-nowrap whitespace-nowrap">
+                <p className="text-dark-200 dark:text-light-200 font-medium whitespace-nowrap">{placeholder}</p>
                 <ErrorMessage component="p" name={field.name} render={(errorMessage: string) => {
-                    return <p className="text-red-500 font-medium">{errorMessage}</p>;
+                    return <p className="text-red-500 font-medium whitespace-nowrap">{errorMessage}</p>;
                 }} />
             </div>
             <input placeholder={placeholder} disabled={props.disable} type={type} defaultValue={value} onSubmit={onSumbit}

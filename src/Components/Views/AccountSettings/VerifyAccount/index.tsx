@@ -54,10 +54,10 @@ export const VerifyAccount: React.FC = () => {
         <>
             {
                 user &&
-                <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200 dark:text-light-200">
+                <div className="flex flex-col h-full py-[50px] px-[150px] mm:px-[3%] sm:px-[5%] md:px-[10%] lg:px-[10%] xl:px-[10%] text-dark-200 dark:text-light-200">
                     <h1 className="text-3xl font-bold">Verify your account</h1>
                     <div className="flex flex-col mt-[40px] w-full gap-[20px]">
-                        <div className="grid grid-cols-2 w-full gap-10">
+                        <div className="grid grid-cols-2 mm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full gap-10">
                             <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Client profile"}
                                 isSelect={currentItem === "/accountsettings/verifyaccount"} nickname={user.username} email={user.email} icon={faUser} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount"); nav(""); }} />
                             <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Verified profile"}
