@@ -1,5 +1,5 @@
 export interface IPlaylistItem {
-    name: any,
+    name: string | any,
     title: any,
     imageSrc: any,
     onClick: () => void,

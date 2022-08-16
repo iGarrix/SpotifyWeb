@@ -98,7 +98,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
 
     return (
-        <div className={`flex items-center gap-3 rounded-[18px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
+        <div className={`flex items-center gap-3 rounded-[18px] mm:rounded-[9px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
         ${isPlay ? `bg_select_sound text-light-200` : "bg-light-100 dark:bg-dark-100 text-dark-200 dark:text-light-200"}`}>
             <FullScreenModal visible={shareModal} center>
                 <ShareModal
@@ -149,7 +149,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                 <div className="mm:hidden sm:hidden">
                     <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                 </div>
-                <h1 className="text-base mm:text-sm">
+                <h1 className="text-base mm:text-sm overflow-hidden">
                     {
                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                             return (
@@ -161,7 +161,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                     <span>- {item.track?.name}</span>
                 </h1>
             </div>
-            <div className="flex gap-4 items-center justify-between ml-auto mm:text-sm">
+            <div className="flex gap-4 items-center justify-between ml-auto mm:text-sm whitespace-nowrap mm:w-[40%] mm:justify-end">
                 {
                     item.track &&
                     <h1 className="text-thin w-[48px] mm:w-[32px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>

@@ -1,7 +1,7 @@
 .mainresultcard {
     @apply transition-all hover:shadow-lg;
     .mainresultbutton {
-        @apply opacity-0 transition-all;
+        @apply opacity-0 mm:opacity-100 transition-all;
         transform: translateY(5px);
     }
 

@@ -74,7 +74,7 @@ export const CreatorsResult : React.FC = () => {
                 rx.artists && rx.artists.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Artists All</h1>
-                        <div className="flex gap-6 flex-wrap">
+                        <div className="flex gap-6 mm:gap-[10px] flex-wrap">
                             {
                                 rx.artists?.map(item => {
                                     return (
@@ -86,10 +86,10 @@ export const CreatorsResult : React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCircleCheck} />
+                        <FontAwesomeIcon className="text-7xl mm:text-5xl sm:text-5xl md:text-6xl font-medium text-dark-200 dark:text-light-200" icon={faCircleCheck} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl dark:text-light-200">Artists not found</h1>
+                                <h1 className="font-medium text-3xl mm:text-xl sm:text-xl md:text-2xl dark:text-light-200">Artists not found</h1>
                             </div>
                         </div>
                     </div>

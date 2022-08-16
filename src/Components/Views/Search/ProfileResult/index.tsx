@@ -76,7 +76,7 @@ export const ProfileResult: React.FC = () => {
                 rx.profiles && rx.profiles.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Profiles All</h1>
-                        <div className="flex gap-6 flex-wrap">
+                        <div className="flex gap-6 mm:gap-[10px] flex-wrap">
                             {
                                 rx.profiles?.map(item => {
                                     return (
@@ -88,10 +88,10 @@ export const ProfileResult: React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCircleUser} />
+                        <FontAwesomeIcon className="text-7xl mm:text-5xl sm:text-5xl md:text-6xl font-medium text-dark-200 dark:text-light-200" icon={faCircleUser} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl dark:text-light-200">Profiles not found</h1>
+                                <h1 className="font-medium text-3xl mm:text-xl sm:text-xl md:text-2xl dark:text-light-200">Profiles not found</h1>
                             </div>
                         </div>
                     </div>

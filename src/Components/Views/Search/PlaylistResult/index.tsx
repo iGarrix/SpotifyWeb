@@ -83,11 +83,11 @@ export const PlaylistResult : React.FC = () => {
                 rx.playlists && rx.playlists.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">Playlist All</h1>
-                        <div className="flex gap-6 flex-wrap">
+                        <div className="flex gap-6 mm:gap-[10px] flex-wrap">
                             {
                                 rx.playlists?.map(item => {
                                     return (
-                                        <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id, item.creator.username)}} />
+                                        <PlaylistItem key={Guid.create().toString()} name={item.name.substring(0, 12)} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id, item.creator.username)}} />
                                     )
                                 })
                             }
@@ -95,10 +95,10 @@ export const PlaylistResult : React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                        <FontAwesomeIcon className="text-7xl mm:text-5xl sm:text-5xl md:text-6xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl dark:text-light-200">Playlist not found</h1>
+                                <h1 className="font-medium text-3xl  mm:text-xl sm:text-xl md:text-2xl dark:text-light-200">Playlist not found</h1>
                             </div>
                         </div>
                     </div>

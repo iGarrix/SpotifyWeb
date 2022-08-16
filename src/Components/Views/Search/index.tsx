@@ -60,16 +60,16 @@ export const Search: React.FC = () => {
             <Helmet>
                 <title>Soundwave | Search all</title>
             </Helmet>
-            <div className="w-full flex flex-col px-12 py-8 gap-8">
+            <div className="w-full flex flex-col px-12 mm:px-2 py-8 gap-8">
                 <div className="flex flex-col gap-4">
-                    <div className="flex w-[40%]">
+                    <div className="flex w-[40%] mm:w-full sm:w-full md:w-[60%] lg:w-[60%] xl:w-[50%]">
                         <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
                             setSearchQuery(e.target.value)
                         }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     </div>
                     {
                         searchQuery && 
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 mm:grid mm:grid-cols-2 sm:grid sm:grid-cols-3">
                             <FilterButton text="All result" isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
                             <FilterButton text="Albums" isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
                             <FilterButton text="Playlists" isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />

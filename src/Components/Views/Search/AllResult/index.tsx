@@ -127,8 +127,8 @@ export const AllResultSearch: React.FC = () => {
             {
                 reducer.searchall &&
                 reducer.searchall.bestResult &&
-                <div className="grid grid-rows-1 grid-cols-5 gap-20">
-                    <div className="flex flex-col gap-1 col-span-2">
+                <div className="grid grid-rows-1 grid-cols-5 mm:grid-rows-2 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-2 gap-20 mm:gap-5 sm:gap-5 md:gap-5 lg:gap-5">
+                    <div className="flex flex-col gap-1 col-span-2 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
                         <h1 className="font-medium text-2xl">Best result</h1>
                         <div>
                             {
@@ -170,9 +170,9 @@ export const AllResultSearch: React.FC = () => {
                             }
                         </div>
                     </div>
-                    <div className="flex flex-col gap-1 col-span-3">
+                    <div className="flex flex-col gap-2 col-span-3 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
                         <h1 className="font-medium text-2xl">Songs</h1>
-                        <div className="flex flex-col justify-between w-full h-full flex-wrap gap-[15px]">
+                        <div className="flex flex-col justify-between mm:justify-start w-full h-full flex-wrap gap-[15px]">
                             {
                                 reducer.searchall.tracks && reducer.searchall.tracks.length > 0 ?
                                 reducer.searchall.tracks?.map(item => {
@@ -203,11 +203,11 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.albums && reducer.searchall.albums.length > 0 &&
                 <div className="flex flex-col gap-6">
                     <h1 className="font-medium text-2xl">Albums</h1>
-                    <div className="flex w-full flex-wrap gap-6">
+                    <div className="flex w-full flex-wrap gap-6 mm:justify-center">
                         {
                             reducer.searchall.albums.map(item => {
                                 return (
-                                    <AlbumItem key={Guid.create().toString()} name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) }} title={item.creators.map(i => i.username).join(" ")} />
+                                    <AlbumItem key={Guid.create().toString()} name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) }} title={item.creators.map(i => i.username)[0]} />
                                 )
                             })
                         }
@@ -218,11 +218,11 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
                 <div className="flex flex-col gap-6">
                     <h1 className="font-medium text-2xl">Playlists</h1>
-                    <div className="flex w-full flex-wrap gap-6">
+                    <div className="flex w-full flex-wrap gap-6 mm:justify-center">
                         {
                             reducer.searchall.playlists.map(item => {
                                 return (
-                                    <PlaylistItem key={Guid.create().toString()} name={item.name} title={item.creator.username} imageSrc={item.image} onClick={() => { onSelectPlaylist(item.id, item.creator.username) }} />
+                                    <PlaylistItem key={Guid.create().toString()} name={item.name.substring(0, 15)} title={item.creator.username} imageSrc={item.image} onClick={() => { onSelectPlaylist(item.id, item.creator.username) }} />
                                 )
                             })
                         }
