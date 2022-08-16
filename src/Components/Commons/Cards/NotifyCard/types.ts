@@ -3,5 +3,6 @@ export interface INotifyCard {
     date: Date,
     type?: "wait" | "success" | "error",
     isFunc?: boolean,
+    device?: string,
     onClick?: () => void,
 }

@@ -113,28 +113,28 @@ export const OverviewProfile: React.FC = () => {
         </FullScreenModal>
         <img alt="bg" className="absolute top-0 left-0 w-full h-full object-cover" src={GetUserBackground(user.overviewer)} />
         <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-        <div className="flex flex-col w-full px-20 pt-16 pb-8 z-[2]">
-          <div className="flex gap-6 w-full">
+        <div className="flex flex-col w-full px-20 pt-16 mm:pt-6 sm:pt-6 z-[2] mm:gap-4">
+          <div className="flex mm:flex-col mm:items-center gap-6 mm:gap-3 sm:gap-3 md:gap-3 w-full">
             {
               user?.overviewer?.avatar.length !== 0 ?
-                <div className="w-48 h-48 relative overflow-hidden rounded-xl">
+                <div className="w-48 h-48 mm:w-36 mm:h-36 sm:w-36 sm:h-36 md:w-36 md:h-36 relative overflow-hidden rounded-xl">
                   <img alt="avatar" src={GetUserAvatar(user.overviewer)} className="transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
                 </div> :
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
                 </div>
             }
-            <div className="flex flex-col gap-1">
-              <h1 className="font-semibold text-5xl font-['Lexend'] flex gap-4">{user.overviewer?.username}
+            <div className="flex flex-col gap-2 mm:gap-0 sm:gap-0">
+              <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-['Lexend'] flex gap-4">{user.overviewer?.username}
                 <p className="translate-y-[-5px]">{verifyImage}</p>
               </h1>
-              <p className="text-light-100/80">{user?.overviewer?.emojie}</p>        
+              <p className="text-light-100/80 mm:text-base sm:text-base">{user?.overviewer?.emojie}</p>        
             </div>
           </div>
-          <div className="flex items-center gap-4 justify-between">
-          <p className="mt-auto text-[18px] tracking-wide gap-2 font-['Lexend']">{ user.overviewer && user.overviewer.views > 0 ?
+          <div className="flex  mm:flex-col mm:items-center items-end gap-4 justify-between pb-6 w-full mm:gap-2">
+          <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 font-['Lexend']">{ user.overviewer && user.overviewer.views > 0 ?
           user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
           "NO"} Views for all time</p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 mm:scale-90">
               <FontAwesomeIcon className={`text-xl p-3 rounded-lg border border-light-100 cursor-pointer
               hover:border-blue-500 hover:text-blue-500 active:bg-blue-500 active:text-light-100 ${shareModal && "bg-blue-500 border-blue-500 text-light-100"}`} icon={faShare} onClick={onShare} />
               <SubscribeButton isSubscribe={user.isSubscribe || isSubs} onClick={onSubscribe} subscribedText="Unsubscribe" text="Subscribe" />
@@ -142,8 +142,9 @@ export const OverviewProfile: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className={`h-full w-full flex flex-col items-center mt-5`}>
-        <div className="bg-light-200 dark:bg-dark-100 flex px-[50px] rounded-xl py-3 justify-center gap-[100px]">
+      <div className={`h-full w-full flex flex-col items-center mm:items-start sm:items-start md:items-start mm:px-[2%] sm:px-[2%] md:px-[2%] mt-5`}>
+        <div className="bg-light-200 dark:bg-dark-100 mm:w-full sm:w-full md:w-full
+         flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
           <ProfileButton text="Singles" isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums") } onClick={() => { nav("") }} />
           <ProfileButton text="Playlists" isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
           <ProfileButton text="Albums" isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />

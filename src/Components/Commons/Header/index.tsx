@@ -22,12 +22,12 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
     const nav = useNavigate();
     const { theme } = useTypedSelector(state => state.globalReducer);
     return (
-        <div className={`py-2 px-10 bg-light-100 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
+        <div className={`py-2 px-10 mm:px-3 sm:px-3 md:px-3 bg-light-100 mm:bg-light-200 sm:bg-light-200 md:bg-light-200 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
             <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
                 {
                     user ?
                         user.avatar.length !== 0 ?
-                            <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
+                            <div className={`flex items-center gap-6 mm:gap-3 sm:gap-3 ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
                                     <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />

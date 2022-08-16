@@ -64,14 +64,14 @@ export const OverviewProfileAlbums: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative mm:w-full sm:w-full md:w-full">
             <Helmet>
                 <title>Soundwave | Albums</title>
             </Helmet>
             {
                     albums && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 gap-16">
+                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-16">
                                 {
                                     albums.map(item => {
                                         return (

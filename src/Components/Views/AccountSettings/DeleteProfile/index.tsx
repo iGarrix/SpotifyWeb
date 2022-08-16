@@ -41,12 +41,14 @@ export const DeleteProfile: React.FC = () => {
             </Helmet>
             <div className="flex justify-start items-center w-full">
                 <div className="flex flex-col gap-4 w-auto">
-                    <div className="flex">
-                        <h1 className="text-3xl font-bold">Delete Profile</h1>
+                    <div className="flex mm:justify-center sm:text-center">
+                        <h1 className="text-3xl mm:text-2xl mm:text-center sm:text-center font-bold">Delete Profile</h1>
                     </div>
-                    <div className="w-auto flex items-center gap-10 bg-light-200 dark:bg-dark-100 rounded-md px-4 py-2">
+                    <div className="w-auto flex  mm:flex-col items-center gap-10 bg-light-200 dark:bg-dark-100 rounded-md px-4 py-2">
                         <h2 className="">Your profile will be deleted and you will be able to restore it within 30 days</h2>
-                        <ProfileButton text="Delete profile" onClick={() => { setOpenModal(true) }} isSelect={true} />
+                        <div className="flex mm:w-full sm:w-full justify-end">
+                            <ProfileButton text="Delete profile" onClick={() => { setOpenModal(true) }} isSelect={true} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,8 +57,9 @@ export const DeleteProfile: React.FC = () => {
                     initialValues={initialValues}
                     validationSchema={DeleteProfileValidate}
                     onSubmit={onHandleSubmit}>
-                    <Form>
-                            <div className="rounded-md py-8 flex flex-col items-center justify-center gap-6 shadow-xl px-10 border border-light-200 dark:border-dark-100">
+                    <Form className="mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full">
+                            <div className="rounded-md py-8 mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full
+                             flex mm:bg-dark-200/60 sm:bg-dark-200/60 md:bg-dark-200/60 flex-col items-center justify-center gap-6 shadow-xl px-10 border border-light-200 dark:border-dark-100">
                                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-100 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
                                 <h1 className="text-3xl font-medium font-['Lexend']">Delete account</h1>
                                 {

@@ -72,7 +72,7 @@ export const Invites : React.FC = () => {
                 <title>Soundwave | Your invites</title>
             </Helmet>
             {
-                reducer.error &&
+                reducer.error &&  !reducer.invites &&
                 <div className="flex flex-col py-5 items-center justify-center bg-red-500/80 rounded-xl">
                     <h1 className="text-light-100 font-medium text-center">{reducer.error}</h1>
                 </div>

@@ -76,7 +76,7 @@ export const ProfileSingles: React.FC = () => {
             </Helmet>
             {
                     singles && rx.error.length === 0 ?
-                        <div className="w-full h-full flex flex-col gap-[15px] px-[330px]">
+                        <div className="w-full h-full flex flex-col gap-[15px] px-[330px] mm:px-0 sm:px-0 md:px-0 lg:px-[10%] xl:px-[15%] 2xl:px-[20%]">
                             {
                                 singles.map(item => {
                                     return (

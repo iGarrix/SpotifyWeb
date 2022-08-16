@@ -146,10 +146,10 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                         <img alt="icon" className="w-[25px] cursor-pointer invert dark:invert-0" src={icon_play} onClick={() => { user ? onClick() : nav("/authorizate") }} />
                     // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
-                <div>
+                <div className="mm:hidden sm:hidden">
                     <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                 </div>
-                <h1 className="text-medium">
+                <h1 className="text-base mm:text-sm">
                     {
                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                             return (
@@ -161,16 +161,16 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                     <span>- {item.track?.name}</span>
                 </h1>
             </div>
-            <div className="flex gap-4 items-center justify-between ml-auto">
+            <div className="flex gap-4 items-center justify-between ml-auto mm:text-sm">
                 {
                     item.track &&
-                    <h1 className="text-thin w-[48px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>
+                    <h1 className="text-thin w-[48px] mm:w-[32px]">{moment.utc(Number.parseFloat(item.track.duration) * 1000).format("mm:ss")}</h1>
                 }
                 {
                     isLiked ?
-                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
+                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
                         :
-                        <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "dark:invert-0 invert"}`} src={icon_like} onClick={onSubscribeTrack} />
+                        <img alt="icon" className={`w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "dark:invert-0 invert"}`} src={icon_like} onClick={onSubscribeTrack} />
                 }
                 <SoundOptionModal options={[{
                     title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
@@ -181,7 +181,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                 {
                     title: "Share", icon: <FontAwesomeIcon icon={faShare} />, onClick: () => { onShare() }
                 },]}
-                    trigger={<FontAwesomeIcon className="text-2xl hover:text-black dark:hover:text-light-300 cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
+                    trigger={<FontAwesomeIcon className="text-2xl mm:text-xl hover:text-black dark:hover:text-light-300 cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
             </div>
         </div>
     )

@@ -66,23 +66,23 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
         onClose();
     }
     return (
-        <div className="rounded-lg py-8 flex flex-col items-center gap-3 text-dark-200 bg-light-100 shadow-xl px-10">
+        <div className="rounded-lg py-8 mm:pt-[10%] flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:bg-dark-200 dark:text-light-200 shadow-xl px-10 mm:w-full mm:h-full">
             <div className="flex justify-between w-full">
                 <h1 className="text-xl font-['Lexend']">Rename</h1>
-                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
+                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
-            <hr className="w-full mb-4" />
+            <hr className="w-full mb-4 dark:border-dark-100" />
             {
                 enterError && enterError.length !== 0 ?
                     <p className="text-red-500 font-medium text-lg flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{enterError}</p> : null
             }
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="mm:h-full">
                 {
                     user ?
-                    <div className="flex flex-col gap-3 px-20">
+                    <div className="flex flex-col gap-3 px-20 mm:px-5 mm:h-full">
                         <Field placeholder="Enter new name" value={user?.name} onChange={(e: any) => { }} />
                         <Field placeholder="Enter new surname" value={user?.surname} onChange={(e: any) => { }} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7">You want to rename pib?</button>
+                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7 mm:mt-auto">You want to rename pib?</button>
                     </div> : null
                 }
             </form>

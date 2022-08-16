@@ -11,7 +11,7 @@ export const StatusDetailModal: React.FC<IStatusDetailModal> = ({ ...props }) =>
     const nav = useNavigate();
 
     return (
-        <div className="flex flex-col justify-center items-center rounded-xl bg-light-100 dark:bg-dark-100 shadow-xl px-[2%] py-[2%] gap-5 border border-light-200 dark:border-dark-100">
+        <div className="flex flex-col justify-center items-center mm:justify-start rounded-xl mm:rounded-none bg-light-100 dark:bg-dark-100 shadow-xl px-[2%] py-[2%] mm:py-[7%] gap-5 border border-light-200 dark:border-dark-100 mm:h-full sm:full mm:w-full">
             <div className="flex flex-col my-[10px] gap-3">
                 <h2 className="font-bold text-2xl text-center">Serious reasons</h2>
                 <div className="flex justify-between items-center gap-5">
@@ -52,7 +52,9 @@ export const StatusDetailModal: React.FC<IStatusDetailModal> = ({ ...props }) =>
                     <p>Phone: {props.data.user.phone}</p>
                 </div>
             </div>
-            <ProfileButton text="Ok" onClick={props.onClose} isSelect />
+            <div className="mm:mt-auto">
+                <ProfileButton text="Ok" onClick={props.onClose} isSelect />
+            </div>
         </div>
     )
 }

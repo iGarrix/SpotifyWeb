@@ -22,7 +22,7 @@ export const LayStartup: React.FC = () => {
   }, [rx.queue]);
   const nav = useNavigate();
   return (
-    <div className="grid grid-cols-20 w-full nin-h-screen">
+    <div className="grid grid-cols-20 w-full mm:flex mm:flex-col sm:flex sm:flex-col md:flex md:flex-col">
       {
         load.mySingleReducer.loading || load.myAlbumsReducer.loading || 
         load.playingReducer.loading || load.userReducer.loading || 
@@ -31,15 +31,15 @@ export const LayStartup: React.FC = () => {
         load.genreReducer.loading &&
         <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-100 animate-pulse w-screen h-1 rounded-b-md fixed top-0 left-0 z-[10000]"></div>
       }
-      <div className="col-span-3 w-full h-full z-[100]">
+      <div className="col-span-3 lg:col-span-4 xl:col-span-4 w-full h-full z-[100]">
         <SideBar />
       </div>
-      <div className={`col-[span_17] w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[100px]"}`}>
+      <div className={`col-[span_17] lg:col-[span_16] xl:col-[span_16] w-full h-full flex flex-col ${isVisible ? "mb-[150px]" : "mb-[100px]"}`}>
         <Header />
         <Outlet />
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-20 z-[100]">
-        <div className={`col-[span_3] w-full mb-6`}>
+        <div className={`col-[span_3] w-full mb-6 mm:hidden sm:hidden md:hidden`}>
           <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("websettings") }} />
         </div>
         {

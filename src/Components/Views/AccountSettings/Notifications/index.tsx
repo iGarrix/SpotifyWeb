@@ -10,7 +10,9 @@ export const Notifications: React.FC = () => {
     const [currentItem, setCurrentItem] = useState(window.location.pathname);
     return (
         <div className="flex flex-col h-full py-[50px] px-[5%] text-dark-200 dark:text-light-200 gap-[20px]">
-            <h1 className="font-bold text-3xl">Notification</h1>
+            <div className="flex w-full mm:justify-center sm:justify-center md:justify-center">
+                <h1 className="font-bold text-3xl mm:text-2xl mm:text-center sm:text-center md:text-center">Notification</h1>
+            </div>
             {
                 user?.verify === VerifyType.profile &&
                 <div className="bg-light-200 flex justify-center rounded-md items-center py-3">
@@ -20,7 +22,7 @@ export const Notifications: React.FC = () => {
                     </div>
                 </div>
             }
-            <div className="flex justify-center items-center rounded-md gap-[20px]">
+            <div className="flex flex-wrap justify-center items-center rounded-md gap-[20px]">
                 <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification'); nav('') }}>Logs in account</p>
                 <p>/</p>
                 <p className={`font-medium text-lg cursor-pointer transition-all ${currentItem === "/accountsettings/notification/actions" && "text-blue-400"}`} onClick={() => { setCurrentItem('/accountsettings/notification/actions'); nav('actions') }}>Account actions</p>
