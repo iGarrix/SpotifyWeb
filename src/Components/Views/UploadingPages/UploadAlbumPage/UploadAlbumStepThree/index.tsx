@@ -16,11 +16,11 @@ export const UploadAlbumStepThree: React.FC = () => {
     const [copy, setCopy] = useState(false);
     const [link, setLink] = useState(document.location.origin + "/search?query=" + reducer.albumdata?.title);
 
-    // useEffect(() => {
-    //     if (!reducer.albumfiles) {
-    //         nav(-2);
-    //     }
-    // }, [reducer.albumfiles]);
+    useEffect(() => {
+        if (!reducer.albumfiles) {
+            nav(-2);
+        }
+    }, [reducer.albumfiles]);
 
     return (
         <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">

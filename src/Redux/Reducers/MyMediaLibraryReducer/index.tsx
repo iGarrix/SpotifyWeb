@@ -21,7 +21,7 @@ export const myMediaLibraryReducer = (
     case MyMediaLibraryActionTypes.INITMYMEDIALIBRARYSINGLE: {
       return {
         ...state,
-        singles: action.payload ? action.payload.pageables : [],
+        singles: action.payload ? action.payload.pageables: [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -49,7 +49,7 @@ export const myMediaLibraryReducer = (
     case MyMediaLibraryActionTypes.INITMYMEDIALIBRARYALBUMS: {
       return {
         ...state,
-        albums: action.payload ? action.payload.pageables : [],
+        albums: action.payload && action.payload.pageables ? action.payload.pageables?.reverse() : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -67,7 +67,7 @@ export const myMediaLibraryReducer = (
       }
       return {
         ...state,
-        albums: action.payload ? arr : null,
+        albums: action.payload ? arr.reverse() : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -77,7 +77,7 @@ export const myMediaLibraryReducer = (
     case MyMediaLibraryActionTypes.INITMYMEDIALIBRARYPLAYLISTS: {
       return {
         ...state,
-        playlists: action.payload ? action.payload.pageables : [],
+        playlists: action.payload && action.payload.pageables ? action.payload.pageables?.reverse() : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -95,7 +95,7 @@ export const myMediaLibraryReducer = (
       }
       return {
         ...state,
-        playlists: action.payload ? arr : null,
+        playlists: action.payload ? arr.reverse() : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -105,7 +105,7 @@ export const myMediaLibraryReducer = (
     case MyMediaLibraryActionTypes.INITMYMEDIALIBRARYARTISTS: {
       return {
         ...state,
-        artists: action.payload ? action.payload.pageables : [],
+        artists: action.payload && action.payload.pageables ? action.payload.pageables?.reverse() : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
@@ -123,7 +123,7 @@ export const myMediaLibraryReducer = (
       }
       return {
         ...state,
-        artists: action.payload ? arr : null,
+        artists: action.payload ? arr.reverse() : null,
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,
