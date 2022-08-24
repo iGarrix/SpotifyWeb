@@ -5,8 +5,8 @@ import "./style.scss";
 
 export const RedirectButton: React.FC<IRedirectButton> = ({ text, icon, isActive = true, onClick }) => {
     return (
-        <button disabled={!isActive} className={`py-2 px-6 border border-light-200 bg-light-200 text-dark-200 dark:bg-dark-100 dark:border-transparent dark:text-light-200
-        redirectdefbtn rounded-xl w-full flex items-center gap-6 transition-all 
+        <button disabled={!isActive} className={`py-2 px-6 border border-light-200 bg-light-200 text-dark-200 dark:bg-dark-100 dark:border-transparent text-center dark:text-light-200
+        redirectdefbtn rounded-xl w-full flex justify-center items-center gap-6 transition-all 
         ${isActive ? "hover:border-blue-500 hover:bg-blue-500/90 hover:text-light-100 dark:hover:bg-blue-600/90" : "brightness-50"}`}
             onClick={isActive ? onClick : () => { }}>
             {
@@ -15,7 +15,7 @@ export const RedirectButton: React.FC<IRedirectButton> = ({ text, icon, isActive
                     :
                     null
             }
-            <p className="text-lg">{text}</p>
+            <p className="text-lg mm:text-base sm:text-base md:text-base lg:text-base">{text}</p>
         </button>
     )
 }

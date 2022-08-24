@@ -29,8 +29,8 @@ export const SoundItemPlaylist: React.FC<ISoundItemPlaylist> = ({ item, onDelete
     }
 
     return (
-        <div className={`flex items-center gap-3 rounded-md bg-light-200 dark:bg-dark-100 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
-            <div className="flex gap-6">
+        <div className={`flex mm:flex-col items-center gap-3 rounded-md bg-light-200 dark:bg-dark-100 px-4 py-[12px] bg-no-repeat object-cover bg-cover`}>
+            <div className="flex gap-6 mm:gap-2 mm:w-full">
                 <div>
                     <img alt="icon" className="w-[96px] h-[96px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage}} />
                 </div>

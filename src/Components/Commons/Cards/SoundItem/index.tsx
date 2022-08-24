@@ -98,7 +98,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
 
 
     return (
-        <div className={`flex items-center gap-3 rounded-[18px] mm:rounded-[9px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
+        <div className={`flex items-center gap-3 rounded-[18px] mm:rounded-[9px] sm:rounded-[9px] md:rounded-[9px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
         ${isPlay ? `bg_select_sound text-light-200` : "bg-light-100 dark:bg-dark-100 text-dark-200 dark:text-light-200"}`}>
             <FullScreenModal visible={shareModal} center>
                 <ShareModal
@@ -110,7 +110,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                             <img alt="singleImage" src={`${baseUrl}Images/Tracks/${item.track?.image}`}
                                 className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                             <div className="flex flex-col">
-                                <div className="flex gap-2 items-center">
+                                <div className="flex mm:flex-col gap-2 items-center mm:items-start mm:gap-0">
                                     <h1 className="font-['Lexend'] text-xl">{item.track?.name}</h1>
                                     <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
                                         <span className="text-center text-sm">Sharing</span>

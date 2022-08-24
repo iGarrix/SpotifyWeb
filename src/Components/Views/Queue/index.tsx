@@ -65,7 +65,7 @@ export const Queue: React.FC = () => {
     }
     
     return (
-        <div className="w-full flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 px-[3%] py-[2%]">
+        <div className="w-full mm:min-h-[65vh] flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 px-[3%] py-[2%] mm:py-[4%]">
             <Helmet>
                 <title>Soundwave | Playing Queue</title>
             </Helmet>
@@ -76,8 +76,8 @@ export const Queue: React.FC = () => {
                             rx.queue.soundobjs[0] &&
                             <>
                                 <div className="flex flex-col gap-6 w-full">
-                                    <div className="flex flex-col items-start gap-2">
-                                        <h1 className="font-semibold text-2xl">In queue</h1>
+                                    <div className="flex flex-col items-start mm:items-center gap-2">
+                                        <h1 className="font-semibold text-2xl mm:text-center sm:text-center">In queue</h1>
                                         <FilterButton onClick={onClearQueue} text={"Clear all queue"} />
                                     </div>
                                     <div className="flex flex-col gap-6 w-full">
@@ -103,7 +103,7 @@ export const Queue: React.FC = () => {
                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="font-medium text-3xl">Queue is empty</h1>
-                            <p className="font-medium text-xl">You can also listening your favorite songs using search</p>
+                            <p className="font-medium text-xl text-center">You can also listening your favorite songs using search</p>
                         </div>
                         <div>
                             <DefaultButton onClick={() => { nav("/search") }} text={"Search songs"} />

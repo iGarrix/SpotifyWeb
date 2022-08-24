@@ -1,5 +1,5 @@
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,9 @@ const logoDark = require("../../../Assets/Logo.png");
 
 export interface IHeaderProps {
     isHead?: boolean,
+    isShow?: boolean,
+    isVisible?: boolean,
+    onShow?: () => void,
 }
 
 export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
@@ -22,17 +25,27 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
     const nav = useNavigate();
     const { theme } = useTypedSelector(state => state.globalReducer);
     return (
-        <div className={`py-2 px-10 mm:px-3 sm:px-3 md:px-3 bg-light-100 mm:bg-light-200 sm:bg-light-200 md:bg-light-200 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
-            <div className={`flex gap-7 items-center ${props.isHead && "w-full"}`}>
+        <div className={`py-2 px-10 mm:hidden sm:px-3 md:px-3 bg-light-100 mm:bg-light-200 sm:bg-light-200 md:bg-light-200 dark:bg-dark-200 flex overflow-x-hidden sticky top-0 z-[100] ${props.isHead ? "justify-between" : "justify-end"}`}>
+            <div className={`flex gap-7 items-center mm:w-full sm:w-full md:w-full ${props.isHead && "w-full"}`}>
                 {
                     user ?
                         user.avatar.length !== 0 ?
-                            <div className={`flex items-center gap-6 mm:gap-3 sm:gap-3 ${props.isHead && "w-full"}`}>
+                            <div className={`flex items-center gap-6 mm:gap-3 sm:gap-3 mm:w-full sm:w-full md:w-full ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
                                     <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
                                 }
-                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
+                                {
+                                    !props.isHead &&
+                                    <div className="hidden h-full px-2 mm:flex sm:flex md:flex mr-auto">
+                                        {
+                                            props.isShow ?
+                                            <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleDown} onClick={props.onShow} /> :
+                                            <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleUp} onClick={props.onShow} />
+                                        }
+                                    </div>
+                                }
+                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer ml-auto"
                                     onClick={() => { nav('/upload') }}
                                     style={{ backgroundImage: `url('${bg}')` }}>
                                     <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
@@ -42,12 +55,22 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                                     <div className="bg-gray-600 w-10 h-10 animate-pulse rounded-lg px-3 py-1 cursor-pointer">
                                     </div>} />
                             </div> :
-                            <div className={`flex items-center gap-6 ${props.isHead && "w-full"}`}>
+                            <div className={`flex items-center gap-6 mm:w-full sm:w-full md:w-full ${props.isHead && "w-full"}`}>
                                 {
                                     props.isHead &&
                                     <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mr-auto" height={170} width={170} onClick={() => { nav("/") }} />
                                 }
-                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer"
+                                {
+                                    !props.isHead &&
+                                    <div className="hidden h-full px-2 mm:flex sm:flex md:flex mr-auto">
+                                        {
+                                            props.isShow ?
+                                            <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleDown} onClick={props.onShow} /> :
+                                            <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleUp} onClick={props.onShow} />
+                                        }
+                                    </div>
+                                }
+                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer ml-auto"
                                     onClick={() => { nav('/upload') }}
                                     style={{ backgroundImage: `url('${bg}')` }}>
                                     <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />

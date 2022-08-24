@@ -9,10 +9,10 @@ const icon_trash = require('../../../../../Assets/Icons/Trash.png');
 export const SoundItemSingle: React.FC<ISoundItemSingle> = ({ item, onDelete }) => {
     const nav = useNavigate();
     return (
-        <div className="playlistCardMain flex gap-20 cursor-pointer text-dark-200 dark:text-light-200 relative">
+        <div className="playlistCardMain flex gap-20 text-dark-200 dark:text-light-200 relative">
             <div className="flex w-full gap-4 ">
-                <div className={`p-3 grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden plCardMailSelect`}>
-                    <div className="flex flex-col items-start justify-between col-span-4">
+                <div className={`p-3 grid grid-cols-12 gap-4 w-full overflow-hidden plCardMailSelect`}>
+                    <div className="flex flex-col items-start justify-between col-span-5 sm:col-span-8 md:col-span-8 lg:col-span-7 xl:col-span-6 mm:col-span-full">
                         <div className="flex gap-6 items-center bg-blue-400 text-light-100 rounded-xl py-3 px-2 w-full">    
                             <h1 className="text-medium">
                                 {
@@ -32,11 +32,17 @@ export const SoundItemSingle: React.FC<ISoundItemSingle> = ({ item, onDelete }) 
                                 }
                             </div>
                         </div>
-                        <div className="flex gap-2 playlistCardMailOptions mt-4">
-                            <img className="invert dark:invert-0 w-[28px]" alt="trash" src={icon_trash} onClick={onDelete} />
+                        <div className="flex gap-2 playlistCardMailOptions mt-3 w-full mm:justify-between items-center">
+                            <img className="invert dark:invert-0 w-[28px] cursor-pointer" alt="trash" src={icon_trash} onClick={onDelete} />
+                            <div className="hidden mm:flex">
+                                {
+                                    item.track?.create &&
+                                    <p className="text-dark-200/90 dark:text-light-300 font-medium whitespace-nowrap">{moment(new Date(item.track?.create)).format("DD.MM.YYYY")}</p>
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div className="col-span-8 flex justify-end pr-[2%]">
+                    <div className="col-span-7 sm:col-span-4 md:col-span-4 lg:col-span-5 xl:col-span-6 flex justify-end pr-[2%] mm:hidden">
                         <div className="flex flex-col items-center justify-center ">
                             <h1 className="text-xl">Date</h1>
                             {

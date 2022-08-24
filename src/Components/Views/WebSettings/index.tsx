@@ -64,35 +64,35 @@ export const WebSettings: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col h-full py-[50px] px-[150px] text-dark-200 dark:text-light-200 gap-10">
+        <div className="flex flex-col h-full py-[50px] px-[150px] mm:px-2 mm:py-[8%] sm:px-4 sm:py-[6%] md:px-6 md:py-[4%] lg:px-6 lg:py-[4%] text-dark-200 dark:text-light-200 gap-10">
             <Helmet>
                 <title>Soundwave | Settings</title>
             </Helmet>
-            <h1 className="text-3xl font-bold">Settings</h1>
-            <div className="flex items-center justify-between">
-                <div className="flex flex-col">
+            <h1 className="text-3xl font-bold mm:text-center sm:text-center md:text-center">Settings</h1>
+            <div className="flex mm:flex-col mm:gap-2 items-center justify-between mm:w-full">
+                <div className="flex flex-col mm:w-full">
                     <p className="text-2xl font-medium">Language</p>
-                    <p>Choose language</p>
+                    <p className="mm:hidden">Choose language</p>
                 </div>
-                <div>
+                <div className="mm:w-full">
                     <DefaultSettingsDropdown title={"Choose language"} options={["English", "Ukraine"]} value={lang} onChange={(e: any) => {onChangeLanguage(e.target.value)}} />
                 </div>
             </div>
-            <div className="flex items-center justify-between">
-                <div className="flex flex-col">
+            <div className="flex mm:flex-col mm:gap-2 items-center justify-between mm:w-full">
+                <div className="flex flex-col mm:w-full">
                     <p className="text-2xl font-medium">Theme</p>
-                    <p>Choose theme</p>
+                    <p className="mm:hidden">Choose theme</p>
                 </div>
-                <div>
+                <div className="mm:w-full">
                    <ToggleButton onCheck={onChangeTheme} isSelected={dark === Theme.dark ? true : false} text={"Active light"} checkedText={"Active dark"}/>
                 </div>
             </div>
-            <div className="flex items-center justify-between">
-                <div className="flex flex-col">
+            <div className="flex mm:flex-col mm:gap-2 items-center justify-between">
+                <div className="flex flex-col mm:w-full">
                     <p className="text-2xl font-medium">Storage & Cookies</p>
                     <p>Clear all data in storage and cookies</p>
                 </div>
-                <div className="">
+                <div className="mm:w-full">
                    <ProfileButton text={"Clear All"} isSelect={false} onClick={clearAllStorage} />
                 </div>
             </div>

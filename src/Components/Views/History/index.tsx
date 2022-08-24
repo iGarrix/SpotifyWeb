@@ -111,20 +111,22 @@ export const History: React.FC = () => {
     }
 
     return (
-        <div className="w-full px-[3%] py-[2%] flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 bg-no-repeat h-full">
+        <div className="w-full px-[3%] py-[2%] mm:py-[4%] flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 bg-no-repeat h-full mm:min-h-[65vh]">
             <Helmet>
                 <title>Soundwave | Your history</title>
             </Helmet>
             {rx && rx.history && rx.history.soundobjs.length > 0 ?
                 <div className="flex flex-col gap-8 w-full">
-                    <div className="flex flex-col items-start gap-4">
-                        <h1 className="font-semibold text-2xl">Listening history</h1>
-                        <div className="flex w-[40%]">
+                    <div className="flex flex-col items-start mm:items-center gap-4">
+                        <h1 className="font-semibold text-2xl mm:text-center sm:text-center">Listening history</h1>
+                        <div className="flex w-[40%] mm:w-full sm:w-full md:w-[90%] lg:w-[90%] xl:w-[80%]">
                             <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
                                 setSearchQuery(e.target.value)
                             }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                         </div>
-                        <FilterButton onClick={onClearHistory} text={"Clear all history"} />
+                        <div className="flex mm:w-full">
+                            <FilterButton onClick={onClearHistory} text={"Clear all history"} />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-10 w-full">
                         {
@@ -177,7 +179,7 @@ export const History: React.FC = () => {
                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="font-medium text-3xl">History is empty</h1>
-                            <p className="font-medium text-xl">You can also listening your favorite songs using search</p>
+                            <p className="font-medium text-xl text-center">You can also listening your favorite songs using search</p>
                         </div>
                         <div>
                             <DefaultButton onClick={() => { nav("/search") }} text={"Search songs"} />

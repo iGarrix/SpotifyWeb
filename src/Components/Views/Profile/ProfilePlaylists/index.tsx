@@ -80,7 +80,7 @@ export const ProfilePlaylists: React.FC = () => {
             {
                     playlists && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-16">
+                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
                                 {
                                     playlists.map(item => {
                                         return (

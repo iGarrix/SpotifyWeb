@@ -36,6 +36,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
 
     const inititalAlbumDataValues: IAlbumData = {
         title: "",
+        image: "",
         description: ""
     };
 
@@ -112,6 +113,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                     }
                     const data : IAlbumData = {
                         title: values.title,
+                        image: image,
                         description: values.description
                     }
                     initAlbumData(data);
@@ -224,7 +226,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                     <div className="flex items-center justify-end w-full absolute right-0 bottom-0 px-[20%] pb-[3%] gap-6">
                         {
                             reducer.loading || processing > 0 &&
-                            <h1 className="h-full text-lg bg-dark-200 rounded-xl px-4 py-1"><span className="text-light-100">Processing:</span> <span className="font-bold text-light-100">{processing}%</span></h1>
+                            <h1 className="h-full text-lg bg-dark-200 rounded-xl px-4 py-1 text-light-100"><span className="text-light-100">Processing:</span> <span className="font-bold text-light-100">{processing}%</span></h1>
                         }
                         {
                             reducer.loading ? 

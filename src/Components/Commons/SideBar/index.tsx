@@ -12,6 +12,7 @@ const icon_music = require('../../../Assets/Icons/Music.png');
 const icon_library = require('../../../Assets/Icons/Library.png');
 const icon_playlist = require('../../../Assets/Icons/Playlist.png');
 const icon_history = require('../../../Assets/Icons/HistoryWhite.png');
+const icon_settings = require('../../../Assets/Icons/Settings.png');
 
 export const SideBar: React.FC = () => {
     const history = useLocation();
@@ -33,7 +34,7 @@ export const SideBar: React.FC = () => {
                 <SideBarItem text="New Playlist" isSelect={history.pathname.includes("/creativestudio")} icon={icon_playlist} onClick={() => { nav("creativestudio") }} />
                 <SideBarItem text="Media Library" isSelect={history.pathname.includes("/medialibrary")} icon={icon_library} onClick={() => { nav("medialibrary") }} />
                 <div className="md:block lg:hidden xl:hidden hidden sm:block mm:block">
-                    <SideBarItem text="Settings" isSelect={history.pathname.includes("/websettings")} icon={icon_library} onClick={() => { nav("websettings") }} />
+                    <SideBarItem text="Settings" isSelect={history.pathname.includes("/websettings")} icon={icon_settings} onClick={() => { nav("websettings") }} />
                 </div>
             </div>
         </div>

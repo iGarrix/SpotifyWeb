@@ -72,7 +72,7 @@ export const MyMediaLibraryAlbums: React.FC = () => {
       {
                     albums && rx.error.length === 0 ?
                         <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 gap-16">
+                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-16">
                                 {
                                     albums.map(item => {
                                         return (
@@ -87,8 +87,8 @@ export const MyMediaLibraryAlbums: React.FC = () => {
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Save you first album</h1>
-                                    <p className="font-medium text-xl">You can also login account</p>
+                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">Save you first album</h1>
+                                    <p className="font-medium text-xl mm:text-lg text-center">You can also login account</p>
                                 </div>
                                 <div>
                                     <DefaultButton onClick={() => { nav("/search") }} text={"Save you first album"} />

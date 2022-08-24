@@ -29,7 +29,7 @@ export const UploadAlbumStepThree: React.FC = () => {
                 <div className="flex flex-col gap-2 bg-light-100 dark:bg-dark-100 rounded-lg p-4">
                     <h1 className="text-xl font-medium">Preview</h1>
                     <div className="w-full flex gap-[50px]">
-                        <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[200px] w-[200px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
+                        <img alt="single_image" src={reducer.albumdata ? reducer.albumdata.image : ""} className="cursor-pointer transition-all object-cover h-[200px] w-[200px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                         <div className="flex flex-col gap-2 w-full">
                             <div>
                                 <h1 className="text-2xl font-bold">{reducer.albumdata?.title}</h1>

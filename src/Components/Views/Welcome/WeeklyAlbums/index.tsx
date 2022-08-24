@@ -70,15 +70,15 @@ export const WeeklyAlbums: React.FC = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 px-12 text-dark-200 dark:text-light-200 items-center relative">
+        <div className="w-full h-full flex flex-col justify-start py-8 px-12 mm:px-3 text-dark-200 dark:text-light-200 items-center relative">
             <Helmet>
                 <title>Soundwawe | Top albums</title>
             </Helmet>
             {
                 mainReducer.albums ?
                     <div className="w-full h-full flex flex-col gap-5 z-10">
-                        <h1 className="font-semibold text-2xl">Weekly albums</h1>
-                        <div className="flex items-center gap-6 flex-wrap">
+                        <h1 className="font-semibold text-2xl mm:text-center">Weekly albums</h1>
+                        <div className="flex items-center gap-6 mm:gap-4 flex-wrap">
                             {
                                 mainReducer.albums.map(item => {
                                     return (

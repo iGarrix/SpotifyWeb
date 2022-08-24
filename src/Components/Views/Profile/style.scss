@@ -1,6 +1,6 @@
 .profilenames {
     .profilechangenames {
-        @apply opacity-0 transition-all cursor-pointer;
+        @apply opacity-0 mm:opacity-100 sm:opacity-100 transition-all cursor-pointer;
 
         &:hover {
             @apply animate-pulse;

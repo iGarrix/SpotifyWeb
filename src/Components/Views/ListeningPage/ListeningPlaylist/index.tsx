@@ -192,16 +192,16 @@ export const ListeningPlaylist: React.FC = () => {
     }
  
     return (
-        <div className="w-full h-full pt-[7%] px-[15%] text-dark-200 dark:text-light-200 relative">
+        <div className="w-full h-full pt-[7%] px-[15%] mm:px-[3%] sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] text-dark-200 dark:text-light-200 relative">
             {
                 playingReducer.playlist ?
-                    <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
+                    <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full h-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                     :
                     null
             }
             {
                 playingReducer.playlist ?
-                    <div className="w-full h-full grid grid-cols-5 gap-12 z-[2]">
+                    <div className="w-full h-full grid grid-cols-5 gap-12 xl:gap-6 z-[2]">
                         <FullScreenModal visible={shareModal} center >
                             <ShareModal
                                 onClose={() => { setShareModal(false) }}
@@ -214,8 +214,8 @@ export const ListeningPlaylist: React.FC = () => {
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
-                                                <p className="bg-light-300 rounded-2xl px-3">
-                                                    <span className="text-center text-sm">Sharing</span>
+                                                <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
+                                                    <span className="text-center text-sm text-dark-200 dark:text-light-200">Sharing</span>
                                                 </p>
                                             </div>
                                             {
@@ -230,42 +230,42 @@ export const ListeningPlaylist: React.FC = () => {
                                     </div>
                                 } />
                         </FullScreenModal>               
-                        <div className="flex justify-end col-span-2">
-                            <div className="flex flex-col fixed select-none">
+                        <div className="flex justify-end mm:justify-center sm:justify-center md:justify-center lg:justify-center col-span-2 mm:col-span-full md:col-span-full sm:col-span-full lg:col-span-full">
+                            <div className="flex flex-col fixed mm:relative sm:relative md:relative lg:relative select-none">
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
-                                    className="h-96 w-96 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
+                                    className="h-96 w-96 mm:w-[296px] mm:h-[296px] xl:w-[348px] xl:h-[348px] rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0" src={icon_share} onClick={onShare} />
-                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
+                                <img alt="icon" className="w-[26px] mm:w-[22px] cursor-pointer invert dark:invert-0" src={icon_share} onClick={onShare} />
+                                    <div className="flex items-center justify-center w-[38px] h-[38px] mm:w-[32px] mm:h-[32px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
-                                    <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] rounded-full cursor-pointer"
+                                    <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center w-[64px] h-[64px] mm:w-[48px] mm:h-[48px] rounded-full cursor-pointer"
                                         onClick={onPause}
                                         style={{ backgroundImage: `url(${bg})` }}>
                                         {
                                             playingReducer.queue?.isPlay ?
-                                                <img alt="icon" className="w-[30px] -translate-x-[0.5px]" src={icon_pause} />
+                                                <img alt="icon" className="w-[30px] mm:w-[24px] -translate-x-[0.5px]" src={icon_pause} />
                                                 :
-                                                <img alt="icon" className="w-[30px] -translate-x-[0.8px]" src={icon_play} />
+                                                <img alt="icon" className="w-[30px] mm:w-[24px] -translate-x-[0.8px]" src={icon_play} />
 
                                         }
                                     </div>
-                                    <div className="flex items-center justify-center w-[38px] h-[38px] rounded-full cursor-pointer bg-light-200" onClick={toggleForward}>
+                                    <div className="flex items-center justify-center w-[38px] h-[38px] mm:w-[32px] mm:h-[32px] rounded-full cursor-pointer bg-light-200" onClick={toggleForward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_next} />
                                     </div>
                                     {
                                         isLiked ?
-                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
-                                        <img alt="icon" className="w-[26px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
+                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
+                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
                                     }
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-start w-full col-span-3 mb-32 z-10">
+                        <div className="flex justify-start w-full col-span-3 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full mb-32 mm:mb-10 sm:mb-10 md:mb-10 z-10">
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col gap-1">
                                     <div className="flex gap-4 w-full items-center">
-                                        <h1 className="font-medium font-['Lexend'] text-4xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                        <h1 className="font-medium font-['Lexend'] text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
                                             playingReducer.playlist.playlistCreator?.username === user?.username &&
                                             <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
@@ -280,7 +280,7 @@ export const ListeningPlaylist: React.FC = () => {
                                             onClick={() => { nav("/overview/" + playingReducer.playlist?.playlistCreator?.username, { replace: false }) }}>{playingReducer.playlist?.playlistCreator?.username}</span>
                                     </p>
                                 </div>
-                                <div className="flex flex-col gap-4 overflow-x-hidden pb-10 h-full">
+                                <div className="flex flex-col gap-4 overflow-x-hidden mm:px-0 sm:px-0 md:px-0 lg:px-0 pb-10 h-full">
                                     <div className="flex flex-col gap-[18px] h-full">
                                         {
                                             playingReducer.error &&

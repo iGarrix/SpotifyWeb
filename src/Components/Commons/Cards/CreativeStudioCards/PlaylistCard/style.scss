@@ -4,7 +4,7 @@
     }
 
     .playlistCardMailOptions {
-        @apply hidden transition-all;
+        @apply hidden mm:flex transition-all;
         z-index: 22;
     }
 

@@ -284,12 +284,17 @@ export const PlayingFooter: React.FC = () => {
 
         }
     }
-
+    
     return (
-        <div className="select-none">
+        <div className="select-none mm:h-full">
             {
                 rx && rx.soundobjs && rx.soundobjs[rx.playedIndex] && rx.soundobjs[rx.playedIndex].trackCreators && rx.playedIndex != undefined ?
-                    <div className="w-full text-white grid grid-cols-12 relative overflow-hidden">
+                    <div className="w-full text-white grid grid-cols-12 lg:grid-cols-15 xl:grid-cols-15 relative overflow-hidden mm:rounded-t-2xl sm:rounded-t-2xl">
+                        <div className="hidden justify-center w-full col-span-full pt-2 gap-2 text-sm mm:flex sm:flex">
+                            <h1 className="font-semibold hover:text-blue-500 cursor-pointer" onClick={() => { nav("/overview/" + rx.soundobjs[rx.playedIndex].trackCreators[0].username) }}>{rx.soundobjs[rx.playedIndex].trackCreators[0].username}</h1>
+                            <span> - </span>
+                            <p className="text-gray-300 whitespace-normal max-h-[70px] text-center">{rx.soundobjs[rx.playedIndex].track?.name}</p>
+                        </div>
                         <FullScreenModal visible={shareModal} center>
                             <ShareModal
                                 onClose={() => { setShareModal(false) }}
@@ -302,7 +307,7 @@ export const PlayingFooter: React.FC = () => {
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{rx?.soundobjs[rx?.playedIndex].track?.name}</h1>
-                                                <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
+                                                <p className="bg-light-300 dark:bg-dark-100 text-dark-200 dark:text-light-200 rounded-2xl px-3">
                                                     <span className="text-center text-sm">Sharing</span>
                                                 </p>
                                             </div>
@@ -314,9 +319,9 @@ export const PlayingFooter: React.FC = () => {
                                     </div>
                                 } />
                         </FullScreenModal>
-                        <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image}')` }}></div>
-                        <div className="absolute top-0 left-0 w-full h-full bg-dark-200/70 z-[-1]"></div>
-                        <div className="flex items-end pb-4 px-10 py-2 pr-0 z-10 col-span-2">
+                        
+
+                        <div className="flex md:flex-col lg:flex-col items-end md:items-start lg:items-start md:gap-2 lg:gap-2 md:justify-end pb-4 px-10 md:px-2 py-2 pr-0 z-10 col-span-2 mm:col-span-0 sm:col-span-0 md:col-span-4 lg:col-span-4 xl:col-span-4 2xl:col-span-2 mm:hidden sm:hidden">
                             <div className="flex items-center gap-3 overflow-hidden">
                                 <img alt="image" className="h-[55px] w-[55px] rounded-xl object-cover bg-cover bg-no-repeat shadow-2xl"
                                     src={baseUrl + "Images/Tracks/" + rx.soundobjs[rx.playedIndex].track?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
@@ -328,11 +333,29 @@ export const PlayingFooter: React.FC = () => {
                                     <p className="text-gray-300 whitespace-normal max-h-[70px]">{rx.soundobjs[rx.playedIndex].track?.name}</p>
                                 </div>
                             </div>
+                            <div className="hidden items-center gap-2 md:flex lg:flex mt-auto">
+                                {
+                                    volume > 60 ?
+                                        <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volfull} onClick={() => { onMute() }} />
+                                        : volume > 40 && volume <= 60 ?
+                                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volmedium} onClick={() => { onMute() }} />
+                                            : volume > 0 && volume <= 40 ?
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_vollow} onClick={() => { onMute() }} />
+                                                :
+                                                <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volmute} onClick={() => { onMute() }} />
+
+                                }
+                                <Slider min={0} max={100} value={volume} onChange={(e: any) => { ChangeVolume(e.target.value) }} />
+                            </div>
                         </div>
-                        <div className="flex flex-col justify-end items-center col-span-8 overflow-hidden px-20 pb-4 z-10">
+
+                        <div className="flex flex-col justify-end md:justify-center items-center md:w-full col-span-8 mm:col-span-12 sm:col-span-12 md:col-span-8 lg:col-span-11 xl:col-span-7 2xl:col-span-8 overflow-hidden px-20 mm:px-2 sm:px-0 md:px-2 pb-4 z-10">
                             <audio crossOrigin="anonymous" ref={audioPlayer} src={baseUrl + "TrackStorage/Tracks/" + rx.soundobjs[rx.playedIndex].track?.tracknameid} preload={"metadata"} />
                             <div className="py-3 flex items-center justify-between gap-8">
-                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100" onClick={shuffleTracks}>
+                                <div className="hidden mm:flex sm:flex md:flex lg:flex">
+                                    <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_queue} onClick={() => { onNav("queue") }} />
+                                </div>
+                                <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100 mm:hidden" onClick={shuffleTracks}>
                                     <img alt="icon" className="w-[18px] dark:invert" src={icon_shuffle} />
                                 </div>
                                 <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100 active:bg-blue-500" onClick={toggleBackward}>
@@ -352,18 +375,26 @@ export const PlayingFooter: React.FC = () => {
                                 <div className="flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer bg-light-200 dark:bg-dark-100 active:bg-blue-500" onClick={toggleForward}>
                                     <img alt="icon" className="w-[18px] invert dark:invert-0" src={icon_skip_next} />
                                 </div>
-                                <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all ${isRepeat ? "bg-blue-500" : "bg-white dark:bg-dark-100"}`} onClick={() => { setRepeat(!isRepeat) }}>
+                                <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-full cursor-pointer transition-all mm:hidden ${isRepeat ? "bg-blue-500" : "bg-white dark:bg-dark-100"}`} onClick={() => { setRepeat(!isRepeat) }}>
                                     <img alt="icon" className="w-[18px] dark:invert" src={icon_repeat} />
+                                </div>
+                                <div className="hidden mm:flex sm:flex md:flex lg:flex">
+                                    {
+                                    isLiked ?
+                                        <img alt="icon" className="w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
+                                        :
+                                        <img alt="icon" className={`w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none`} src={icon_like} onClick={onSubscribeTrack} />
+                                    }
                                 </div>
                             </div>
                             {
                                 rx.soundobjs[0].track &&
 
-                                <div className="grid grid-cols-12 w-full gap-2 items-center">
-                                    <div className="col-span-1 flex items-center justify-end">
+                                <div className="grid grid-cols-12 w-full gap-2 mm:gap-4 sm:gap-4 items-center md:w-full">
+                                    <div className="col-span-2 sm:col-span-1 md:col-span-1 xl:col-span-1 lg:col-span-1 flex items-center justify-end">
                                         <h1 className="text-thin text-[12px]">{moment.utc(elapsed * 1000).format("mm:ss")}</h1>
                                     </div>
-                                    <div className="col-span-10 flex items-center">
+                                    <div className="col-span-8 sm:col-span-10 md:col-span-10 xl:col-span-10 lg:col-span-10 flex items-center">
                                         {
                                             !isNaN(elapsed) && !isNaN(duration) &&
                                             <Slider min={0} max={duration} value={elapsed}
@@ -371,21 +402,22 @@ export const PlayingFooter: React.FC = () => {
                                                 onChange={(e: any) => { ElapseChange(e.target.value) }} />
                                         }
                                     </div>
-                                    <div className="col-span-1 flex items-center">
+                                    <div className="col-span-2 sm:col-span-1 md:col-span-1 xl:col-span-1 lg:col-span-1 flex items-center">
                                         <h1 className="text-thin con-span-1 text-[12px]">{moment.utc(duration * 1000).format("mm:ss")}</h1>
                                     </div>
                                 </div>
                             }
                         </div>
-                        <div className="flex items-end pb-4 px-10 py-2 gap-3 z-10 col-span-2">
-                            {
-                                isLiked ?
-                                    <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
-                                    :
-                                    <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none`} src={icon_like} onClick={onSubscribeTrack} />
-                            }
-                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_queue} onClick={() => { onNav("queue") }} />
-                            <div className="flex items-center gap-2">
+
+                        <div className="flex items-end pb-4 px-10 py-2 gap-3 z-10 col-span-2 mm:col-span-0 sm:col-span-0 xl:col-span-4 2xl:col-span-2 mm:hidden sm:hidden md:hidden lg:hidden">
+                                {
+                                    isLiked ?
+                                        <img alt="icon" className="w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likered} onClick={onUnsubscribeTrack} />
+                                        :
+                                        <img alt="icon" className={`w-[26px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none`} src={icon_like} onClick={onSubscribeTrack} />
+                                }
+                            <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1 md:hidden" src={icon_queue} onClick={() => { onNav("queue") }} />
+                            <div className="flex items-center gap-2 mm:hidden">
                                 {
                                     volume > 60 ?
                                         <img alt="icon" className="w-[28px] h-[28px] cursor-pointer bg-white dark:bg-light-300 dark:invert rounded-[50%] p-1" src={icon_volfull} onClick={() => { onMute() }} />

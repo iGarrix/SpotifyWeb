@@ -141,11 +141,11 @@ export const StudioPlaylist: React.FC = () => {
                     </FullScreenModal> : null
             }
             <div className="flex flex-col gap-8 w-full h-full">
-                <h1 className="font-semibold text-2xl">Create new Playlist</h1>
+                <h1 className="font-semibold text-2xl mm:text-center mm:mt-4">Create new Playlist</h1>
                 <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-300 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
                     <FontAwesomeIcon className="text-white text-[64px]" icon={faPlus} />
                 </div>
-                <div className="flex flex-col gap-10 w-full">
+                <div className="flex flex-col gap-10 mm:gap-4 w-full">
                     {
                             playlists && rx.error.length === 0 ?
                                 playlists?.map(item => {
@@ -170,8 +170,8 @@ export const StudioPlaylist: React.FC = () => {
                                     <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
                                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                         <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-3xl">Create you first playlist</h1>
-                                            <p className="font-medium text-xl">You can also upload a new single or album</p>
+                                            <h1 className="font-medium text-3xl text-center">Create you first playlist</h1>
+                                            <p className="font-medium text-xl text-center">You can also upload a new single or album</p>
                                         </div>
                                     </div>
                                 </>

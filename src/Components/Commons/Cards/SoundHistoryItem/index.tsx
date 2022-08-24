@@ -20,7 +20,7 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
     return (
         <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 dark:text-light-200 relative">
             <div className="absolute top-0 left-0 w-full h-full z-[10]" onClick={onClick}></div>
-            <div className="flex w-full gap-4">
+            <div className="flex w-full gap-4 mm:gap-[10px]">
                 {
                     index != undefined &&
                     <div className="flex items-center justify-center px-2 w-[15px]">
@@ -28,11 +28,11 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                     </div>
                 }
                 <img alt="Desc image" src={baseUrl + "Images/Tracks/" + track?.image}
-                    className="w-[100px] h-[100px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
-                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden ${selected && "bg-light-200 dark:bg-dark-200/60 shadow-xl rounded-xl"}`}>
-                    <div className="flex flex-col items-start justify-center col-span-4 pl-[10%]">
-                        <h1 className="text-xl">{track?.name}</h1>
-                        <p className="text-gray-500 dark:text-light-300/80 font-medium flex gap-2 items-center z-10">
+                    className="w-[100px] h-[100px] mm:w-[64px] mm:h-[64px] bg-cover object-cover bg-no-repeat rounded-lg" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} onClick={onClick} />
+                <div className={`grid grid-rows-1 grid-cols-12 gap-4 w-full overflow-hidden pr-5 mm:px-2 ${selected && "bg-light-200 dark:bg-dark-200/60 shadow-xl rounded-xl"}`}>
+                    <div className="flex flex-col items-start justify-center col-span-4 mm:col-span-10 lg:col-span-10  pl-[10%] mm:pl-0">
+                        <h1 className="text-xl mm:text-base">{track?.name}</h1>
+                        <p className="text-gray-500 dark:text-light-300/80 font-medium mm:text-base flex gap-2 items-center z-10">
                             {
                                 trackCreators?.map(i => i.username).map((i: any, index: number) => {
                                     return (
@@ -44,19 +44,19 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                             <FontAwesomeIcon className="w-[16px] h-[16px] flex items-center text-primary-100 -translate-y-[12%]" icon={trackCreators ? trackCreators[0].verify === VerifyType.verify ? faCheck :
                                 trackCreators[0].verify === VerifyType.verify ? faCheck : faUser : faUser} /></p>
                     </div>
-                    <div className="flex flex-col items-center justify-center col-span-5">
+                    <div className="flex flex-col items-center justify-center col-span-5 mm:hidden lg:hidden">
                         <h1 className="text-xl">Realised</h1>
                         {
                             track?.create &&
                             <p className="text-dark-200/90 dark:text-light-200/80 font-medium whitespace-nowrap">realised {moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
                         }
                     </div>
-                    <div className="flex items-center justify-end gap-4 col-span-3">
+                    <div className="flex items-center justify-end gap-4 col-span-3 mm:col-span-2 lg:col-span-2">
                         <div className="flex flex-col items-center gap-2">
-                            <img alt="icon" className="invert dark:invert-0 w-[24px]" src={icon_duration} />
+                            <img alt="icon" className="invert dark:invert-0 w-[24px] mm:w-[20px]" src={icon_duration} />
                             {
                                 track &&
-                                <p>{moment.utc(Number.parseFloat(track?.duration) * 1000).format("mm:ss")}</p>
+                                <p className="mm:text-sm">{moment.utc(Number.parseFloat(track?.duration) * 1000).format("mm:ss")}</p>
 
                             }
                         </div>

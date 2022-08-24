@@ -128,9 +128,9 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall &&
                 reducer.searchall.bestResult &&
                 <div className="grid grid-rows-1 grid-cols-5 mm:grid-rows-2 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-2 gap-20 mm:gap-5 sm:gap-5 md:gap-5 lg:gap-5">
-                    <div className="flex flex-col gap-1 col-span-2 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
+                    <div className="flex flex-col gap-1 col-span-2 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full h-full">
                         <h1 className="font-medium text-2xl">Best result</h1>
-                        <div>
+                        <div className="h-full">
                             {
                                 TypeOfInstance(reducer.searchall?.bestResult) &&
                                     TypeOfInstance(reducer.searchall?.bestResult) === BestResultTypes.User ?
@@ -172,7 +172,7 @@ export const AllResultSearch: React.FC = () => {
                     </div>
                     <div className="flex flex-col gap-2 col-span-3 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
                         <h1 className="font-medium text-2xl">Songs</h1>
-                        <div className="flex flex-col justify-between mm:justify-start w-full h-full flex-wrap gap-[15px]">
+                        <div className="flex flex-col mm:justify-start w-full h-full flex-wrap gap-[15px]">
                             {
                                 reducer.searchall.tracks && reducer.searchall.tracks.length > 0 ?
                                 reducer.searchall.tracks?.map(item => {
@@ -201,9 +201,9 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.albums && reducer.searchall.albums.length > 0 &&
-                <div className="flex flex-col gap-6">
-                    <h1 className="font-medium text-2xl">Albums</h1>
-                    <div className="flex w-full flex-wrap gap-6 mm:justify-center">
+                <div className="flex flex-col gap-6 mm:gap-6">
+                    <h1 className="font-medium text-2xl mm:text-center">Albums</h1>
+                    <div className="flex w-full flex-wrap gap-6 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.albums.map(item => {
                                 return (
@@ -216,9 +216,9 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
-                <div className="flex flex-col gap-6">
-                    <h1 className="font-medium text-2xl">Playlists</h1>
-                    <div className="flex w-full flex-wrap gap-6 mm:justify-center">
+                <div className="flex flex-col gap-6 mm:gap-6">
+                    <h1 className="font-medium text-2xl mm:text-center">Playlists</h1>
+                    <div className="flex w-full flex-wrap gap-6 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.playlists.map(item => {
                                 return (
@@ -231,9 +231,9 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.artists && reducer.searchall.artists.length > 0 &&
-                <div className="flex flex-col gap-3">
-                    <h1 className="font-medium text-2xl">Creators</h1>
-                    <div className="flex w-full flex-wrap gap-3">
+                <div className="flex flex-col gap-3 mm:gap-6">
+                    <h1 className="font-medium text-2xl mm:text-center">Creators</h1>
+                    <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.artists.map(item => {
                                 return (
@@ -246,9 +246,9 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.profiles && reducer.searchall.profiles.length > 0 &&
-                <div className="flex flex-col gap-3">
-                    <h1 className="font-medium text-2xl">Profiles</h1>
-                    <div className="flex w-full flex-wrap gap-3">
+                <div className="flex flex-col gap-3 mm:gap-6">
+                    <h1 className="font-medium text-2xl mm:text-center">Profiles</h1>
+                    <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.profiles.map(item => {
                                 return (

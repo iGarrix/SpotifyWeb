@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
-import { Header } from "../../Commons/Header";
 
 const icon_music = require('../../../Assets/Icons/Upload.png');
 
@@ -15,9 +14,9 @@ export const UploadIntro: React.FC = () => {
         <Helmet>
             <title>Soundwave | Uploading</title>
         </Helmet>
-        <div className="flex flex-col items-center gap-4 z-[10] relative">
-            <img alt="bg" src={require('../../../Assets/Subtract.png')} className="rounded-2xl absolute top-0 left-0 h-full bg-cover object-cover" />
-            <div className="flex flex-col items-center justify-center z-10 py-20 px-[220px]  gap-16 h-full w-full">
+        <div className="flex flex-col items-center gap-4 z-[10] relative mm:w-full mm:h-full sm:w-full sm:h-full">
+            <img alt="bg" src={require('../../../Assets/Subtract.png')} className="rounded-2xl mm:rounded-none sm:rounded-none absolute top-0 left-0 h-full bg-cover object-cover mm:w-full mm:h-full sm:w-full sm:h-full" />
+            <div className="flex flex-col items-center justify-center z-10 py-20 px-[220px] mm:px-2 sm:px-[3%] gap-16 h-full w-full">
                 <h1 className="font-semibold text-3xl font-['Lexend'] text-center">Upload content</h1>
                 <div className="flex flex-col gap-8">
                     <RedirectButton text="Upload album, more song" icon={icon_music} onClick={() => { navigate('album') }} />

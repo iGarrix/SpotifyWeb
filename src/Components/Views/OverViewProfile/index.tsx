@@ -102,8 +102,8 @@ export const OverviewProfile: React.FC = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2 items-center">
                     <h1 className="font-['Lexend'] text-xl">{user.overviewer?.username}</h1>
-                    <p className="bg-light-300 rounded-2xl px-3">
-                      <span className="text-center text-sm">Sharing</span>
+                    <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
+                      <span className="text-center text-sm text-dark-200 dark:text-light-200">Sharing</span>
                     </p>
                   </div>
                   <p className="">{user.overviewer?.name} {user.overviewer?.surname}</p>

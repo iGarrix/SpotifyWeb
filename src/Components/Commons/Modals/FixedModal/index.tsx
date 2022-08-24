@@ -15,6 +15,11 @@ const icon_studio = require('../../../../Assets/Icons/Studio.png');
 const icon_notifications = require('../../../../Assets/Icons/Notifications.png');
 const icon_logout = require('../../../../Assets/Icons/Logout.png');
 
+const icon_music = require('../../../../Assets/Icons/Music.png');
+const icon_playlist = require('../../../../Assets/Icons/Playlist.png');
+const icon_HistoryWhite = require('../../../../Assets/Icons/HistoryWhite.png');
+const icon_upload = require('../../../../Assets/Icons/Add.png');
+
 export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
 
     const fixeddropdown = useRef<HTMLDivElement>(null);
@@ -57,11 +62,12 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
     });
 
     return (
-        <div className="relative flex flex-col">
+        <div className="relative flex flex-col overflow-y-scroll">
             <div onClick={() => { setOpen(!isOpen) }}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} className={`${isOpen ? "border-light-100/20 shadow-xl fixed right-10 top-16 flex flex-col text-dark-200 bg-light-200 dark:text-light-200 dark:bg-dark-200 rounded-sm overflow-hidden"
+            <div ref={fixeddropdown} onClick={() => {setOpen(false);}}
+            className={`${isOpen ? "border-light-100/20 shadow-2xl fixed right-10 top-16 mm:w-auto mm:h-auto mm:rounded-xl mm:right-4 mm:left-4 mm:top-4 mm:bottom-20 flex flex-col text-dark-200 bg-light-200 dark:text-light-200 dark:bg-dark-200 rounded-sm overflow-hidden"
                 : "hidden"}`} style={{ zIndex: 30 }}>
                 <div className="w-full py-2 px-4 gap-3 flex items-center transition-all hover:text-light-200 hover:bg-primary-100 active:bg-primary-100/20 cursor-pointer mb-1 hoveredverifyfixed" onClick={() => { onNavigateClick("/profile") }}>
                     <div className="scale-110">
@@ -83,6 +89,15 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
                 <DropdownButtonItem text="Notification" notifications={notificate} icon={<img alt="icon" src={icon_notifications} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings/notification"); }} />
                 <DropdownButtonItem text="Creative Studio" icon={<img alt="icon" src={icon_studio} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio"); }} />
                 <DropdownButtonItem text="Account Manage" icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings") }} />
+                <div className="hidden mm:flex flex-col">
+                    <hr className="border-light-300 dark:border-dark-100" />
+                    <DropdownButtonItem text="Genres" icon={<img alt="icon" src={icon_music} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/genres") }} />
+                    <DropdownButtonItem text="History" icon={<img alt="icon" src={icon_HistoryWhite} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/history") }} />
+                    <DropdownButtonItem text="New Playlist" icon={<img alt="icon" src={icon_playlist} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio") }} />
+                    <DropdownButtonItem text="Uploading" icon={<img alt="icon" src={icon_upload} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/upload") }} />
+                    <DropdownButtonItem text="Settings" icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/websettings") }} />
+                    <hr className="border-light-300 dark:border-dark-100" />
+                </div>
                 <DropdownButtonItem text="Log out" isDanger={true} icon={<img alt="icon" src={icon_logout} className="w-[22px] h-[22p   x]" />} onClick={() => { LogoutUser(); nav("/"); }} />
             </div>
         </div>

@@ -58,18 +58,15 @@ export const GenreDetails: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 pl-[5%] pr-[2%] items-center relative dark:text-light-200">
+        <div className="w-full h-full flex flex-col justify-start py-8 pl-[5%] pr-[2%] mm:px-2 items-center relative dark:text-light-200">
             <Helmet>
                 <title>Soundwave | Genres Details</title>
             </Helmet>
             {
                 playlist ?
                     <div className="w-full flex flex-col gap-5">
-                        <h1 className="font-semibold text-5xl my-10">{name}</h1>
-                        <div className="w-full flex justify-between items-center">
-                            <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Weekly top playlists</h1>
-                        </div>
-                        <div className="flex items-center gap-[18px] flex-wrap">
+                        <h1 className="font-semibold text-5xl my-10 mm:my-2 mm:text-center">{name}</h1>
+                        <div className="flex items-center gap-[18px] mm:gap-[12px] flex-wrap">
                             {
                                 playlist?.map(item => {
                                     return (
@@ -85,9 +82,9 @@ export const GenreDetails: React.FC = () => {
                         <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center dark:text-light-200">
-                                <h1 className="font-medium text-3xl">No playlists found in genre '{name}'</h1>
-                                <p className="font-medium text-xl">You can also search your favorite playlists</p>
-                                <p className="font-medium text-xl">"{rx.error}"</p>
+                                <h1 className="font-medium text-3xl mm:text-xl">No playlists found in genre '{name}'</h1>
+                                <p className="font-medium text-xl mm:text-base">You can also search your favorite playlists</p>
+                                <p className="font-medium text-xl mm:text-base">"{rx.error}"</p>
                             </div>
                             <div>
                                 <DefaultButton onClick={() => { nav("/search") }} text={"Search playlists"} />

@@ -214,28 +214,28 @@ export const OverViewPlaylist: React.FC = () => {
                         <ChangePlaylistModal playlist={playlist} onSave={onSaveChanges} onClose={onCloseModal} />
                     </FullScreenModal> : null
             }
-            <div className="w-full flex py-[50px] px-[150px] gap-[32px]">
+            <div className="w-full flex mm:flex-col mm:items-center py-[50px] mm:py-[5%] sm:py-[5%] md:py-[5%] px-[150px] mm:px-0 sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] gap-[32px]">
                 {
-                    playlist ?
-                        <div className="w-64 h-64 relative overflow-hidden rounded-xl">  
+                    playlist?.playlistDto?.image ?
+                        <div className="w-[256px] h-[256px] relative overflow-hidden rounded-xl">  
                             <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                 <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
                                 <label htmlFor="file"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
                             </div>
-                            <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
+                            <img alt="avatar" src={baseUrl + "Images/Playlist/" + playlist?.playlistDto?.image} className="cursor-pointer transition-all object-cover w-[256px] h-[256px]" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                         </div> :
                         <div className="flex items-center justify-center w-[240px] h-[240px] bg-light-200">
                             <FontAwesomeIcon onClick={onChangeImage} className="text-white text-[64px]" icon={faPlus} />
                         </div>
                 }
-                <div className="flex flex-col gap-2 ">
+                <div className="flex flex-col gap-2 mm:w-full">
                     <h1 className="text-xl font-['Lexend'] flex gap-4">Playlist {playlist?.playlistDto?.accessStatus}</h1>
                     <h1 className="font-semibold text-3xl font-['Lexend'] flex gap-4 profilenames">{playlist?.playlistDto?.name}
                         <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangePlaylist} />
                     </h1>
                 </div>
             </div>
-            <div className="flex flex-col w-full gap-5 px-[150px]">
+            <div className="flex flex-col w-full gap-5 px-[150px] mm:px-0 sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%]">
                 <div className="flex flex-col gap-2">
                     <h1 className="font-medium text-xl">Add something to your playlist</h1>
                     <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
@@ -251,7 +251,7 @@ export const OverViewPlaylist: React.FC = () => {
                                 </div>
                             }
                             <div className="flex items-center gap-3 mt-2">
-                                <h1 className="text-medium text-xl whitespace-nowrap">Found by '{searchQuery}'</h1>
+                                <h1 className="text-medium text-xl whitespace-nowrap mm:hidden sm:hidden">Found by '{searchQuery}'</h1>
                                 <hr className="w-full border dark:border-dark-100" />
                                 <p className="text-dark-200/80 dark:text-light-300 hover:text-primary-100 cursor-pointer select-none whitespace-nowrap" onClick={() => { document.documentElement.scrollTo(0, 0); nav("/search/tracks?query=" + searchQuery) }}>See all</p>
                             </div>

@@ -1,6 +1,6 @@
 .soundhistory {
     .soundhistory_menu {
-        @apply opacity-0 transition-all;     
+        @apply opacity-0 mm:opacity-100 sm:opacity-100 transition-all;     
     }
 
     &:hover {

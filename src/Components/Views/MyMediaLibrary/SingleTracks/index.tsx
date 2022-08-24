@@ -97,7 +97,7 @@ export const MyMediaLibrarySingle: React.FC = () => {
             </Helmet>
             {
                     singles && rx.error.length === 0 ?
-                        <div className="w-full h-full flex flex-col gap-[18px] px-[330px]">
+                        <div className="w-full h-full flex flex-col gap-[18px] px-[330px] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 2xl:px-[15%]">
                             {
                                 singles.map(item => {
                                     return (
@@ -115,8 +115,8 @@ export const MyMediaLibrarySingle: React.FC = () => {
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl">Save you first single song</h1>
-                                    <p className="font-medium text-xl">You can also login your account</p>
+                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">Save you first single song</h1>
+                                    <p className="font-medium text-xl mm:text-lg text-center">You can also login your account</p>
                                 </div>
                                 <div>
                                     <DefaultButton onClick={() => { nav("/search") }} text={"Save you first single song"} />

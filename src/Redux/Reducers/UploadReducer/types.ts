@@ -19,6 +19,7 @@ export interface ISingleData {
 }
 export interface IAlbumData {
     title: string,
+    image: string,
     description: string,
 }
 

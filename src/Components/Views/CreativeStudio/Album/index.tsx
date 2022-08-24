@@ -107,8 +107,8 @@ export const StudioAlbum: React.FC = () => {
                     </FullScreenModal> : null
             }
             <div className="flex flex-col gap-8 w-full h-full">
-                <h1 className="font-semibold text-2xl">Manage my albums</h1>
-                <div className="flex flex-col gap-10 w-full">
+                <h1 className="font-semibold text-2xl mm:text-center">Manage my albums</h1>
+                <div className="flex flex-col gap-10 mm:gap-4 w-full">
                     {
                         album && rx.error.length === 0 ?
                             album?.map(item => {
@@ -133,8 +133,8 @@ export const StudioAlbum: React.FC = () => {
                                 <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
                                 <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                     <div className="flex flex-col gap-3 items-center">
-                                        <h1 className="font-medium text-3xl">Create you first albums</h1>
-                                        <p className="font-medium text-xl">You can also upload a new single or create new playlist</p>
+                                        <h1 className="font-medium text-3xl text-center">Create you first albums</h1>
+                                        <p className="font-medium text-xl text-center">You can also upload a new single or create new playlist</p>
                                     </div>
                                     <div>
                                             <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first album"} />
