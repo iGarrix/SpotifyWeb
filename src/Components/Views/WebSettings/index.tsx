@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { ClearStorage } from "../../../Redux/GlobalReduxFunc";
 import { store } from "../../../Redux/store";
-import { StorageVariables, Theme } from "../../../types";
+import { LanguageVars, StorageVariables, Theme } from "../../../types";
 import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { ToggleButton } from "../../Commons/Buttons/ToggleButton";
 import { DefaultSettingsDropdown } from "../../Commons/DefaultSettingsDropdown";
 import { initTheme } from "../../../Redux/Reducers/GlobalReducer/action"
+import { useActions } from "../../../Hooks/useActions";
 
 export const WebSettings: React.FC = () => {
+
+
+    const {initLangDispath} = useActions();
 
     const [lang, setLang] = useState(() => {
         const lang = localStorage.getItem(StorageVariables.Language);
@@ -28,16 +32,8 @@ export const WebSettings: React.FC = () => {
 
 
     const onChangeLanguage = (value: string) => {
-        switch (value) {
-            case 'English':             
-                localStorage.setItem(StorageVariables.Language, "English");
-                break;
-            case 'Ukraine':             
-                localStorage.setItem(StorageVariables.Language, "Ukraine");
-                break;
-            default:
-                break;
-        }
+        localStorage.setItem(StorageVariables.Language, value);
+        initLangDispath(value);
     }
     
     const onChangeTheme = () => {
@@ -75,7 +71,7 @@ export const WebSettings: React.FC = () => {
                     <p className="mm:hidden">Choose language</p>
                 </div>
                 <div className="mm:w-full">
-                    <DefaultSettingsDropdown title={"Choose language"} options={["English", "Ukraine"]} value={lang} onChange={(e: any) => {onChangeLanguage(e.target.value)}} />
+                    <DefaultSettingsDropdown title={"Choose language"} options={[LanguageVars.EN, LanguageVars.UA]} value={lang} onChange={(e: any) => {onChangeLanguage(e.target.value)}} />
                 </div>
             </div>
             <div className="flex mm:flex-col mm:gap-2 items-center justify-between mm:w-full">

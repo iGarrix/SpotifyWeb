@@ -76,18 +76,19 @@ import { UploadAlbumStepOne } from "./Components/Views/UploadingPages/UploadAlbu
 import { UploadAlbumStepTwo } from "./Components/Views/UploadingPages/UploadAlbumPage/UploadAlbumStepTwo";
 import { UploadAlbumStepThree } from "./Components/Views/UploadingPages/UploadAlbumPage/UploadAlbumStepThree";
 import { Invites } from "./Components/Views/AccountSettings/Notifications/Invites";
+import { useTranslation } from "react-i18next";
 
 function App() {
 
-  const { theme } = useTypedSelector(state => state.globalReducer);
+  const { theme, lang } = useTypedSelector(state => state.globalReducer);
 
-//   const [isDark, setDark] = useState(() => {
-//     const theme = localStorage.getItem(StorageVariables.Theme);
-//     if (theme === null || theme === undefined) {
-//         return Theme.light;
-//     }
-//     return theme;
-// });
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang]);
 
   const { initQueue } = useActions();
 

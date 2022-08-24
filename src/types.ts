@@ -5,6 +5,12 @@ export enum Theme {
   light = "light",
 }
 
+export enum LanguageVars {
+  EN = "En",
+  UA = "Ua"
+}
+
+
 export enum DeviceType {
   mobile = "mobile",
   desktop = "WebBrowser Desktop",
