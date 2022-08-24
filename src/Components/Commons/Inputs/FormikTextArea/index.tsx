@@ -9,7 +9,7 @@ export const FormikTextArea: React.FC<FormikTextAreaProps> = ({
 }) => {
     const [field] = useField(props);
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
             <div className="min-h-5 flex gap-2 text-dark-200 dark:text-light-200">
                 <h1 className="text-lg font-medium">{label}</h1>
                 <ErrorMessage component="h1" name={field.name} className="error text-red-500 font-medium" />

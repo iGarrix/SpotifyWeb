@@ -27,7 +27,7 @@ export const UploadAlbumPage: React.FC = () => {
 
     return (
         <div className="w-full h-full flex flex-col">
-            <div className="w-full flex flex-col justify-center pt-[3%] gap-5">
+            <div className="w-full flex flex-col justify-center pt-[3%]  mm:pt-[50px] sm:pt-[50px] md:pt-[50px] lg:pt-[50px] xl:pt-[50px] gap-5">
                 <LinearStepper isError={reducer.error.length > 0} paddingX={20} selectedIndex={history.pathname === "/upload/album" ? 1 :
                     history.pathname.includes("information") ? 2 : 3
                 } stepsItem={steps} />

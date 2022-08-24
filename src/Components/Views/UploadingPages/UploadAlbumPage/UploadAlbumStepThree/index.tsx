@@ -15,20 +15,19 @@ export const UploadAlbumStepThree: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const [copy, setCopy] = useState(false);
     const [link, setLink] = useState(document.location.origin + "/search?query=" + reducer.albumdata?.title);
-    const history = useLocation();
 
-    useEffect(() => {
-        if (!reducer.albumfiles) {
-            nav(-2);
-        }
-    }, [reducer.albumfiles]);
+    // useEffect(() => {
+    //     if (!reducer.albumfiles) {
+    //         nav(-2);
+    //     }
+    // }, [reducer.albumfiles]);
 
     return (
         <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">
-            <div className="flex flex-col pt-[4%] gap-[6%] w-full h-full px-[30%]">
-                <div className="flex flex-col gap-2 bg-light-100 dark:bg-dark-100 rounded-lg p-4">
+            <div className="flex flex-col pt-[4%] gap-[2%] mm:gap-4 sm:gap-4 md:gap-4 w-full h-full px-[30%] mm:px-[2%] sm:px-[2%] md:px-[5%] lg:px-[5%] xl:px-[15%] 2xl:px-[25%]">
+                <div className="flex flex-col gap-2 bg-light-100 dark:bg-dark-100 rounded-lg px-6 py-5">
                     <h1 className="text-xl font-medium">Preview</h1>
-                    <div className="w-full flex gap-[50px]">
+                    <div className="w-full flex mm:flex-col sm:flex-col mm:items-center sm:items-center gap-[20px]">
                         <img alt="single_image" src={reducer.albumdata ? reducer.albumdata.image : ""} className="cursor-pointer transition-all object-cover h-[200px] w-[200px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                         <div className="flex flex-col gap-2 w-full">
                             <div>
@@ -40,8 +39,8 @@ export const UploadAlbumStepThree: React.FC = () => {
                                     reducer.albumfiles &&
                                     reducer.albumfiles.map(f => {
                                         return (
-                                            <div key={Guid.create().toString()} className="bg-light-300 dark:bg-dark-200/30 w-full py-2 px-3 rounded-lg flex justify-between items-center">
-                                                <h1 className="text-lg">{user?.username} - {f.name}</h1>
+                                            <div key={Guid.create().toString()} className="bg-light-300 dark:bg-dark-200/30 w-full py-2 px-3 rounded-lg flex mm:flex-wrap justify-between items-center">
+                                                <h1 className="text-lg mm:text-base">{user?.username} - {f.name}</h1>
                                                 <p>{formatBytes(f.file.size)}</p>
                                             </div>
                                         )
@@ -62,9 +61,6 @@ export const UploadAlbumStepThree: React.FC = () => {
                             </CopyToClipboard>
                         </div>
                     </div>
-                </div>
-                <div className="flex w-full justify-end">
-
                 </div>
             </div>
             <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">

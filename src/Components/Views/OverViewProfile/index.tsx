@@ -82,8 +82,6 @@ export const OverviewProfile: React.FC = () => {
     }
   }
 
-  console.log(history.pathname);
-
   return (
     <div className="overflow-x-hidden text-light-100 flex flex-col h-full">
       <Helmet>

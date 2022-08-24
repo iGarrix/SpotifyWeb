@@ -37,7 +37,7 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                                 }
                                 {
                                     !props.isHead &&
-                                    <div className="hidden h-full px-2 mm:flex sm:flex md:flex mr-auto">
+                                    <div className="hidden h-full px-2 mm:flex sm:flex  mr-auto">
                                         {
                                             props.isShow ?
                                             <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleDown} onClick={props.onShow} /> :
@@ -62,7 +62,7 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                                 }
                                 {
                                     !props.isHead &&
-                                    <div className="hidden h-full px-2 mm:flex sm:flex md:flex mr-auto">
+                                    <div className="hidden h-full px-2 mm:flex sm:flex mr-auto">
                                         {
                                             props.isShow ?
                                             <FontAwesomeIcon className="text-dark-200 dark:text-light-200 text-xl transition-all cursor-pointer active:scale-125" icon={faAngleDown} onClick={props.onShow} /> :

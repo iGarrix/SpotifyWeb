@@ -8,7 +8,6 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { ISingleCreateRequest, ISingleData, singleDataValidate } from "../../../../../Redux/Reducers/UploadReducer/types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 import { FormikTextArea } from "../../../../Commons/Inputs/FormikTextArea";
-import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 
 const defaultBg = require('../../../../../Assets/Background1.png');
 const loader = require('../../../../../Assets/Icons/Loader.png');
@@ -82,15 +81,17 @@ export const UploadSingleStepTwo: React.FC = () => {
                     validationSchema={singleDataValidate}
                     onSubmit={onChangeSingleDataHandle}>
                     <Form className="flex flex-col h-full">
-                        <div className="flex px-[30%] w-full gap-4 h-full">
-                            <div className="h-[264px] w-full relative overflow-hidden rounded-lg shadow-2xl">
+                        <div className="flex justify-center mm:justify-start sm:justify-start md:justify-start
+                        mm:flex-col sm:flex-col md:flex-col mm:items-center sm:items-center md:items-center px-[25%] mm:px-[2%] sm:px-[2%] md:px-[2%] lg:px-0 
+                        w-full gap-4 h-full ">
+                            <div className="h-[264px] mm:h-[232px] sm:h-[232px] w-[264px] mm:w-auto sm:w-auto md:w-auto relative overflow-hidden rounded-lg shadow-2xl">
                                 <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                     <input type="file" id="file" accept="image/*" onChange={(event: any) => { onLoadingImage(event) }} className="hidden" />
                                     <label htmlFor="file"><FontAwesomeIcon className="invert text-6xl cursor-pointer" icon={faPlus} /> </label>
                                 </div>
-                                <img alt="single_image" src={image} className="cursor-pointer transition-all object-cover h-[264px] w-[264px]" onError={(tg: any) => { tg.target.src = defaultBg }} />
+                                <img alt="single_image" src={image} className="cursor-pointer transition-all object-cover h-[264px] w-[264px] mm:h-[232px] mm:w-[232px] sm:h-[232px] sm:w-[232px]" onError={(tg: any) => { tg.target.src = defaultBg }} />
                             </div>
-                            <div className="flex flex-col w-[200%] gap-[20px]">
+                            <div className="flex flex-col mm:w-full sm:w-full md:w-full gap-[20px] sm:px-[10%] md:px-[10%]">
                                 <FormikTextArea name={"title"} label={"Title"} minHeight={100} />
                             </div>
                         </div>

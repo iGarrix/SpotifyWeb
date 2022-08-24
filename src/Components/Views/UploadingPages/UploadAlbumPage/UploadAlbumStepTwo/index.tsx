@@ -187,12 +187,12 @@ export const UploadAlbumStepTwo: React.FC = () => {
                 initialValues={inititalAlbumDataValues}
                 validationSchema={albumDataValidate}
                 onSubmit={onUploadAlbumDataHandle}>
-                <Form className="flex flex-col pt-[4%] gap-12 w-full h-full">
-                    <div className="px-[27%] pb-[5%]">
+                <Form className="flex flex-col pt-[4%] w-full h-full">
+                    <div className="px-[27%] mm:px-3 sm:px-[5%] md:px-[5%] lg:px-[5%] xl:px-[15%] pb-[5%]">
                         <div className="flex flex-col h-full p-[30px] shadow-2xl bg-light-200 dark:bg-dark-200/30 gap-6 rounded-xl overflow-hidden relative">
                             <img alt="bgimage" className="absolute top-0 left-0 w-full h-[25%] object-cover bg-cover"
                                 src={imageBack} onError={(tg: any) => { tg.target.src = defaultBg }} />
-                            <div className="w-full gap-6 flex z-10">
+                            <div className="w-full gap-6 flex mm:flex-col sm:flex-col mm:items-center sm:items-center z-10">
                                 <div className="w-auto">
                                     <div className="h-[264px] w-[264px] relative overflow-hidden rounded-lg shadow-2xl">
                                         <div className="h-full w-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
@@ -210,7 +210,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                                     <FormikTextArea name={"title"} label={"Title"} minHeight={100} />
                                 </div>
                             </div>
-                            <div className="grid grid-rows-1 grid-cols-2 gap-6 z-10">
+                            <div className="grid grid-rows-1 grid-cols-2 mm:grid-cols-1 gap-6 z-10">
                                 <div>
                                     <FormikTextArea name={"description"} label={"Description"} minHeight={100} />
                                 </div>
@@ -223,10 +223,10 @@ export const UploadAlbumStepTwo: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-end w-full absolute right-0 bottom-0 px-[20%] pb-[3%] gap-6">
+                    <div className="flex items-center justify-end w-full px-[20%] sm:px-[5%] md:px-[5%] lg:px-[5%] xl:px-[15%] pb-[3%] gap-6">
                         {
                             reducer.loading || processing > 0 &&
-                            <h1 className="h-full text-lg bg-dark-200 rounded-xl px-4 py-1 text-light-100"><span className="text-light-100">Processing:</span> <span className="font-bold text-light-100">{processing}%</span></h1>
+                            <h1 className="h-full text-lg bg-dark-200 rounded-xl px-4 py-1 text-light-100 whitespace-nowrap"><span className="text-light-100">Processing:</span> <span className="font-bold text-light-100">{processing}%</span></h1>
                         }
                         {
                             reducer.loading ? 

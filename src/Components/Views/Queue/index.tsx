@@ -1,4 +1,4 @@
-import { faHeart, faMusic, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faHeart, faMusic, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react"
@@ -69,6 +69,9 @@ export const Queue: React.FC = () => {
             <Helmet>
                 <title>Soundwave | Playing Queue</title>
             </Helmet>
+            <div className="hidden mm:flex w-full px-[5%] pb-[15px] border-b border-b-dark-100">
+                <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => {nav(-1)}} />
+            </div>
             {
                 rx && rx.queue && rx.queue.soundobjs && rx.queue.soundobjs.length > 0 ?
                     <div className="flex flex-col gap-6 w-full">

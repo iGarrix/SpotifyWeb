@@ -21,7 +21,7 @@ export const LinearStepper: React.FC<ILinearStepper> = ({ ...props }) => {
                 props.stepsItem.map(item => {
                     return (
                         <div key={Guid.create().toString()} className="relative flex items-center">
-                            <p className={`absolute top-[-150%] flex justify-center w-full font-medium text-lg dark:text-light-200 ${props.selectedIndex === item.key && `${props.isError ? "text-red-500" : "text-primary-100"}`}`}>{item.title}</p>
+                            <p className={`absolute top-[-150%] flex justify-center w-full font-medium text-lg mm:text-base dark:text-light-200 ${props.selectedIndex === item.key && `${props.isError ? "text-red-500" : "text-primary-100"}`}`}>{item.title}</p>
                             <hr className={`w-full border-[1.5px] ${props.selectedIndex >= item.key ? `${props.isError ? "border-red-500" : "border-blue-500"}` : "border-light-300"}`} />
                             <img alt="step" src={props.selectedIndex === item.key ? props.isError ? selectStepError : selectStep : theme === Theme.light ? nonselectStep: nonselectStepDark} />
                             <hr className={`w-full border-[1.5px] ${props.selectedIndex > item.key || props.selectedIndex === props.stepsItem.length ? `${props.isError ? "border-red-500" : "border-blue-500"}` : "border-light-300"}`} />

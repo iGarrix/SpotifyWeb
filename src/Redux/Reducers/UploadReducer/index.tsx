@@ -67,7 +67,6 @@ export const uploadReducer = (
         }
         case UploadActionTypes.INITALBUMMOREFILES: {
             const tmpPayload : ISongData[]  = [];
-            console.log(state.albumfiles)
             action.payload?.forEach(f => {
                 if (state.albumfiles && state.albumfiles.findIndex(ff => ff.file.name === f.name) < 0) {
                     tmpPayload.push(f);
