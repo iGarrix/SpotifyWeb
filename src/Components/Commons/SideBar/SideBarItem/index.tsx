@@ -9,7 +9,7 @@ export const SideBarItem: React.FC<ISideBarItem> = ({ text, icon, isSelect, onCl
         transition-all text-dark-200 dark:text-light-200`} onClick={onClick}>
             <div className="py-3 px-6 flex items-center gap-4 overflow-x-hidden">
                 <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover" style={{ backgroundImage: `url('${bg}')` }}>
-                    <img alt="icon" src={icon} className="w-[22px] h-[22px]" />
+                    <img alt="icon" src={icon} className="w-[22px] h-[22px] mm:w-[25px] mm:h-[25px]" />
                 </div>
                 <div className={`${props.isShowLabel && "hidden"}`}>
                     <h1 className="select-none text-[1em]">{text}</h1>

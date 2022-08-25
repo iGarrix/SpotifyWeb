@@ -88,7 +88,7 @@ export const Welcome: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col text-dark-200 dark:text-light-200 z-10">
+    <div className="flex flex-col text-dark-200 dark:text-light-200 z-10 overflow-x-hidden">
       <Helmet>
         <title>Soundwave</title>
       </Helmet>
@@ -200,7 +200,7 @@ export const Welcome: React.FC = () => {
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (
-                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); } } title={item.track?.name} />
+                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); } } title={item.track?.name + "dfjghdfjghdfjkghdfjkghdfjkghdfjghxcbvnm"} />
                       )
                     })
                   }

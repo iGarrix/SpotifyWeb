@@ -62,7 +62,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
     });
 
     return (
-        <div className="relative flex flex-col overflow-y-scroll">
+        <div className="relative flex flex-col">
             <div onClick={() => { setOpen(!isOpen) }}>
                 {trigger}
             </div>
