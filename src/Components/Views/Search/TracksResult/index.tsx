@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -15,6 +16,7 @@ export const TracksResult : React.FC = () => {
     const { getAllSearchTrack, addAllSearchTrack, initQueue} = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    const { t } = useTranslation();
     const user = useTypedSelector(state => state.userReducer.profile);
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const [isPending, startTransition] = useTransition();
@@ -79,7 +81,7 @@ export const TracksResult : React.FC = () => {
             {
                 rx.tracks && rx.tracks.length > 0 ?
                     <div className="w-full flex flex-col gap-5">
-                        <h1 className="font-semibold text-2xl">Tracks All</h1>
+                        <h1 className="font-semibold text-2xl">{t("Tracks All")}</h1>
                         <div className="flex flex-col gap-[15px] flex-wrap">
                                 {
                                     rx.tracks?.map(item => {
@@ -99,7 +101,7 @@ export const TracksResult : React.FC = () => {
                         <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl dark:text-light-200">Tracks not found</h1>
+                                <h1 className="font-medium text-3xl dark:text-light-200">{t("Tracks not found")}</h1>
                             </div>
                         </div>
                     </div>

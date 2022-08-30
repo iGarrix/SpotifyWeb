@@ -11,6 +11,7 @@ import { Field } from "../../../../Commons/Inputs/Field";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
+import { useTranslation } from "react-i18next";
 
 const logo = require('../../../../../Assets/Logo.png');
 const background1 = require('../../../../../Assets/Background1.png');
@@ -19,6 +20,7 @@ const background2 = require('../../../../../Assets/Background2.png');
 export const PasswordSendEmail: React.FC = () => {
     const { CheckUserByEmail, SendCodeForgot } = useActions();
     const nav = useNavigate();
+    const { t } = useTranslation();
     const error = useTypedSelector((state) => state.userReducer.error);
     const initialValues: IForgotByEmailForm = {
         email: "",
@@ -63,9 +65,8 @@ export const PasswordSendEmail: React.FC = () => {
                             <Form className="mm:h-full sm:h-full">
                                 <div className="w-full mm:h-full flex flex-col justify-center items-center gap-8">
                                     <div className="flex flex-col gap-3 w-full items-center">
-                                        <h1 className="text-3xl font-['Lexend'] text-center">Forgot password?</h1>
-                                        <p className="text-lg font-['Lexend'] text-center">Enter your email  address and we’ll send you a
-                                            link to reset your password</p>
+                                        <h1 className="text-3xl font-['Lexend'] text-center">{t("Forgot password?")}</h1>
+                                        <p className="text-lg font-['Lexend'] text-center">{t("Enter your email address and we’ll send you a link to reset your password")}</p>
                                         {
                                             error &&
                                             <div className="flex flex-col gap-3 items-center bg-red-500 rounded-xl py-3 px-8">
@@ -74,14 +75,14 @@ export const PasswordSendEmail: React.FC = () => {
                                         }
                                     </div>
                                     <div className="flex flex-col gap-2">
-                                        <FormikField placeholder="Email" name="email" type="email" onSumbit={() => { }} />
+                                        <FormikField placeholder={t("Email")} name="email" type="email" onSumbit={() => { }} />
                                     </div>
 
                                     <div className="flex items-center justify-between w-full mm:mt-auto sm:mt-auto py-2 px-40 mm:px-16 sm:px-16 md:px-20 lg:px-20">
                                         <button type="button" onClick={() => { nav("/authorizate") }}>
                                             <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
                                         </button>
-                                        <DefaultButton text="Send code" onClick={() => { }} />
+                                        <DefaultButton text={t("Send code")} onClick={() => { }} />
                                     </div>
                                 </div>
                             </Form>

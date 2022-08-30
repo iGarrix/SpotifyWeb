@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -19,6 +20,7 @@ export const GenreDetails: React.FC = () => {
     const rx = useTypedSelector(state => state.genreReducer);
     const playlist = useTypedSelector(state => state.genreReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
+    const { t } = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -82,12 +84,12 @@ export const GenreDetails: React.FC = () => {
                         <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center dark:text-light-200">
-                                <h1 className="font-medium text-3xl mm:text-xl">No playlists found in genre '{name}'</h1>
-                                <p className="font-medium text-xl mm:text-base">You can also search your favorite playlists</p>
-                                <p className="font-medium text-xl mm:text-base">"{rx.error}"</p>
+                                <h1 className="font-medium text-3xl mm:text-xl">{t("No playlists found in genre")} '{name}'</h1>
+                                <p className="font-medium text-xl mm:text-base">{t("You can also search your favorite playlists")}</p>
+                                {/* <p className="font-medium text-xl mm:text-base">"{rx.error}"</p> */}
                             </div>
                             <div>
-                                <DefaultButton onClick={() => { nav("/search") }} text={"Search playlists"} />
+                                <DefaultButton onClick={() => { nav("/search") }} text={t("Search playlists")} />
                             </div>
                         </div>
                     </div>

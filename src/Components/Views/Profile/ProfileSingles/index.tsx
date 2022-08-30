@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -14,6 +15,7 @@ import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
 export const ProfileSingles: React.FC = () => {
     const nav = useNavigate();
+    const { t } = useTranslation();
     const { getMySingle, addMySingle, initQueue } = useActions();
     const rx = useTypedSelector(state => state.mySingleReducer);
     const singles = useTypedSelector(state => state.mySingleReducer.singles);
@@ -94,8 +96,8 @@ export const ProfileSingles: React.FC = () => {
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
                                 <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Singles not found</h1>
-                                <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first single song"} />
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Singles not found")}</h1>
+                                <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first single song")} />
                             </div>
                         </>
             }

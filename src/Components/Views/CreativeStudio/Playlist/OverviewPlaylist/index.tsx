@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState, useTransition } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
@@ -27,6 +28,7 @@ export const OverViewPlaylist: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const searchrx = useTypedSelector(state => state.searchReducer);
     const nav = useNavigate();
+    const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
     const [isPending, startTransition] = useTransition();
     const [searchQuery, setSearchQuery] = useState<string>(() => {
@@ -229,7 +231,7 @@ export const OverViewPlaylist: React.FC = () => {
                         </div>
                 }
                 <div className="flex flex-col gap-2 mm:w-full">
-                    <h1 className="text-xl font-['Lexend'] flex gap-4">Playlist {playlist?.playlistDto?.accessStatus}</h1>
+                    <h1 className="text-xl font-['Lexend'] flex gap-4">{t("Playlist")} {playlist?.playlistDto?.accessStatus}</h1>
                     <h1 className="font-semibold text-3xl font-['Lexend'] flex gap-4 profilenames">{playlist?.playlistDto?.name}
                         <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangePlaylist} />
                     </h1>
@@ -237,8 +239,8 @@ export const OverViewPlaylist: React.FC = () => {
             </div>
             <div className="flex flex-col w-full gap-5 px-[150px] mm:px-0 sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%]">
                 <div className="flex flex-col gap-2">
-                    <h1 className="font-medium text-xl">Add something to your playlist</h1>
-                    <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
+                    <h1 className="font-medium text-xl">{t("Add something to your playlist")}</h1>
+                    <SearchField placeholder={t("Search")} value={searchQuery} onChange={(e: any) => {
                         setSearchQuery(e.target.value)
                     }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     {
@@ -251,9 +253,9 @@ export const OverViewPlaylist: React.FC = () => {
                                 </div>
                             }
                             <div className="flex items-center gap-3 mt-2">
-                                <h1 className="text-medium text-xl whitespace-nowrap mm:hidden sm:hidden">Found by '{searchQuery}'</h1>
+                                <h1 className="text-medium text-xl whitespace-nowrap mm:hidden sm:hidden">{t("Found by")} '{searchQuery}'</h1>
                                 <hr className="w-full border dark:border-dark-100" />
-                                <p className="text-dark-200/80 dark:text-light-300 hover:text-primary-100 cursor-pointer select-none whitespace-nowrap" onClick={() => { document.documentElement.scrollTo(0, 0); nav("/search/tracks?query=" + searchQuery) }}>See all</p>
+                                <p className="text-dark-200/80 dark:text-light-300 hover:text-primary-100 cursor-pointer select-none whitespace-nowrap" onClick={() => { document.documentElement.scrollTo(0, 0); nav("/search/tracks?query=" + searchQuery) }}>{t("See all")}</p>
                             </div>
                             {
                                 searchrx.tracks?.slice(0, 3).map(item => {
@@ -288,7 +290,7 @@ export const OverViewPlaylist: React.FC = () => {
                             <FontAwesomeIcon className="text-5xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-2xl">Tracks not found</h1>
+                                    <h1 className="font-medium text-2xl">{t("Tracks not found")}</h1>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faClose, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { ICreatePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
@@ -14,6 +15,7 @@ import { ICreatePlaylistModal } from "./types";
 export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, onClose }) => {
     const error = useTypedSelector(state => state.userReducer.error);
     const { createPlaylist } = useActions();
+    const { t } = useTranslation();
     const [file, setFile] = useState<any>(defaultPlaylistImage);
     const [targetFile, settargetFile] = useState<any>(null);
     const user = useTypedSelector(state => state.userReducer.profile);
@@ -77,7 +79,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
     return (
         <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-10 border border-light-200 dark:border-dark-200 mm:w-full mm:h-full">
             <div className="flex justify-between w-full">
-                <h1 className="whitespace-nowrap text-xl font-['Lexend']">Create playlist</h1>
+                <h1 className="whitespace-nowrap text-xl font-['Lexend']">{t("Create playlist")}</h1>
                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4 dark:border-dark-100" />
@@ -96,10 +98,10 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
                     </div>
                 </div>
                 <div className="flex flex-col gap-5 w-full">
-                    <Field placeholder="Enter name" onChange={(e: any) => { }} />
-                    <DefaultSettingsDropdown onChange={(e: any) => { }} title={"Chose access type"} options={["Public", "Private"]} />
+                    <Field placeholder={t("Enter name")} onChange={(e: any) => { }} />
+                    <DefaultSettingsDropdown onChange={(e: any) => { }} title={t("Chose access type")} options={[t("Public"), t("Private")]} />
                     <div className="mt-auto w-full flex justify-end">
-                        <ProfileButton text={"Create"} isSelect onClick={() => { }}></ProfileButton>
+                        <ProfileButton text={t("Create")} isSelect onClick={() => { }}></ProfileButton>
                     </div>
                 </div>
             </form>

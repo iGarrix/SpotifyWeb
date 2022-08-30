@@ -1,14 +1,13 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useRef, useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ISoundOptionModal } from "./types";
 
 export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options }) => {
 
     const fixeddropdown = useRef<HTMLDivElement>(null);
     const [isOpen, setOpen] = useState(false);
-
-    //const nav = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const handleClick = (event: any) => {
@@ -23,10 +22,6 @@ export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options
         };
     }, []);
 
-    // const onNavigateClick = (path: string) => {
-    //     nav(path);
-    //     setOpen(false);
-    // }
     const Addqueue = async (item: any) => {
         item.onClick();
         setOpen(false);
@@ -50,7 +45,6 @@ export const SoundOptionModal: React.FC<ISoundOptionModal> = ({ trigger, options
                             )
                         })
                     }
-
                 </div>
             </div>
         </div>

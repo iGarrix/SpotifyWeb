@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -29,6 +30,7 @@ export const Register: React.FC = () => {
   const nav = useNavigate();
   const error = useTypedSelector((state) => state.userReducer.error);
   const phone: any = localStorage.getItem("tempphone");
+  const { t } = useTranslation();
   const [localError, setLocalError] = useState("");
   useEffect(() => {
     if (error) {
@@ -139,70 +141,70 @@ export const Register: React.FC = () => {
                 </div>
                 <SignUpSteps selectedIndex={step} children={[
                   {
-                    title: "Step 1",
-                    description: "Enter email and phone",
+                    title: t("Step 1"),
+                    description: t("Enter email and phone"),
                     index: 1,
                     children: <>
-                      <FormikField placeholder="Email" name="email" type="email" />
-                      <DefaultPhoneInput label="Phone" name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) }} error={"Phone is required"} />
+                      <FormikField placeholder={t("Email")} name="email" type="email" />
+                      <DefaultPhoneInput label={t("Phone")} name="phone" value={phone} onChange={(e: any) => { localStorage.setItem("tempphone", e) }} error={"Phone is required"} />
                     </>
                   },
                   {
-                    title: "Step 2",
-                    description: "Enter NS and nickname",
+                    title: t("Step 2"),
+                    description: t("Enter Name and Surname"),
                     index: 2,
                     children: <>
-                      <FormikField placeholder="Name" name="name" type="text" />
-                      <FormikField placeholder="Surname" name="surname" type="text" />
+                      <FormikField placeholder={t("Name")} name="name" type="text" />
+                      <FormikField placeholder={t("Surname")} name="surname" type="text" />
                     </>
                   },
                   {
-                    title: "Step 3",
-                    description: "Select your country and gender",
+                    title: t("Step 3"),
+                    description: t("Select your country and gender"),
                     index: 3,
                     children: <>
                       <FormikDefaultDropdown
-                        title="Select your country"
-                        label="country"
+                        title={t("Select your country")}
+                        label={t("country")}
                         name="country"
                         value="Ukraine"
-                        options={["Ukraine", "USA", "Other"]}
+                        options={[t("Ukraine"), t("USA"), t("Other")]}
                       />
                       <FormikDefaultDropdown
-                        title="Select your gender"
-                        label="gender"
+                        title={t("Select your gender")}
+                        label={t("gender")}
                         name="gender"
                         value="Male"
-                        options={["Male", "Female", "Other"]}
+                        options={[t("Male"), t("Female"), t("Other")]}
                       />
                     </>
                   },
                   {
-                    title: "Step 4",
-                    description: "Enter your nickname",
+                    title: t("Step 4"),
+                    description: t("Enter your nickname"),
                     index: 4,
                     children: <div className="flex flex-col gap-2 px-10">
-                      <FormikField placeholder="Username" name="username" type="text" />
+                      <FormikField placeholder={t("Username")} name="username" type="text" />
                       <div className='grid grid-cols-3 mm:grid-cols-1 mm:grid-rows-3 sm:grid-cols-1 sm:grid-rows-3 md:grid-cols-1 md:grid-rows-3 lg:grid-cols-1 lg:grid-rows-3 gap-3'>
-                          <FormikField placeholder='Day' type="text" name={'date'} />
-                          <FormikField placeholder='Month' type="text" name={'month'} />
-                          <FormikField placeholder='Years' type="text" name={'years'} />
+                          <FormikField placeholder={t('Day')} type="text" name={'date'} />
+                          <FormikField placeholder={t('Month')} type="text" name={'month'} />
+                          <FormikField placeholder={t('Years')} type="text" name={'years'} />
                       </div>
                       {/* <FormikField placeholder="Age" name="age" type="text" /> */}
                     </div>
                   },
                   {
-                    title: "Step 5",
-                    description: "Enter your password and confirm password",
+                    title: t("Step 5"),
+                    description: t("Enter your password and confirm password"),
                     index: 5,
                     children: <>
                       <FormikField
-                        placeholder="Password"
+                        placeholder={t("Password")}
                         name="password"
                         type="password"
                       />
                       <FormikField
-                        placeholder="Confirm password"
+                        placeholder={t("Confirm password")}
                         name="passwordConfirm"
                         type="password"
                       />

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -11,7 +12,7 @@ import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 
 export const ProfileAlbums: React.FC = () => {
-
+    const { t } = useTranslation();
     const nav = useNavigate();
     const { getMyAlbum, addMyAlbum, clearTracks, initSelectAlbum } = useActions();
     const rx = useTypedSelector(state => state.myAlbumsReducer);
@@ -88,8 +89,8 @@ export const ProfileAlbums: React.FC = () => {
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
                                 <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Albums not found</h1>
-                                <DefaultButton onClick={() => { nav("/upload") }} text={"Upload you first album"} />
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Albums not found")}</h1>
+                                <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first")} />
                             </div>
                         </>
             }

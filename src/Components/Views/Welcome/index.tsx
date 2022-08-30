@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
@@ -25,7 +26,7 @@ export const Welcome: React.FC = () => {
   const mainReducer = useTypedSelector(state => state.mainReducer);
   const user = useTypedSelector(state => state.userReducer.profile);
   const nav = useNavigate();
-
+  const { t } = useTranslation();
   useEffect(() => {
     const storage_history = localStorage.getItem(StorageVariables.History);
     if (storage_history) {
@@ -102,9 +103,9 @@ export const Welcome: React.FC = () => {
               src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
           </div>
           <div className="flex flex-col mm:items-center gap-4 sm:gap-2 md:gap-2 lg:gap-2 col-start-6 col-span-7 z-[2]">
-            <p className="font-medium text-xl md:text-lg xl:text-lg select-none text-light-200 mm:hidden sm:hidden">The best of week</p>
+            <p className="font-medium text-xl md:text-lg xl:text-lg select-none text-light-200 mm:hidden sm:hidden">{t("The best of week")}</p>
             <h1 className="font-semibold text-4xl mm:text-2xl sm:text-2xl md:text-2xl lg:text-2xl text-light-200">{mainReducer.albums[0].albomDto?.name}</h1>
-            <p className="text-xl mm:text-base sm:text-base md:text-base lg:text-lg grid-cols-4 text-gray-200">Creators: {mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom.map(item => item.username).join(", ")}</p>
+            <p className="text-xl mm:text-base sm:text-base md:text-base lg:text-lg grid-cols-4 text-gray-200">{t("Creat")} {mainReducer.albums[0].creatorsAlbom && mainReducer.albums[0].creatorsAlbom.map(item => item.username).join(", ")}</p>
             <div className="bg-no-repeat object-cover bg-cover flex items-center justify-center sm:mt-auto md:mt-auto lg:mt-auto
              w-[64px] h-[64px] mm:w-[54px] mm:h-[54px] sm:w-[54px] sm:h-[54px] md:w-[54px] md:h-[54px] lg:w-[54px] lg:h-[54px] rounded-full cursor-pointer"
               onClick={onRedirectToAlbum}
@@ -119,8 +120,8 @@ export const Welcome: React.FC = () => {
           {
             mainReducer.albums &&
             <div className="w-full flex justify-between items-center">
-              <h1 className="font-medium text-2xl">Weekly top albums</h1>
-              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>See all</p>
+              <h1 className="font-medium text-2xl">{t("Weekly top albums")}</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyalbums") }}>{t("See all")}</p>
             </div>
           }
           <div className="flex gap-[18px] w-full flex-wrap">
@@ -141,8 +142,8 @@ export const Welcome: React.FC = () => {
         <div className="w-full grid grid-rows-1 grid-cols-2 mt-4 gap-10">
           <div className="w-full gap-2 flex flex-col mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
             <div className="w-full flex justify-between">
-              <h1 className="font-medium text-2xl">Weekly top tracks</h1>
-              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={onRedirectToAlbum}>See all</p>
+              <h1 className="font-medium text-2xl">{t("Weekly top tracks")}</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={onRedirectToAlbum}>{t("See all")}</p>
             </div>
             {
               mainReducer.tracks ?
@@ -162,7 +163,7 @@ export const Welcome: React.FC = () => {
                   <FontAwesomeIcon className="text-4xl font-medium" icon={faMusic} />
                   <div className="flex flex-col items-center gap-8">
                     <div className="flex flex-col gap-3 items-center">
-                      <h1 className="font-medium text-xl">Tracks not found</h1>
+                      <h1 className="font-medium text-xl">{t("Tracks not found")}</h1>
                     </div>
                   </div>
                 </div>
@@ -171,8 +172,8 @@ export const Welcome: React.FC = () => {
           </div>
           <div className="w-full gap-2 flex flex-col mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
             <div className="w-full flex justify-between items-center">
-              <h1 className="font-medium text-2xl">Weekly top artist</h1>
-              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>See all</p>
+              <h1 className="font-medium text-2xl">{t("Weekly top artist")}</h1>
+              <p className="hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("weeklyartist") }}>{t("See all")}</p>
             </div>
             <div className="flex gap-4 flex-wrap">
               {
@@ -193,8 +194,8 @@ export const Welcome: React.FC = () => {
               playingReducer.history &&
               <div className="flex flex-col gap-2">
                 <div className="w-full flex justify-between mt-6 items-center">
-                  <h1 className="font-medium text-2xl">Recent played</h1>
-                  <p className=" hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>See all</p>
+                  <h1 className="font-medium text-2xl">{t("Recent played")}</h1>
+                  <p className=" hover:text-primary-100 cursor-pointer select-none" onClick={() => { nav("history") }}>{t("See all")}</p>
                 </div>
                 <div className="flex gap-4 flex-wrap">
                   {

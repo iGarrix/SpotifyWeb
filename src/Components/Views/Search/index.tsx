@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useTransition } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { createSearchParams, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { FilterButton } from "../../Commons/Buttons/FilterButton";
@@ -10,6 +11,7 @@ const icon_search = require('../../../Assets/Icons/Search.png');
 export const Search: React.FC = () => {
 
     const { ClearSearchXHR } = useActions();
+    const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState<string>(() => {
         const initQuery = searchParams.get('query');
@@ -63,19 +65,19 @@ export const Search: React.FC = () => {
             <div className="w-full flex flex-col px-12 mm:px-2 py-8 gap-8">
                 <div className="flex flex-col gap-4">
                     <div className="flex w-[40%] mm:w-full sm:w-full md:w-[60%] lg:w-[60%] xl:w-[50%]">
-                        <SearchField placeholder={"Search"} value={searchQuery} onChange={(e: any) => {
+                        <SearchField placeholder={t("Search")} value={searchQuery} onChange={(e: any) => {
                             setSearchQuery(e.target.value)
                         }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     </div>
                     {
                         searchQuery && 
                         <div className="flex gap-4 mm:grid mm:grid-cols-2 sm:grid sm:grid-cols-3">
-                            <FilterButton text="All result" isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
-                            <FilterButton text="Albums" isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
-                            <FilterButton text="Playlists" isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
-                            <FilterButton text="Tracks" isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
-                            <FilterButton text="Artists" isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
-                            <FilterButton text="Profiles" isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
+                            <FilterButton text={t("All result")} isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
+                            <FilterButton text={t("Album")} isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
+                            <FilterButton text={t("Playlis")} isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
+                            <FilterButton text={t("Tracks")} isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
+                            <FilterButton text={t("Artists")} isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
+                            <FilterButton text={t("Profiles")} isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
                         </div>
                     }
                 </div>

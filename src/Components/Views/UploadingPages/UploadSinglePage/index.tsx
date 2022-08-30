@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -9,19 +10,19 @@ export const UploadSinglePage : React.FC = () => {
 
     const history = useLocation();
     const reducer = useTypedSelector(state => state.uploadReducer);
-
+    const { t } = useTranslation();
     const [steps] = useState<ILinearStepperItem[]>([
         {
             key: 1,
-            title: "Uploading"
+            title: t("Uploading")
         },
         {
             key: 2,
-            title: "Infromation"
+            title: t("Infromation")
         },
         {
             key: 3,
-            title: "Overview"
+            title: t("Overview")
         },
     ]);
 

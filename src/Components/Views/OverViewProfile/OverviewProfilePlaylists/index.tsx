@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -12,7 +13,7 @@ import { PlaylistItem } from "../../../Commons/PlaylistItem";
 export const OverviewProfilePlaylists : React.FC = () => {
     const nav = useNavigate();
     const { getMyPlaylists, addMyPlaylists, clearTracks, initSelectPlaylist } = useActions();
-
+    const { t } = useTranslation();
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.overviewer);
@@ -93,7 +94,7 @@ export const OverviewProfilePlaylists : React.FC = () => {
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
                                 <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Playlist not found</h1> 
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1> 
                             </div>
                         </>
             }

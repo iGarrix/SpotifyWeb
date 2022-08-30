@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react"
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AddToHistory, RemoveWithQueue, SetPlayingTrack } from "../../../Helpers/QueueHelper";
 import { useActions } from "../../../Hooks/useActions";
@@ -17,6 +18,7 @@ export const Queue: React.FC = () => {
     let rx = useTypedSelector(state => state.playingReducer);
     const { initQueue, clearQueue } = useActions();
     const nav = useNavigate();
+    const { t } = useTranslation();
     let page = TempTake;
     const RmWithQueue = (id: any, isPlay: boolean | any) => {
         if (id) {
@@ -80,8 +82,8 @@ export const Queue: React.FC = () => {
                             <>
                                 <div className="flex flex-col gap-6 w-full">
                                     <div className="flex flex-col items-start mm:items-center gap-2">
-                                        <h1 className="font-semibold text-2xl mm:text-center sm:text-center">In queue</h1>
-                                        <FilterButton onClick={onClearQueue} text={"Clear all queue"} />
+                                        <h1 className="font-semibold text-2xl mm:text-center sm:text-center">{t("In queue")}</h1>
+                                        <FilterButton onClick={onClearQueue} text={t("Clear all queue")} />
                                     </div>
                                     <div className="flex flex-col gap-6 w-full">
                                         {
@@ -89,7 +91,7 @@ export const Queue: React.FC = () => {
                                                 return (
                                                     <SoundHistoryItem key={Guid.create().toString()} index={index + 1} selected={rx.queue?.playedIndex === index}
                                                         options={[{
-                                                            title: "Remove with queue", icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
+                                                            title: t("Remove with queue"), icon: <FontAwesomeIcon icon={faTrash} />, onClick: () => { RmWithQueue(item.track?.returnId, rx.queue?.isPlay) }
                                                         }]}
                                                         track={item.track} trackCreators={item.trackCreators} onClick={() => { onSelectTrack(item) }} />
                                                 )
@@ -105,11 +107,11 @@ export const Queue: React.FC = () => {
                     <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                         <div className="flex flex-col gap-3 items-center">
-                            <h1 className="font-medium text-3xl">Queue is empty</h1>
-                            <p className="font-medium text-xl text-center">You can also listening your favorite songs using search</p>
+                            <h1 className="font-medium text-3xl">{t("Queue is empty")}</h1>
+                            <p className="font-medium text-xl text-center">{t("You can also listening your favorite songs using search")}</p>
                         </div>
                         <div>
-                            <DefaultButton onClick={() => { nav("/search") }} text={"Search songs"} />
+                            <DefaultButton onClick={() => { nav("/search") }} text={t("Search songs")} />
                         </div>
                     </div>
                 </div>

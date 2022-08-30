@@ -2,6 +2,7 @@ import { faCheck, faEye, faShare, faUser } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -12,7 +13,7 @@ import { FullScreenModal } from "../../Commons/Modals/FullScreenModal";
 import { ShareModal } from "../../Commons/Modals/FullScreenModal/Shares/ShareModal";
 
 export const OverviewProfile: React.FC = () => {
-
+  const { t } = useTranslation();
   const { nickname } = useParams();
   const history = useLocation();
   const user = useTypedSelector(state => state.userReducer);
@@ -91,7 +92,7 @@ export const OverviewProfile: React.FC = () => {
         <FullScreenModal visible={shareModal} center>
           <ShareModal
             onClose={() => { setShareModal(false) }}
-            title={"Share account"}
+            title={t("Share account")}
             link={document.location.origin + "/overview/" + user.overviewer?.username}
             banner={
               <div className="flex w-full gap-2">
@@ -101,7 +102,7 @@ export const OverviewProfile: React.FC = () => {
                   <div className="flex gap-2 items-center">
                     <h1 className="font-['Lexend'] text-xl">{user.overviewer?.username}</h1>
                     <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
-                      <span className="text-center text-sm text-dark-200 dark:text-light-200">Sharing</span>
+                      <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                     </p>
                   </div>
                   <p className="">{user.overviewer?.name} {user.overviewer?.surname}</p>
@@ -131,11 +132,11 @@ export const OverviewProfile: React.FC = () => {
           <div className="flex  mm:flex-col mm:items-center items-end gap-4 justify-between pb-6 w-full mm:gap-2">
           <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 font-['Lexend']">{ user.overviewer && user.overviewer.views > 0 ?
           user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
-          "NO"} Views for all time</p>
+          "NO"} {t("Views for all time")}</p>
             <div className="flex gap-2 mm:scale-90">
               <FontAwesomeIcon className={`text-xl p-3 rounded-lg border border-light-100 cursor-pointer
               hover:border-blue-500 hover:text-blue-500 active:bg-blue-500 active:text-light-100 ${shareModal && "bg-blue-500 border-blue-500 text-light-100"}`} icon={faShare} onClick={onShare} />
-              <SubscribeButton isSubscribe={user.isSubscribe || isSubs} onClick={onSubscribe} subscribedText="Unsubscribe" text="Subscribe" />
+              <SubscribeButton isSubscribe={user.isSubscribe || isSubs} onClick={onSubscribe} subscribedText={t("Unsubscribe")} text={t("Subscribe")} />
             </div>
           </div>
         </div>
@@ -143,9 +144,9 @@ export const OverviewProfile: React.FC = () => {
       <div className={`h-full w-full flex flex-col items-center mm:items-start sm:items-start md:items-start mm:px-[2%] sm:px-[2%] md:px-[2%] mt-5`}>
         <div className="bg-light-200 dark:bg-dark-100 mm:w-full sm:w-full md:w-full
          flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
-          <ProfileButton text="Singles" isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums") } onClick={() => { nav("") }} />
-          <ProfileButton text="Playlists" isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
-          <ProfileButton text="Albums" isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
+          <ProfileButton text={t("Singles")} isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums") } onClick={() => { nav("") }} />
+          <ProfileButton text={t("Playli")} isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
+          <ProfileButton text={t("Albu")} isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
         </div>
         <Outlet />
       </div>

@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { useActions } from '../../../../Hooks/useActions';
 import { useTypedSelector } from '../../../../Hooks/useTypedSelector';
 import {
@@ -15,8 +16,8 @@ import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
 import { FormikField } from '../../../Commons/Inputs/FormikField';
 import { DefaultPhoneInput } from '../../../Commons/Inputs/PhoneInput';
-
 export const PersonalData: React.FC = () => {
+    const { t } = useTranslation();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
     const { updateEmojieUser, updatePDUser, updateNicknameUser, updatePhoneUser, updateEmailUser, updatePasswordUser } = useActions();
@@ -178,7 +179,7 @@ export const PersonalData: React.FC = () => {
                                                 validationSchema={changeEmojieAccountValidate}
                                                 onSubmit={onChangeEmojieHandle}>
                                                 <Form>
-                                                    <FormikField placeholder="Emojie" type="text" value={user.emojie} isOutline onSumbit={() => { }} name={'emojie'} />
+                                                    <FormikField placeholder={t("Emojie")} type="text" value={user.emojie} isOutline onSumbit={() => { }} name={'emojie'} />
                                                 </Form>
                                             </Formik>
                                         </div>
@@ -201,14 +202,14 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeDataAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change data account</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change data account")}</h1>
                                         <div className='grid grid-cols-2 gap-[30px]'>
-                                            <FormikField placeholder='Name' type="text" value={user.name} onSumbit={() => { }} name={'name'} />
-                                            <FormikField placeholder='Surname' type="text" value={user.surname} onSumbit={() => { }} name={'surname'} />
+                                            <FormikField placeholder={t('Name')} type="text" value={user.name} onSumbit={() => { }} name={'name'} />
+                                            <FormikField placeholder={t('Surname')} type="text" value={user.surname} onSumbit={() => { }} name={'surname'} />
                                         </div>
-                                        <FormikField placeholder='Nickname' type="text" value={user.username} onSumbit={() => { }} name={'username'} />
+                                        <FormikField placeholder={t('Nickname')} type="text" value={user.username} onSumbit={() => { }} name={'username'} />
                                         <div className='flex w-full justify-end'>
-                                            <ProfileButton text="Save changes" onClick={() => { }} isSelect />
+                                            <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
                                         </div>
                                     </div>
                                 </Form>
@@ -219,19 +220,19 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeOtherDataAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change other data</h1>
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change other data")}</h1>
                                         <div className='grid grid-cols-3 gap-[30px]'>
-                                            <FormikField placeholder='Day' type="text" value={new Date(user.birthday).getDate().toString()} onSumbit={() => { }} name={'date'} />
-                                            <FormikField placeholder='Month' type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { }} name={'month'} />
-                                            <FormikField placeholder='Years' type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { }} name={'years'} />
+                                            <FormikField placeholder={t('Day')} type="text" value={new Date(user.birthday).getDate().toString()} onSumbit={() => { }} name={'date'} />
+                                            <FormikField placeholder={t('Month')} type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { }} name={'month'} />
+                                            <FormikField placeholder={t('Years')} type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { }} name={'years'} />
                                         </div>
-                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={'Phone'} value={number} error={'Invalid phone'} />
+                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={t('Phone')} value={number} error={t('Invalid phone')} />
                                         <div className='grid grid-cols-2 gap-[30px]'>
-                                            <SettingsDropdownFormik name={'gender'} title={'Gender'} value={user.gender} options={["Male", "Female", "Other"]} />
-                                            <SettingsDropdownFormik name={'country'} title={'Country'} value={user.country} options={["Ukraine", "USA", "Other"]} />
+                                            <SettingsDropdownFormik name={'gender'} title={t('Gender')} value={user.gender} options={[t("Male"), t("Female"), t("Other")]} />
+                                            <SettingsDropdownFormik name={'country'} title={t('Country')} value={user.country} options={[t("Ukraine"), t("USA"), t("Other")]} />
                                         </div>
                                         <div className='flex w-full justify-end'>
-                                            <ProfileButton text="Save changes" onClick={() => { }} isSelect />
+                                            <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
                                         </div>
                                     </div>
                                 </Form>
@@ -242,10 +243,10 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangeEmailAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change email</h1>
-                                        <FormikField placeholder='Email' type="email" onSumbit={() => { }} value={user.email} name={'email'} />
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change email")}</h1>
+                                        <FormikField placeholder={t('Email')} type="email" onSumbit={() => { }} value={user.email} name={'email'} />
                                         <div className='flex w-full justify-end'>
-                                            <ProfileButton text="Save changes" onClick={() => { }} isSelect />
+                                            <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
                                         </div>
                                     </div>
                                 </Form>
@@ -256,12 +257,12 @@ export const PersonalData: React.FC = () => {
                                 onSubmit={onChangePasswordAccountHandle}>
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>Change password</h1>
-                                        <FormikField placeholder='Old password' type='password' onSumbit={() => { }} name={'oldPassword'} />
-                                        <FormikField placeholder='New password' type='password' onSumbit={() => { }} name={'password'} />
-                                        <FormikField placeholder='Confirm new password' type='password' onSumbit={() => { }} name={'passwordConfirm'} />
+                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change password")}</h1>
+                                        <FormikField placeholder={t('Old password')} type='password' onSumbit={() => { }} name={'oldPassword'} />
+                                        <FormikField placeholder={t('New password')} type='password' onSumbit={() => { }} name={'password'} />
+                                        <FormikField placeholder={t('Confirm new password')} type='password' onSumbit={() => { }} name={'passwordConfirm'} />
                                         <div className='flex w-full justify-end'>
-                                            <ProfileButton text="Save changes" onClick={() => { }} isSelect />
+                                            <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
                                         </div>
                                     </div>
                                 </Form>

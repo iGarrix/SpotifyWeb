@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -34,6 +35,7 @@ export const ListeningPlaylist: React.FC = () => {
     const [shareModal, setShareModal] = useState(false);
     const [isLiked, setLiked] = useState(false);
     const nav = useNavigate();
+    const { t } = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (playingReducer.nextPage && !playingReducer.loading) {
@@ -205,7 +207,7 @@ export const ListeningPlaylist: React.FC = () => {
                         <FullScreenModal visible={shareModal} center >
                             <ShareModal
                                 onClose={() => { setShareModal(false) }}
-                                title={"Share playlist"}
+                                title={t("Share playlist")}
                                 link={document.location.origin + "/playlist/" + playingReducer.playlist?.playlistDto?.returnId}
                                 banner={
                                     <div className="flex w-full gap-2">
@@ -215,14 +217,14 @@ export const ListeningPlaylist: React.FC = () => {
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                                 <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
-                                                    <span className="text-center text-sm text-dark-200 dark:text-light-200">Sharing</span>
+                                                    <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                                                 </p>
                                             </div>
                                             {
                                                 playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
-                                                <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
+                                                <p className="font-thin">{playingReducer.playlist?.songs} {t("songs • realised")} {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} {t("views for all time")}</p>
                                             }
-                                            <p className="font-thin flex gap-2">Creators:
+                                            <p className="font-thin flex gap-2">{t("Creat")}
                                                 <span className="cursor-pointer hover:text-blue-400"
                                                     onClick={() => { nav("/overview/" + playingReducer.playlist?.playlistCreator?.username, { replace: false }) }}>{playingReducer.playlist?.playlistCreator?.username}</span>
                                             </p>
@@ -273,7 +275,7 @@ export const ListeningPlaylist: React.FC = () => {
                                     </div>
                                     {
                                         playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistDto.create &&
-                                        <p className="font-thin">{playingReducer.playlist?.songs} songs • realised {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
+                                        <p className="font-thin">{playingReducer.playlist?.songs} {t("songs • realised")} {moment(new Date(playingReducer.playlist?.playlistDto?.create)).format("DD.MM.YYYY")} • {playingReducer.playlist?.playlistDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} {t("views for all time")}</p>
                                     }
                                     <p className="font-thin flex gap-2">Creators:
                                         <span className="cursor-pointer hover:text-blue-400"

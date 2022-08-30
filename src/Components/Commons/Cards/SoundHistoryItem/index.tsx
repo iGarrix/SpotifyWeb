@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { baseUrl, dayDiff, defaultAlbumImage, VerifyType } from "../../../../types";
 import { SoundOptionModal } from "../../Modals/SoundOptionModal";
@@ -14,9 +15,8 @@ const icon_duration = require("../../../../Assets/Icons/Duration.png");
 const icon_like = require("../../../../Assets/Icons/Like.png");
 
 export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCreators, index, selected, options, onClick, onLike }) => {
-
     const nav = useNavigate();
-
+    const { t } = useTranslation();
     return (
         <div className="flex gap-20 cursor-pointer soundhistory text-dark-200 dark:text-light-200 relative">
             <div className="absolute top-0 left-0 w-full h-full z-[10]" onClick={onClick}></div>
@@ -45,10 +45,10 @@ export const SoundHistoryItem: React.FC<ISoundHistoryItem> = ({ track, trackCrea
                                 trackCreators[0].verify === VerifyType.verify ? faCheck : faUser : faUser} /></p>
                     </div>
                     <div className="flex flex-col items-center justify-center col-span-5 mm:hidden lg:hidden">
-                        <h1 className="text-xl">Realised</h1>
+                        <h1 className="text-xl">{t("Realised")}</h1>
                         {
                             track?.create &&
-                            <p className="text-dark-200/90 dark:text-light-200/80 font-medium whitespace-nowrap">realised {moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
+                            <p className="text-dark-200/90 dark:text-light-200/80 font-medium whitespace-nowrap">{moment(new Date(track?.create)).format("DD.MM.YYYY")}</p>
                         }
                     </div>
                     <div className="flex items-center justify-end gap-4 col-span-3 mm:col-span-2 lg:col-span-2">

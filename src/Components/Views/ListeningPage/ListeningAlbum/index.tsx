@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddToHistory, BackwardQueue, ForwardQueue, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -34,6 +35,7 @@ export const ListeningAlbum: React.FC = () => {
     const [upt, setUpt] = useState(false);
     const [shareModal, setShareModal] = useState(false);
     const [isLiked, setLiked] = useState(false);
+    const { t } = useTranslation();
     const nav = useNavigate();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
@@ -194,7 +196,7 @@ export const ListeningAlbum: React.FC = () => {
                         <FullScreenModal visible={shareModal} center >
                             <ShareModal
                                 onClose={() => { setShareModal(false) }}
-                                title={"Share album"}
+                                title={t("Share album")}
                                 link={document.location.origin + "/album/" + playingReducer.album.albomDto?.returnId}
                                 banner={
                                     <div className="flex w-full gap-2">
@@ -204,14 +206,14 @@ export const ListeningAlbum: React.FC = () => {
                                             <div className="flex gap-2 items-center">
                                                 <h1 className="font-['Lexend'] text-xl">{playingReducer.album?.albomDto?.name}</h1>
                                                 <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
-                                                    <span className="text-center text-sm text-dark-200 dark:text-light-200">Sharing</span>
+                                                    <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                                                 </p>
                                             </div>
                                             {
                                                 playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                                <p className="">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
+                                                <p className="">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} {t("songs • realised")} {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} {t("views for all time")}</p>
                                             }
-                                            <p className="flex gap-2 mt-auto flex-wrap">Creators:
+                                            <p className="flex gap-2 mt-auto flex-wrap">{t("Creat")}
                                                 {
                                                     playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
                                                         return (
@@ -267,9 +269,9 @@ export const ListeningAlbum: React.FC = () => {
                                     </div>
                                     {
                                         playingReducer.album && playingReducer.album.albomDto && playingReducer.album.albomDto.releasealbom &&
-                                        <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} songs • realised {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} views for all time</p>
+                                        <p className="font-thin">{playingReducer.album?.albomDto?.description} • {playingReducer.album?.songs} {t("songs • realised")} {moment(new Date(playingReducer.album?.albomDto?.releasealbom)).format("DD.MM.YYYY")} • {playingReducer.album?.albomDto.views.toLocaleString(undefined, { maximumFractionDigits: 2 })} {t("views for all time")}</p>
                                     }
-                                    <p className="font-thin flex gap-2">Creators:
+                                    <p className="font-thin flex gap-2">{t("Creat")}
                                         {
                                             playingReducer.album?.creatorsAlbom?.map(i => i.username).map((i: any, index: number) => {
                                                 return (

@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import { FormikField } from "../../../../Commons/Inputs/FormikField";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
+import { useTranslation } from "react-i18next";
 
 const logo = require('../../../../../Assets/Logo.png');
 const background1 = require('../../../../../Assets/Background1.png');
@@ -17,6 +18,7 @@ const background2 = require('../../../../../Assets/Background2.png');
 export const NewPasswordChange: React.FC = () => {
     const { updateRecoveryPasswordUser } = useActions();
     const nav = useNavigate();
+    const { t } = useTranslation();
     const error = useTypedSelector((state) => state.userReducer.error);
     const initialValues: IForgotNewPasswordForm = {
         newPassword: "",
@@ -68,7 +70,7 @@ export const NewPasswordChange: React.FC = () => {
                             <Form className="mm:h-full">
                                 <div className="w-full mm:h-full flex flex-col justify-center items-center gap-8">
                                     <div className="flex flex-col gap-3 w-full items-center">
-                                        <h1 className="text-3xl font-['Lexend'] text-center">Change password</h1>
+                                        <h1 className="text-3xl font-['Lexend'] text-center">{t("Change password")}</h1>
                                         {
                                             error &&
                                             <div className="flex flex-col gap-3 items-center bg-red-500 rounded-xl py-3 px-8">
@@ -77,11 +79,11 @@ export const NewPasswordChange: React.FC = () => {
                                         }
                                     </div>
                                     <div className="flex flex-col gap-4">
-                                        <FormikField placeholder="New password" name="newPassword" type="password" onSumbit={() => { }} />
-                                        <FormikField placeholder="Confirm password" name="confirmPassword" type="password" onSumbit={() => { }} />
+                                        <FormikField placeholder={t("New password")} name="newPassword" type="password" onSumbit={() => { }} />
+                                        <FormikField placeholder={t("Confirm password")} name="confirmPassword" type="password" onSumbit={() => { }} />
                                     </div>
                                     <div className="flex items-center justify-end w-full mm:mt-auto py-2 px-20 mm:px-12 sm:px-16 md:px-20 lg:px-2">
-                                        <DefaultButton text="Confirm" onClick={() => { }} />
+                                        <DefaultButton text={t("Confirm")} onClick={() => { }} />
                                     </div>
                                 </div>
                             </Form>

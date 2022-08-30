@@ -2,6 +2,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
@@ -19,7 +20,7 @@ export const UploadSingleStepTwo: React.FC = () => {
     const [image, setImage] = useState<string | any>(defaultBg);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const user = useTypedSelector(state => state.userReducer.profile);
-
+    const { t } = useTranslation();
     const { setUploadError, initSingleData, uploadSingleApi } = useActions();
 
     const inititalSingleDataValues: ISingleData = {
@@ -92,14 +93,14 @@ export const UploadSingleStepTwo: React.FC = () => {
                                 <img alt="single_image" src={image} className="cursor-pointer transition-all object-cover h-[264px] w-[264px] mm:h-[232px] mm:w-[232px] sm:h-[232px] sm:w-[232px]" onError={(tg: any) => { tg.target.src = defaultBg }} />
                             </div>
                             <div className="flex flex-col mm:w-full sm:w-full md:w-full gap-[20px] sm:px-[10%] md:px-[10%]">
-                                <FormikTextArea name={"title"} label={"Title"} minHeight={100} />
+                                <FormikTextArea name={"title"} label={t("Title")} minHeight={100} />
                             </div>
                         </div>
                         <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">
                             {
                                 reducer.loading ?
                                     <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
-                                    <ProfileButton text={"Publish"} isSelect onClick={() => { }} />
+                                    <ProfileButton text={t("Publish")} isSelect onClick={() => { }} />
                             }
                             {/* <ProfileButton text={reducer.loading ? <FontAwesomeIcon className="animate-spin text-2xl px-2" icon={faSpinner} /> : "Publish"} isSelect onClick={() => { }} /> */}
                         </div>

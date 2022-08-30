@@ -5,10 +5,12 @@ import { IVerifyCodeByForgotRequest, IVerifyEmailRequest } from "../../../../../
 import { DeviceType, StorageVariables } from "../../../../../types";
 import PinInput from 'react-pin-input';
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 export const VerifyCodEmail: React.FC = () => {
     const { VerifyCodeForgot, VerifyEmailUser } = useActions();
     const nav = useNavigate();
+    const { t } = useTranslation();
     const [error, setError] = useState("");
     const onHandleSubmit = async (code: string) => {
         try {
@@ -45,10 +47,10 @@ export const VerifyCodEmail: React.FC = () => {
                 <div className="flex justify-end mm:justify-center sm:justify-center md:justify-center items-center w-full col-span-3 mm:col-span-full sm:col-span-full md:col-span-full">
                     <div className="flex flex-col gap-4 w-full mm:py-[20%] sm:py-[20%]">
                         <div className="flex justify-center">
-                            <h1 className="text-3xl mm:text-2xl font-bold">Verify Email</h1>
+                            <h1 className="text-3xl mm:text-2xl font-bold">{t("Verify Email")}</h1>
                         </div>
                         <div className="flex justify-center">
-                            <h2 className="text-center">Please enter the 4 digit code sent to <br /> {localStorage.getItem(StorageVariables.ForgotUser)}</h2>
+                            <h2 className="text-center">{t("Please enter the 4 digit code sent to")} <br /> {localStorage.getItem(StorageVariables.ForgotUser)}</h2>
                         </div>
                         <div className="flex flex-col">
                             {

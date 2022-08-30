@@ -1,5 +1,6 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
@@ -11,6 +12,7 @@ import { UploadFileCard } from "../../../../Commons/Cards/UploadFileCard";
 export const UploadAlbumStepOne: React.FC = () => {
 
     const nav = useNavigate();
+    const { t } = useTranslation();
     const reducer = useTypedSelector(state => state.uploadReducer);
     const [files, setFiles] = useState<ISongData[] | null>(() => {
         if (reducer.albumfiles) {
@@ -89,17 +91,17 @@ export const UploadAlbumStepOne: React.FC = () => {
             {
                 !files || files.length === 0 ?
                     <div className="w-full pt-[4%] flex flex-col items-center gap-4 h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">Upload Album</h1>
-                        <p className="font-medium text-xl mt-10 text-center">Drag & drop mp3 files</p>
+                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Upload Album")}</h1>
+                        <p className="font-medium text-xl mt-10 text-center">{t("Drag & drop mp3 files")}</p>
                         <div className="flex">
                             <input type="file" id="filebg" accept="audio/mp3" multiple onChange={onUpload} className="hidden" />
                             <ProfileButton text={
-                                <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"> <h1>Choose file to upload</h1></div></label>
+                                <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2"> <h1>{t("Choose file to upload")}</h1></div></label>
                             } onClick={() => { }} isSelect={true} />
                         </div>
                     </div> :
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">Uploading is complete</h1>
+                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Uploading is complete")}</h1>
                         <div className="w-full px-[35%] mm:px-[3%] sm:px-[3%] md:px-[5%] lg:px-[15%] xl:px-[15%] 2xl:px-[30%] gap-4 flex flex-col">
                             {
                                 files?.map(item => {
@@ -112,17 +114,17 @@ export const UploadAlbumStepOne: React.FC = () => {
                                 <div className="flex">
                                     <input type="file" id="filebgmore" accept="audio/mp3" multiple onChange={onUploadMore} className="hidden" />
                                     <DefaultButton text={
-                                        <label htmlFor="filebgmore" className="cursor-pointer"><div className="flex gap-2"> <h1>Upload more</h1></div></label>
+                                        <label htmlFor="filebgmore" className="cursor-pointer"><div className="flex gap-2"> <h1>{t("Upload more")}</h1></div></label>
                                     } onClick={() => { }}/>
                                     
                                 </div>
-                                <DefaultButton onClick={onClear} text={"Clear All"} />
+                                <DefaultButton onClick={onClear} text={t("Clear All")} />
                             </div>
                         </div>
                         {
                             files &&
                             <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">
-                                <ProfileButton text={"Next"} isSelect onClick={onNext} />
+                                <ProfileButton text={t("Next")} isSelect onClick={onNext} />
                             </div>
                         }
                     </div>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -16,6 +17,7 @@ export const MyMediaLibraryAlbums: React.FC = () => {
     const rx = useTypedSelector(state => state.myMediaLibraryReducer);
     const albums = useTypedSelector(state => state.myMediaLibraryReducer.albums);
     const user = useTypedSelector(state => state.userReducer.profile);
+    const { t } = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -87,11 +89,11 @@ export const MyMediaLibraryAlbums: React.FC = () => {
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">Save you first album</h1>
-                                    <p className="font-medium text-xl mm:text-lg text-center">You can also login account</p>
+                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first album")}</h1>
+                                    <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
                                 </div>
                                 <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={"Save you first album"} />
+                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first album")} />
                                 </div>
                             </div>
                         </>

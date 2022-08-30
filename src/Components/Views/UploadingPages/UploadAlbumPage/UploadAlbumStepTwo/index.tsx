@@ -2,6 +2,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
@@ -19,7 +20,7 @@ const UploadBg = require('../../../../../Assets/UploadBg.png');
 const loader = require('../../../../../Assets/Icons/Loader.png');
 
 export const UploadAlbumStepTwo: React.FC = () => {
-
+    const { t } = useTranslation();
     const nav = useNavigate();
     const reducer = useTypedSelector(state => state.uploadReducer);
     const [image, setImage] = useState<string | any>(defaultBg);
@@ -207,16 +208,16 @@ export const UploadAlbumStepTwo: React.FC = () => {
                                         <input type="file" id="fileBack" accept="image/*" onChange={(event: any) => { onLoadingImageBack(event) }} className="hidden" />
                                         <label htmlFor="fileBack"><FontAwesomeIcon icon={faPlus} className="flex items-center justify-center text-center rounded-lg cursor-pointer bg-light-200 ml-auto px-2.5 py-2 text-3xl" /></label>
                                     </div>
-                                    <FormikTextArea name={"title"} label={"Title"} minHeight={100} />
+                                    <FormikTextArea name={"title"} label={t("Title")} minHeight={100} />
                                 </div>
                             </div>
                             <div className="grid grid-rows-1 grid-cols-2 mm:grid-cols-1 gap-6 z-10">
                                 <div>
-                                    <FormikTextArea name={"description"} label={"Description"} minHeight={100} />
+                                    <FormikTextArea name={"description"} label={t("Description")} minHeight={100} />
                                 </div>
                                 <div>
                                     <ListField value={creatorNicknames && creatorNicknames.length > 0 ? creatorNicknames[creatorNicknames.length - 1].username: ""} 
-                                    placeholder={"Creators list"} items={creatorNicknames} title={"Adding creators"}
+                                    placeholder={t("Creators list")} items={creatorNicknames} title={t("Adding creators")}
                                      onOpenList={() => {setVisibleModal(true)}}
                                      onRemove={() => {setVisibleDelModal(true)}} />
                                 </div>
@@ -231,7 +232,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                         {
                             reducer.loading ? 
                             <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
-                            <ProfileButton text={"Publish"} isSelect onClick={() => { }} />
+                            <ProfileButton text={t("Publish")} isSelect onClick={() => { }} />
                         }
                     </div>
                 </Form>

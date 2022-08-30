@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -24,6 +25,7 @@ export const LayStartup: React.FC = () => {
   const rx = useTypedSelector(state => state.playingReducer);
   const user = useTypedSelector(state => state.userReducer.profile);
   const load = useTypedSelector(state => state);
+  const { t } = useTranslation();
   useEffect(() => {
     if (rx.queue) {
       setVisible(true);
@@ -49,7 +51,7 @@ export const LayStartup: React.FC = () => {
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-20 z-[100]">
         <div className={`col-[span_3] lg:col-[span_4] xl:col-[span_4] w-full mb-6 mm:hidden sm:hidden md:hidden`}>
-          <SideBarItem text="Settings" icon={icon_settings} onClick={() => { nav("websettings") }} />
+          <SideBarItem text={t('Settings')} icon={icon_settings} onClick={() => { nav("websettings") }} />
         </div>
         <div className="col-[span_20] relative mm:rounded-t-2xl overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[22px] blur-[22px] z-[-2]" style={{ backgroundImage: `url('${baseUrl + "Images/Tracks/" + rx.queue?.soundobjs[rx.queue?.playedIndex].track?.image}')` }}></div>
@@ -63,11 +65,11 @@ export const LayStartup: React.FC = () => {
               <div className="w-full h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-100 text-light-100 col-[span_17] lg:col-[span_16] xl:col-[span_16] mm:col-span-full sm:col-span-full md:col-span-full
               flex mm:flex-col sm:flex-col md:flex-col justify-between items-center px-[2%] mm:py-[1%] sm:py-[1%] md:py-[1%]">
                 <div className="flex flex-col sm:w-full md:w-full">
-                  <p className="text-lg font-['Lexend'] font-bold] mm:hidden">TEMPORALITY USING SOUNDWAVE</p>
-                  <p>Sign up to listen to playlists, albums and songs for free</p>
+                  <p className="text-lg font-['Lexend'] font-bold] mm:hidden">{t("TEMPORALITY USING SOUNDWAVE")}</p>
+                  <p>{t("Sign up to listen to playlists, albums and songs for free")}</p>
                 </div>
                 <div className="flex ml-auto mm:w-full sm:w-full md:w-full">
-                  <RedirectButton onClick={() => nav('/authorizate')} text={"Register & Login - Free"}/>
+                  <RedirectButton onClick={() => nav('/authorizate')} text={t("Register & Login - Free")}/>
                 </div>
               </div>
           }

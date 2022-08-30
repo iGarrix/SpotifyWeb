@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem, IPlaylistFindRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
+import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
 import { CreatePlaylistItem } from "../../../../Commons/Cards/CreativeStudioCards/PlaylistCard";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
@@ -18,6 +20,7 @@ export const StudioPlaylist: React.FC = () => {
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
+    const { t } = useTranslation();
     const [openModal, setOpenModal] = useState(false);
     const [selectedPlaylist, setselectedPlaylist] = useState<any>(null);
     const [createPlaylist, setcreatePlaylist] = useState<any>(null);
@@ -141,7 +144,7 @@ export const StudioPlaylist: React.FC = () => {
                     </FullScreenModal> : null
             }
             <div className="flex flex-col gap-8 w-full h-full">
-                <h1 className="font-semibold text-2xl mm:text-center mm:mt-4">Create new Playlist</h1>
+                <h1 className="font-semibold text-2xl mm:text-center mm:mt-4">{t("Create new Playlist")}</h1>
                 <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-300 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
                     <FontAwesomeIcon className="text-white text-[64px]" icon={faPlus} />
                 </div>
@@ -170,8 +173,11 @@ export const StudioPlaylist: React.FC = () => {
                                     <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
                                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                         <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-3xl text-center">Create you first playlist</h1>
-                                            <p className="font-medium text-xl text-center">You can also upload a new single or album</p>
+                                            <h1 className="font-medium text-3xl text-center">{t("Create you first playlist")}</h1>
+                                            <p className="font-medium text-xl text-center">{t("You can also upload a new single or album")}</p>
+                                        </div>
+                                        <div>
+                                            <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload")} />
                                         </div>
                                     </div>
                                 </>

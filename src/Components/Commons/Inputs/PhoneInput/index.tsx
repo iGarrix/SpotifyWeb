@@ -4,6 +4,8 @@ import PhoneInput from 'react-phone-number-input'
 import { PhoneInputProps } from "./types";
 
 import "./style.scss";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({
   label,
@@ -15,7 +17,7 @@ export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({
 
 
   const [localError, setError] = useState("");
-
+  const { t } = useTranslation();
   const onLocalChange = (e: any) => {
     if (e) {
       if (e.length > 13 || e.length < 13) {
@@ -44,7 +46,7 @@ export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({
         name={name}
         value={value}
         className="defphone bg-light-100 dark:bg-dark-100 shadow-xl text-dark-200 dark:text-light-200"
-        placeholder="Enter phone number" />
+        placeholder={t("Enter phone number")} />
     </div>
   )
 }

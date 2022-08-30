@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AddToQueue } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -95,15 +96,14 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
             
         }
     }
-
-
+    const { t } = useTranslation();
     return (
         <div className={`flex items-center gap-3 rounded-[18px] mm:rounded-[9px] sm:rounded-[9px] md:rounded-[9px] px-4 py-[12px] bg-no-repeat object-cover bg-cover 
         ${isPlay ? `bg_select_sound text-light-200` : "bg-light-100 dark:bg-dark-100 text-dark-200 dark:text-light-200"}`}>
             <FullScreenModal visible={shareModal} center>
                 <ShareModal
                     onClose={() => { setShareModal(false) }}
-                    title={"Share track"}
+                    title={t("Share track")}
                     link={document.location.origin + "/search?query=" + item.track?.name}
                     banner={
                         <div className="flex w-full gap-2">
@@ -113,11 +113,11 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                                 <div className="flex mm:flex-col gap-2 items-center mm:items-start mm:gap-0">
                                     <h1 className="font-['Lexend'] text-xl">{item.track?.name}</h1>
                                     <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
-                                        <span className="text-center text-sm">Sharing</span>
+                                        <span className="text-center text-sm">{t("Sharing")}</span>
                                     </p>
                                 </div>
                                 <h1 className="text-medium flex gap-1">
-                                    Creators:
+                                    {t("Creat")}
                                     {
                                         item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
                                             return (
@@ -140,11 +140,9 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
             <div className="flex gap-6 items-center">
                 {
                     isPlay ?
-                        // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPause} onClick={onClick} />
                         <img alt="icon" className="w-[25px] cursor-pointer" src={icon_pause} onClick={() => { user ? onClick() : nav("/authorizate") }} />
                         :
                         <img alt="icon" className="w-[25px] cursor-pointer invert dark:invert-0" src={icon_play} onClick={() => { user ? onClick() : nav("/authorizate") }} />
-                    // <FontAwesomeIcon className="text-2xl cursor-pointer transition-all" icon={faPlay} onClick={onClick} />
                 }
                 <div className="mm:hidden sm:hidden">
                     <img alt="icon" className="w-[40px] h-[40px] rounded-sm bg-no-repeat object-cover bg-cover cursor-pointer" src={baseUrl + "Images/Tracks/" + item.track?.image} onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
@@ -173,13 +171,13 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                         <img alt="icon" className={`w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none ${isPlay ? "" : "dark:invert-0 invert"}`} src={icon_like} onClick={onSubscribeTrack} />
                 }
                 <SoundOptionModal options={[{
-                    title: "Add to queue", icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
+                    title: t("Add to queue"), icon: <FontAwesomeIcon icon={faPlus} />, onClick: () => { addtoqueue(play) }
                 },
                 {
-                    title: "Add to playlist", icon: <FontAwesomeIcon icon={faCirclePlus} />, onClick: () => { setAddtrackModal(true) }
+                    title: t("Add to playlist"), icon: <FontAwesomeIcon icon={faCirclePlus} />, onClick: () => { setAddtrackModal(true) }
                 },
                 {
-                    title: "Share", icon: <FontAwesomeIcon icon={faShare} />, onClick: () => { onShare() }
+                    title: t("Share"), icon: <FontAwesomeIcon icon={faShare} />, onClick: () => { onShare() }
                 },]}
                     trigger={<FontAwesomeIcon className="text-2xl mm:text-xl hover:text-black dark:hover:text-light-300 cursor-pointer transition-all translate-y-[1px]" icon={faEllipsisVertical} />} />
             </div>

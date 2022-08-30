@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { RedirectButton } from "../../Commons/Buttons/RedirectButton";
 
@@ -6,6 +7,7 @@ const icon_music = require('../../../Assets/Icons/Upload.png');
 
 export const UploadIntro: React.FC = () => {
     const nav = useNavigate();
+    const { t } = useTranslation();
     const navigate = (path: string) => {
         nav(path, { replace: true });
     }
@@ -19,8 +21,8 @@ export const UploadIntro: React.FC = () => {
             <div className="flex flex-col items-center justify-center z-10 py-20 px-[220px] mm:px-2 sm:px-[3%] gap-16 h-full w-full">
                 <h1 className="font-semibold text-3xl font-['Lexend'] text-center">Upload content</h1>
                 <div className="flex flex-col gap-8">
-                    <RedirectButton text="Upload album, more song" icon={icon_music} onClick={() => { navigate('album') }} />
-                    <RedirectButton text="Upload single, 1 song" icon={icon_music} onClick={() => { navigate('single') }} />
+                    <RedirectButton text={t("Upload album, more song")} icon={icon_music} onClick={() => { navigate('album') }} />
+                    <RedirectButton text={t("Upload single, 1 song")} icon={icon_music} onClick={() => { navigate('single') }} />
                 </div>
             </div>
         </div >

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AddToHistory, SetPlayingTrack } from "../../../../Helpers/QueueHelper";
 import { useActions } from "../../../../Hooks/useActions";
@@ -21,6 +22,7 @@ export const MyMediaLibrarySingle: React.FC = () => {
     const playingReducer = useTypedSelector(state => state.playingReducer);
     const [isInited, setInited] = useState(false);
     const nav = useNavigate();
+    const { t } = useTranslation();
 
     const InitQueueSingles = (play: boolean) => {
         if (playingReducer.tracks && !isInited && singles) {
@@ -115,11 +117,11 @@ export const MyMediaLibrarySingle: React.FC = () => {
                             <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">Save you first single song</h1>
-                                    <p className="font-medium text-xl mm:text-lg text-center">You can also login your account</p>
+                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first single song")}</h1>
+                                    <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
                                 </div>
                                 <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={"Save you first single song"} />
+                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first single song")} />
                                 </div>
                             </div>
                         </>

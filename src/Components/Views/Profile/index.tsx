@@ -2,6 +2,7 @@ import { faCheck, faImage, faPen, faUser } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useActions } from "../../../Hooks/useActions";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -17,6 +18,7 @@ const icon_crop = require('../../../Assets/Icons/Crop.png');
 export const Profile: React.FC = () => {
   const user = useTypedSelector((state) => state.userReducer.profile);
   const nav = useNavigate();
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(window.location.pathname);
   const [verifyImage, setVerifyImage] = useState<any>();
@@ -108,11 +110,11 @@ export const Profile: React.FC = () => {
           <div className="flex mm:flex-col mm:items-center items-end justify-between pb-6 w-full mm:gap-2">
             <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 font-['Lexend']">{ user && user.views > 0 ?
             user.views.toLocaleString(undefined, { maximumFractionDigits: 2 }):
-            "NO"} Views for all time</p>
+            "NO"} {t("Views for all time")}</p>
             <div className="flex mm:w-full">
               <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
                 <ProfileButton text={
-                  <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2 items-center"><img alt="crop" src={icon_crop} /> <h1 className="text-lg mm:text-base ">Change image</h1></div></label>
+                  <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2 items-center"><img alt="crop" src={icon_crop} /> <h1 className="text-lg mm:text-base ">{t("Change image")}</h1></div></label>
                 } onClick={() => { }} isSelect={true} />
             </div>
           </div>
@@ -121,9 +123,9 @@ export const Profile: React.FC = () => {
       <div className={`h-full w-full flex flex-col items-center mm:items-start sm:items-start md:items-start mm:px-[2%] sm:px-[2%] md:px-[2%] mt-5`}>
         <div className="bg-light-100 dark:bg-dark-100 mm:w-full sm:w-full md:w-full 
         flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
-          <ProfileButton text="My singles" isSelect={currentItem === "/profile"} onClick={() => { onCurrentItem("/profile") }} />
-          <ProfileButton text="My Playlists" isSelect={currentItem === "/profile/playlists"} onClick={() => { onCurrentItem("/profile/playlists") }} />
-          <ProfileButton text="My albums" isSelect={currentItem === "/profile/albums"} onClick={() => { onCurrentItem("/profile/albums") }} />
+          <ProfileButton text={t("My singles")} isSelect={currentItem === "/profile"} onClick={() => { onCurrentItem("/profile") }} />
+          <ProfileButton text={t("My Playlists")} isSelect={currentItem === "/profile/playlists"} onClick={() => { onCurrentItem("/profile/playlists") }} />
+          <ProfileButton text={t("My albums")} isSelect={currentItem === "/profile/albums"} onClick={() => { onCurrentItem("/profile/albums") }} />
         </div>
         <Outlet />
       </div>

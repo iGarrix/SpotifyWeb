@@ -2,6 +2,7 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { baseUrl, defaultAlbumImage } from "../../../../../types";
 import { IAlbumCard } from "./types";
@@ -12,7 +13,7 @@ const icon_pen = require('../../../../../Assets/Icons/Pen.png');
 export const AlbumStudioItem: React.FC<IAlbumCard> = ({ image, name, description, date, listening, onEdit, onDelete, ...props }) => {
 
     const nav = useNavigate();
-
+    const { t } = useTranslation();
     return (
         <div className="playlistCardMain flex gap-20 cursor-pointer text-dark-200 dark:text-light-200 relative">
             <div className="flex w-full gap-4">
@@ -32,14 +33,14 @@ export const AlbumStudioItem: React.FC<IAlbumCard> = ({ image, name, description
                         </div>
                     </div>  
                     <div className="flex flex-col items-center justify-center col-span-2 mm:col-span-2 sm:col-span-4 md:col-span-3">
-                        <h1 className="text-xl mm:text-base">Date</h1>
+                        <h1 className="text-xl mm:text-base">{t("Date")}</h1>
                         {
                             date &&
                             <p className="text-dark-200/90 dark:text-light-200/90 font-medium whitespace-nowrap">{moment(new Date(date)).format("DD.MM.YYYY")}</p>
                         }
                     </div>
                     <div className="flex flex-col items-center justify-center col-span-2 mm:col-span-2 sm:col-span-1 md:col-span-1">
-                        <h1 className="text-xl mm:text-base mm:hidden">Listening</h1>
+                        <h1 className="text-xl mm:text-base mm:hidden">{t("Listening")}</h1>
                         {
                             listening &&
                             <p className="text-dark-200/90 dark:text-light-200/90 font-medium whitespace-nowrap">{listening}</p>

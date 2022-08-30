@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -16,7 +17,7 @@ export const WeeklyArtist: React.FC = () => {
     const mainReducer = useTypedSelector(state => state.mainReducer);
     const [isPending, startTransition] = useTransition();
     const nav = useNavigate();
-
+    const { t } = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (mainReducer.nextPage && !mainReducer.loading) {
@@ -68,7 +69,7 @@ export const WeeklyArtist: React.FC = () => {
             {
                 mainReducer.artists ?
                     <div className="w-full h-full flex flex-col gap-5 z-10">
-                        <h1 className="font-semibold text-2xl mm:text-center">Weekly artists & creators</h1>
+                        <h1 className="font-semibold text-2xl mm:text-center">{t("Weekly artists & creators")}</h1>
                         <div className="flex items-center gap-6 mm:gap-4 flex-wrap">
                             {
                                 mainReducer.artists.map(item => {
@@ -84,11 +85,11 @@ export const WeeklyArtist: React.FC = () => {
                         <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center">
-                                <h1 className="font-medium text-3xl">Weekly creators not found</h1>
-                                <p className="font-medium text-xl">You can jump to soundwave page</p>
+                                <h1 className="font-medium text-3xl">{t("Weekly creators not found")}</h1>
+                                <p className="font-medium text-xl">{t("You can jump to main page")}</p>
                             </div>
                             <div>
-                                <DefaultButton onClick={() => { nav("/") }} text={"Jump"} />
+                                <DefaultButton onClick={() => { nav("/") }} text={t("Jump")} />
                             </div>
                         </div>
                     </div>

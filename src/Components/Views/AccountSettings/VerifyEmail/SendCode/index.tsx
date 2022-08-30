@@ -7,10 +7,12 @@ import { emailForgotValidate, IForgotByEmailForm, ISendVerifyCodeByForgotRequest
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
 import { Helmet } from "react-helmet";
 import { Field } from "../../../../Commons/Inputs/Field";
+import { useTranslation } from "react-i18next";
 
 export const VerifyEmail: React.FC = () => {
     const { CheckUserByEmail, SendCodeForgot } = useActions();
     const nav = useNavigate();
+    const { t } = useTranslation();
     const user = useTypedSelector((state) => state.userReducer.profile);
     const error = useTypedSelector((state) => state.userReducer.error);
     const initialValues: IForgotByEmailForm = {
@@ -35,8 +37,8 @@ export const VerifyEmail: React.FC = () => {
                 <title>Soundwave | Verify Email</title>
             </Helmet>
             <div className="flex flex-col gap-2">
-                <h1 className="text-3xl mm:text-2xl font-bold mm:text-center sm:text-center md:text-center lg:text-center">Verify Email</h1>
-                <h2 className="mm:text-center sm:text-center md:text-center lg:text-center">We will send a code to your mail for verification</h2>
+                <h1 className="text-3xl mm:text-2xl font-bold mm:text-center sm:text-center md:text-center lg:text-center">{t("Verify Email")}</h1>
+                <h2 className="mm:text-center sm:text-center md:text-center lg:text-center">{t("We will send a code to your mail for verification")}</h2>
             </div>
                 {
                     error &&
@@ -45,7 +47,7 @@ export const VerifyEmail: React.FC = () => {
                     </div>
                 }
             {user?.emailconfirm ? <div className="flex items-center justify-center">
-                <h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">Email Verify</h1></div> : 
+                <h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">{t("Email Verify")}</h1></div> : 
                 <Formik
                 initialValues={initialValues}
                 validationSchema={emailForgotValidate}
@@ -53,10 +55,10 @@ export const VerifyEmail: React.FC = () => {
                 <Form>
                     <div className="grid grid-rows-1 grid-cols-3 w-full px-[20%] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 gap-[20px]">
                         <div className="col-span-2 mm:col-span-full sm:col-span-full">
-                            <Field placeholder="Email" value={user?.email} onChange={() => { }} />
+                            <Field placeholder={t("Email")} value={user?.email} onChange={() => { }} />
                         </div>
                         <div className="flex items-end mm:justify-end sm:justify-end md:justify-end col-span-1 mm:col-span-full sm:col-span-full">
-                            <ProfileButton text="Send verify code" onClick={() => { }} isSelect={true} />
+                            <ProfileButton text={t("Send verify code")} onClick={() => { }} isSelect={true} />
                         </div>
                     </div>
                 </Form>

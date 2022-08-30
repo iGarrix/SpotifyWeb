@@ -1,6 +1,7 @@
 import { faClose, faImage, faPlus, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IChangePlaylistImageRequest, IChangePlaylistRequest } from "../../../../../Redux/Reducers/MyPlaylistReducer/types";
@@ -15,6 +16,7 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
     const error = useTypedSelector(state => state.userReducer.error);
     const { updatePlaylist, updateImagePlaylist } = useActions();
     const user = useTypedSelector(state => state.userReducer.profile);
+    const { t } = useTranslation();
     useEffect(() => {
         if (error && error !== "") {
             setEnterError(error);
@@ -73,7 +75,7 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
     return (
         <div className="rounded-md py-6 flex flex-col mm:w-full mm:h-full items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-10 border border-light-200 dark:border-dark-200">
             <div className="flex justify-between w-full">
-                <h1 className="text-xl font-['Lexend']">Change</h1>
+                <h1 className="text-xl font-['Lexend']">{t("Change")}</h1>
                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4 dark:border-dark-100" />
@@ -100,10 +102,10 @@ export const ChangePlaylistModal: React.FC<IChangePlaylistModal> = ({ onSave, on
                 {
                     playlist ?
                         <div className="flex flex-col gap-5 w-full">
-                            <Field placeholder="Enter new name" value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
-                            <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { }} title={"Chose new access type"} options={["Public", "Private"]} />
+                            <Field placeholder={t("Enter new name")} value={playlist.playlistDto?.name} onChange={(e: any) => { }} />
+                            <DefaultSettingsDropdown value={playlist.playlistDto?.accessStatus} onChange={(e: any) => { }} title={t("Chose new access type")} options={[t("Public"), t("Private")]} />
                             <div className="mt-auto w-full flex justify-end">
-                                <ProfileButton text={"Save"} isSelect onClick={() => { }}></ProfileButton>
+                                <ProfileButton text={t("Save")} isSelect onClick={() => { }}></ProfileButton>
                             </div>
                         </div> : null
                 }

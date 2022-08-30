@@ -17,12 +17,14 @@ import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 
 export const AllResultSearch: React.FC = () => {
 
     const { SearchAllXHR, clearTracks, initQueue, setPlayingTrack, initSelectPlaylist, initSelectAlbum, SearchAllWithoutBestResultXHR } = useActions();
     const [searchParams, setSearchParams] = useSearchParams();
+    const { t } = useTranslation();
     const [upt, setUpt] = useState(false);
     const user = useTypedSelector(state => state.userReducer.profile);
     const nav = useNavigate();
@@ -129,7 +131,7 @@ export const AllResultSearch: React.FC = () => {
                 reducer.searchall.bestResult &&
                 <div className="grid grid-rows-1 grid-cols-5 mm:grid-rows-2 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-2 gap-20 mm:gap-5 sm:gap-5 md:gap-5 lg:gap-5">
                     <div className="flex flex-col gap-1 col-span-2 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full h-full">
-                        <h1 className="font-medium text-2xl">Best result</h1>
+                        <h1 className="font-medium text-2xl">{t("Best result")}</h1>
                         <div className="h-full">
                             {
                                 TypeOfInstance(reducer.searchall?.bestResult) &&
@@ -171,7 +173,7 @@ export const AllResultSearch: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 col-span-3 mm:col-span-full sm:col-span-full md:col-span-full lg:col-span-full">
-                        <h1 className="font-medium text-2xl">Songs</h1>
+                        <h1 className="font-medium text-2xl">{t("Song")}</h1>
                         <div className="flex flex-col mm:justify-start w-full h-full flex-wrap gap-[15px]">
                             {
                                 reducer.searchall.tracks && reducer.searchall.tracks.length > 0 ?
@@ -190,7 +192,7 @@ export const AllResultSearch: React.FC = () => {
                                     <FontAwesomeIcon className="text-3xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                                     <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                         <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-xl dark:text-light-200">No tracks</h1>
+                                            <h1 className="font-medium text-xl dark:text-light-200">{t("No tracks")}</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +204,7 @@ export const AllResultSearch: React.FC = () => {
             {
                 reducer.searchall?.albums && reducer.searchall.albums.length > 0 &&
                 <div className="flex flex-col gap-6 mm:gap-6">
-                    <h1 className="font-medium text-2xl mm:text-center">Albums</h1>
+                    <h1 className="font-medium text-2xl mm:text-center">{t("Album")}</h1>
                     <div className="flex w-full flex-wrap gap-6 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.albums.map(item => {
@@ -217,7 +219,7 @@ export const AllResultSearch: React.FC = () => {
             {
                 reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
                 <div className="flex flex-col gap-6 mm:gap-6">
-                    <h1 className="font-medium text-2xl mm:text-center">Playlists</h1>
+                    <h1 className="font-medium text-2xl mm:text-center">{t("Playlis")}</h1>
                     <div className="flex w-full flex-wrap gap-6 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.playlists.map(item => {
@@ -232,7 +234,7 @@ export const AllResultSearch: React.FC = () => {
             {
                 reducer.searchall?.artists && reducer.searchall.artists.length > 0 &&
                 <div className="flex flex-col gap-3 mm:gap-6">
-                    <h1 className="font-medium text-2xl mm:text-center">Creators</h1>
+                    <h1 className="font-medium text-2xl mm:text-center">{t("Artists")}</h1>
                     <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.artists.map(item => {
@@ -247,7 +249,7 @@ export const AllResultSearch: React.FC = () => {
             {
                 reducer.searchall?.profiles && reducer.searchall.profiles.length > 0 &&
                 <div className="flex flex-col gap-3 mm:gap-6">
-                    <h1 className="font-medium text-2xl mm:text-center">Profiles</h1>
+                    <h1 className="font-medium text-2xl mm:text-center">{t("Profiles")}</h1>
                     <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {
                             reducer.searchall.profiles.map(item => {

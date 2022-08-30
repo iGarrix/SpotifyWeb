@@ -22,6 +22,7 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Helmet } from "react-helmet";
 import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const logo = require('../../../../Assets/Logo.png');
 const background1 = require('../../../../Assets/Background1.png');
@@ -32,6 +33,7 @@ export const Login: React.FC = () => {
   const nav = useNavigate();
   const error = useTypedSelector((state) => state.userReducer.error);
   const [remember, setRemember] = useState(false);
+  const { t } = useTranslation();
   const initialValues: ILoginByEmailForm = {
     email: "",
     password: "",
@@ -95,7 +97,7 @@ export const Login: React.FC = () => {
         <div className="flex flex-col justify-center py-10 border-4 mm:border-0 sm:border-0 shadow-xl rounded-2xl mm:rounded-none text-white col-span-4 col-start-5 relative overflow-hidden">
           <div className="absolute w-[300%] h-[300%] blur-[20px] rounded-xl p-2 opacity-98 bg-no-repeat bg-cover -translate-x-[25%] translate-y-[10%]" style={{ backgroundImage: `url(${background1})` }}></div>
           <div className="w-full flex mm:h-full flex-col px-32 mm:px-6 sm:px-8 md:px-8 lg:px-8 xl:px-16 2xl:px-32 z-20">
-            <h1 className="font-bold text-3xl z-10 text-center">Log in</h1>
+            <h1 className="font-bold text-3xl z-10 text-center">{t("Log in")}</h1>
             <div className="z-10 flex flex-col gap-6">
               <Formik
                 initialValues={initialValues}
@@ -115,25 +117,25 @@ export const Login: React.FC = () => {
                       }
                     </div>
                     <div className="flex flex-col gap-3">
-                      <FormikField placeholder="Email" name="email" type="email" />
+                      <FormikField placeholder={t("Email")} name="email" type="email" />
                       <FormikField
-                        placeholder="Password"
+                        placeholder={t("Password")}
                         name="password"
                         type="password"
                       />
                     </div>
-                    <DefaultButton importantDark text="Login" onClick={() => { }} />
+                    <DefaultButton importantDark text={t("Login")} onClick={() => { }} />
                   </div>
                 </Form>
               </Formik>
               <div className="flex justify-between">
-                <CustomCheckbox value={remember} text="Remember me" onCheck={() => { setRemember(!remember) }} />
-                <button onClick={onForgotSubmit}>Forgot password</button>
+                <CustomCheckbox value={remember} text={t("Remember me")} onCheck={() => { setRemember(!remember) }} />
+                <button onClick={onForgotSubmit}>{t("Forgot password")}</button>
               </div>
               <div className="flex justify-center gap-3">
                 <div className="flex flex-col gap-5 w-full">
                   <hr className="w-full" />
-                  <button onClick={() => { nav("register") }}>Don't have an account</button>
+                  <button onClick={() => { nav("register") }}>{t("Don't have an account")}</button>
                 </div>
               </div>
             </div>
@@ -147,7 +149,7 @@ export const Login: React.FC = () => {
               onSuccess={responseGoogle}
               onFailure={responseError}
               theme="dark"
-              render={props => (<button className="flex items-center gap-3 text-lg text-white font-medium" onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-white text-3xl" icon={faGoogle} />Sign in with google</button>)}
+              render={props => (<button className="flex items-center gap-3 text-lg text-white font-medium" onClick={props.onClick} disabled={props.disabled}><FontAwesomeIcon className="text-white text-3xl" icon={faGoogle} />{t("Sign in with google")}</button>)}
               cookiePolicy={'single_host_origin'}></GoogleLogin>
           </div>
         </div>

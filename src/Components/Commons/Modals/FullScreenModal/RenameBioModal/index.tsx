@@ -1,6 +1,7 @@
 import { faClose, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IUpdatePersonalData } from "../../../../../Redux/Reducers/UserReducer/types";
@@ -12,6 +13,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
 
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
+    const { t } = useTranslation();
     const {updatePDUser} = useActions();
     useEffect(() => {
         if (error && error !== "") {         
@@ -23,15 +25,15 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
         event.preventDefault();
         try {
             if (event.target[0].value.length === 0 && event.target[1].value.length === 0) {
-                setEnterError("Field 'Name' 'Surname' is empty")
+                setEnterError(t("Field 'Name' 'Surname' is empty"))
                 return;
             }
             else if (event.target[0].value.length === 0) {
-                setEnterError("Field 'Name' is empty")
+                setEnterError(t("Field 'Name' is empty"))
                 return;
             }
             else if (event.target[1].value.length === 0) {
-                setEnterError("Field 'Surname' is empty")
+                setEnterError(t("Field 'Surname' is empty"))
                 return;
             }
             if (user) {
@@ -45,7 +47,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
                     device: DeviceType.desktop,
                 }
                 if (request.newName === user.name && request.newSurname === user.surname) {
-                    setEnterError("Field 'Name' 'Surname' is don't renamed");
+                    setEnterError(t("Field 'Name' 'Surname' is don't renamed"));
                     return;
                 }
                 await updatePDUser(request);
@@ -68,7 +70,7 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
     return (
         <div className="rounded-lg mm:rounded-none py-8 mm:pt-[10%] flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:bg-dark-200 dark:text-light-200 shadow-xl px-10 mm:w-full mm:h-full">
             <div className="flex justify-between w-full">
-                <h1 className="text-xl font-['Lexend']">Rename</h1>
+                <h1 className="text-xl font-['Lexend']">{t("Rename")}</h1>
                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4 dark:border-dark-100" />
@@ -80,9 +82,9 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
                 {
                     user ?
                     <div className="flex flex-col gap-3 px-20 mm:px-5 mm:h-full">
-                        <Field placeholder="Enter new name" value={user?.name} onChange={(e: any) => { }} />
-                        <Field placeholder="Enter new surname" value={user?.surname} onChange={(e: any) => { }} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7 mm:mt-auto">You want to rename pib?</button>
+                        <Field placeholder={t("Enter new name")} value={user?.name} onChange={(e: any) => { }} />
+                        <Field placeholder={t("Enter new surname")} value={user?.surname} onChange={(e: any) => { }} />
+                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7 mm:mt-auto">{t("You want to rename pib?")}</button>
                     </div> : null
                 }
             </form>

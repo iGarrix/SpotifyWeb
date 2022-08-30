@@ -1,5 +1,6 @@
 import { Guid } from "guid-typescript";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { baseUrl, defaultBackgroundImage } from "../../../../../types";
 import { ISoundItemSingle } from "./types";
@@ -8,6 +9,7 @@ const icon_trash = require('../../../../../Assets/Icons/Trash.png');
 
 export const SoundItemSingle: React.FC<ISoundItemSingle> = ({ item, onDelete }) => {
     const nav = useNavigate();
+    const { t } = useTranslation();
     return (
         <div className="playlistCardMain flex gap-20 text-dark-200 dark:text-light-200 relative">
             <div className="flex w-full gap-4 ">
@@ -44,7 +46,7 @@ export const SoundItemSingle: React.FC<ISoundItemSingle> = ({ item, onDelete }) 
                     </div>
                     <div className="col-span-7 sm:col-span-4 md:col-span-4 lg:col-span-5 xl:col-span-6 flex justify-end pr-[2%] mm:hidden">
                         <div className="flex flex-col items-center justify-center ">
-                            <h1 className="text-xl">Date</h1>
+                            <h1 className="text-xl">{t("Date")}</h1>
                             {
                                 item.track?.create &&
                                 <p className="text-dark-200/90 dark:text-light-300 font-medium whitespace-nowrap">{moment(new Date(item.track?.create)).format("DD.MM.YYYY")}</p>

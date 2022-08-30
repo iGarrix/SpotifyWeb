@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -17,7 +18,7 @@ export const ProfilePlaylists: React.FC = () => {
     const rx = useTypedSelector(state => state.myPlaylistReducer);
     const playlists = useTypedSelector(state => state.myPlaylistReducer.playlists);
     const user = useTypedSelector(state => state.userReducer.profile);
-
+    const { t } = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (rx.nextPage && !rx.loading) {
@@ -95,8 +96,8 @@ export const ProfilePlaylists: React.FC = () => {
                             <hr className="w-full" />
                             <div className="flex flex-col items-center gap-6">
                                 <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">Playlist not found</h1>
-                                <DefaultButton onClick={() => { nav("/creativestudio") }} text={"Create you first playlist song"} />
+                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1>
+                                <DefaultButton onClick={() => { nav("/creativestudio") }} text={t("Create you first playlist song")} />
                             </div>
                         </>
             }

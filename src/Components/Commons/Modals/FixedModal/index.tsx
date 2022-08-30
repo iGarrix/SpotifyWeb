@@ -1,6 +1,7 @@
 import { faCheck, faTriangleExclamation, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -28,7 +29,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const { LogoutUser } = useActions();
     const nav = useNavigate();
-
+    const { t } = useTranslation();
 
     const [verifyImage] = useState(user?.verify === VerifyType.profile ? <FontAwesomeIcon className="verifyiconfixed" icon={faUser} width={12} height={12} /> :
             user?.verify === VerifyType.verify ? <FontAwesomeIcon className="verifyiconfixed" icon={faCheck} width={12} height={12} /> : null)
@@ -82,23 +83,23 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
                     {!user?.emailconfirm ?
                         <div className="bg-red-500 py-3 px-4 flex items-center gap-3 transition-all hover:bg-red-400 cursor-pointer text-light-100" onClick={() => {onNavigateClick("/accountsettings/verifyemail")}}>
                             <FontAwesomeIcon className="text-2xl" icon={faTriangleExclamation} />
-                            <h1 className="select-none font-[15px]">Email don't confirmed</h1>
+                            <h1 className="select-none font-[15px]">{t("Email don't confirmed")}</h1>
                         </div> : null
                     }
                 </div>
-                <DropdownButtonItem text="Notification" notifications={notificate} icon={<img alt="icon" src={icon_notifications} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings/notification"); }} />
-                <DropdownButtonItem text="Creative Studio" icon={<img alt="icon" src={icon_studio} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio"); }} />
-                <DropdownButtonItem text="Account Manage" icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings") }} />
+                <DropdownButtonItem text={t("Notification")} notifications={notificate} icon={<img alt="icon" src={icon_notifications} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings/notification"); }} />
+                <DropdownButtonItem text={t("Creative Studio")} icon={<img alt="icon" src={icon_studio} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio"); }} />
+                <DropdownButtonItem text={t("Account Manage")} icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/accountsettings") }} />
                 <div className="hidden mm:flex flex-col">
                     <hr className="border-light-300 dark:border-dark-100" />
-                    <DropdownButtonItem text="Genres" icon={<img alt="icon" src={icon_music} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/genres") }} />
-                    <DropdownButtonItem text="History" icon={<img alt="icon" src={icon_HistoryWhite} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/history") }} />
-                    <DropdownButtonItem text="New Playlist" icon={<img alt="icon" src={icon_playlist} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio") }} />
-                    <DropdownButtonItem text="Uploading" icon={<img alt="icon" src={icon_upload} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/upload") }} />
-                    <DropdownButtonItem text="Settings" icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/websettings") }} />
+                    <DropdownButtonItem text={t("Genres")} icon={<img alt="icon" src={icon_music} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/genres") }} />
+                    <DropdownButtonItem text={t("History")} icon={<img alt="icon" src={icon_HistoryWhite} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/history") }} />
+                    <DropdownButtonItem text={t("New Playlist")} icon={<img alt="icon" src={icon_playlist} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/creativestudio") }} />
+                    <DropdownButtonItem text={t("Uploading")} icon={<img alt="icon" src={icon_upload} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/upload") }} />
+                    <DropdownButtonItem text={t("Settings")} icon={<img alt="icon" src={icon_settings} className="w-[22px] h-[22px]" />} onClick={() => { onNavigateClick("/websettings") }} />
                     <hr className="border-light-300 dark:border-dark-100" />
                 </div>
-                <DropdownButtonItem text="Log out" isDanger={true} icon={<img alt="icon" src={icon_logout} className="w-[22px] h-[22p   x]" />} onClick={() => { LogoutUser(); nav("/"); }} />
+                <DropdownButtonItem text={t("Log out")} isDanger={true} icon={<img alt="icon" src={icon_logout} className="w-[22px] h-[22p   x]" />} onClick={() => { LogoutUser(); nav("/"); }} />
             </div>
         </div>
     )

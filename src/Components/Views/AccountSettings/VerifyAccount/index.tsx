@@ -1,5 +1,6 @@
 import { faCheck, faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
@@ -9,7 +10,7 @@ import { ProfileButton } from "../../../Commons/Buttons/ProfileButton";
 import { PreviewCardAccount } from "../../../Commons/Cards/PreviewCardAccount";
 
 export const VerifyAccount: React.FC = () => {
-
+    const { t } = useTranslation();
     const nav = useNavigate();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
@@ -55,12 +56,12 @@ export const VerifyAccount: React.FC = () => {
             {
                 user &&
                 <div className="flex flex-col h-full py-[50px] px-[150px] mm:px-[3%] sm:px-[5%] md:px-[10%] lg:px-[10%] xl:px-[10%] text-dark-200 dark:text-light-200">
-                    <h1 className="text-3xl font-bold">Verify your account</h1>
+                    <h1 className="text-3xl font-bold">{t("Verify your account")}</h1>
                     <div className="flex flex-col mt-[40px] w-full gap-[20px]">
                         <div className="grid grid-cols-2 mm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full gap-10">
-                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Client profile"}
+                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={t("Client profile")}
                                 isSelect={currentItem === "/accountsettings/verifyaccount"} nickname={user.username} email={user.email} icon={faUser} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount"); nav(""); }} />
-                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={"Verified profile"}
+                            <PreviewCardAccount ImageSrc={ImageSrc} BackgroundSrc={BackgroundSrc} title={t("Verified profile")}
                                 isSelect={currentItem === "/accountsettings/verifyaccount/verified"} nickname={user.username} email={user.email} icon={faCheck} onSelect={() => { setCurrentItem("/accountsettings/verifyaccount/verified"); nav("verified"); }} />
                         </div>
                     </div>
@@ -73,7 +74,7 @@ export const VerifyAccount: React.FC = () => {
                         }
                         <Outlet />
                         <div className="flex w-full justify-end">
-                            <ProfileButton onClick={async () => { await onVerifySubmit() }} text={"Verify"} isSelect={true} />
+                            <ProfileButton onClick={async () => { await onVerifySubmit() }} text={t("Verify")} isSelect={true} />
                         </div>
                     </div>
                 </div>
