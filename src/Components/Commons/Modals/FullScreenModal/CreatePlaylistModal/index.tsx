@@ -79,7 +79,7 @@ export const CreatePlaylistModal: React.FC<ICreatePlaylistModal> = ({ onSave, on
     return (
         <div className="rounded-md py-6 flex flex-col items-center gap-3 text-dark-200 bg-light-100 dark:text-light-200 dark:bg-dark-200 shadow-xl px-10 border border-light-200 dark:border-dark-200 mm:w-full mm:h-full">
             <div className="flex justify-between w-full">
-                <h1 className="whitespace-nowrap text-xl font-['Lexend']">{t("Create playlist")}</h1>
+                <h1 className="whitespace-nowrap text-xl">{t("Create playlist")}</h1>
                 <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 dark:hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseSubmit} /></div>
             </div>
             <hr className="w-full mb-4 dark:border-dark-100" />

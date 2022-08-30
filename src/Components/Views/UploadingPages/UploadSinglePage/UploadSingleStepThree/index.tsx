@@ -30,8 +30,8 @@ export const UploadSingleStepThree: React.FC = () => {
                     <div className="p-4 bg-light-100 dark:bg-dark-100 w-full rounded-lg flex gap-3">
                         <img alt="single_image" src={reducer.singledata ? reducer.singledata.image : ""} className="cursor-pointer transition-all object-cover h-[120px] w-[120px] rounded-xl" onError={(tg: any) => { tg.target.src = defaultMusicImage }} />
                         <div className="flex flex-col justify-center mm:justify-start sm:justify-start md:justify-start">
-                            <h1 className="text-2xl mm:text-xl sm:text-xl font-['Lexend'] font-bold">{reducer.singledata?.title}</h1>
-                            <h1 className="text-xl mm:text-lg sm:text-lg font-['Lexend'] font-nornal">{user?.username}</h1>
+                            <h1 className="text-2xl mm:text-xl sm:text-xl font-bold">{reducer.singledata?.title}</h1>
+                            <h1 className="text-xl mm:text-lg sm:text-lg font-nornal">{user?.username}</h1>
                         </div>
                     </div>
                 </div>

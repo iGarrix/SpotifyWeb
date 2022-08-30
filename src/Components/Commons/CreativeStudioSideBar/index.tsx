@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../Hooks/useTypedSelector";
@@ -17,7 +18,7 @@ export const CreativeStudioSideBar: React.FC = () => {
     const history = useLocation();
     const nav = useNavigate();
     const user = useTypedSelector(state => state.userReducer.profile);
-
+    const { t } = useTranslation();
     const { theme } = useTypedSelector(state => state.globalReducer);
 
     return (
@@ -26,11 +27,11 @@ export const CreativeStudioSideBar: React.FC = () => {
                 <img alt="logo" src={theme === Theme.light ? logo : logoDark} className="rounded-xl contrast-125 cursor-pointer transition-all mx-7" height={170} width={170} onClick={() => { nav("/creativestudio") }} />
             </div>
             <div className="flex flex-col h-auto z-10">
-                <SettingsBarItem text="Playlist" isSelect={history.pathname === "/creativestudio" || history.pathname.includes("overviewplaylist")} icon={icon_playlist}
+                <SettingsBarItem text={t("Playl")} isSelect={history.pathname === "/creativestudio" || history.pathname.includes("overviewplaylist")} icon={icon_playlist}
                     onClick={() => { nav("") }} />
-                <SettingsBarItem text="Single" isSelect={history.pathname.includes("/creativestudio/single")} icon={icon_music}
+                <SettingsBarItem text={t("Single")} isSelect={history.pathname.includes("/creativestudio/single")} icon={icon_music}
                     onClick={() => { nav("single") }} />
-                <SettingsBarItem text="Album" isSelect={history.pathname.includes("/creativestudio/album")} icon={icon_disc}
+                <SettingsBarItem text={t("Album")} isSelect={history.pathname.includes("/creativestudio/album")} icon={icon_disc}
                     onClick={() => { nav("album") }} />
             </div>
         </div>

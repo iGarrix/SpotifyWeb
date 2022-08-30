@@ -19,7 +19,7 @@ export const ShareModal : React.FC<IShareAlbumModal> = ({...props}) => {
         md:mx-[10%] mm:w-full">
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-center gap-10">
-                    <h1 className="text-xl font-['Lexend'] whitespace-nowrap">{props.title}</h1>
+                    <h1 className="text-xl whitespace-nowrap">{props.title}</h1>
                     <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-200 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={onCloseHandle} /></div>
                 </div>
                 <hr className="w-full border border-light-200 dark:border-dark-100" />

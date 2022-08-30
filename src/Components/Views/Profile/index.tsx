@@ -108,7 +108,7 @@ export const Profile: React.FC = () => {
             </div>
           </div>
           <div className="flex mm:flex-col mm:items-center items-end justify-between pb-6 w-full mm:gap-2">
-            <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 font-['Lexend']">{ user && user.views > 0 ?
+            <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 ">{ user && user.views > 0 ?
             user.views.toLocaleString(undefined, { maximumFractionDigits: 2 }):
             "NO"} {t("Views for all time")}</p>
             <div className="flex mm:w-full">

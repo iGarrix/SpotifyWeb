@@ -130,7 +130,7 @@ export const OverviewProfile: React.FC = () => {
             </div>
           </div>
           <div className="flex  mm:flex-col mm:items-center items-end gap-4 justify-between pb-6 w-full mm:gap-2">
-          <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 font-['Lexend']">{ user.overviewer && user.overviewer.views > 0 ?
+          <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2">{ user.overviewer && user.overviewer.views > 0 ?
           user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
           "NO"} {t("Views for all time")}</p>
             <div className="flex gap-2 mm:scale-90">

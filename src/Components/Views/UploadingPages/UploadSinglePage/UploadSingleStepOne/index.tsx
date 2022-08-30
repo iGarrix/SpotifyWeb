@@ -32,7 +32,7 @@ export const UploadSingleStepOne: React.FC = () => {
             {
                 !file ?
                     <div className="w-full pt-[4%] flex flex-col items-center gap-4 h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Upload Single")}</h1>
+                        <h1 className="text-4xl mm:text-3xl font-bold text-center">{t("Upload Single")}</h1>
                         <p className="font-medium text-xl mt-10 text-center">{t("Drag & drop your single")}</p>
                         <div className="flex">
                             <input type="file" id="filebg" accept="audio/mp3" onChange={onUpload} className="hidden" />
@@ -42,7 +42,7 @@ export const UploadSingleStepOne: React.FC = () => {
                         </div>
                     </div> :
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Uploading is complete")}</h1>
+                        <h1 className="text-4xl mm:text-3xl font-bold text-center">{t("Uploading is complete")}</h1>
                         <div className="w-full px-[30%] mm:px-[3%] sm:px-[3%] md:px-[5%] lg:px-[15%] xl:px-[15%]">
                             <div className="flex justify-between flex-wrap items-center rounded-lg gap-2 bg-light-100 dark:bg-dark-100 p-2 pr-4">
                                 <div className="flex gap-3 items-center">

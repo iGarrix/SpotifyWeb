@@ -56,6 +56,8 @@ i18n.use(initReactI18next).init({
         "Save you first artist": "Save you first artist",
         "Save you first album": "Save you first album",
         //Creative studio
+        "Playl": "Playlists",
+        "Single": "Single",
         "Create new Playlist": "Create new Playlist",
         "Create you first playlist": "Create you first playlist",
         "You can also upload a new single or album": "You can also upload a new single or album",
@@ -199,6 +201,7 @@ i18n.use(initReactI18next).init({
         "Creators list": "Creators list",
         "songs": "songs",
         //Upload intro
+        "Upload content": "Upload content",
         "Upload album, more song": "Upload album, more song",
         "Upload single, 1 song": "Upload single, 1 song",
         //Add creators to album modal
@@ -216,7 +219,7 @@ i18n.use(initReactI18next).init({
         "Upload you first single song": "Upload you first single song",
         "Create you first playlist song": "Create you first playlist song",
         "Upload you first": "Upload you first",
-        //rename bio modal
+        //Rename bio modal
         "Rename": "Rename",
         "You want to rename pib?": "You want to rename pib?",
         "Enter new surname": "Enter new surname",
@@ -401,6 +404,8 @@ i18n.use(initReactI18next).init({
         "Save you first artist": "Підпишіться на вашого першого артиста",
         "Save you first album": "Збережіть ваш перший альбом",
         //Creative studio
+        "Playl": "Плейлисти",
+        "Single": "Пісні",
         "Create new Playlist": "Створити новий плейлист",
         "Create you first playlist": "Створіть ваш перший плейлист",
         "You can also upload a new single or album": "Ви також можете завантажити новий сингл або альбом",
@@ -543,6 +548,7 @@ i18n.use(initReactI18next).init({
         "Creators list": "Список виконавців",
         "songs": "пісні",
         //Upload intro
+        "Upload content": "Завантажити контент",
         "Upload album, more song": "Завантажити альбом, багато пісень",
         "Upload single, 1 song": "Завантажити сінгл, 1 пісню",
         //Add creators to album modal

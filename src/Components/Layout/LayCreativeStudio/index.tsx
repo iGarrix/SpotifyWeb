@@ -14,7 +14,6 @@ export const LayCreativeStudio: React.FC = () => {
     const loading = useTypedSelector(state => state.userReducer.loading);
     const [show, setShow] = useState(true);
     const nav = useNavigate();
-
     return (
         <div className="grid grid-cols-12 w-full h-full">
             {

@@ -91,7 +91,7 @@ export const UploadAlbumStepOne: React.FC = () => {
             {
                 !files || files.length === 0 ?
                     <div className="w-full pt-[4%] flex flex-col items-center gap-4 h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Upload Album")}</h1>
+                        <h1 className="text-4xl mm:text-3xl font-bold text-center">{t("Upload Album")}</h1>
                         <p className="font-medium text-xl mt-10 text-center">{t("Drag & drop mp3 files")}</p>
                         <div className="flex">
                             <input type="file" id="filebg" accept="audio/mp3" multiple onChange={onUpload} className="hidden" />
@@ -101,7 +101,7 @@ export const UploadAlbumStepOne: React.FC = () => {
                         </div>
                     </div> :
                     <div className="flex flex-col pt-[4%] gap-12 w-full h-full">
-                        <h1 className="text-4xl mm:text-3xl font-bold font-['Lexend'] text-center">{t("Uploading is complete")}</h1>
+                        <h1 className="text-4xl mm:text-3xl font-bold text-center">{t("Uploading is complete")}</h1>
                         <div className="w-full px-[35%] mm:px-[3%] sm:px-[3%] md:px-[5%] lg:px-[15%] xl:px-[15%] 2xl:px-[30%] gap-4 flex flex-col">
                             {
                                 files?.map(item => {
