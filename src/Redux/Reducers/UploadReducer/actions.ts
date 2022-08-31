@@ -54,7 +54,6 @@ export const setUploadError = (error: string) => {
   };
 };
 
-
 export const uploadSingleApi = (data: ISingleCreateRequest) => {
   return async (dispatch: Dispatch<UploadingAction>) => {
     try {
@@ -96,9 +95,8 @@ export const uploadAlbumApi = (data: IAlbumCreateRequest) => {
       data.userCreatorEmails.forEach(f => {
         form.append("UserCreatorEmails", f);
       })
-      // form.append("UserCreatorEmails", JSON.stringify(data.userCreatorEmails));
       form.append("Name", data.name);
-      form.append("Releasealbom", data.releasealbom? data.releasealbom.toDateString() : "");
+      form.append("Releasealbom", data.releasealbom ? data.releasealbom.toDateString() : "");
       form.append("Image", data.image);
       form.append("Templateimage", data.templateimage);
       form.append("Description", data.description);
@@ -110,7 +108,6 @@ export const uploadAlbumApi = (data: IAlbumCreateRequest) => {
       if (response.data.albomDto) {
         dispatch({ type: UploadActionTypes.INITALBUMID, payload: response.data.albomDto.returnId })
       }
-      //dispatch({ type: UploadActionTypes.UPLOAD_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       console.log(error)
@@ -131,7 +128,6 @@ export const uploadAlbumApi = (data: IAlbumCreateRequest) => {
 export const addTrackToAlbumApi = (data: IAddTrackToAlbumRequest) => {
   return async (dispatch: Dispatch<UploadingAction>) => {
     try {
-      //dispatch({ type: UploadActionTypes.UPLOAD_WAITING, payload: true });
       const token = localStorage.getItem("token");
       const form = new FormData();
 
@@ -146,7 +142,6 @@ export const addTrackToAlbumApi = (data: IAddTrackToAlbumRequest) => {
         `api/Track/AddTrackToAlbom`, form,
         AuthorizateHeader(token)
       );
-      //dispatch({ type: UploadActionTypes.UPLOAD_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       console.log(error)
@@ -174,7 +169,6 @@ export const sendInviteApi = (data: IAddInviteRequest) => {
         `api/Invite/AddInvite`, data,
         AuthorizateHeader(token)
       );
-      //dispatch({ type: UploadActionTypes.UPLOAD_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       console.log(error)

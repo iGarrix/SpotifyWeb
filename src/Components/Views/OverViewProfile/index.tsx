@@ -126,13 +126,13 @@ export const OverviewProfile: React.FC = () => {
               <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-['Lexend'] flex gap-4">{user.overviewer?.username}
                 <p className="translate-y-[-5px]">{verifyImage}</p>
               </h1>
-              <p className="text-light-100/80 mm:text-base sm:text-base">{user?.overviewer?.emojie}</p>        
+              <p className="text-light-100/80 mm:text-base sm:text-base">{user?.overviewer?.emojie}</p>
             </div>
           </div>
           <div className="flex  mm:flex-col mm:items-center items-end gap-4 justify-between pb-6 w-full mm:gap-2">
-          <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2">{ user.overviewer && user.overviewer.views > 0 ?
-          user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
-          "NO"} {t("Views for all time")}</p>
+            <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2">{user.overviewer && user.overviewer.views > 0 ?
+              user.overviewer.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
+              "NO"} {t("Views for all time")}</p>
             <div className="flex gap-2 mm:scale-90">
               <FontAwesomeIcon className={`text-xl p-3 rounded-lg border border-light-100 cursor-pointer
               hover:border-blue-500 hover:text-blue-500 active:bg-blue-500 active:text-light-100 ${shareModal && "bg-blue-500 border-blue-500 text-light-100"}`} icon={faShare} onClick={onShare} />
@@ -144,7 +144,7 @@ export const OverviewProfile: React.FC = () => {
       <div className={`h-full w-full flex flex-col items-center mm:items-start sm:items-start md:items-start mm:px-[2%] sm:px-[2%] md:px-[2%] mt-5`}>
         <div className="bg-light-200 dark:bg-dark-100 mm:w-full sm:w-full md:w-full
          flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
-          <ProfileButton text={t("Singles")} isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums") } onClick={() => { nav("") }} />
+          <ProfileButton text={t("Singles")} isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums")} onClick={() => { nav("") }} />
           <ProfileButton text={t("Playli")} isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
           <ProfileButton text={t("Albu")} isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
         </div>

@@ -26,7 +26,7 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     if (user != null) {
       setVerifyImage(user.verify === VerifyType.profile ? <FontAwesomeIcon icon={faUser} width={20} height={20} /> :
-          user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
+        user.verify === VerifyType.verify ? <FontAwesomeIcon icon={faCheck} width={20} height={20} /> : null);
     }
   }, [user]);
   const onChangeName = () => {
@@ -94,7 +94,7 @@ export const Profile: React.FC = () => {
                     <input type="file" id="file" accept="image/*" onChange={onChangeAvatar} className="hidden" />
                     <label htmlFor="file"><FontAwesomeIcon className="text-6xl mm:text-3xl sm:text-3xl cursor-pointer" icon={faImage} /> </label>
                   </div>
-                  <img alt="avatar" src={GetUserAvatar(user)} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage}} />
+                  <img alt="avatar" src={GetUserAvatar(user)} className="cursor-pointer transition-all object-cover w-full h-full" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
                 </div> :
                 <div className="bg-gray-600 animate-pulse rounded-2xl cursor-pointer w-48 h-48 flex justify-center items-center">
                 </div>
@@ -108,14 +108,14 @@ export const Profile: React.FC = () => {
             </div>
           </div>
           <div className="flex mm:flex-col mm:items-center items-end justify-between pb-6 w-full mm:gap-2">
-            <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 ">{ user && user.views > 0 ?
-            user.views.toLocaleString(undefined, { maximumFractionDigits: 2 }):
-            "NO"} {t("Views for all time")}</p>
+            <p className="mt-auto text-[18px] mm:text-base tracking-wide gap-2 ">{user && user.views > 0 ?
+              user.views.toLocaleString(undefined, { maximumFractionDigits: 2 }) :
+              "NO"} {t("Views for all time")}</p>
             <div className="flex mm:w-full">
               <input type="file" id="filebg" accept="image/*" onChange={onChangeBackground} className="hidden" />
-                <ProfileButton text={
-                  <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2 items-center"><img alt="crop" src={icon_crop} /> <h1 className="text-lg mm:text-base ">{t("Change image")}</h1></div></label>
-                } onClick={() => { }} isSelect={true} />
+              <ProfileButton text={
+                <label htmlFor="filebg" className="cursor-pointer"><div className="flex gap-2 items-center"><img alt="crop" src={icon_crop} /> <h1 className="text-lg mm:text-base ">{t("Change image")}</h1></div></label>
+              } onClick={() => { }} isSelect={true} />
             </div>
           </div>
         </div>

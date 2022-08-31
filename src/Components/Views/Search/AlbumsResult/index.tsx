@@ -9,9 +9,9 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { AlbumItem } from "../../../Commons/AlbumItem";
 
-export const AlbumsResult : React.FC = () => {
+export const AlbumsResult: React.FC = () => {
     const nav = useNavigate();
-    const { getAllSearchAlbum, addAllSearchAlbum, initSelectAlbum, clearTracks} = useActions();
+    const { getAllSearchAlbum, addAllSearchAlbum, initSelectAlbum, clearTracks } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const { t } = useTranslation();
@@ -31,7 +31,7 @@ export const AlbumsResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchAlbum(query, 1);
             }
-            startTransition(() => {           
+            startTransition(() => {
                 fetchData();
             });
             const addNew = async () => {
@@ -39,7 +39,7 @@ export const AlbumsResult : React.FC = () => {
                     await FetchNext();
                 }
             }
-            startTransition(() => {       
+            startTransition(() => {
                 addNew();
             });
         }
@@ -81,7 +81,7 @@ export const AlbumsResult : React.FC = () => {
                             {
                                 rx.albums?.map(item => {
                                     return (
-                                        <AlbumItem key={Guid.create().toString()} name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) } } title={item.creators.map(i => i.username)[0]} />
+                                        <AlbumItem key={Guid.create().toString()} name={item.name} imageSrc={item.image} onClick={() => { onSelectAlbum(item.id) }} title={item.creators.map(i => i.username)[0]} />
                                     )
                                 })
                             }

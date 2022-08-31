@@ -1,7 +1,6 @@
 import { DefaultServerError } from "../../../types";
 import { IMainState, MainActionTypes, MainAction } from "./types";
 
-
 const inialState: IMainState = {
   albums: null,
   artists: null,

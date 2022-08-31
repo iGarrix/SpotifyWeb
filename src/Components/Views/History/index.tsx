@@ -48,14 +48,14 @@ export const History: React.FC = () => {
 
     const GetHistory = (query: string | any) => {
         startTransition(() => {
-            const storage_history = localStorage.getItem(StorageVariables.History);   
+            const storage_history = localStorage.getItem(StorageVariables.History);
             if (storage_history) {
                 let stor_history = JSON.parse(storage_history) as IHistory;
                 const size = stor_history.soundobjs.length;
-                if (query && query.length != 0) {       
+                if (query && query.length != 0) {
                     const filtererHistory = stor_history.soundobjs.filter(f => f.track?.name.includes(query));
                     filtererHistory.splice(TempTake, size);
-                    if (filtererHistory.length != 0) {   
+                    if (filtererHistory.length != 0) {
                         setFoundedHistory(filtererHistory);
                     }
                 }
@@ -80,7 +80,7 @@ export const History: React.FC = () => {
         if (searchQuery && searchQuery.length != 0) {
             onSearch(searchQuery)
         }
-        else{
+        else {
             onSearch("");
         }
     }, [searchQuery]);
@@ -106,8 +106,8 @@ export const History: React.FC = () => {
         localStorage.removeItem(StorageVariables.History);
     }
 
-    const onSearch = (value: string) => {    
-        setSearchParams({query: value}); 
+    const onSearch = (value: string) => {
+        setSearchParams({ query: value });
         GetHistory(value);
     }
 
@@ -117,7 +117,7 @@ export const History: React.FC = () => {
                 <title>Soundwave | Your history</title>
             </Helmet>
             <div className="hidden mm:flex w-full px-[5%] pb-[15px] border-b border-b-dark-100">
-                <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => {nav(-1)}} />
+                <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => { nav(-1) }} />
             </div>
             {rx && rx.history && rx.history.soundobjs.length > 0 ?
                 <div className="flex flex-col gap-8 w-full">

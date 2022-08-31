@@ -11,6 +11,6 @@ export const initLang = (lang: string, dispatch: any) => {
 
 export const initLangDispath = (lang: string) => {
     return (dispatch: Dispatch<any>) => {
-        dispatch({ type: GlobalActionTypes.INITLANGUAGE, payload: lang });      
+        dispatch({ type: GlobalActionTypes.INITLANGUAGE, payload: lang });
     }
 };

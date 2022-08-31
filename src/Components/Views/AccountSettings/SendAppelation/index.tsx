@@ -59,8 +59,8 @@ export const SendAppelation: React.FC = () => {
                         <div className="flex flex-col gap-2">
                             <h1 className="font-bold text-3xl mm:text-2xl mm:text-center sm:text-center md:text-center">{t("Appelations")}</h1>
                             <p className="font-medium mm:text-center sm:text-center md:text-center">
-                            {t("If you have a problem with your account, you can file an appeal")} <br></br>
-                            {t("and the administration will review it within 3 business days.")}
+                                {t("If you have a problem with your account, you can file an appeal")} <br></br>
+                                {t("and the administration will review it within 3 business days.")}
                             </p>
                         </div>
                         {
@@ -75,7 +75,7 @@ export const SendAppelation: React.FC = () => {
                             onSubmit={onSendAppelationHandle}>
                             <Form>
                                 <div className="flex flex-col w-full gap-[20px]">
-                                    <FormikTextArea name={"message"} label={t("Message")}/>
+                                    <FormikTextArea name={"message"} label={t("Message")} />
                                     <div className='flex w-full justify-end'>
                                         <ProfileButton text={t("Send appelation")} onClick={() => { }} isSelect />
                                     </div>

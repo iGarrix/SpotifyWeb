@@ -75,7 +75,7 @@ export const WeeklyArtist: React.FC = () => {
                                 mainReducer.artists.map(item => {
                                     return (
                                         <UserOverviever key={Guid.create().toString()} avatar={item.avatar} username={item.username} />
-                                      )
+                                    )
                                 })
                             }
                         </div>

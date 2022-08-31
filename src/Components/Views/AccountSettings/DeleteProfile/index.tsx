@@ -60,23 +60,23 @@ export const DeleteProfile: React.FC = () => {
                     validationSchema={DeleteProfileValidate}
                     onSubmit={onHandleSubmit}>
                     <Form className="mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full">
-                            <div className="rounded-md py-8 mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full
+                        <div className="rounded-md py-8 mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full
                              flex mm:bg-dark-200/60 sm:bg-dark-200/60 md:bg-dark-200/60 flex-col items-center justify-center gap-6 shadow-xl px-10 border border-light-200 dark:border-dark-100">
-                                <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-100 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
-                                <h1 className="text-3xl font-medium font-['Lexend']">{t("Delete account")}</h1>
-                                {
-                                    error && error.length !== 0 ?
-                                        <p className="text-red-500 font-medium flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null
-                                }
-                                <div className="flex justify-center items-center flex-col px-20">
-                                    <div className="flex flex-col w-full items-center">
-                                        <FormikField placeholder={t("Password")} name="password" type="password" onSumbit={() => { }} />
-                                    </div>
-                                    <div className="flex justify-center w-full mt-7">
-                                        <ProfileButton text={t("Delete")} onClick={() => { }} isSelect={true} />
-                                    </div>
+                            <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-100 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
+                            <h1 className="text-3xl font-medium font-['Lexend']">{t("Delete account")}</h1>
+                            {
+                                error && error.length !== 0 ?
+                                    <p className="text-red-500 font-medium flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null
+                            }
+                            <div className="flex justify-center items-center flex-col px-20">
+                                <div className="flex flex-col w-full items-center">
+                                    <FormikField placeholder={t("Password")} name="password" type="password" onSumbit={() => { }} />
+                                </div>
+                                <div className="flex justify-center w-full mt-7">
+                                    <ProfileButton text={t("Delete")} onClick={() => { }} isSelect={true} />
                                 </div>
                             </div>
+                        </div>
                     </Form>
                 </Formik>
             </FullScreenModal>

@@ -9,9 +9,9 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
-export const PlaylistResult : React.FC = () => {
+export const PlaylistResult: React.FC = () => {
     const nav = useNavigate();
-    const { getAllSearchPlaylist, addAllSearchPlaylist, initSelectPlaylist, clearTracks} = useActions();
+    const { getAllSearchPlaylist, addAllSearchPlaylist, initSelectPlaylist, clearTracks } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const { t } = useTranslation();
@@ -32,7 +32,7 @@ export const PlaylistResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchPlaylist(query, 1);
             }
-            startTransition(() => {    
+            startTransition(() => {
                 fetchData();
             });
             const addNew = async () => {
@@ -40,7 +40,7 @@ export const PlaylistResult : React.FC = () => {
                     await FetchNext();
                 }
             }
-            startTransition(() => {       
+            startTransition(() => {
                 addNew();
             });
         }
@@ -69,7 +69,7 @@ export const PlaylistResult : React.FC = () => {
             if (user?.username === username) {
                 nav({
                     pathname: "/playlist/" + id,
-                });           
+                });
             }
             else {
                 nav("/playlist/" + id);
@@ -89,7 +89,7 @@ export const PlaylistResult : React.FC = () => {
                             {
                                 rx.playlists?.map(item => {
                                     return (
-                                        <PlaylistItem key={Guid.create().toString()} name={item.name.substring(0, 12)} title={item.creator.username} imageSrc={item.image} onClick={() => {onSelectPlaylist(item.id, item.creator.username)}} />
+                                        <PlaylistItem key={Guid.create().toString()} name={item.name.substring(0, 12)} title={item.creator.username} imageSrc={item.image} onClick={() => { onSelectPlaylist(item.id, item.creator.username) }} />
                                     )
                                 })
                             }

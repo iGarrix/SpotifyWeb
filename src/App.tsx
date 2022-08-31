@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark bg-dark-200/90" : "bg-gradient-to-b from-light-200/90 to-light-200/50"}`}
+      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark from-dark-100/100 to-dark-200/100 bg-gradient-to-b" : "bg-gradient-to-b from-light-200/100 to-light-100/100"}`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>
@@ -132,7 +132,6 @@ function App() {
             <Route index element={<Genres />} />
             <Route path=":name" element={<GenreDetails />} />
           </Route>
-          {/* <Route path="createplaylist" element={<Settings />} /> */}
           <Route path="history" element={<History />} />
           <Route path="queue" element={<Queue />} />
 

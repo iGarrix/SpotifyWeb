@@ -1,5 +1,5 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faArrowCircleRight, faArrowLeft, faArrowRight, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -98,7 +98,7 @@ export const Register: React.FC = () => {
     if (step > 1) {
       setStep(step - 1);
     }
-    else{
+    else {
       nav("/authorizate");
     }
   }
@@ -186,11 +186,10 @@ export const Register: React.FC = () => {
                     children: <div className="flex flex-col gap-2 px-10">
                       <FormikField placeholder={t("Username")} name="username" type="text" />
                       <div className='grid grid-cols-3 mm:grid-cols-1 mm:grid-rows-3 sm:grid-cols-1 sm:grid-rows-3 md:grid-cols-1 md:grid-rows-3 lg:grid-cols-1 lg:grid-rows-3 gap-3'>
-                          <FormikField placeholder={t('Day')} type="text" name={'date'} />
-                          <FormikField placeholder={t('Month')} type="text" name={'month'} />
-                          <FormikField placeholder={t('Years')} type="text" name={'years'} />
+                        <FormikField placeholder={t('Day')} type="text" name={'date'} />
+                        <FormikField placeholder={t('Month')} type="text" name={'month'} />
+                        <FormikField placeholder={t('Years')} type="text" name={'years'} />
                       </div>
-                      {/* <FormikField placeholder="Age" name="age" type="text" /> */}
                     </div>
                   },
                   {
@@ -213,7 +212,7 @@ export const Register: React.FC = () => {
                 ]} />
                 <div className="flex items-center justify-between w-full mm:mt-auto sm:mt-auto py-2 px-40 mm:px-8 sm:px-8 md:px-10 lg:px-10">
                   <button type="button" onClick={onPrevious}>
-                    <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
+                    <FontAwesomeIcon className="bg-dark-100 rounded-2xl shadow-2xl px-5 py-2 text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
                   </button>
                   <GoogleLogin
                     clientId="62751843627-3hvrb4vhojmd60im3q708b1usgoob3ka.apps.googleusercontent.com"
@@ -225,11 +224,11 @@ export const Register: React.FC = () => {
                   {
                     step < 5 ?
                       <button type="button" onClick={onNext}>
-                        <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} />
+                        <FontAwesomeIcon className="bg-dark-100 rounded-2xl shadow-2xl px-5 py-2 text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} />
                       </button>
                       :
                       step > 0 ?
-                        <button type="submit"><FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowCircleRight} /></button> : null
+                        <button type="submit"><FontAwesomeIcon className="bg-dark-100 rounded-2xl shadow-2xl px-5 py-2 text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowRight} /></button> : null
                   }
                 </div>
               </div>

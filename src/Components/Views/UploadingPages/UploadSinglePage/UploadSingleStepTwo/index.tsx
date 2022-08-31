@@ -102,7 +102,6 @@ export const UploadSingleStepTwo: React.FC = () => {
                                     <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
                                     <ProfileButton text={t("Publish")} isSelect onClick={() => { }} />
                             }
-                            {/* <ProfileButton text={reducer.loading ? <FontAwesomeIcon className="animate-spin text-2xl px-2" icon={faSpinner} /> : "Publish"} isSelect onClick={() => { }} /> */}
                         </div>
                     </Form>
                 </Formik>

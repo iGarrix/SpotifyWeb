@@ -91,13 +91,11 @@ export const removeTrack = (id: string) => {
 export const subscribeSingle = (data: ISubscribeSingleRequest) => {
   return async (dispatch: Dispatch<MySingleAction>) => {
     try {
-      //dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.post<any>(
         "api/Track/SaveTrack",
         data, AuthorizateHeader(token)
       );
-      //dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -117,7 +115,6 @@ export const subscribeSingle = (data: ISubscribeSingleRequest) => {
 export const unsubscribeSingle = (data: IUnsubscribeSingleRequest) => {
   return async (dispatch: Dispatch<MySingleAction>) => {
     try {
-      //dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.delete<any>(
         "api/Track/RemoveSaveTrack",
@@ -126,7 +123,6 @@ export const unsubscribeSingle = (data: IUnsubscribeSingleRequest) => {
           data: data
         }
       );
-      //dispatch({ type: MySingleActionTypes.INITMYSINGLE_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

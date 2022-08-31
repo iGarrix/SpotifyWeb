@@ -14,9 +14,9 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
     const { t } = useTranslation();
-    const {updatePDUser} = useActions();
+    const { updatePDUser } = useActions();
     useEffect(() => {
-        if (error && error !== "") {         
+        if (error && error !== "") {
             setEnterError(error);
         }
     }, [error]);
@@ -81,11 +81,11 @@ export const RenameBioModal: React.FC<IRenameBioModal> = ({ onSave, onClose }) =
             <form onSubmit={onSubmit} className="mm:h-full">
                 {
                     user ?
-                    <div className="flex flex-col gap-3 px-20 mm:px-5 mm:h-full">
-                        <Field placeholder={t("Enter new name")} value={user?.name} onChange={(e: any) => { }} />
-                        <Field placeholder={t("Enter new surname")} value={user?.surname} onChange={(e: any) => { }} />
-                        <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7 mm:mt-auto">{t("You want to rename pib?")}</button>
-                    </div> : null
+                        <div className="flex flex-col gap-3 px-20 mm:px-5 mm:h-full">
+                            <Field placeholder={t("Enter new name")} value={user?.name} onChange={(e: any) => { }} />
+                            <Field placeholder={t("Enter new surname")} value={user?.surname} onChange={(e: any) => { }} />
+                            <button type="submit" className="text-center font-medium text-lg hover:text-primary-100 transition-all mt-7 mm:mt-auto">{t("You want to rename pib?")}</button>
+                        </div> : null
                 }
             </form>
         </div>

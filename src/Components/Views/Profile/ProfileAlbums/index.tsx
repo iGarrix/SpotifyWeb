@@ -67,32 +67,31 @@ export const ProfileAlbums: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative mm:w-full sm:w-full md:w-full">
+        <div className="w-full h-full flex flex-col justify-start py-12 items-center gap-12 relative mm:w-full sm:w-full md:w-full">
             <Helmet>
                 <title>Soundwave | My Albums</title>
             </Helmet>
             {
-                    albums && rx.error.length === 0 ?
-                        <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
-                                {
-                                    albums.map(item => {
-                                        return (
-                                            <AlbumItem key={Guid.create().toString()} onClick={() => { onSelectAlbum(item) }} name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
-                                        )
-                                    })
-                                }
-                            </div>
+                albums && rx.error.length === 0 ?
+                    <div className="w-full flex flex-col items-center gap-20">
+                        <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
+                            {
+                                albums.map(item => {
+                                    return (
+                                        <AlbumItem key={Guid.create().toString()} onClick={() => { onSelectAlbum(item) }} name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
+                                    )
+                                })
+                            }
                         </div>
-                        :
-                        <>
-                            <hr className="w-full" />
-                            <div className="flex flex-col items-center gap-6">
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Albums not found")}</h1>
-                                <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first")} />
-                            </div>
-                        </>
+                    </div>
+                    :
+                    <>
+                        <div className="flex flex-col items-center gap-6">
+                            <FontAwesomeIcon className="text-7xl mt-[5vh] font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
+                            <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Albums not found")}</h1>
+                            <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first")} />
+                        </div>
+                    </>
             }
         </div>
     )

@@ -8,13 +8,13 @@ import { NotifyCard } from "../../../../Commons/Cards/NotifyCard";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { StatusDetailModal } from "../../../../Commons/Modals/FullScreenModal/StatusDetailModal";
 
-export const StatusAccount : React.FC = () => {
+export const StatusAccount: React.FC = () => {
 
     const { getStatuses, addStatuses, setSelectStatus } = useActions();
     const reducer = useTypedSelector(state => state.notificationReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const [open, setOpen] = useState(false);
-    
+
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (reducer.nextPage && !reducer.loading) {
@@ -57,7 +57,7 @@ export const StatusAccount : React.FC = () => {
 
     }, [reducer.nextPage && reducer.loading])
 
-    const onSelect = (data : IUserStatusResponse) => {
+    const onSelect = (data: IUserStatusResponse) => {
         setSelectStatus(data);
         setOpen(true);
     }
@@ -70,7 +70,7 @@ export const StatusAccount : React.FC = () => {
             {
                 reducer.selectedStatus &&
                 <FullScreenModal visible={open} center>
-                    <StatusDetailModal data={reducer.selectedStatus} onClose={() => {setOpen(false)}} />
+                    <StatusDetailModal data={reducer.selectedStatus} onClose={() => { setOpen(false) }} />
                 </FullScreenModal>
             }
             {
@@ -84,7 +84,7 @@ export const StatusAccount : React.FC = () => {
                     return (
                         <NotifyCard key={Guid.create().toString()}
                             isFunc
-                            onClick={() => {onSelect(item)}}
+                            onClick={() => { onSelect(item) }}
                             message={`You have a ${item.userStatusDto.status} status due to: ${item.userStatusDto.reason}`} type={"error"} date={new Date(item.userStatusDto.create)} />
                     )
                 })

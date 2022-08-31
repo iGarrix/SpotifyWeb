@@ -58,20 +58,20 @@ export const PasswordVerifyCode: React.FC = () => {
                 <div className="absolute w-full h-full rounded-xl p-2 opacity-98 bg-gradient-to-r from-blue-600 to-blue-400"></div>
                 <div className="z-10 flex flex-col gap-6 mm:gap-10 mm:h-full mm:justify-between">
                     <div className="w-full mm:h-full flex flex-col justify-center items-center gap-8 mm:gap-10">
-                    <div className="w-full flex justify-center mm:flex sm:hidden">
-                        <img alt="logo" className="w-[200px]" src={logo} />
-                    </div>
+                        <div className="w-full flex justify-center mm:flex sm:hidden">
+                            <img alt="logo" className="w-[200px]" src={logo} />
+                        </div>
                         <div className="flex flex-col gap-3 w-full items-center">
                             <h1 className="text-3xl font-['Lexend'] text-center">{t("Check your email")}</h1>
                             <p className="text-lg font-['Lexend'] text-center">{t("We sent a 4-digit code to")} {localStorage.getItem(StorageVariables.ForgotUser)}</p>
                         </div>
                         <div className="flex flex-col gap-2">
-                                    {
-                                        error &&
-                                        <div className="flex flex-col gap-3 items-center bg-red-500 rounded-xl py-3 px-8">
-                                            <h1 className="text-white font-semibold text-center">{error}</h1>
-                                        </div>
-                                    }
+                            {
+                                error &&
+                                <div className="flex flex-col gap-3 items-center bg-red-500 rounded-xl py-3 px-8">
+                                    <h1 className="text-white font-semibold text-center">{error}</h1>
+                                </div>
+                            }
                             <div className="flex items-center flex-col gap-3 rounded-xl py-8 px-20 mm:px-2">
                                 <PinInput
                                     length={4}

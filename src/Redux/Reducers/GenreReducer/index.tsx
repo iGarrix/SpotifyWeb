@@ -1,7 +1,6 @@
 import { DefaultServerError } from "../../../types";
 import { IGenreStateState, MyGenreAction, MyGenreActionTypes } from "./types";
 
-
 const inialState: IGenreStateState = {
   genres: null,
   playlists: null,

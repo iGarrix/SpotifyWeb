@@ -43,7 +43,7 @@ export const VerifyCodEmail: React.FC = () => {
             <Helmet>
                 <title>Soundwave | Enter Code</title>
             </Helmet>
-            <div className="grid grid-cols-5 h-full">       
+            <div className="grid grid-cols-5 h-full">
                 <div className="flex justify-end mm:justify-center sm:justify-center md:justify-center items-center w-full col-span-3 mm:col-span-full sm:col-span-full md:col-span-full">
                     <div className="flex flex-col gap-4 w-full mm:py-[20%] sm:py-[20%]">
                         <div className="flex justify-center">
@@ -64,33 +64,33 @@ export const VerifyCodEmail: React.FC = () => {
                             <div className="flex flex-col items-center dark:text-dark-200">
                                 {
                                     1 === 1 ?
-                                    <PinInput
-                                        length={4}
-                                        initialValue=""
-                                        onChange={(value, index) => { }}
-                                        type="numeric"
-                                        inputMode="number"
-                                        style={{ padding: '5px' }}
-                                        inputStyle={{ borderColor: `#e6e6e6`, margin: `0px 10px`, backgroundColor: `#e6e6e6`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
-                                        onComplete={async (value, index) => { await onHandleSubmit(value) }}
-                                        autoSelect={true}
-    
-                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                                    />
-                                    :
-                                    <PinInput
-                                        length={4}
-                                        initialValue=""
-                                        onChange={(value, index) => { }}
-                                        type="numeric"
-                                        inputMode="number"
-                                        style={{ padding: '5px' }}
-                                        inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
-                                        onComplete={async (value, index) => { await onHandleSubmit(value) }}
-                                        autoSelect={true}
-    
-                                        regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                                    />
+                                        <PinInput
+                                            length={4}
+                                            initialValue=""
+                                            onChange={(value, index) => { }}
+                                            type="numeric"
+                                            inputMode="number"
+                                            style={{ padding: '5px' }}
+                                            inputStyle={{ borderColor: `#e6e6e6`, margin: `0px 10px`, backgroundColor: `#e6e6e6`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                            onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                                            autoSelect={true}
+
+                                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                                        />
+                                        :
+                                        <PinInput
+                                            length={4}
+                                            initialValue=""
+                                            onChange={(value, index) => { }}
+                                            type="numeric"
+                                            inputMode="number"
+                                            style={{ padding: '5px' }}
+                                            inputStyle={{ borderColor: `#434343`, margin: `0px 10px`, backgroundColor: `#434343`, borderWidth: `0.2rem`, borderRadius: '0.5rem', fontSize: `1.6rem`, width: '4rem', height: `4rem`, userSelect: `none` }}
+                                            onComplete={async (value, index) => { await onHandleSubmit(value) }}
+                                            autoSelect={true}
+
+                                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                                        />
                                 }
                             </div>
                         </div>

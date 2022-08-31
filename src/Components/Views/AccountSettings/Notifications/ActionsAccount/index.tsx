@@ -64,9 +64,9 @@ export const ActionsAccount: React.FC = () => {
                 reducer.notifications?.map(item => {
                     return (
                         <NotifyCard key={Guid.create().toString()}
-                        device={item.device}
-                        message={`Action ${item.message}`}
-                        type={item.transaction === "Success" ? "success" : "error"} date={new Date(item.date)} />
+                            device={item.device}
+                            message={`Action ${item.message}`}
+                            type={item.transaction === "Success" ? "success" : "error"} date={new Date(item.date)} />
                     )
                 })
             }

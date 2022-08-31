@@ -130,9 +130,7 @@ export type PlayingAction =
     ClearHistoryAction |
     SetPlayingAction |
     InitPlayingPlaylistAction;
-
-
-
+    
 export interface IAddTrackToPlaylistRequest {
     playlistFind: IPlaylistFindRequest,
     trackId: string,

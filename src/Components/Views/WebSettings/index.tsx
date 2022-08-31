@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export const WebSettings: React.FC = () => {
 
 
-    const {initLangDispath} = useActions();
+    const { initLangDispath } = useActions();
 
     const [lang, setLang] = useState(() => {
         const lang = localStorage.getItem(StorageVariables.Language);
@@ -36,7 +36,7 @@ export const WebSettings: React.FC = () => {
         localStorage.setItem(StorageVariables.Language, value);
         initLangDispath(value);
     }
-    
+
     const onChangeTheme = () => {
         const theme = dark === Theme.dark ? Theme.light : Theme.dark;
         switch (theme) {
@@ -74,7 +74,7 @@ export const WebSettings: React.FC = () => {
                     <p className="mm:hidden">{t('Choose language')}</p>
                 </div>
                 <div className="mm:w-full">
-                    <DefaultSettingsDropdown title={t('Choose language')} options={[LanguageVars.EN, LanguageVars.UA]} value={lang} onChange={(e: any) => {onChangeLanguage(e.target.value)}} />
+                    <DefaultSettingsDropdown title={t('Choose language')} options={[LanguageVars.EN, LanguageVars.UA]} value={lang} onChange={(e: any) => { onChangeLanguage(e.target.value) }} />
                 </div>
             </div>
             <div className="flex mm:flex-col mm:gap-2 items-center justify-between mm:w-full">
@@ -83,7 +83,7 @@ export const WebSettings: React.FC = () => {
                     <p className="mm:hidden">{t('Choose theme')}</p>
                 </div>
                 <div className="mm:w-full">
-                   <ToggleButton onCheck={onChangeTheme} isSelected={dark === Theme.dark ? true : false} text={t('Active light')} checkedText={t('Active dark')}/>
+                    <ToggleButton onCheck={onChangeTheme} isSelected={dark === Theme.dark ? true : false} text={t('Active light')} checkedText={t('Active dark')} />
                 </div>
             </div>
             <div className="flex mm:flex-col mm:gap-2 items-center justify-between">
@@ -92,7 +92,7 @@ export const WebSettings: React.FC = () => {
                     <p>{t('ClearTitle')}</p>
                 </div>
                 <div className="mm:w-full">
-                   <ProfileButton text={t('Clear')} isSelect={false} onClick={clearAllStorage} />
+                    <ProfileButton text={t('Clear')} isSelect={false} onClick={clearAllStorage} />
                 </div>
             </div>
             <div className="flex flex-col gap-6">
@@ -102,7 +102,7 @@ export const WebSettings: React.FC = () => {
                         <hr className="w-full" />
                     </div>
                     <ol>
-                        <li className="flex flex-col gap-1">
+                        <li className="flex flex-col gap-2">
                             <p className="text-xl">{t('• OAuth2 Authorizate')}</p>
                             <div className="px-[2%] flex flex-col">
                                 <p className="">{t('OAuth2 Authorizate 1')}</p>
@@ -113,7 +113,7 @@ export const WebSettings: React.FC = () => {
                         </li>
                     </ol>
                     <ol>
-                        <li className="flex flex-col gap-1">
+                        <li className="flex flex-col gap-2">
                             <p className="text-xl">{t('• Queue & History')}</p>
                             <div className="px-[2%] flex flex-col">
                                 <p className="">{t('Queue & History 1')}</p>
@@ -123,7 +123,7 @@ export const WebSettings: React.FC = () => {
                         </li>
                     </ol>
                     <ol>
-                        <li className="flex flex-col gap-1">
+                        <li className="flex flex-col gap-2">
                             <p className="text-xl">{t('• Language')}</p>
                             <div className="px-[2%] flex flex-col">
                                 <p className="">{t('Language 1')}</p>
@@ -132,7 +132,7 @@ export const WebSettings: React.FC = () => {
                         </li>
                     </ol>
                     <ol>
-                        <li className="flex flex-col gap-1">
+                        <li className="flex flex-col gap-2">
                             <p className="text-xl">{t('• Theme')}</p>
                             <div className="px-[2%] flex flex-col">
                                 <p className="">{t('Theme 1')}</p>
@@ -141,7 +141,7 @@ export const WebSettings: React.FC = () => {
                         </li>
                     </ol>
                     <ol>
-                        <li className="flex flex-col gap-1">
+                        <li className="flex flex-col gap-2">
                             <p className="text-xl">{t('• Save Volume')}</p>
                             <div className="px-[2%] flex flex-col">
                                 <p className="">{t('Save Volume 1')}</p>

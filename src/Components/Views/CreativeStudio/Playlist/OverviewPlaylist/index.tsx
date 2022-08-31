@@ -11,7 +11,6 @@ import { IChangePlaylistImageRequest, IPagableMyPlaylistItem, IRemoveTrackPlayli
 import { IAddTrackToPlaylistRequest, IGetPlaylistTracksRequest } from "../../../../../Redux/Reducers/PlayingReducer/types";
 import { baseUrl, defaultPlaylistImage } from "../../../../../types";
 import { SoundItemPlaylist } from "../../../../Commons/Cards/CreativeStudioCards/SoundItemPlaylist";
-import { SoundItem } from "../../../../Commons/Cards/SoundItem";
 import { SearchField } from "../../../../Commons/Inputs/SearchField";
 import { FullScreenModal } from "../../../../Commons/Modals/FullScreenModal";
 import { ChangePlaylistModal } from "../../../../Commons/Modals/FullScreenModal/ChangePlaylistModal";
@@ -186,7 +185,7 @@ export const OverViewPlaylist: React.FC = () => {
 
     const AddTrackToPlaylist = async (item: IPagableMyPlaylistItem | any) => {
         if (item && playlist && playlist.playlistDto && playlist.playlistCreator) {
-            const rq : IAddTrackToPlaylistRequest = {
+            const rq: IAddTrackToPlaylistRequest = {
                 playlistFind: {
                     findPlaylistName: playlist?.playlistDto.name,
                     findPlaylistCreatorEmail: playlist?.playlistCreator.email
@@ -219,7 +218,7 @@ export const OverViewPlaylist: React.FC = () => {
             <div className="w-full flex mm:flex-col mm:items-center py-[50px] mm:py-[5%] sm:py-[5%] md:py-[5%] px-[150px] mm:px-0 sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] gap-[32px]">
                 {
                     playlist?.playlistDto?.image ?
-                        <div className="w-[256px] h-[256px] relative overflow-hidden rounded-xl">  
+                        <div className="w-[256px] h-[256px] relative overflow-hidden rounded-xl">
                             <div className="w-full h-full transition-all bg-black/60 opacity-0 hover:opacity-100 absolute flex justify-center items-center">
                                 <input type="file" id="file" accept="image/*" onChange={onChangeImage} className="hidden" />
                                 <label htmlFor="file"><FontAwesomeIcon className="invert dark:invert-0 text-6xl cursor-pointer" icon={faImage} /> </label>
@@ -287,7 +286,7 @@ export const OverViewPlaylist: React.FC = () => {
                         </div>
                         :
                         <div className="flex flex-col gap-6">
-                            <FontAwesomeIcon className="text-5xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                            <FontAwesomeIcon className="text-5xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                             <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                 <div className="flex flex-col gap-3 items-center">
                                     <h1 className="font-medium text-2xl">{t("Tracks not found")}</h1>

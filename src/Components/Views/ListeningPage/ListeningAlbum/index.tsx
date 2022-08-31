@@ -48,7 +48,7 @@ export const ListeningAlbum: React.FC = () => {
     }
     useEffect(() => {
         const work = async () => {
-            if (id) {      
+            if (id) {
                 await findAlbum(id, user ? user.email : "");
                 const rq: IGetTracksRequest = {
                     albomId: id,
@@ -150,35 +150,35 @@ export const ListeningAlbum: React.FC = () => {
 
     const onSubscribe = async () => {
         try {
-            if (user && id) {        
-                const rq : ISubscribeAlbumRequest = {
+            if (user && id) {
+                const rq: ISubscribeAlbumRequest = {
                     findSubscriberEmail: user.email,
                     findAlbomId: id
                 }
                 await subscribeAlbum(rq);
-                if (!isLiked) {          
+                if (!isLiked) {
                     setLiked(true);
                 }
             }
         } catch (error) {
-            
+
         }
     }
 
     const onUnsubscribe = async () => {
         try {
-            if (user && id) {        
-                const rq : IUnsubscribeAlbumRequest = {
+            if (user && id) {
+                const rq: IUnsubscribeAlbumRequest = {
                     albomId: id,
                     email: user.email
                 }
                 await unsubscribeAlbum(rq);
-                if (isLiked) {   
+                if (isLiked) {
                     setLiked(false);
                 }
             }
         } catch (error) {
-            
+
         }
     }
 
@@ -251,8 +251,8 @@ export const ListeningAlbum: React.FC = () => {
                                     </div>
                                     {
                                         isLiked ?
-                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
-                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
+                                            <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
+                                            <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
                                     }
                                 </div>
                             </div>
@@ -264,7 +264,7 @@ export const ListeningAlbum: React.FC = () => {
                                         <h1 className="font-medium font-['Lexend'] text-3xl">{playingReducer.album?.albomDto?.name}</h1>
                                         {
                                             user && playingReducer.album?.creatorsAlbom?.map(i => i.username).includes(user.username) &&
-                                            <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/album')}} />
+                                            <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => { nav('/creativestudio/album') }} />
                                         }
                                     </div>
                                     {

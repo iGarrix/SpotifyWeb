@@ -132,15 +132,15 @@ export const StudioAlbum: React.FC = () => {
                             })
                             :
                             <>
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                                <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
                                 <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                                     <div className="flex flex-col gap-3 items-center">
                                         <h1 className="font-medium text-3xl text-center">{t("Upload you first albums")}</h1>
                                         <p className="font-medium text-xl text-center">{t("You can also upload a new single or create new playlist")}</p>
                                     </div>
                                     <div>
-                                            <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first album")} />
-                                        </div>
+                                        <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload you first album")} />
+                                    </div>
                                 </div>
                             </>
                     }

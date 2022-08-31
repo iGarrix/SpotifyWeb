@@ -115,6 +115,6 @@ export const addGenrePlaylist = (genreName: string, page: number) => {
 
 export const clearGenrePlaylist = () => {
   return (dispatch: Dispatch<MyGenreAction>) => {
-    dispatch({type: MyGenreActionTypes.INITGENREPLAYLIST_CLEAR});
+    dispatch({ type: MyGenreActionTypes.INITGENREPLAYLIST_CLEAR });
   };
 };

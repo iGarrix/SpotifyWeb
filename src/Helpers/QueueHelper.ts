@@ -54,7 +54,7 @@ export const ForwardQueue = () => {
     const storageQueue = localStorage.getItem(StorageVariables.Queue);
     if (storageQueue) {
         let queue: IQueue = JSON.parse(storageQueue) as IQueue;
-        if (queue) {         
+        if (queue) {
             if (queue.soundobjs.length === 1) {
                 return null;
             }
@@ -77,7 +77,7 @@ export const BackwardQueue = () => {
     const storageQueue = localStorage.getItem(StorageVariables.Queue);
     if (storageQueue) {
         let queue: IQueue = JSON.parse(storageQueue) as IQueue;
-        if (queue) {         
+        if (queue) {
             if (queue.soundobjs.length === 1) {
                 return null;
             }
@@ -109,25 +109,11 @@ export const ShuffleQueue = () => {
             queue.playedIndex = findIndex;
             queue.soundobjs = shuffle_objs;
             localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-            return queue;      
+            return queue;
         }
     }
     return null;
 }
-
-// export const NextTrackInQeueue = () => {
-//     const storageQueue = localStorage.getItem(StorageVariables.Queue);
-//     if (storageQueue) {
-//         let queue: IQueue = JSON.parse(storageQueue) as IQueue;
-//         if (queue.soundobjs.length > 1) {
-//             queue.soundobjs.shift();
-//             localStorage.setItem(StorageVariables.Queue, JSON.stringify(queue));
-//             return queue;
-//         }
-//         localStorage.removeItem(StorageVariables.Queue);
-//         return null
-//     }
-// }
 
 export const AddToHistory = (item: ITrackResponse | null) => {
     if (item) {

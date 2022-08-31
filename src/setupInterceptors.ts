@@ -37,10 +37,10 @@ const setup = () => {
                         }
                     } catch (_error) {
                         if (axios.isAxiosError(_error)) {
-                            const serverError = _error as AxiosError<any>;    
+                            const serverError = _error as AxiosError<any>;
                             if (serverError) {
                                 ClearRedux(dispatch);
-                                Navigate({to: "/authorizate", replace: true});
+                                Navigate({ to: "/authorizate", replace: true });
                             }
                             dispatch({ type: UserActionTypes.INITUSER_WAITING, payload: false });
                             if (serverError && serverError.response) {
@@ -51,7 +51,6 @@ const setup = () => {
                     }
                 }
             }
-
             return Promise.reject(err);
         }
     );

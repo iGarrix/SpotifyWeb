@@ -4,13 +4,12 @@ import { Guid } from "guid-typescript";
 import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
 
-export const CreatorsResult : React.FC = () => {
-    const nav = useNavigate();
+export const CreatorsResult: React.FC = () => {
     const { getAllSearchArtists, addAllSearchArtists } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -31,7 +30,7 @@ export const CreatorsResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchArtists(query, 1);
             }
-            startTransition(() => {      
+            startTransition(() => {
                 fetchData();
             });
             const addNew = async () => {
@@ -39,7 +38,7 @@ export const CreatorsResult : React.FC = () => {
                     await FetchNext();
                 }
             }
-            startTransition(() => {      
+            startTransition(() => {
                 addNew();
             });
         }
@@ -61,12 +60,6 @@ export const CreatorsResult : React.FC = () => {
             await addAllSearchArtists(query, rx.nextPage);
         }
     }
-    // const onSelectGenre = async (item: IGenre | null) => {
-    //     if (item) {
-    //         clearGenrePlaylist();
-    //         nav(item?.name);
-    //     }
-    // }
     return (
         <div className="w-full h-full flex flex-col justify-start items-center relative">
             <Helmet>

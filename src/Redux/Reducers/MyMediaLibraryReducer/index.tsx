@@ -1,7 +1,6 @@
 import { DefaultServerError } from "../../../types";
 import { IMyMediaLibrarySingleStateState, MyMediaLibraryAction, MyMediaLibraryActionTypes } from "./types";
 
-
 const inialState: IMyMediaLibrarySingleStateState = {
   singles: null,
   albums: null,
@@ -21,7 +20,7 @@ export const myMediaLibraryReducer = (
     case MyMediaLibraryActionTypes.INITMYMEDIALIBRARYSINGLE: {
       return {
         ...state,
-        singles: action.payload ? action.payload.pageables: [],
+        singles: action.payload ? action.payload.pageables : [],
         prevPage: action.payload ? action.payload.prevPage : null,
         nextPage: action.payload ? action.payload.nextPage : null,
         loading: false,

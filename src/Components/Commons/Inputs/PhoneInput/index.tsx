@@ -4,7 +4,6 @@ import PhoneInput from 'react-phone-number-input'
 import { PhoneInputProps } from "./types";
 
 import "./style.scss";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 export const DefaultPhoneInput: React.FC<PhoneInputProps> = ({

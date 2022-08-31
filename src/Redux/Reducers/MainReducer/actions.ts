@@ -127,7 +127,7 @@ export const getMainTracks = (albomId: any, page: number, emailClient: string) =
           AuthorizateHeader(token)
         );
         dispatch({ type: MainActionTypes.INITWEEKLYSONGSALBUM, payload: response.data });
-  
+
         return Promise.resolve();
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -157,7 +157,7 @@ export const addMainTracks = (albomId: any, page: number) => {
           AuthorizateHeader(token)
         );
         dispatch({ type: MainActionTypes.ADDWEEKLYSONGSALBUM, payload: response.data });
-  
+
         return Promise.resolve();
       } catch (error) {
         if (axios.isAxiosError(error)) {

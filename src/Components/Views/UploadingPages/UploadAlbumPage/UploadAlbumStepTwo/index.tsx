@@ -43,29 +43,29 @@ export const UploadAlbumStepTwo: React.FC = () => {
 
     useEffect(() => {
         if (!reducer.albumfiles && !reducer.loading) {
-          nav(-1);  
+            nav(-1);
         }
     }, [reducer.albumfiles]);
 
     useEffect(() => {
         if (reducer && reducer.uploadedAlbumId) {
             try {
-                const processingNext = async() => {
-                    if (processing === 33) {                  
+                const processingNext = async () => {
+                    if (processing === 33) {
                         await onUploadTrackToAlbum(reducer.uploadedAlbumId);
                     }
-                    if (processing === 66) {               
+                    if (processing === 66) {
                         await onSendInvites(reducer.uploadedAlbumId);
                     }
-                    if (processing === 100) {            
+                    if (processing === 100) {
                         setUploadLoader(false);
                         nav("../overview");
                     }
                 }
                 processingNext();
-            } catch (error) {     
+            } catch (error) {
             }
-            
+
         }
     }, [reducer.uploadedAlbumId, processing])
 
@@ -112,7 +112,7 @@ export const UploadAlbumStepTwo: React.FC = () => {
                         description: values.description,
                         isSingle: false
                     }
-                    const data : IAlbumData = {
+                    const data: IAlbumData = {
                         title: values.title,
                         image: image,
                         description: values.description
@@ -140,24 +140,24 @@ export const UploadAlbumStepTwo: React.FC = () => {
                 }
                 await sendInviteApi(inviterq);
             })
-            setProcessing(100);  
+            setProcessing(100);
         }
     }
 
     const onUploadTrackToAlbum = async (albumId: string | null) => {
         if (imageFile && reducer.albumfiles && user && albumId) {
             reducer.albumfiles.forEach(async f => {
-                if (f.file) {              
-                    const addrq : IAddTrackToAlbumRequest = {
+                if (f.file) {
+                    const addrq: IAddTrackToAlbumRequest = {
                         id: albumId,
                         name: f.name,
                         image: imageFile,
                         sound: f.file,
                         userCreatorEmails: [user.email]
-                    }                 
+                    }
                     await addTrackToAlbumApi(addrq);
                 }
-            })   
+            })
             setProcessing(66);
         }
     }
@@ -179,10 +179,10 @@ export const UploadAlbumStepTwo: React.FC = () => {
     return (
         <div className="w-full flex flex-col items-center gap-10 h-full relative">
             <FullScreenModal center visible={visibleModal}>
-                <AddCreatorToAlbumModal onClose={() => {setVisibleModal(false)}} onAdd={onAddLocalCreators} />
+                <AddCreatorToAlbumModal onClose={() => { setVisibleModal(false) }} onAdd={onAddLocalCreators} />
             </FullScreenModal>
             <FullScreenModal center visible={visibleDelModal}>
-                <RemoveCreatorWithAlbumModal artists={creatorNicknames} onClose={() => {setVisibleDelModal(false)}} onRemove={onRemoveLocalCreators} />
+                <RemoveCreatorWithAlbumModal artists={creatorNicknames} onClose={() => { setVisibleDelModal(false) }} onRemove={onRemoveLocalCreators} />
             </FullScreenModal>
             <Formik
                 initialValues={inititalAlbumDataValues}
@@ -216,10 +216,10 @@ export const UploadAlbumStepTwo: React.FC = () => {
                                     <FormikTextArea name={"description"} label={t("Description")} minHeight={100} />
                                 </div>
                                 <div>
-                                    <ListField value={creatorNicknames && creatorNicknames.length > 0 ? creatorNicknames[creatorNicknames.length - 1].username: ""} 
-                                    placeholder={t("Creators list")} items={creatorNicknames} title={t("Adding creators")}
-                                     onOpenList={() => {setVisibleModal(true)}}
-                                     onRemove={() => {setVisibleDelModal(true)}} />
+                                    <ListField value={creatorNicknames && creatorNicknames.length > 0 ? creatorNicknames[creatorNicknames.length - 1].username : ""}
+                                        placeholder={t("Creators list")} items={creatorNicknames} title={t("Adding creators")}
+                                        onOpenList={() => { setVisibleModal(true) }}
+                                        onRemove={() => { setVisibleDelModal(true) }} />
                                 </div>
                             </div>
                         </div>
@@ -230,9 +230,9 @@ export const UploadAlbumStepTwo: React.FC = () => {
                             <h1 className="h-full text-lg bg-dark-200 rounded-xl px-4 py-1 text-light-100 whitespace-nowrap"><span className="text-light-100">Processing:</span> <span className="font-bold text-light-100">{processing}%</span></h1>
                         }
                         {
-                            reducer.loading ? 
-                            <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
-                            <ProfileButton text={t("Publish")} isSelect onClick={() => { }} />
+                            reducer.loading ?
+                                <img alt="loader" src={loader} className="animate-spin w-[48px] h-[48px]" /> :
+                                <ProfileButton text={t("Publish")} isSelect onClick={() => { }} />
                         }
                     </div>
                 </Form>

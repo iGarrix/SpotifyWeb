@@ -335,7 +335,6 @@ export const removeTrackByPlaylist = (data: IRemoveTrackPlaylistRequest) => {
   };
 };
 
-
 export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest, isAddingError?: boolean) => {
   return async (dispatch: Dispatch<PlayingAction>) => {
     try {
@@ -350,7 +349,7 @@ export const addTrackToPlaylist = (data: IAddTrackToPlaylistRequest, isAddingErr
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverError = error as AxiosError<any>;
-        if (!isAddingError) {       
+        if (!isAddingError) {
           dispatch({
             type: PlayingActionTypes.INITSELECTALBUMS_ERROR,
             payload: serverError.response?.data,

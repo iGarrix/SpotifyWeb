@@ -40,29 +40,29 @@ export const VerifyEmail: React.FC = () => {
                 <h1 className="text-3xl mm:text-2xl font-bold mm:text-center sm:text-center md:text-center lg:text-center">{t("Verify Email")}</h1>
                 <h2 className="mm:text-center sm:text-center md:text-center lg:text-center">{t("We will send a code to your mail for verification")}</h2>
             </div>
-                {
-                    error &&
-                    <div className="flex flex-col gap-3 items-center bg-red-500/80 rounded-xl py-6 px-4">
-                        <h1 className="text-light-100 font-semibold text-center">{error}</h1>
-                    </div>
-                }
+            {
+                error &&
+                <div className="flex flex-col gap-3 items-center bg-red-500/80 rounded-xl py-6 px-4">
+                    <h1 className="text-light-100 font-semibold text-center">{error}</h1>
+                </div>
+            }
             {user?.emailconfirm ? <div className="flex items-center justify-center">
-                <h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">{t("Email Verify")}</h1></div> : 
+                <h1 className="bg-green-500 text-white rounded-xl py-3 px-10 text-xl">{t("Email Verify")}</h1></div> :
                 <Formik
-                initialValues={initialValues}
-                validationSchema={emailForgotValidate}
-                onSubmit={onHandleSubmit}>
-                <Form>
-                    <div className="grid grid-rows-1 grid-cols-3 w-full px-[20%] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 gap-[20px]">
-                        <div className="col-span-2 mm:col-span-full sm:col-span-full">
-                            <Field placeholder={t("Email")} value={user?.email} onChange={() => { }} />
+                    initialValues={initialValues}
+                    validationSchema={emailForgotValidate}
+                    onSubmit={onHandleSubmit}>
+                    <Form>
+                        <div className="grid grid-rows-1 grid-cols-3 w-full px-[20%] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 gap-[20px]">
+                            <div className="col-span-2 mm:col-span-full sm:col-span-full">
+                                <Field placeholder={t("Email")} value={user?.email} onChange={() => { }} />
+                            </div>
+                            <div className="flex items-end mm:justify-end sm:justify-end md:justify-end col-span-1 mm:col-span-full sm:col-span-full">
+                                <ProfileButton text={t("Send verify code")} onClick={() => { }} isSelect={true} />
+                            </div>
                         </div>
-                        <div className="flex items-end mm:justify-end sm:justify-end md:justify-end col-span-1 mm:col-span-full sm:col-span-full">
-                            <ProfileButton text={t("Send verify code")} onClick={() => { }} isSelect={true} />
-                        </div>
-                    </div>
-                </Form>
-            </Formik>}
+                    </Form>
+                </Formik>}
         </div>
     );
 };

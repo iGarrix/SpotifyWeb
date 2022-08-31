@@ -47,7 +47,7 @@ export const AddTrackToPlaylistModal: React.FC<IAddTrackToPlaylistModal> = ({ ..
 
     const AddTrackToPlaylist = async (item: IPagableMyPlaylistItem, trackId: string) => {
         if (item && item.playlistDto && item.playlistCreator) {
-            const rq : IAddTrackToPlaylistRequest = {
+            const rq: IAddTrackToPlaylistRequest = {
                 playlistFind: {
                     findPlaylistName: item.playlistDto?.name,
                     findPlaylistCreatorEmail: item.playlistCreator?.email

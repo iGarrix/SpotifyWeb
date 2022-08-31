@@ -1,4 +1,4 @@
-import { faMusic, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Guid } from "guid-typescript";
 import moment from "moment";
@@ -49,9 +49,9 @@ export const ListeningPlaylist: React.FC = () => {
         const work = async () => {
             if (id) {
                 if (user && playingReducer?.playlist && playingReducer?.playlist.playlistCreator?.username === user.username) {
-                    await findPlaylist(id, user.email, true);               
+                    await findPlaylist(id, user.email, true);
                 }
-                else{
+                else {
                     await findPlaylist(id, user ? user.email : "");
                 }
                 const rq: IGetPlaylistTracksRequest = {
@@ -73,7 +73,7 @@ export const ListeningPlaylist: React.FC = () => {
             setLiked(playingReducer.playlist.isLiked);
         }
     }, [playingReducer.playlist])
-    
+
     const toggleForward = () => {
         const newQueue = ForwardQueue();
         if (newQueue) {
@@ -118,7 +118,7 @@ export const ListeningPlaylist: React.FC = () => {
         }
     }
     const onSelectTrack = (item: ITrackResponse | null) => {
-        if (user) {          
+        if (user) {
             InitQueueAlbum();
             setUpt(true);
             const response = SetPlayingTrack(item);
@@ -132,8 +132,8 @@ export const ListeningPlaylist: React.FC = () => {
         }
     }
     const onPause = async () => {
-        if (user) {       
-            if (!upt) {       
+        if (user) {
+            if (!upt) {
                 if (playingReducer.tracks) {
                     await onSelectTrack(playingReducer.tracks[0]);
                 }
@@ -155,28 +155,28 @@ export const ListeningPlaylist: React.FC = () => {
 
     const onSubscribe = async () => {
         try {
-            if (user && playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistCreator) {        
-                const rq : ISubscribePlaylistRequest = {
+            if (user && playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistCreator) {
+                const rq: ISubscribePlaylistRequest = {
                     userEmail: user.email,
                     playlistFind: {
-                        findPlaylistCreatorEmail:  playingReducer.playlist.playlistCreator.email,
-                        findPlaylistName:  playingReducer.playlist.playlistDto.name
+                        findPlaylistCreatorEmail: playingReducer.playlist.playlistCreator.email,
+                        findPlaylistName: playingReducer.playlist.playlistDto.name
                     }
                 }
                 await subscribePlaylist(rq);
-                if (!isLiked) {          
+                if (!isLiked) {
                     setLiked(true);
                 }
             }
         } catch (error) {
-            
+
         }
     }
 
     const onUnsubscribe = async () => {
         try {
-            if (user && playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistCreator) {        
-                const rq : IUnsubscribePlaylistRequest = {
+            if (user && playingReducer.playlist && playingReducer.playlist.playlistDto && playingReducer.playlist.playlistCreator) {
+                const rq: IUnsubscribePlaylistRequest = {
                     findSubscriberEmail: user.email,
                     playlistFind: {
                         findPlaylistCreatorEmail: playingReducer.playlist.playlistCreator.email,
@@ -184,15 +184,15 @@ export const ListeningPlaylist: React.FC = () => {
                     },
                 }
                 await unsubscribePlaylist(rq);
-                if (isLiked) {   
+                if (isLiked) {
                     setLiked(false);
                 }
             }
         } catch (error) {
-            
+
         }
     }
- 
+
     return (
         <div className="w-full h-full pt-[7%] px-[15%] mm:px-[3%] sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] text-dark-200 dark:text-light-200 relative">
             {
@@ -231,13 +231,13 @@ export const ListeningPlaylist: React.FC = () => {
                                         </div>
                                     </div>
                                 } />
-                        </FullScreenModal>               
+                        </FullScreenModal>
                         <div className="flex justify-end mm:justify-center sm:justify-center md:justify-center lg:justify-center col-span-2 mm:col-span-full md:col-span-full sm:col-span-full lg:col-span-full">
                             <div className="flex flex-col fixed mm:relative sm:relative md:relative lg:relative select-none">
                                 <img alt="singleImage" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`}
                                     className="h-96 w-96 mm:w-[296px] mm:h-[296px] xl:w-[348px] xl:h-[348px] rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                 <div className="py-3 flex items-center justify-between w-full">
-                                <img alt="icon" className="w-[26px] mm:w-[22px] cursor-pointer invert dark:invert-0" src={icon_share} onClick={onShare} />
+                                    <img alt="icon" className="w-[26px] mm:w-[22px] cursor-pointer invert dark:invert-0" src={icon_share} onClick={onShare} />
                                     <div className="flex items-center justify-center w-[38px] h-[38px] mm:w-[32px] mm:h-[32px] rounded-full cursor-pointer bg-light-200" onClick={toggleBackward}>
                                         <img alt="icon" className="w-[18px] invert" src={icon_skip_forward} />
                                     </div>
@@ -257,8 +257,8 @@ export const ListeningPlaylist: React.FC = () => {
                                     </div>
                                     {
                                         isLiked ?
-                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
-                                        <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
+                                            <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert" src={icon_likeRed} onClick={onUnsubscribe} /> :
+                                            <img alt="icon" className="w-[26px] mm:w-[22px] text-red-500 invert cursor-pointer transition-all active:scale-125 active:shadow-2xl active:invert-none dark:invert-0" src={icon_like} onClick={onSubscribe} />
                                     }
                                 </div>
                             </div>
@@ -270,7 +270,7 @@ export const ListeningPlaylist: React.FC = () => {
                                         <h1 className="font-medium font-['Lexend'] text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
                                             playingReducer.playlist.playlistCreator?.username === user?.username &&
-                                            <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => {nav('/creativestudio/overviewplaylist/' + id)}} />
+                                            <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => { nav('/creativestudio/overviewplaylist/' + id) }} />
                                         }
                                     </div>
                                     {

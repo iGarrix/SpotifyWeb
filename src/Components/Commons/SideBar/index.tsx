@@ -20,7 +20,7 @@ export const SideBar: React.FC = () => {
     const nav = useNavigate();
     const { theme } = useTypedSelector(state => state.globalReducer);
     const { t } = useTranslation();
-    
+
     return (
         <div className="w-full h-screen mm:h-auto sm:h-auto md:h-auto sticky top-0 pb-12 mm:pb-2 sm:pb-2 md:pb-2 pt-6 py-1 flex flex-col gap-12 bg-gradient-to-b from-light-100 to-light-200/100 dark:from-dark-200 dark:to-dark-200">
             <div className="w-full flex justify-center">

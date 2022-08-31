@@ -10,7 +10,7 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IGetAllMyPlaylistRequest, IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
-export const OverviewProfilePlaylists : React.FC = () => {
+export const OverviewProfilePlaylists: React.FC = () => {
     const nav = useNavigate();
     const { getMyPlaylists, addMyPlaylists, clearTracks, initSelectPlaylist } = useActions();
     const { t } = useTranslation();
@@ -77,26 +77,26 @@ export const OverviewProfilePlaylists : React.FC = () => {
                 <title>Soundwave | Playlist</title>
             </Helmet>
             {
-                    playlists && rx.error.length === 0 ?
-                        <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
-                                {
-                                    playlists.map(item => {
-                                        return (
-                                            <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
-                                        )
-                                    })
-                                }
-                            </div>
+                playlists && rx.error.length === 0 ?
+                    <div className="w-full flex flex-col items-center gap-20">
+                        <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
+                            {
+                                playlists.map(item => {
+                                    return (
+                                        <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
+                                    )
+                                })
+                            }
                         </div>
-                        :
-                        <>
-                            <hr className="w-full" />
-                            <div className="flex flex-col items-center gap-6">
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1> 
-                            </div>
-                        </>
+                    </div>
+                    :
+                    <>
+                        <hr className="w-full" />
+                        <div className="flex flex-col items-center gap-6">
+                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                            <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1>
+                        </div>
+                    </>
             }
         </div>
     )

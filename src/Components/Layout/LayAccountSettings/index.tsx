@@ -17,7 +17,7 @@ export const LayAccountSettings: React.FC = () => {
             }
             <div className="col-span-2 2xl:col-span-2 xl:col-span-2 lg:col-span-3 md:col-span-3 w-full h-full mm:h-auto sm:h-auto z-[100]">
                 <div className="hidden mm:flex w-full px-[5%] py-[15px] border-b border-b-dark-100">
-                    <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => {nav("/")}} />
+                    <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => { nav("/") }} />
                 </div>
                 <AccountSettingsSideBar />
             </div>

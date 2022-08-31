@@ -65,14 +65,14 @@ export const Queue: React.FC = () => {
         clearQueue();
         localStorage.removeItem(StorageVariables.Queue);
     }
-    
+
     return (
         <div className="w-full mm:min-h-[65vh] flex flex-col gap-6 items-start text-dark-200 dark:text-light-200 px-[3%] py-[2%] mm:py-[4%]">
             <Helmet>
                 <title>Soundwave | Playing Queue</title>
             </Helmet>
             <div className="hidden mm:flex w-full px-[5%] pb-[15px] border-b border-b-dark-100">
-                <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => {nav(-1)}} />
+                <FontAwesomeIcon className="text-xl text-dark-200 dark:text-light-200" icon={faArrowLeft} onClick={() => { nav(-1) }} />
             </div>
             {
                 rx && rx.queue && rx.queue.soundobjs && rx.queue.soundobjs.length > 0 ?
@@ -104,17 +104,17 @@ export const Queue: React.FC = () => {
                     </div>
                     :
                     <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                    <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
-                    <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                        <div className="flex flex-col gap-3 items-center">
-                            <h1 className="font-medium text-3xl">{t("Queue is empty")}</h1>
-                            <p className="font-medium text-xl text-center">{t("You can also listening your favorite songs using search")}</p>
-                        </div>
-                        <div>
-                            <DefaultButton onClick={() => { nav("/search") }} text={t("Search songs")} />
+                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="font-medium text-3xl">{t("Queue is empty")}</h1>
+                                <p className="font-medium text-xl text-center">{t("You can also listening your favorite songs using search")}</p>
+                            </div>
+                            <div>
+                                <DefaultButton onClick={() => { nav("/search") }} text={t("Search songs")} />
+                            </div>
                         </div>
                     </div>
-                </div>
 
             }
         </div>

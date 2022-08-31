@@ -11,9 +11,9 @@ import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { ITrackResponse } from "../../../../Redux/Reducers/PlayingReducer/types";
 import { SoundItem } from "../../../Commons/Cards/SoundItem";
 
-export const TracksResult : React.FC = () => {
+export const TracksResult: React.FC = () => {
     const nav = useNavigate();
-    const { getAllSearchTrack, addAllSearchTrack, initQueue} = useActions();
+    const { getAllSearchTrack, addAllSearchTrack, initQueue } = useActions();
     const rx = useTypedSelector(state => state.searchReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const { t } = useTranslation();
@@ -35,7 +35,7 @@ export const TracksResult : React.FC = () => {
             const fetchData = async () => {
                 await getAllSearchTrack(query, user ? user.email : "", 1);
             }
-            startTransition(() => {          
+            startTransition(() => {
                 fetchData();
             });
             const addNew = async () => {
@@ -43,7 +43,7 @@ export const TracksResult : React.FC = () => {
                     await FetchNext();
                 }
             }
-            startTransition(() => {         
+            startTransition(() => {
                 addNew();
             });
         }
@@ -83,17 +83,17 @@ export const TracksResult : React.FC = () => {
                     <div className="w-full flex flex-col gap-5">
                         <h1 className="font-semibold text-2xl">{t("Tracks All")}</h1>
                         <div className="flex flex-col gap-[15px] flex-wrap">
-                                {
-                                    rx.tracks?.map(item => {
-                                        return (
-                                            <SoundItem key={Guid.create().toString()}
-                                                onClick={() => { onSelectInstanceTrack(item) }}
-                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                                item={item}
-                                            />
-                                        )
-                                    })
-                                }
+                            {
+                                rx.tracks?.map(item => {
+                                    return (
+                                        <SoundItem key={Guid.create().toString()}
+                                            onClick={() => { onSelectInstanceTrack(item) }}
+                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                            item={item}
+                                        />
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                     :

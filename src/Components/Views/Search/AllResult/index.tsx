@@ -91,7 +91,7 @@ export const AllResultSearch: React.FC = () => {
             if (user?.username === username) {
                 nav({
                     pathname: "/playlist/" + id,
-                });           
+                });
             }
             else {
                 nav("/playlist/" + id);
@@ -177,25 +177,25 @@ export const AllResultSearch: React.FC = () => {
                         <div className="flex flex-col mm:justify-start w-full h-full flex-wrap gap-[15px]">
                             {
                                 reducer.searchall.tracks && reducer.searchall.tracks.length > 0 ?
-                                reducer.searchall.tracks?.map(item => {
-                                    return (
-                                        <SoundItem key={Guid.create().toString()}
-                                            onClick={() => { onSelectInstanceTrack(item) }}
-                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            item={item}
-                                        />
-                                    )
-                                })
-                                :
-                                <div className="flex flex-col gap-6 w-full h-full">
-                                    <hr className="w-full" />
-                                    <FontAwesomeIcon className="text-3xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
-                                    <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                                        <div className="flex flex-col gap-3 items-center">
-                                            <h1 className="font-medium text-xl dark:text-light-200">{t("No tracks")}</h1>
+                                    reducer.searchall.tracks?.map(item => {
+                                        return (
+                                            <SoundItem key={Guid.create().toString()}
+                                                onClick={() => { onSelectInstanceTrack(item) }}
+                                                isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                                item={item}
+                                            />
+                                        )
+                                    })
+                                    :
+                                    <div className="flex flex-col gap-6 w-full h-full">
+                                        <hr className="w-full" />
+                                        <FontAwesomeIcon className="text-3xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                                            <div className="flex flex-col gap-3 items-center">
+                                                <h1 className="font-medium text-xl dark:text-light-200">{t("No tracks")}</h1>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                             }
                         </div>
                     </div>
@@ -218,7 +218,7 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.playlists && reducer.searchall.playlists.length > 0 &&
-                <div className="flex flex-col gap-6 mm:gap-6">
+                <div className="flex flex-col mt-10 gap-6 mm:gap-6">
                     <h1 className="font-medium text-2xl mm:text-center">{t("Playlis")}</h1>
                     <div className="flex w-full flex-wrap gap-6 mm:grid mm:grid-cols-2">
                         {
@@ -233,7 +233,7 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.artists && reducer.searchall.artists.length > 0 &&
-                <div className="flex flex-col gap-3 mm:gap-6">
+                <div className="flex flex-col mt-10 gap-3 mm:gap-6">
                     <h1 className="font-medium text-2xl mm:text-center">{t("Artists")}</h1>
                     <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {
@@ -248,7 +248,7 @@ export const AllResultSearch: React.FC = () => {
             }
             {
                 reducer.searchall?.profiles && reducer.searchall.profiles.length > 0 &&
-                <div className="flex flex-col gap-3 mm:gap-6">
+                <div className="flex flex-col mt-10 gap-3 mm:gap-6">
                     <h1 className="font-medium text-2xl mm:text-center">{t("Profiles")}</h1>
                     <div className="flex w-full flex-wrap gap-3 mm:grid mm:grid-cols-2">
                         {

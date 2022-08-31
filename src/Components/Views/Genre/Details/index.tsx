@@ -9,7 +9,6 @@ import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { IPagableMyPlaylistItem } from "../../../../Redux/Reducers/MyPlaylistReducer/types";
 import { clearTracks } from "../../../../Redux/Reducers/PlayingReducer/actions";
-import { StorageVariables } from "../../../../types";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
@@ -81,12 +80,11 @@ export const GenreDetails: React.FC = () => {
                     :
                     !rx.loading &&
                     <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                        <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
                         <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
                             <div className="flex flex-col gap-3 items-center dark:text-light-200">
                                 <h1 className="font-medium text-3xl mm:text-xl">{t("No playlists found in genre")} '{name}'</h1>
                                 <p className="font-medium text-xl mm:text-base">{t("You can also search your favorite playlists")}</p>
-                                {/* <p className="font-medium text-xl mm:text-base">"{rx.error}"</p> */}
                             </div>
                             <div>
                                 <DefaultButton onClick={() => { nav("/search") }} text={t("Search playlists")} />

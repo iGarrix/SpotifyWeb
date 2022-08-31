@@ -42,18 +42,6 @@ export const emailLoginValidate = Yup.object({
     .required("Password is required"),
 });
 
-// export const nicknameLoginValidate = Yup.object({
-//   userName: Yup.string()
-//     .email("Email is invalid")
-//     .required("Email is required"),
-//   password: Yup.string()
-//     .min(
-//       MinPasswordLenght,
-//       `Password must be at least ${MinPasswordLenght} charaters`
-//     )
-//     .required("Password is required"),
-// });
-
 export const emailForgotValidate = Yup.object({
   email: Yup.string(),
 });

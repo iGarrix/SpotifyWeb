@@ -28,11 +28,10 @@ export const SignUpStep: React.FC<ISignUpStep> = ({ title, description, children
             title: "Step 5"
         },
     ]);
-    
+
     return (
         <div className="w-full flex flex-col justify-center items-center gap-8">
             <div className="flex flex-col gap-3 mm:gap-10 sm:gap-10 w-full items-center pt-5">
-                {/* <h1 className="text-3xl font-['Lexend']">{title}</h1> */}
                 <LinearStepper paddingX={10} selectedIndex={props.index} stepsItem={steps} />
                 <p className="text-lg font-['Lexend'] text-center">{description}</p>
             </div>

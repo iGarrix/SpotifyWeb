@@ -37,12 +37,12 @@ export const AddCreatorToAlbumModal: React.FC<IAddCreatorToAlbumModal> = ({ ...p
         }
     }, [searchQuery])
 
-    const {artists, error} = useTypedSelector(state => state.searchReducer);
+    const { artists, error } = useTypedSelector(state => state.searchReducer);
 
     const onCloseHandle = () => {
         props.onClose();
     }
-    
+
     const onAddHandle = (item: IUserSearch | null) => {
         if (item) {
             props.onAdd(item);
@@ -63,27 +63,27 @@ export const AddCreatorToAlbumModal: React.FC<IAddCreatorToAlbumModal> = ({ ...p
                 }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
 
                 {
-                    error ? 
-                    <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4">{error}</h1>
-                    :
-                    <div className="flex flex-col gap-2">
-                        {
-                            artists && artists.length > 0 ?
-                            artists.map(item => {
-                                    return (
-                                        <div key={Guid.create().toString()} className="flex gap-2 overflow-hidden border hover:border-primary-100 dark:border-dark-100 dark:hover:border-blue-500
-                                         rounded-md cursor-pointer" onClick={() => {onAddHandle(item)}}>
-                                            <img alt="avatar" src={GetUserAvatarSimple(item.avatar)} className="w-[64px] h-[64px] rounded-md"
-                                            onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
-                                            <div className="flex flex-col justify-center">
-                                                <p className="text-lg">{item.username}</p>
+                    error ?
+                        <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4">{error}</h1>
+                        :
+                        <div className="flex flex-col gap-2">
+                            {
+                                artists && artists.length > 0 ?
+                                    artists.map(item => {
+                                        return (
+                                            <div key={Guid.create().toString()} className="flex gap-2 overflow-hidden border hover:border-primary-100 dark:border-dark-100 dark:hover:border-blue-500
+                                         rounded-md cursor-pointer" onClick={() => { onAddHandle(item) }}>
+                                                <img alt="avatar" src={GetUserAvatarSimple(item.avatar)} className="w-[64px] h-[64px] rounded-md"
+                                                    onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                                <div className="flex flex-col justify-center">
+                                                    <p className="text-lg">{item.username}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                }):
-                            <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4 w-full">{t("No Result")}</h1>
-                        }
-                    </div>
+                                        )
+                                    }) :
+                                    <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4 w-full">{t("No Result")}</h1>
+                            }
+                        </div>
                 }
             </div>
         </div>

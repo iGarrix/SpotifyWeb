@@ -2,6 +2,7 @@
     .verifyiconfixed {
         @apply text-blue-400 transition-all;
     }
+
     &:hover .verifyiconfixed {
         @apply text-white;
     }

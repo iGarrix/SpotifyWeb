@@ -173,15 +173,11 @@ export const updateTemplateImageAlbum = (data: IChangeTemplateImageAlbumRequest)
 export const subscribeAlbum = (data: ISubscribeAlbumRequest) => {
   return async (dispatch: Dispatch<MyAlbumAction>) => {
     try {
-     // dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.post<any>(
         "api/Albom/SaveAlbom",
         data, AuthorizateHeader(token)
       );
-
-      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: false });
-
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -201,7 +197,6 @@ export const subscribeAlbum = (data: ISubscribeAlbumRequest) => {
 export const unsubscribeAlbum = (data: IUnsubscribeAlbumRequest) => {
   return async (dispatch: Dispatch<MyAlbumAction>) => {
     try {
-      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.delete<any>(
         "api/Albom/RemoveSaveAlbom",
@@ -210,8 +205,6 @@ export const unsubscribeAlbum = (data: IUnsubscribeAlbumRequest) => {
           data: data
         }
       );
-      //dispatch({ type: MyAlbumActionTypes.INITMYALBUM_WAITING, payload: false });
-
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

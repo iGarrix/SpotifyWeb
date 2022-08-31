@@ -30,10 +30,10 @@ export const Genres: React.FC = () => {
     }
     useEffect(() => {
         const fetchData = async () => {
-                const rq: IGetAllGenreRequest = {
-                    page: 1
-                }
-                await getAllGenre(rq);
+            const rq: IGetAllGenreRequest = {
+                page: 1
+            }
+            await getAllGenre(rq);
         }
         fetchData();
     }, []);
@@ -71,29 +71,28 @@ export const Genres: React.FC = () => {
                 <h1 className="font-semibold text-2xl">{t("Genres")}</h1>
                 {
                     genre ?
-                    <div className="flex gap-[18px] flex-wrap mm:justify-center">
-                        {
-                            genre?.map(item => {
-                                return (
-                                    <GenreItem key={Guid.create().toString()} onClick={() => { onSelectGenre(item) }} name={item.name} image={item.image} />
-                                )
-                            })
-                        }
-                    </div>
-                    :
-                    <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
-                        <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
-                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                            <div className="flex flex-col gap-3 items-center dark:text-light-200">
-                            <h1 className="font-medium text-3xl mm:text-xl">{t("Genre not found")}</h1>
-                                <p className="font-medium text-xl mm:text-base">{t("You can also search your favorite playlists")}</p>
-                                {/* <p className="font-medium text-xl mm:text-base">"{rx.error}"</p> */}
-                            </div>
-                            <div>
-                                <DefaultButton onClick={() => { nav("/search") }} text={t("Go to search")} />
+                        <div className="flex gap-[18px] flex-wrap mm:justify-center">
+                            {
+                                genre?.map(item => {
+                                    return (
+                                        <GenreItem key={Guid.create().toString()} onClick={() => { onSelectGenre(item) }} name={item.name} image={item.image} />
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <div className="flex flex-col gap-6 w-full h-full pt-[10%]">
+                            <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
+                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                                <div className="flex flex-col gap-3 items-center dark:text-light-200">
+                                    <h1 className="font-medium text-3xl mm:text-xl">{t("Genre not found")}</h1>
+                                    <p className="font-medium text-xl mm:text-base">{t("You can also search your favorite playlists")}</p>
+                                </div>
+                                <div>
+                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Go to search")} />
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
             </div>
         </div>

@@ -16,8 +16,6 @@ const icon_home = require('../../../Assets/Icons/Home.png');
 const icon_search = require('../../../Assets/Icons/Search.png');
 const icon_lib = require('../../../Assets/Icons/Library.png');
 const icon_pd = require('../../../Assets/Icons/PDAccount.png');
-// const icon_home = require('../../../Assets/Icons/Home.png');
-// const icon_home = require('../../../Assets/Icons/Home.png');
 
 export const LayStartup: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
@@ -35,8 +33,8 @@ export const LayStartup: React.FC = () => {
   return (
     <div className="grid grid-cols-20 w-full mm:flex mm:flex-col sm:flex sm:flex-col md:flex md:flex-col">
       {
-        load.mySingleReducer.loading || load.myAlbumsReducer.loading || 
-        load.playingReducer.loading || load.userReducer.loading || 
+        load.mySingleReducer.loading || load.myAlbumsReducer.loading ||
+        load.playingReducer.loading || load.userReducer.loading ||
         load.searchReducer.loading || load.myPlaylistReducer.loading
         || load.myMediaLibraryReducer.loading || load.mainReducer.loading ||
         load.genreReducer.loading &&
@@ -46,7 +44,7 @@ export const LayStartup: React.FC = () => {
         <SideBar />
       </div>
       <div className={`col-[span_17] lg:col-[span_16] xl:col-[span_16] w-full h-full flex flex-col ${isVisible ? "mb-[150px] mm:mb-[25vh]" : "mb-[100px] mm:mb-[10vh]"}`}>
-        <Header isShow={show} onShow={() => {setShow(!show)}} />
+        <Header isShow={show} onShow={() => { setShow(!show) }} />
         <Outlet />
       </div>
       <div className="fixed bottom-0 w-full grid grid-cols-20 z-[100]">
@@ -69,7 +67,7 @@ export const LayStartup: React.FC = () => {
                   <p>{t("Sign up to listen to playlists, albums and songs for free")}</p>
                 </div>
                 <div className="flex ml-auto mm:w-full sm:w-full md:w-full">
-                  <RedirectButton onClick={() => nav('/authorizate')} text={t("Register & Login - Free")}/>
+                  <RedirectButton onClick={() => nav('/authorizate')} text={t("Register & Login - Free")} />
                 </div>
               </div>
           }
@@ -79,9 +77,9 @@ export const LayStartup: React.FC = () => {
             <SideBarItem text="" isShowLabel icon={icon_lib} onClick={() => { nav("/medialibrary"); }} />
             <FixedModal trigger={<div className="px-6">
               <img alt="avatar" src={GetUserAvatar(user)} className="rounded-xl cursor-pointer transition-all object-cover w-[40px] h-[40px]"
-                                    onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
             </div>} />
-            
+
           </div>
         </div>
       </div>

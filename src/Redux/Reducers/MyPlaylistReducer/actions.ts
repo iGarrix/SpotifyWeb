@@ -121,13 +121,11 @@ export const searchMyPlaylists = (query: string) => {
 export const subscribePlaylist = (data: ISubscribePlaylistRequest) => {
   return async (dispatch: Dispatch<MyPlaylistAction>) => {
     try {
-      //dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.post<any>(
         "api/Playlist/AddSubscriber",
         data, AuthorizateHeader(token)
       );
-      //dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -147,7 +145,6 @@ export const subscribePlaylist = (data: ISubscribePlaylistRequest) => {
 export const unsubscribePlaylist = (data: IUnsubscribePlaylistRequest) => {
   return async (dispatch: Dispatch<MyPlaylistAction>) => {
     try {
-      //dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: true });
       const token = localStorage.getItem("token");
       await http.delete<any>(
         "api/Playlist/RemoveUser",
@@ -156,7 +153,6 @@ export const unsubscribePlaylist = (data: IUnsubscribePlaylistRequest) => {
           data: data
         }
       );
-      //dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_WAITING, payload: false });
       return Promise.resolve();
     } catch (error) {
       if (axios.isAxiosError(error)) {

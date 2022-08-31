@@ -280,7 +280,7 @@ export const acceptInvite = (data: string) => {
             dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
             const token = localStorage.getItem("token");
             const response = await http.post<string>(
-                `api/Invite/AcceptInvite`, data, AuthorizateHeader(token)        
+                `api/Invite/AcceptInvite`, data, AuthorizateHeader(token)
             );
             dispatch({ type: NotificationActionTypes.REJECTINVITE, payload: data });
 
@@ -306,7 +306,7 @@ export const rejectInvite = (data: string) => {
             dispatch({ type: NotificationActionTypes.INITNOTIFICATION_WAITING, payload: true });
             const token = localStorage.getItem("token");
             const response = await http.delete<string>(
-                `api/Invite/RejectInvite`, {data: data, headers: AuthorizateHeader(token).headers}       
+                `api/Invite/RejectInvite`, { data: data, headers: AuthorizateHeader(token).headers }
             );
             dispatch({ type: NotificationActionTypes.REJECTINVITE, payload: data });
 

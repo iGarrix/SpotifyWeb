@@ -425,12 +425,12 @@ i18n.use(initReactI18next).init({
         "Public": "Публічний",
         "Private": "Приватний",
         "Create": "Створити",
-         //Change playlist modal
-         "Change": "Редагування",
-         "Enter new name": "Введіть нове ім'я",
-         "Chose new access type": "Виберіть новий тип приватності",
-         "Save": "Зберегти",
-         //Playlist overview
+        //Change playlist modal
+        "Change": "Редагування",
+        "Enter new name": "Введіть нове ім'я",
+        "Chose new access type": "Виберіть новий тип приватності",
+        "Save": "Зберегти",
+        //Playlist overview
         "Playlist": "Плейлист",
         "Add something to your playlist": "Додайте щось у свій плейлист",
         "Tracks not found": "Пісень не знайдено",
@@ -567,7 +567,7 @@ i18n.use(initReactI18next).init({
         "My Playlists": "Мої плейлисти",
         "My albums": "Мої альбоми",
         "Singles not found": "Пісней не знайдено",
-        "Upload you first single song": "Завантажте свою першу пісню", 
+        "Upload you first single song": "Завантажте свою першу пісню",
         "Create you first playlist song": "Створіть свій перший плейлист",
         "Upload you first": "Завантажте свій перший альбом",
         //Rename bio modal

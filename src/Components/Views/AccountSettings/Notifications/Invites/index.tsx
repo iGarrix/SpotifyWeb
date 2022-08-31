@@ -6,7 +6,7 @@ import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetInviteRequest } from "../../../../../Redux/Reducers/NotificationReducer/types";
 import { InviteCard } from "../../../../Commons/Cards/InviteCard";
 
-export const Invites : React.FC = () => {
+export const Invites: React.FC = () => {
     const { getInvite, addInvite, rejectInvite, acceptInvite } = useActions();
     const reducer = useTypedSelector(state => state.notificationReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
@@ -54,7 +54,7 @@ export const Invites : React.FC = () => {
         try {
             await acceptInvite(inviteId);
         } catch (error) {
-            
+
         }
     }
 
@@ -62,7 +62,7 @@ export const Invites : React.FC = () => {
         try {
             await rejectInvite(inviteId);
         } catch (error) {
-            
+
         }
     }
 
@@ -72,7 +72,7 @@ export const Invites : React.FC = () => {
                 <title>Soundwave | Your invites</title>
             </Helmet>
             {
-                reducer.error &&  !reducer.invites &&
+                reducer.error && !reducer.invites &&
                 <div className="flex flex-col py-5 items-center justify-center bg-red-500/80 rounded-xl">
                     <h1 className="text-light-100 font-medium text-center">{reducer.error}</h1>
                 </div>
@@ -81,7 +81,7 @@ export const Invites : React.FC = () => {
                 {
                     reducer.invites?.map(item => {
                         return (
-                            <InviteCard key={Guid.create().toString()} invite={item} onAccept={() => {onAcceptInvite(item.id)}} onRejected={() => {onRejectInvite(item.id)}} />
+                            <InviteCard key={Guid.create().toString()} invite={item} onAccept={() => { onAcceptInvite(item.id) }} onRejected={() => { onRejectInvite(item.id) }} />
                         )
                     })
                 }

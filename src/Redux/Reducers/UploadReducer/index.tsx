@@ -1,6 +1,4 @@
-
 import { ISongData, IUploadStateState, UploadActionTypes, UploadingAction } from "./types";
-
 
 const inialState: IUploadStateState = {
     singledata: null,
@@ -66,7 +64,7 @@ export const uploadReducer = (
             };
         }
         case UploadActionTypes.INITALBUMMOREFILES: {
-            const tmpPayload : ISongData[]  = [];
+            const tmpPayload: ISongData[] = [];
             action.payload?.forEach(f => {
                 if (state.albumfiles && state.albumfiles.findIndex(ff => ff.file.name === f.name) < 0) {
                     tmpPayload.push(f);
@@ -75,7 +73,7 @@ export const uploadReducer = (
             const arr = state.albumfiles && tmpPayload ? [...state.albumfiles, ...tmpPayload] : [];
             return {
                 ...state,
-                albumfiles: arr,     
+                albumfiles: arr,
                 loading: false,
                 error: "",
             };

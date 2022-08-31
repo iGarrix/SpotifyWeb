@@ -38,7 +38,7 @@ export const playingReducer = (
       let arr = state.tracks ? state.tracks : [];
       if (action.payload && arr) {
         if (action.payload.pageables) {
-          action.payload.pageables.forEach(e => {   
+          action.payload.pageables.forEach(e => {
             arr.push(e);
           })
         }

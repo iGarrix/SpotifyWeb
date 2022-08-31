@@ -76,7 +76,7 @@ export const Login: React.FC = () => {
     nav("/profile");
   }
   const responseError = (error: any) => {
-    
+
   }
   return (
     <div className="overflow-x-hidden w-full min-h-screen bg-gradient-to-b from-dark-200/80 to-dark-200 grid grid-cols-12 items-center relative">

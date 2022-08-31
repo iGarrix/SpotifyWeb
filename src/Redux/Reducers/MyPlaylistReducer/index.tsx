@@ -1,7 +1,6 @@
 import { DefaultServerError } from "../../../types";
 import { IMyPlaylistStateState, MyPlaylistAction, MyPlaylistActionTypes } from "./types";
 
-
 const inialState: IMyPlaylistStateState = {
   playlists: null,
   searchPlaylists: null,

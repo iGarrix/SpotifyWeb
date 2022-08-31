@@ -155,7 +155,7 @@ export const PersonalData: React.FC = () => {
             {
                 user ?
                     <div className="flex flex-col items-center h-full py-[50px] px-[25%] mm:px-[5%] sm:px-[10%] md:px-[15%] lg:px-[15%] xl:px-[20%] gap-[40px] text-dark-200 dark:text-light-200">
-                        <div className='flex flex-col h-full gap-[40px]'>
+                        <div className='flex flex-col h-full gap-[100px]'>
                             <div className='flex w-full justify-center'>
                                 <div className="rounded-xl shadow-2xl flex flex-col items-center bg-light-200 dark:bg-dark-200/80 gap-[20px] relative overflow-hidden mm:w-full sm:w-full">
                                     <div className="absolute top-0 left-0 w-full h-full grid grid-rows-10">

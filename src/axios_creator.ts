@@ -8,7 +8,7 @@ export default axios.create({
   },
 });
 
-export const AuthorizateHeader = (token : any) => {
+export const AuthorizateHeader = (token: any) => {
   return {
     headers: {
       Authorization: "Bearer " + token
@@ -16,5 +16,5 @@ export const AuthorizateHeader = (token : any) => {
   }
 }
 export interface IAuthConfig {
-  headers: {Authorization : any};
+  headers: { Authorization: any };
 }

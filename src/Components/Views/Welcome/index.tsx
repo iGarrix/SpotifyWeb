@@ -100,7 +100,7 @@ export const Welcome: React.FC = () => {
           <div className="flex col-span-5 w-full justify-end mm:justify-center items-center z-[2]">
             <img alt="bestofweek"
               className="bg-no-repeat object-cover bg-cover rounded-xl shadow-xl w-[264px] h-[264px] mm:w-[164px] mm:h-[164px] sm:w-[164px] sm:h-[164px] md:w-[184px] md:h-[184px] lg:w-[200px] lg:h-[200px] xl:w-[244px] xl:h-[244px]"
-              src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }}/>
+              src={baseUrl + "Images/AlbomImages/" + mainReducer.albums[0].albomDto?.image} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
           </div>
           <div className="flex flex-col mm:items-center gap-4 sm:gap-2 md:gap-2 lg:gap-2 col-start-6 col-span-7 z-[2]">
             <p className="font-medium text-xl md:text-lg xl:text-lg select-none text-light-200 mm:hidden sm:hidden">{t("The best of week")}</p>
@@ -151,9 +151,9 @@ export const Welcome: React.FC = () => {
                   {
                     mainReducer.tracks.map(item => {
                       return (
-                        <SoundItem key={Guid.create().toString()} 
-                        isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                        item={item} onClick={() => { onSelectTrack(item) }} />
+                        <SoundItem key={Guid.create().toString()}
+                          isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                          item={item} onClick={() => { onSelectTrack(item) }} />
                       )
                     })
                   }
@@ -201,7 +201,7 @@ export const Welcome: React.FC = () => {
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (
-                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); } } title={item.track?.name + "dfjghdfjghdfjkghdfjkghdfjkghdfjghxcbvnm"} />
+                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); }} title={item.track?.name + "dfjghdfjghdfjkghdfjkghdfjkghdfjghxcbvnm"} />
                       )
                     })
                   }

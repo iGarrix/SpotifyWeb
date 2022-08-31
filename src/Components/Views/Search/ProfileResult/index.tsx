@@ -1,12 +1,10 @@
 import { faCircleUser, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { profile } from "console";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useTransition } from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { start } from "repl";
 import { useActions } from "../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../Hooks/useTypedSelector";
 import { UserOverviever } from "../../../Commons/Cards/UserOverviever";
@@ -63,12 +61,6 @@ export const ProfileResult: React.FC = () => {
             await addAllSearchProfile(query, rx.nextPage);
         }
     }
-    // const onSelectGenre = async (item: IGenre | null) => {
-    //     if (item) {
-    //         clearGenrePlaylist();
-    //         nav(item?.name);
-    //     }
-    // }
     return (
         <div className="w-full h-full flex flex-col justify-start items-center relative">
             <Helmet>

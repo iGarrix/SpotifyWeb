@@ -14,7 +14,7 @@ export const UploadSingleStepOne: React.FC = () => {
 
     const nav = useNavigate();
     const file = useTypedSelector(state => state.uploadReducer.singlefile);
-    const {initSingleFile} = useActions();
+    const { initSingleFile } = useActions();
     const { t } = useTranslation();
     const onUpload = (event: any) => {
         initSingleFile(event.target.files[0]);

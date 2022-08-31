@@ -88,7 +88,3 @@ export interface IUnsubscribeAlbumRequest {
   albomId: string,
   email: string,
 }
-
-export interface ICreateAlbumRequest {
-  
-}

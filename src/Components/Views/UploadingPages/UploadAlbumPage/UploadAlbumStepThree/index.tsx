@@ -25,7 +25,7 @@ export const UploadAlbumStepThree: React.FC = () => {
 
     return (
         <div className="w-full flex flex-col items-center gap-10 h-full relative text-dark-200 dark:text-light-200">
-            <div className="flex flex-col pt-[4%] gap-[2%] mm:gap-4 sm:gap-4 md:gap-4 w-full h-full px-[30%] mm:px-[2%] sm:px-[2%] md:px-[5%] lg:px-[5%] xl:px-[15%] 2xl:px-[25%]">
+            <div className="flex flex-col pt-[4%] gap-[7%] mm:gap-4 sm:gap-4 md:gap-4 w-full h-full px-[30%] mm:px-[2%] sm:px-[2%] md:px-[5%] lg:px-[5%] xl:px-[15%] 2xl:px-[25%]">
                 <div className="flex flex-col gap-2 bg-light-100 dark:bg-dark-100 rounded-lg px-6 py-5">
                     <h1 className="text-xl font-medium">{t("Preview")}</h1>
                     <div className="w-full flex mm:flex-col sm:flex-col mm:items-center sm:items-center gap-[20px]">
@@ -45,7 +45,7 @@ export const UploadAlbumStepThree: React.FC = () => {
                                                 <p>{formatBytes(f.file.size)}</p>
                                             </div>
                                         )
-                                    })  
+                                    })
                                 }
                             </div>
                         </div>

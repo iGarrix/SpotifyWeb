@@ -8,7 +8,7 @@ import { MySingleActionTypes } from "./Reducers/MySingleReducer/types";
 import { PlayingActionTypes } from "./Reducers/PlayingReducer/types";
 import { UserActionTypes } from "./Reducers/UserReducer/types";
 
-export function ClearRedux (dispatch: Dispatch<any>) {
+export function ClearRedux(dispatch: Dispatch<any>) {
     dispatch({ type: UserActionTypes.INITUSER_CLEAR });
     dispatch({ type: MyPlaylistActionTypes.INITMYPLAYLIST_CLEAR });
     dispatch({ type: MyAlbumActionTypes.INITMYALBUM_CLEAR });
@@ -21,7 +21,7 @@ export function ClearRedux (dispatch: Dispatch<any>) {
     localStorage.removeItem("expiredin");
 };
 
-export function ClearStorage (dispatch: Dispatch<any>) {
+export function ClearStorage(dispatch: Dispatch<any>) {
     ClearRedux(dispatch);
     localStorage.removeItem(StorageVariables.ForgotUser);
     localStorage.removeItem(StorageVariables.History);

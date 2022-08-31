@@ -32,7 +32,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
     const { t } = useTranslation();
 
     const [verifyImage] = useState(user?.verify === VerifyType.profile ? <FontAwesomeIcon className="verifyiconfixed" icon={faUser} width={12} height={12} /> :
-            user?.verify === VerifyType.verify ? <FontAwesomeIcon className="verifyiconfixed" icon={faCheck} width={12} height={12} /> : null)
+        user?.verify === VerifyType.verify ? <FontAwesomeIcon className="verifyiconfixed" icon={faCheck} width={12} height={12} /> : null)
     useEffect(() => {
 
 
@@ -67,9 +67,9 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
             <div onClick={() => { setOpen(!isOpen) }}>
                 {trigger}
             </div>
-            <div ref={fixeddropdown} onClick={() => {setOpen(false);}}
-            className={`${isOpen ? "border-light-100/20 shadow-2xl fixed right-10 top-16 mm:w-auto mm:h-auto mm:rounded-xl mm:right-4 mm:left-4 mm:top-4 mm:bottom-20 flex flex-col text-dark-200 bg-light-200 dark:text-light-200 dark:bg-dark-200 rounded-sm overflow-hidden"
-                : "hidden"}`} style={{ zIndex: 30 }}>
+            <div ref={fixeddropdown} onClick={() => { setOpen(false); }}
+                className={`${isOpen ? "border-light-100/20 shadow-2xl fixed right-10 top-16 mm:w-auto mm:h-auto mm:rounded-xl mm:right-4 mm:left-4 mm:top-4 mm:bottom-20 flex flex-col text-dark-200 bg-light-200 dark:text-light-200 dark:bg-dark-200 rounded-sm overflow-hidden"
+                    : "hidden"}`} style={{ zIndex: 30 }}>
                 <div className="w-full py-2 px-4 gap-3 flex items-center transition-all hover:text-light-200 hover:bg-primary-100 active:bg-primary-100/20 cursor-pointer mb-1 hoveredverifyfixed" onClick={() => { onNavigateClick("/profile") }}>
                     <div className="scale-110">
                         {trigger}
@@ -81,7 +81,7 @@ export const FixedModal: React.FC<IFixedModal> = ({ trigger }) => {
                 </div>
                 <div className="flex flex-col mb-1">
                     {!user?.emailconfirm ?
-                        <div className="bg-red-500 py-3 px-4 flex items-center gap-3 transition-all hover:bg-red-400 cursor-pointer text-light-100" onClick={() => {onNavigateClick("/accountsettings/verifyemail")}}>
+                        <div className="bg-red-500 py-3 px-4 flex items-center gap-3 transition-all hover:bg-red-400 cursor-pointer text-light-100" onClick={() => { onNavigateClick("/accountsettings/verifyemail") }}>
                             <FontAwesomeIcon className="text-2xl" icon={faTriangleExclamation} />
                             <h1 className="select-none font-[15px]">{t("Email don't confirmed")}</h1>
                         </div> : null

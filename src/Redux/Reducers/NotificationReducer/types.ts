@@ -73,7 +73,7 @@ export interface INotificationStateState {
   appelations: IAppelation[] | null,
   statuses: IUserStatusResponse[] | null,
   selectedStatus: IUserStatusResponse | null,
-  invites: IInvite [] | null,
+  invites: IInvite[] | null,
   prevPage: number | null,
   nextPage: number | null,
   loading: boolean;
@@ -143,7 +143,7 @@ export type NotificateAction =
   | AddNotificationAction
   | InitAppelationsAction
   | AddAppelationsAction
-  | InitStatusesAction 
+  | InitStatusesAction
   | AddStatusesAction
   | InitInvitesAction
   | AddInvitesAction

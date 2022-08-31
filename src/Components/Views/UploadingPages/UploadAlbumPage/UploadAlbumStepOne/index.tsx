@@ -20,7 +20,7 @@ export const UploadAlbumStepOne: React.FC = () => {
         }
         return [];
     })
-    const { initAlbumFiles, initAlbumMoreFiles, removeAlbumFile } = useActions(); 
+    const { initAlbumFiles, initAlbumMoreFiles, removeAlbumFile } = useActions();
 
     useEffect(() => {
         if (reducer.albumfiles) {
@@ -34,7 +34,7 @@ export const UploadAlbumStepOne: React.FC = () => {
     const onUpload = (event: any) => {
         let song: ISongData[] = [];
         [...event.target.files].forEach((f: File) => {
-            if (f.size <= 26214400) {           
+            if (f.size <= 26214400) {
                 song.push(
                     {
                         file: f,
@@ -53,7 +53,7 @@ export const UploadAlbumStepOne: React.FC = () => {
     const onClear = () => {
         initAlbumFiles(null);
     }
-    const onDelete = (item : ISongData | null) => {
+    const onDelete = (item: ISongData | null) => {
         if (item) {
             removeAlbumFile(item);
         }
@@ -61,7 +61,7 @@ export const UploadAlbumStepOne: React.FC = () => {
     const onUploadMore = (event: any) => {
         let song: ISongData[] = [];
         [...event.target.files].forEach((f: File) => {
-            if (f.size <= 26214400) {        
+            if (f.size <= 26214400) {
                 song.push(
                     {
                         file: f,
@@ -106,7 +106,7 @@ export const UploadAlbumStepOne: React.FC = () => {
                             {
                                 files?.map(item => {
                                     return (
-                                        <UploadFileCard key={Guid.create().toString()} file={item} onDelete={() => { onDelete(item); } } onChange={(e: any) => {onChangeTitle(item, e.target.value)}}/>
+                                        <UploadFileCard key={Guid.create().toString()} file={item} onDelete={() => { onDelete(item); }} onChange={(e: any) => { onChangeTitle(item, e.target.value) }} />
                                     )
                                 })
                             }
@@ -115,8 +115,8 @@ export const UploadAlbumStepOne: React.FC = () => {
                                     <input type="file" id="filebgmore" accept="audio/mp3" multiple onChange={onUploadMore} className="hidden" />
                                     <DefaultButton text={
                                         <label htmlFor="filebgmore" className="cursor-pointer"><div className="flex gap-2"> <h1>{t("Upload more")}</h1></div></label>
-                                    } onClick={() => { }}/>
-                                    
+                                    } onClick={() => { }} />
+
                                 </div>
                                 <DefaultButton onClick={onClear} text={t("Clear All")} />
                             </div>

@@ -98,33 +98,33 @@ export const MyMediaLibrarySingle: React.FC = () => {
                 <title>Soundwave | MyMediaLibrarySingle</title>
             </Helmet>
             {
-                    singles && rx.error.length === 0 ?
-                        <div className="w-full h-full flex flex-col gap-[18px] px-[330px] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 2xl:px-[15%]">
-                            {
-                                singles.map(item => {
-                                    return (
-                                        <SoundItem key={Guid.create().toString()}
-                                            onClick={() => { onSelectTrack(item) }}
-                                            isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
-                                            item={item}
-                                        />
-                                    )
-                                })
-                            }
-                        </div>
-                        :
-                        <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first single song")}</h1>
-                                    <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first single song")} />
-                                </div>
+                singles && rx.error.length === 0 ?
+                    <div className="w-full h-full flex flex-col gap-[18px] px-[330px] mm:px-0 sm:px-0 md:px-0 lg:px-0 xl:px-0 2xl:px-[15%]">
+                        {
+                            singles.map(item => {
+                                return (
+                                    <SoundItem key={Guid.create().toString()}
+                                        onClick={() => { onSelectTrack(item) }}
+                                        isPlay={playingReducer.queue && item.track ? playingReducer.queue.soundobjs[playingReducer.queue.playedIndex].track?.returnId === item.track.returnId && playingReducer.queue?.isPlay : false}
+                                        item={item}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                    :
+                    <>
+                        <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faMusic} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first single song")}</h1>
+                                <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
                             </div>
-                        </>
+                            <div>
+                                <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first single song")} />
+                            </div>
+                        </div>
+                    </>
             }
         </div>
     );

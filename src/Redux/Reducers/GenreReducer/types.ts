@@ -1,16 +1,15 @@
 import { IPagableResponse } from "../../../types";
 import { IPagableMyPlaylistItem, IPlaylist } from "../MyPlaylistReducer/types";
 
-
 export enum MyGenreActionTypes {
-    INITGENRE = "INITGENRE",
-    ADDGENRE = "ADDGENRE",
-    INITGENREPLAYLIST = "INITGENREPLAYLIST",
-    ADDGENREPLAYLIST = "ADDGENREPLAYLIST",
-    INITGENRE_WAITING = "INITGENRE_WAITING",
-    INITGENRE_ERROR = "INITGENRE_ERROR",
-    INITGENRE_CLEAR = "INITGENRE_CLEAR",
-    INITGENREPLAYLIST_CLEAR = "INITGENREPLAYLIST_CLEAR"
+  INITGENRE = "INITGENRE",
+  ADDGENRE = "ADDGENRE",
+  INITGENREPLAYLIST = "INITGENREPLAYLIST",
+  ADDGENREPLAYLIST = "ADDGENREPLAYLIST",
+  INITGENRE_WAITING = "INITGENRE_WAITING",
+  INITGENRE_ERROR = "INITGENRE_ERROR",
+  INITGENRE_CLEAR = "INITGENRE_CLEAR",
+  INITGENREPLAYLIST_CLEAR = "INITGENREPLAYLIST_CLEAR"
 }
 
 export interface IGenre {
@@ -70,10 +69,10 @@ export interface InitGenrePlayistClearAction {
 
 export type MyGenreAction =
   | InitGenreAction
-  |  InitGenrePlaylistAction
+  | InitGenrePlaylistAction
   | InitGenreWaitAction
   | InitGenreErrorAction
   | InitGenreClearAction
   | AddGenreAction
   | InitGenrePlayistClearAction
-  |  AddGenrePlaylistAction;
+  | AddGenrePlaylistAction;

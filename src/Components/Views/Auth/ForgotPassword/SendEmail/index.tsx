@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../Hooks/useActions";
 import { Helmet } from "react-helmet";
 import { FormikField } from "../../../../Commons/Inputs/FormikField";
-import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
-import { Field } from "../../../../Commons/Inputs/Field";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { DefaultButton } from "../../../../Commons/Buttons/DefaultButton";
@@ -80,7 +78,7 @@ export const PasswordSendEmail: React.FC = () => {
 
                                     <div className="flex items-center justify-between w-full mm:mt-auto sm:mt-auto py-2 px-40 mm:px-16 sm:px-16 md:px-20 lg:px-20">
                                         <button type="button" onClick={() => { nav("/authorizate") }}>
-                                            <FontAwesomeIcon className="text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
+                                            <FontAwesomeIcon className="bg-dark-100 rounded-2xl shadow-2xl px-5 py-2 text-3xl cursor-pointer hover:text-primary-100 transition-all" icon={faArrowLeft} />
                                         </button>
                                         <DefaultButton text={t("Send code")} onClick={() => { }} />
                                     </div>

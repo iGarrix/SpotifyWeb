@@ -12,7 +12,7 @@ import { AlbumItem } from "../../../Commons/AlbumItem";
 import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 
 export const MyMediaLibraryAlbums: React.FC = () => {
-  const nav = useNavigate();
+    const nav = useNavigate();
     const { getMyMediaLibraryAlbums, addMyMediaLibraryAlbums, clearTracks, initSelectAlbum } = useActions();
     const rx = useTypedSelector(state => state.myMediaLibraryReducer);
     const albums = useTypedSelector(state => state.myMediaLibraryReducer.albums);
@@ -66,38 +66,38 @@ export const MyMediaLibraryAlbums: React.FC = () => {
             nav("/album/" + item?.albomDto?.returnId);
         }
     }
-  return (
-    <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
-      <Helmet>
-        <title>Soundwave | MyMediaLibraryAlbums</title>
-      </Helmet>
-      {
-                    albums && rx.error.length === 0 ?
-                        <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-16">
-                                {
-                                    albums.map(item => {
-                                        return (
-                                            <AlbumItem key={Guid.create().toString()} onClick={() => { onSelectAlbum(item) }} name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
-                                        )
-                                    })
-                                }
+    return (
+        <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
+            <Helmet>
+                <title>Soundwave | MyMediaLibraryAlbums</title>
+            </Helmet>
+            {
+                albums && rx.error.length === 0 ?
+                    <div className="w-full flex flex-col items-center gap-20">
+                        <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-16">
+                            {
+                                albums.map(item => {
+                                    return (
+                                        <AlbumItem key={Guid.create().toString()} onClick={() => { onSelectAlbum(item) }} name={item.albomDto?.name} title={`${item.songs} songs`} imageSrc={item.albomDto?.image} />
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    :
+                    <>
+                        <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first album")}</h1>
+                                <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
+                            </div>
+                            <div>
+                                <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first album")} />
                             </div>
                         </div>
-                        :
-                        <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first album")}</h1>
-                                    <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first album")} />
-                                </div>
-                            </div>
-                        </>
+                    </>
             }
-    </div>
-  );
+        </div>
+    );
 };

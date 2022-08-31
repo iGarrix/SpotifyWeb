@@ -20,7 +20,6 @@ export const RemoveCreatorWithAlbumModal: React.FC<IRemoveCreatorWithAlbumModal>
     const onRemoveHandle = (item: IUserSearch | null) => {
         if (item) {
             props.onRemove(item);
-            //props.onClose();
         }
     }
 
@@ -39,22 +38,22 @@ export const RemoveCreatorWithAlbumModal: React.FC<IRemoveCreatorWithAlbumModal>
                         <div className="flex flex-col gap-2 w-full">
                             {
                                 props.artists && props.artists.length > 0 ?
-                                props.artists.map(item => {
-                                    return (
-                                        <div key={Guid.create().toString()} className="flex gap-2 overflow-hidden rounded-md">
-                                            <img alt="avatar" src={GetUserAvatarSimple(item.avatar)} className="w-[64px] h-[64px] rounded-md"
-                                                onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
-                                            <div className="flex flex-col justify-center">
-                                                <p className="text-lg">{item.username}</p>
-                                            </div>
-                                            <div className="flex items-center ml-auto">
-                                                <FontAwesomeIcon icon={faTrash} className="flex items-center justify-center text-center rounded-md p-2 px-2.5 shadow-xl cursor-pointer
+                                    props.artists.map(item => {
+                                        return (
+                                            <div key={Guid.create().toString()} className="flex gap-2 overflow-hidden rounded-md">
+                                                <img alt="avatar" src={GetUserAvatarSimple(item.avatar)} className="w-[64px] h-[64px] rounded-md"
+                                                    onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
+                                                <div className="flex flex-col justify-center">
+                                                    <p className="text-lg">{item.username}</p>
+                                                </div>
+                                                <div className="flex items-center ml-auto">
+                                                    <FontAwesomeIcon icon={faTrash} className="flex items-center justify-center text-center rounded-md p-2 px-2.5 shadow-xl cursor-pointer
                                                 bg-blue-500 text-light-100 ml-auto text-lg bg-cover object-cover" onClick={() => { onRemoveHandle(item) }} />
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                }) :
-                                <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4 w-full">{t("No Result")}</h1>
+                                        )
+                                    }) :
+                                    <h1 className="text-center bg-red-500/90 text-light-100 rounded-lg py-4 w-full">{t("No Result")}</h1>
                             }
                         </div>
                 }

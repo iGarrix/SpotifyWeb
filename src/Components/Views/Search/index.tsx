@@ -28,7 +28,7 @@ export const Search: React.FC = () => {
         if (searchQuery && searchQuery.length != 0) {
             onSearch(searchQuery)
         }
-        else{
+        else {
             onSearch("");
         }
     }, [searchQuery]);
@@ -37,10 +37,10 @@ export const Search: React.FC = () => {
         ClearSearchXHR();
     }, [])
 
-    const onSearch = (value: string) => {    
+    const onSearch = (value: string) => {
         startTransition(() => {
-            setSearchParams({query: value});
-        });   
+            setSearchParams({ query: value });
+        });
     }
 
     const onNavigateFilter = (value: string) => {
@@ -48,13 +48,13 @@ export const Search: React.FC = () => {
         if (query) {
             nav({
                 pathname: value,
-                search: `?${createSearchParams({query: query})}`,
+                search: `?${createSearchParams({ query: query })}`,
             });
         }
         else {
             nav(value);
         }
-        
+
     }
 
     return (
@@ -70,14 +70,14 @@ export const Search: React.FC = () => {
                         }} icon={<img alt="icon" className="invert dark:invert-0 w-[28px]" src={icon_search} />} />
                     </div>
                     {
-                        searchQuery && 
+                        searchQuery &&
                         <div className="flex gap-4 mm:grid mm:grid-cols-2 sm:grid sm:grid-cols-3">
-                            <FilterButton text={t("All result")} isSelected={history.pathname == "/search"} onClick={() => {onNavigateFilter("")}} />
-                            <FilterButton text={t("Album")} isSelected={history.pathname.includes("/albums")} onClick={() => {onNavigateFilter("albums")}}/>
-                            <FilterButton text={t("Playlis")} isSelected={history.pathname.includes("/playlists")} onClick={() => {onNavigateFilter("playlists")}} />
-                            <FilterButton text={t("Tracks")} isSelected={history.pathname.includes("/tracks")} onClick={() => {onNavigateFilter("tracks")}}/>
-                            <FilterButton text={t("Artists")} isSelected={history.pathname.includes("/artists")} onClick={() => {onNavigateFilter("artists")}}/>
-                            <FilterButton text={t("Profiles")} isSelected={history.pathname.includes("/profiles")} onClick={() => {onNavigateFilter("profiles")}}/>
+                            <FilterButton text={t("All result")} isSelected={history.pathname == "/search"} onClick={() => { onNavigateFilter("") }} />
+                            <FilterButton text={t("Album")} isSelected={history.pathname.includes("/albums")} onClick={() => { onNavigateFilter("albums") }} />
+                            <FilterButton text={t("Playlis")} isSelected={history.pathname.includes("/playlists")} onClick={() => { onNavigateFilter("playlists") }} />
+                            <FilterButton text={t("Tracks")} isSelected={history.pathname.includes("/tracks")} onClick={() => { onNavigateFilter("tracks") }} />
+                            <FilterButton text={t("Artists")} isSelected={history.pathname.includes("/artists")} onClick={() => { onNavigateFilter("artists") }} />
+                            <FilterButton text={t("Profiles")} isSelected={history.pathname.includes("/profiles")} onClick={() => { onNavigateFilter("profiles") }} />
                         </div>
                     }
                 </div>

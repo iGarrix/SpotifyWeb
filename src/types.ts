@@ -10,7 +10,6 @@ export enum LanguageVars {
   UA = "Ua"
 }
 
-
 export enum DeviceType {
   mobile = "mobile",
   desktop = "WebBrowser Desktop",
@@ -76,7 +75,7 @@ export interface IPagableResponse<T = any> {
 }
 
 // RELEASE
-export const baseUrl = "https://soundwave.gq/"; 
+export const baseUrl = "https://soundwave.gq/";
 // DEVELOPMENT
 //export const baseUrl = "https://localhost:5001/"; 
 //export const baseUrl = "https://localhost:7286/";
@@ -97,21 +96,12 @@ export const defaultBackgroundImage = "https://static.vecteezy.com/system/resour
 
 
 export function monthDiff(d1: Date, d2: Date) {
-  // var months;
-  // months = (d1.getFullYear() - d2.getFullYear()) * 12;
-  // months += d1.getMonth();
-  // months -= d2.getMonth();
-  // return months <= 0 ? 0 : months;
   var diff = Math.abs(d1.getTime() - d2.getTime());
   var diffMonth = Math.ceil(diff / (1000 * 3600 * 24 * 30));
   return diffMonth;
 }
 
 export function dayDiff(d1: Date, d2: Date) {
-  // var day;
-  // day = ((d1.getFullYear() - d2.getFullYear()) * 12) * 30;
-  // console.log(day);
-  // return day <= 0 ? 0 : day;
   var diff = Math.abs(d1.getTime() - d2.getTime());
   var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
   return diffDays;
@@ -180,7 +170,7 @@ export function GetUserBackgroundSimple(image: string | null) {
 }
 
 export function shuffle<T>(array: T[]): T[] {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length, randomIndex;
 
   while (currentIndex != 0) {
 

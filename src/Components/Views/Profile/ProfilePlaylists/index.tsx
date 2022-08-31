@@ -74,32 +74,31 @@ export const ProfilePlaylists: React.FC = () => {
         }
     }
     return (
-        <div className="w-full h-full flex flex-col justify-start py-8 items-center gap-12 relative mm:w-full sm:w-full md:w-full px-5 text-dark-200 dark:text-light-200">
+        <div className="w-full h-full flex flex-col justify-start py-12 items-center gap-12 relative mm:w-full sm:w-full md:w-full px-5 text-dark-200 dark:text-light-200">
             <Helmet>
                 <title>Soundwave | My Playlist</title>
             </Helmet>
             {
-                    playlists && rx.error.length === 0 ?
-                        <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
-                                {
-                                    playlists.map(item => {
-                                        return (
-                                            <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
-                                        )
-                                    })
-                                }
-                            </div>
+                playlists && rx.error.length === 0 ?
+                    <div className="w-full flex flex-col items-center gap-20">
+                        <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-16">
+                            {
+                                playlists.map(item => {
+                                    return (
+                                        <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
+                                    )
+                                })
+                            }
                         </div>
-                        :
-                        <>
-                            <hr className="w-full" />
-                            <div className="flex flex-col items-center gap-6">
-                                <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
-                                <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1>
-                                <DefaultButton onClick={() => { nav("/creativestudio") }} text={t("Create you first playlist song")} />
-                            </div>
-                        </>
+                    </div>
+                    :
+                    <>
+                        <div className="flex flex-col items-center gap-6">
+                            <FontAwesomeIcon className="text-7xl mt-[5vh] font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                            <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Playlist not found")}</h1>
+                            <DefaultButton onClick={() => { nav("/creativestudio") }} text={t("Create you first playlist song")} />
+                        </div>
+                    </>
             }
         </div>
     )

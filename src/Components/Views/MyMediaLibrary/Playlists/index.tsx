@@ -12,7 +12,7 @@ import { DefaultButton } from "../../../Commons/Buttons/DefaultButton";
 import { PlaylistItem } from "../../../Commons/PlaylistItem";
 
 export const MyMediaLibraryPlaylists: React.FC = () => {
-  const nav = useNavigate();
+    const nav = useNavigate();
     const { getMyMediaLibraryPlaylists, addMyMediaLibraryPlaylists, clearTracks, initSelectPlaylist } = useActions();
 
     const rx = useTypedSelector(state => state.myMediaLibraryReducer);
@@ -72,45 +72,45 @@ export const MyMediaLibraryPlaylists: React.FC = () => {
             if (item.playlistCreator?.username === user?.username) {
                 nav({
                     pathname: "/playlist/" + item?.playlistDto?.returnId,
-                }); 
+                });
             }
             else {
                 nav("/playlist/" + item?.playlistDto?.returnId);
             }
         }
     }
-  return (
-    <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
-      <Helmet>
-        <title>Soundwave | MyMediaLibraryPlaylists</title>
-      </Helmet>
-      {
-                    playlists && rx.error.length === 0 ?
-                        <div className="w-full flex flex-col items-center gap-20">
-                            <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-16">
-                                {
-                                    playlists.map(item => {
-                                        return (
-                                            <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
-                                        )
-                                    })
-                                }
+    return (
+        <div className="w-full h-full flex flex-col justify-start items-center py-8 gap-12 relative">
+            <Helmet>
+                <title>Soundwave | MyMediaLibraryPlaylists</title>
+            </Helmet>
+            {
+                playlists && rx.error.length === 0 ?
+                    <div className="w-full flex flex-col items-center gap-20">
+                        <div className="grid grid-cols-4 mm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-16">
+                            {
+                                playlists.map(item => {
+                                    return (
+                                        <PlaylistItem key={Guid.create().toString()} onClick={() => { onSelectPlaylist(item) }} name={item.playlistDto?.name} title={`${item.songs} songs`} imageSrc={item.playlistDto?.image} />
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    :
+                    <>
+                        <FontAwesomeIcon className="text-7xl mt-[10vh] font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
+                        <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first playlist")}</h1>
+                                <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
+                            </div>
+                            <div>
+                                <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first playlist")} />
                             </div>
                         </div>
-                        :
-                        <>
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faSquarePlus} />
-                            <div className="flex flex-col items-center gap-8 text-dark-200 dark:text-light-200">
-                                <div className="flex flex-col gap-3 items-center">
-                                    <h1 className="font-medium text-3xl mm:text-2xl text-center">{t("Save you first playlist")}</h1>
-                                    <p className="font-medium text-xl mm:text-lg text-center">{t("You can also login your account")}</p>
-                                </div>
-                                <div>
-                                    <DefaultButton onClick={() => { nav("/search") }} text={t("Save you first playlist")} />
-                                </div>
-                            </div>
-                        </>
+                    </>
             }
-    </div>
-  );
+        </div>
+    );
 };
