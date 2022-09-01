@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div
-      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark from-dark-100/100 to-dark-200/100 bg-gradient-to-b" : "bg-gradient-to-b from-light-200/100 to-light-100/100"}`}
+      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark from-dark-200/80 to-dark-200/100 bg-gradient-to-b" : "bg-gradient-to-b from-light-200/80 to-light-100/100"}`}
     >
       <Routes>
         <Route path="/" element={<LayStartup />}>

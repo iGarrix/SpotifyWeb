@@ -100,7 +100,7 @@ export const Profile: React.FC = () => {
                 </div>
             }
             <div className="flex flex-col gap-2 mm:gap-0 sm:gap-0">
-              <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-['Lexend'] flex gap-4 profilenames">{user?.name} {user?.surname}
+              <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl flex gap-4 profilenames">{user?.name} {user?.surname}
                 <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangeName} />
               </h1>
               <p className="font-medium flex gap-1 items-start">{user?.username} {verifyImage}</p>

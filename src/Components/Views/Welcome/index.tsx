@@ -201,7 +201,7 @@ export const Welcome: React.FC = () => {
                   {
                     playingReducer.history.soundobjs.map(item => {
                       return (
-                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); }} title={item.track?.name + "dfjghdfjghdfjkghdfjkghdfjkghdfjghxcbvnm"} />
+                        <SingleCard key={Guid.create().toString()} image={baseUrl + "Images/Tracks/" + item.track?.image} onClick={() => { onSelectTrack(item); }} title={item.track?.name} />
                       )
                     })
                   }

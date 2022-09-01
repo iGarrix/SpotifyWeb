@@ -15,7 +15,7 @@ export const SoundItemSingle: React.FC<ISoundItemSingle> = ({ item, onDelete }) 
             <div className="flex w-full gap-4 ">
                 <div className={`p-3 grid grid-cols-12 gap-4 w-full overflow-hidden plCardMailSelect`}>
                     <div className="flex flex-col items-start justify-between col-span-5 sm:col-span-8 md:col-span-8 lg:col-span-7 xl:col-span-6 mm:col-span-full">
-                        <div className="flex gap-6 items-center bg-blue-400 text-light-100 rounded-xl py-3 px-2 w-full">    
+                        <div className="flex gap-6 items-center bg-dark-200/30 text-light-100 rounded-xl py-3 px-2 w-full">    
                             <h1 className="text-medium">
                                 {
                                     item.trackCreators?.map(i => i.username).map((i: any, index: number) => {
