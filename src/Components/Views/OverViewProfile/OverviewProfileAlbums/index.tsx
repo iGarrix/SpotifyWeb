@@ -85,9 +85,8 @@ export const OverviewProfileAlbums: React.FC = () => {
                     </div>
                     :
                     <>
-                        <hr className="w-full" />
                         <div className="flex flex-col items-center gap-6">
-                            <FontAwesomeIcon className="text-7xl font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
+                            <FontAwesomeIcon className="text-7xl mt-[5vh] font-medium text-dark-200 dark:text-light-200" icon={faCompactDisc} />
                             <h1 className="font-medium text-2xl text-dark-200 dark:text-light-200">{t("Albums not found")}</h1>
                         </div>
                     </>

@@ -356,7 +356,7 @@ i18n.use(initReactI18next).init({
       translation: {
         // GLOBAL
         // Main SideBar
-        "Home": "Основна",
+        "Home": "Головна",
         "Search": "Пошук",
         "Genres": "Жанри",
         "History": "Історія",
