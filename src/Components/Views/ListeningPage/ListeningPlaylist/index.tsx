@@ -195,7 +195,7 @@ export const ListeningPlaylist: React.FC = () => {
 
     return (
         <div className="w-full h-full pt-[7%] px-[15%] mm:px-[3%] sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] text-dark-200 dark:text-light-200 relative">
-            <div className="fixed top-0 left-0 dark:bg-dark-200/80 w-full h-full"></div>
+            <div className="fixed top-0 left-0 bg-light-200/90 dark:bg-dark-200/80 w-full h-full"></div>
             {
                 playingReducer.playlist ?
                     <img alt="bg" src={`${baseUrl}Images/Playlist/${playingReducer.playlist?.playlistDto?.image}`} className="fixed top-0 left-0 object-cover bg-cover w-full h-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
@@ -216,7 +216,7 @@ export const ListeningPlaylist: React.FC = () => {
                                             className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
-                                                <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                                <h1 className=" text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                                 <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
                                                     <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                                                 </p>
@@ -268,7 +268,7 @@ export const ListeningPlaylist: React.FC = () => {
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col gap-1">
                                     <div className="flex gap-4 w-full items-center">
-                                        <h1 className="font-medium font-['Lexend'] text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                        <h1 className="font-medium  text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
                                             playingReducer.playlist.playlistCreator?.username === user?.username &&
                                             <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => { nav('/creativestudio/overviewplaylist/' + id) }} />
