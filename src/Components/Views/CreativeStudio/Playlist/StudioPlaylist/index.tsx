@@ -138,16 +138,22 @@ export const StudioPlaylist: React.FC = () => {
                     </FullScreenModal> : null
             }
             {
-                createPlaylist && openModal2 ?
+                createPlaylist && user?.status !== "Freeze" && openModal2 ?
                     <FullScreenModal visible center>
                         <CreatePlaylistModal onSave={onSaveChanges2} onClose={onCloseModal2} />
                     </FullScreenModal> : null
             }
             <div className="flex flex-col gap-8 w-full h-full">
-                <h1 className="font-semibold text-2xl mm:text-center mm:mt-4">{t("Create new Playlist")}</h1>
-                <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-300 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
-                    <FontAwesomeIcon className="text-white text-[64px]" icon={faPlus} />
-                </div>
+                {
+                    user?.status !== "Freeze" &&
+                    <h1 className="font-semibold text-2xl mm:text-center mm:mt-4">{t("Create new Playlist")}</h1>        
+                }
+                {
+                    user?.status !== "Freeze" &&
+                    <div className="flex items-center cursor-pointer rounded-md justify-center w-[112px] h-[112px] bg-light-300 dark:bg-dark-200 transition-all hover:bg-dark-200/40 dark:hover:bg-dark-100" onClick={() => onCreatePlaylist()}>
+                        <FontAwesomeIcon className="text-white text-[64px]" icon={faPlus} />
+                    </div>
+                }
                 <div className="flex flex-col gap-10 mm:gap-4 w-full">
                     {
                         playlists && rx.error.length === 0 ?
@@ -175,9 +181,6 @@ export const StudioPlaylist: React.FC = () => {
                                     <div className="flex flex-col gap-3 items-center">
                                         <h1 className="font-medium text-3xl text-center">{t("Create you first playlist")}</h1>
                                         <p className="font-medium text-xl text-center">{t("You can also upload a new single or album")}</p>
-                                    </div>
-                                    <div>
-                                        <DefaultButton onClick={() => { nav("/upload") }} text={t("Upload")} />
                                     </div>
                                 </div>
                             </>

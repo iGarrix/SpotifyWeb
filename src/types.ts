@@ -58,6 +58,7 @@ export interface IUser {
   verify: string;
   emojie: string;
   views: number,
+  status: string,
 }
 
 export interface IHistory {

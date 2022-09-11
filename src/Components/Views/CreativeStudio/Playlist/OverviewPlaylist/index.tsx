@@ -230,8 +230,8 @@ export const OverViewPlaylist: React.FC = () => {
                         </div>
                 }
                 <div className="flex flex-col gap-2 mm:w-full">
-                    <h1 className="text-xl font-['Lexend'] flex gap-4">{t("Playlist")} {playlist?.playlistDto?.accessStatus}</h1>
-                    <h1 className="font-semibold text-3xl font-['Lexend'] flex gap-4 profilenames">{playlist?.playlistDto?.name}
+                    <h1 className="text-xl  flex gap-4">{t("Playlist")} {playlist?.playlistDto?.accessStatus}</h1>
+                    <h1 className="font-semibold text-3xl  flex gap-4 profilenames">{playlist?.playlistDto?.name}
                         <FontAwesomeIcon className="text-lg profilechangenames" icon={faPen} onClick={onChangePlaylist} />
                     </h1>
                 </div>

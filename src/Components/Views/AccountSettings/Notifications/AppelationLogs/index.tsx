@@ -1,6 +1,7 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetAppelationRequest } from "../../../../../Redux/Reducers/NotificationReducer/types";
@@ -15,6 +16,7 @@ export const AppelationLogs: React.FC = () => {
     const user = useTypedSelector(state => state.userReducer.profile);
     const [open, setOpen] = useState(false);
     const [answer, setAnswer] = useState("");
+    const {t} = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (reducer.nextPage && !reducer.loading) {
@@ -71,8 +73,8 @@ export const AppelationLogs: React.FC = () => {
             {
                 reducer.appelations?.map(item => {
                     return (
-                        <NotifyCard key={Guid.create().toString()} message={`Your message: ${item.message}`} device={DeviceType.desktop} type={item.answer ? "success" : "wait"} date={new Date(item.sendDate)}
-                        onClick={() => {setAnswer(item.answer); setOpen(true);}} isFunc={item.answer ? true : false} />
+                        <NotifyCard key={Guid.create().toString()} message={`${t(`Yourmess`)}: ${item.message}`} device={DeviceType.desktop} type={item.answer ? "success" : "wait"} date={new Date(item.sendDate)}
+                        onClick={() => {setAnswer(item.answer); setOpen(item.answer ? true : false);}} isFunc={item.answer ? true : false} />
                     )
                 })
             }

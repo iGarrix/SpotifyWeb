@@ -1,6 +1,7 @@
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 import { useActions } from "../../../../../Hooks/useActions";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { IGetStatusUserRequest, IUserStatusResponse } from "../../../../../Redux/Reducers/NotificationReducer/types";
@@ -14,7 +15,7 @@ export const StatusAccount: React.FC = () => {
     const reducer = useTypedSelector(state => state.notificationReducer);
     const user = useTypedSelector(state => state.userReducer.profile);
     const [open, setOpen] = useState(false);
-
+    const {t} = useTranslation();
     const scrollHadler = async () => {
         if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) <= 0) {
             if (reducer.nextPage && !reducer.loading) {
@@ -85,7 +86,7 @@ export const StatusAccount: React.FC = () => {
                         <NotifyCard key={Guid.create().toString()}
                             isFunc
                             onClick={() => { onSelect(item) }}
-                            message={`You have a ${item.userStatusDto.status} status due to: ${item.userStatusDto.reason}`} type={item.userStatusDto.status === "Happy" ? "success" : "error"} date={new Date(item.userStatusDto.create)} />
+                            message={`${t(`YHA`)} ${item.userStatusDto.status} ${t(`SDT`)}: ${item.userStatusDto.reason}`} type={item.userStatusDto.status === "Happy" ? "success" : "error"} date={new Date(item.userStatusDto.create)} />
                     )
                 })
             }
