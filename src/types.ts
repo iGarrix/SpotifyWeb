@@ -75,10 +75,10 @@ export interface IPagableResponse<T = any> {
 }
 
 // RELEASE
-export const baseUrl = "https://soundwave.gq/";
+//export const baseUrl = "https://soundwave.gq/";
 // DEVELOPMENT
 //export const baseUrl = "https://localhost:5001/"; 
-//export const baseUrl = "https://localhost:7286/";
+export const baseUrl = "https://localhost:7286/";
 
 export interface IRefreshModel {
   accessToken: string,

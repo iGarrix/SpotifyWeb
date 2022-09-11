@@ -30,6 +30,7 @@ export interface IAppelation {
   returnId: string,
   sendDate: Date,
   message: string,
+  answer: string,
 }
 
 export interface IInvite {

@@ -21,7 +21,7 @@ export const StatusDetailModal: React.FC<IStatusDetailModal> = ({ ...props }) =>
                 </div>
                 <hr className="w-full border-light-300" />
                 <div className="flex flex-col">
-                    <p>Status: <span className="font-medium text-red-500">{props.data.userStatusDto.status}</span></p>
+                    <p>Status: <span className={`font-medium ${props.data.userStatusDto.status === "Happy" ? "text-green-500" : "text-red-500"}`}>{props.data.userStatusDto.status}</span></p>
                     <p>Reason: {props.data.userStatusDto.reason}</p>
                     <p>Created limit: {moment(props.data.userStatusDto.create).format("DD/MM/YYYY - HH:mm")}</p>
                 </div>

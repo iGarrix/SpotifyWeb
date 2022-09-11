@@ -85,7 +85,7 @@ export const StatusAccount: React.FC = () => {
                         <NotifyCard key={Guid.create().toString()}
                             isFunc
                             onClick={() => { onSelect(item) }}
-                            message={`You have a ${item.userStatusDto.status} status due to: ${item.userStatusDto.reason}`} type={"error"} date={new Date(item.userStatusDto.create)} />
+                            message={`You have a ${item.userStatusDto.status} status due to: ${item.userStatusDto.reason}`} type={item.userStatusDto.status === "Happy" ? "success" : "error"} date={new Date(item.userStatusDto.create)} />
                     )
                 })
             }
