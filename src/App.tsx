@@ -78,6 +78,9 @@ import { UploadAlbumStepThree } from "./Components/Views/UploadingPages/UploadAl
 import { Invites } from "./Components/Views/AccountSettings/Notifications/Invites";
 import { useTranslation } from "react-i18next";
 
+const darkbg = require('./Assets/Darkbg.jpg');
+const lightbg = require('./Assets/Lightbg.jpg');
+
 function App() {
 
   const { theme, lang } = useTypedSelector(state => state.globalReducer);
@@ -112,119 +115,126 @@ function App() {
   }, []);
 
   return (
-    <div
-      className={`w-full min-h-screen flex scroller ${theme === Theme.dark ? "dark from-dark-200/80 to-dark-200/100 bg-gradient-to-b" : "bg-gradient-to-b from-light-200/80 to-light-100/100"}`}
-    >
-      <Routes>
-        <Route path="/" element={<LayStartup />}>
-          <Route index element={<Welcome />} />
-          <Route path="weeklyalbums" element={<WeeklyAlbums />} />
-          <Route path="weeklyartist" element={<WeeklyArtist />} />
-          <Route path="search" element={<Search />}>
-            <Route index element={<AllResultSearch />} />
-            <Route path="albums" element={<AlbumsResult />} />
-            <Route path="playlists" element={<PlaylistResult />} />
-            <Route path="tracks" element={<TracksResult />} />
-            <Route path="artists" element={<CreatorsResult />} />
-            <Route path="profiles" element={<ProfileResult />} />
-          </Route>
-          <Route path="genres" element={<Outlet />} >
-            <Route index element={<Genres />} />
-            <Route path=":name" element={<GenreDetails />} />
-          </Route>
-          <Route path="history" element={<History />} />
-          <Route path="queue" element={<Queue />} />
+    <div className="relative">
+      {
+        theme === Theme.dark ?
+        <img alt="bg" src={darkbg} className="fixed top-0 left-0 w-full h-full z-[-1000]" /> :
+      <img alt="bg" src={lightbg} className="fixed top-0 left-0 w-full h-full z-[-1000]" />
+      }
+      <div
+        className={`w-full min-h-screen flex scroller z-[5] ${theme === Theme.dark ? "dark" : ""}`}
+      >
+        <Routes>
+          <Route path="/" element={<LayStartup />}>
+            <Route index element={<Welcome />} />
+            <Route path="weeklyalbums" element={<WeeklyAlbums />} />
+            <Route path="weeklyartist" element={<WeeklyArtist />} />
+            <Route path="search" element={<Search />}>
+              <Route index element={<AllResultSearch />} />
+              <Route path="albums" element={<AlbumsResult />} />
+              <Route path="playlists" element={<PlaylistResult />} />
+              <Route path="tracks" element={<TracksResult />} />
+              <Route path="artists" element={<CreatorsResult />} />
+              <Route path="profiles" element={<ProfileResult />} />
+            </Route>
+            <Route path="genres" element={<Outlet />} >
+              <Route index element={<Genres />} />
+              <Route path=":name" element={<GenreDetails />} />
+            </Route>
+            <Route path="history" element={<History />} />
+            <Route path="queue" element={<Queue />} />
 
-          <Route path="album" element={<Outlet />}>
-            <Route path=":id" element={<ListeningAlbum />} />
-          </Route>
-          <Route path="playlist" element={<Outlet />}>
-            <Route path=":id" element={<ListeningPlaylist />} />
+            <Route path="album" element={<Outlet />}>
+              <Route path=":id" element={<ListeningAlbum />} />
+            </Route>
+            <Route path="playlist" element={<Outlet />}>
+              <Route path=":id" element={<ListeningPlaylist />} />
+            </Route>
+
+            <Route path="overview" element={<Outlet />}>
+              <Route path=":nickname" element={<OverviewProfile />} >
+                <Route index element={<OverviewProfileSingles />} />
+                <Route path="playlists" element={<OverviewProfilePlaylists />} />
+                <Route path="albums" element={<OverviewProfileAlbums />} />
+              </Route>
+            </Route>
+
+            <Route path="profile" element={<LayProfile />}>
+
+              <Route path="" element={<Profile />}>
+                <Route index element={<ProfileSingles />} />
+                <Route path="playlists" element={<ProfilePlaylists />} />
+                <Route path="albums" element={<ProfileAlbums />} />
+              </Route>
+            </Route>
+
+            <Route path="medialibrary" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+              <Route path="" element={<MyMediaLibrary />} >
+                <Route index element={<MyMediaLibrarySingle />} />
+                <Route path="albums" element={<MyMediaLibraryAlbums />} />
+                <Route path="playlists" element={<MyMediaLibraryPlaylists />} />
+                <Route path="creators" element={<MyMediaLibraryCreators />} />
+              </Route>
+            </Route>
+
+            <Route path="websettings" element={<WebSettings />} />
           </Route>
 
-          <Route path="overview" element={<Outlet />}>
-            <Route path=":nickname" element={<OverviewProfile />} >
-              <Route index element={<OverviewProfileSingles />} />
-              <Route path="playlists" element={<OverviewProfilePlaylists />} />
-              <Route path="albums" element={<OverviewProfileAlbums />} />
+          <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
+            <Route path="" element={<LayAccountSettings />}>
+              <Route index element={<PersonalData />} />
+              <Route path="verifyemail" element={<VerifyEmail />} />
+              <Route path="verifycodeemail" element={<VerifyCodEmail />} />
+              <Route path="deleteaccount" element={<DeleteProfile />} />
+              <Route path="sendappelation" element={<SendAppelation />} />
+              <Route path="verifyaccount" element={<VerifyAccount />}>
+                <Route index element={<RequirementsDefault />} />
+                <Route path="verified" element={<RequirementsVerified />} />
+              </Route>
+              <Route path="notification" element={<Notifications />}>
+                <Route index element={<LogsInAccount />} />
+                <Route path="actions" element={<ActionsAccount />} />
+                <Route path="appeal" element={<AppelationLogs />} />
+                <Route path="status" element={<StatusAccount />} />
+                <Route path="invites" element={<Invites />} />
+              </Route>
             </Route>
           </Route>
 
-          <Route path="profile" element={<LayProfile />}>
+          <Route path="creativestudio" element={<AuthorizateRoute user={user}><LayCreativeStudio /></AuthorizateRoute>}>
+            <Route index element={<StudioPlaylist />}/>
+            <Route path="overviewplaylist" element={<Outlet />} >
+              <Route path=":id" element={<OverViewPlaylist />}/>
+            </Route>
+            <Route path="single" element={<StudioSingle />} />
+            <Route path="album" element={<StudioAlbum />} />
+          </Route>
 
-            <Route path="" element={<Profile />}>
-              <Route index element={<ProfileSingles />} />
-              <Route path="playlists" element={<ProfilePlaylists />} />
-              <Route path="albums" element={<ProfileAlbums />} />
+          <Route path="upload" element={<LayUpload />}>
+            <Route index element={<UploadIntro />} />
+            <Route path="album" element={<UploadAlbumPage />}>
+              <Route index element={<UploadAlbumStepOne />} />
+              <Route path="information" element={<UploadAlbumStepTwo />}/>
+              <Route path="overview" element={<UploadAlbumStepThree />}/>
+            </Route>
+            <Route path="single" element={<UploadSinglePage />}>
+              <Route index element={<UploadSingleStepOne />} />
+              <Route path="information" element={<UploadSingleStepTwo />}/>
+              <Route path="overview" element={<UploadSingleStepThree />}/>
             </Route>
           </Route>
 
-          <Route path="medialibrary" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
-            <Route path="" element={<MyMediaLibrary />} >
-              <Route index element={<MyMediaLibrarySingle />} />
-              <Route path="albums" element={<MyMediaLibraryAlbums />} />
-              <Route path="playlists" element={<MyMediaLibraryPlaylists />} />
-              <Route path="creators" element={<MyMediaLibraryCreators />} />
-            </Route>
+          <Route path="authorizate" element={<LayAuth />}>
+            <Route index element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="passwordSendEmail" element={<PasswordSendEmail />} />
+            <Route path="passwordVerifyCode" element={<PasswordVerifyCode />} />
+            <Route path="newPasswordChange" element={<NewPasswordChange />} />
           </Route>
 
-          <Route path="websettings" element={<WebSettings />} />
-        </Route>
-
-        <Route path="accountsettings" element={<AuthorizateRoute user={user}><Outlet /></AuthorizateRoute>}>
-          <Route path="" element={<LayAccountSettings />}>
-            <Route index element={<PersonalData />} />
-            <Route path="verifyemail" element={<VerifyEmail />} />
-            <Route path="verifycodeemail" element={<VerifyCodEmail />} />
-            <Route path="deleteaccount" element={<DeleteProfile />} />
-            <Route path="sendappelation" element={<SendAppelation />} />
-            <Route path="verifyaccount" element={<VerifyAccount />}>
-              <Route index element={<RequirementsDefault />} />
-              <Route path="verified" element={<RequirementsVerified />} />
-            </Route>
-            <Route path="notification" element={<Notifications />}>
-              <Route index element={<LogsInAccount />} />
-              <Route path="actions" element={<ActionsAccount />} />
-              <Route path="appeal" element={<AppelationLogs />} />
-              <Route path="status" element={<StatusAccount />} />
-              <Route path="invites" element={<Invites />} />
-            </Route>
-          </Route>
-        </Route>
-
-        <Route path="creativestudio" element={<AuthorizateRoute user={user}><LayCreativeStudio /></AuthorizateRoute>}>
-          <Route index element={<StudioPlaylist />}/>
-          <Route path="overviewplaylist" element={<Outlet />} >
-            <Route path=":id" element={<OverViewPlaylist />}/>
-          </Route>
-          <Route path="single" element={<StudioSingle />} />
-          <Route path="album" element={<StudioAlbum />} />
-        </Route>
-
-        <Route path="upload" element={<LayUpload />}>
-          <Route index element={<UploadIntro />} />
-          <Route path="album" element={<UploadAlbumPage />}>
-            <Route index element={<UploadAlbumStepOne />} />
-            <Route path="information" element={<UploadAlbumStepTwo />}/>
-            <Route path="overview" element={<UploadAlbumStepThree />}/>
-          </Route>
-          <Route path="single" element={<UploadSinglePage />}>
-            <Route index element={<UploadSingleStepOne />} />
-            <Route path="information" element={<UploadSingleStepTwo />}/>
-            <Route path="overview" element={<UploadSingleStepThree />}/>
-          </Route>
-        </Route>
-
-        <Route path="authorizate" element={<LayAuth />}>
-          <Route index element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="passwordSendEmail" element={<PasswordSendEmail />} />
-          <Route path="passwordVerifyCode" element={<PasswordVerifyCode />} />
-          <Route path="newPasswordChange" element={<NewPasswordChange />} />
-        </Route>
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }
