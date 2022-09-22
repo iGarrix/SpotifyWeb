@@ -12,9 +12,7 @@ export enum UserActionTypes {
 
 export const registerValidate = Yup.object({
   username: Yup.string().required("Nickname is required"),
-  date: Yup.number().required("Day is required").min(1, "Invalid Day").max(31, "Invalid Day"),
-  month: Yup.number().required("Month is required").min(1, "Invalid Month").max(12, "Invalid Month"),
-  years: Yup.number().required("Years is required").min(1970, "Invalid Years").max(new Date().getFullYear() - minYears, `From ${minYears} years old`),
+  DateBirth: Yup.date().required("Date is required"),
   email: Yup.string().email("Email is invalid").required("Email is required"),
   phone: Yup.string(),
   name: Yup.string().required("Name is required"),
@@ -133,9 +131,7 @@ export interface IRegisterRequest {
 
 export interface IRegisterForm {
   username: string;
-  date: string,
-  month: string,
-  years: string,
+  DateBirth: Date,
   email: string;
   phone: string;
   name: string;

@@ -1,3 +1,4 @@
+import i18n from "./Configs/LangConf";
 import { ITrackResponse } from "./Redux/Reducers/PlayingReducer/types";
 
 export enum Theme {
@@ -194,4 +195,26 @@ export function formatBytes(bytes: number, decimals = 2) {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+export function changeLanguage(lang: string) {
+  if (lang) {
+      switch (lang) {
+          case LanguageVars.EN:
+              localStorage.setItem("lang", LanguageVars.EN);
+              i18n.changeLanguage(LanguageVars.EN);
+              break;
+          case LanguageVars.UA:
+              localStorage.setItem("lang", LanguageVars.UA);
+              i18n.changeLanguage(LanguageVars.UA);
+              break;  
+          default:
+              localStorage.setItem("lang", LanguageVars.EN);
+              i18n.changeLanguage(LanguageVars.EN);
+              break;
+      }
+  }
+  else {
+      i18n.changeLanguage(LanguageVars.EN);
+  }
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { ClearStorage } from "../../../Redux/GlobalReduxFunc";
 import { store } from "../../../Redux/store";
-import { LanguageVars, StorageVariables, Theme } from "../../../types";
+import { changeLanguage, LanguageVars, StorageVariables, Theme } from "../../../types";
 import { ProfileButton } from "../../Commons/Buttons/ProfileButton";
 import { ToggleButton } from "../../Commons/Buttons/ToggleButton";
 import { DefaultSettingsDropdown } from "../../Commons/DefaultSettingsDropdown";
@@ -33,8 +33,7 @@ export const WebSettings: React.FC = () => {
 
 
     const onChangeLanguage = (value: string) => {
-        localStorage.setItem(StorageVariables.Language, value);
-        initLangDispath(value);
+        changeLanguage(value);
     }
 
     const onChangeTheme = () => {

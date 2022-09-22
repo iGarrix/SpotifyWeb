@@ -63,7 +63,7 @@ export const DeleteProfile: React.FC = () => {
                         <div className="rounded-md py-8 mm:w-full mm:h-full sm:w-full sm:h-full md:w-full md:h-full
                              flex mm:bg-dark-200/60 sm:bg-dark-200/60 md:bg-dark-200/60 flex-col items-center justify-center gap-6 shadow-xl px-10 border border-light-200 dark:border-dark-100">
                             <div className="w-full flex justify-end"><FontAwesomeIcon className="text-dark-200 dark:text-light-100 font-medium text-2xl cursor-pointer hover:text-red-500 rounded-sm px-1" icon={faClose} onClick={() => { setOpenModal(false) }} /></div>
-                            <h1 className="text-3xl font-medium font-['Lexend']">{t("Delete account")}</h1>
+                            <h1 className="text-3xl font-medium ">{t("Delete account")}</h1>
                             {
                                 error && error.length !== 0 ?
                                     <p className="text-red-500 font-medium flex gap-3 items-center"><FontAwesomeIcon className="text-xl" icon={faTriangleExclamation} />{error}</p> : null

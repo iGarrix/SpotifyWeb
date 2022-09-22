@@ -100,7 +100,7 @@ export const OverviewProfile: React.FC = () => {
                   className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAvatarImage }} />
                 <div className="flex flex-col">
                   <div className="flex gap-2 items-center">
-                    <h1 className="font-['Lexend'] text-xl">{user.overviewer?.username}</h1>
+                    <h1 className=" text-xl">{user.overviewer?.username}</h1>
                     <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
                       <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                     </p>
@@ -123,7 +123,7 @@ export const OverviewProfile: React.FC = () => {
                 </div>
             }
             <div className="flex flex-col gap-2 mm:gap-0 sm:gap-0">
-              <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-['Lexend'] flex gap-4">{user.overviewer?.username}
+              <h1 className="font-semibold text-5xl mm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-4xl  flex gap-4">{user.overviewer?.username}
                 <p className="translate-y-[-5px]">{verifyImage}</p>
               </h1>
               <p className="text-light-100/80 mm:text-base sm:text-base">{user?.overviewer?.emojie}</p>

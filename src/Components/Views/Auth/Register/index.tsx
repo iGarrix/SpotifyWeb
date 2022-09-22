@@ -17,6 +17,7 @@ import {
 } from "../../../../Redux/Reducers/UserReducer/types";
 import { DeviceType } from "../../../../types";
 import { FormikDefaultDropdown } from "../../../Commons/Dropdowns";
+import { DateDropdown } from "../../../Commons/Dropdowns/DateDropdown";
 import { FormikField } from "../../../Commons/Inputs/FormikField";
 import { DefaultPhoneInput } from "../../../Commons/Inputs/PhoneInput";
 import { SignUpSteps } from "../../../Commons/Steps/SignUpSteps";
@@ -48,9 +49,7 @@ export const Register: React.FC = () => {
     password: "",
     passwordConfirm: "",
     country: "Ukraine",
-    date: "",
-    month: "",
-    years: ""
+    DateBirth: new Date(),
   };
   const onHandleSubmit = async (values: IRegisterForm) => {
     try {
@@ -64,7 +63,7 @@ export const Register: React.FC = () => {
         phone: phone,
         name: values.name,
         surname: values.surname,
-        birthday: new Date(Number.parseInt(values.years), Number.parseInt(values.month), Number.parseInt(values.date)),
+        birthday: new Date(values.DateBirth),
         gender: values.gender,
         country: values.country,
         device: DeviceType.desktop,
@@ -89,12 +88,14 @@ export const Register: React.FC = () => {
   const responseError = (error: any) => {
     console.log(error);
   }
-  const onNext = () => {
+  const onNext = (e:any) => {
+    e.preventDefault();
     if (step < 5) {
       setStep(step + 1);
     }
   }
-  const onPrevious = () => {
+  const onPrevious = (e:any) => {
+    e.preventDefault();
     if (step > 1) {
       setStep(step - 1);
     }
@@ -181,15 +182,11 @@ export const Register: React.FC = () => {
                   },
                   {
                     title: t("Step 4"),
-                    description: t("Enter your nickname"),
+                    description: t("Enter your nickname and birthday"),
                     index: 4,
                     children: <div className="flex flex-col gap-2 px-10">
                       <FormikField placeholder={t("Username")} name="username" type="text" />
-                      <div className='grid grid-cols-3 mm:grid-cols-1 mm:grid-rows-3 sm:grid-cols-1 sm:grid-rows-3 md:grid-cols-1 md:grid-rows-3 lg:grid-cols-1 lg:grid-rows-3 gap-3'>
-                        <FormikField placeholder={t('Day')} type="text" name={'date'} />
-                        <FormikField placeholder={t('Month')} type="text" name={'month'} />
-                        <FormikField placeholder={t('Years')} type="text" name={'years'} />
-                      </div>
+                      <DateDropdown name={"DateBirth"} title={t(`Birthday`)} />
                     </div>
                   },
                   {

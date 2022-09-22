@@ -62,8 +62,8 @@ export const PasswordVerifyCode: React.FC = () => {
                             <img alt="logo" className="w-[200px]" src={logo} />
                         </div>
                         <div className="flex flex-col gap-3 w-full items-center">
-                            <h1 className="text-3xl font-['Lexend'] text-center">{t("Check your email")}</h1>
-                            <p className="text-lg font-['Lexend'] text-center">{t("We sent a 4-digit code to")} {localStorage.getItem(StorageVariables.ForgotUser)}</p>
+                            <h1 className="text-3xl  text-center">{t("Check your email")}</h1>
+                            <p className="text-lg  text-center">{t("We sent a 4-digit code to")} {localStorage.getItem(StorageVariables.ForgotUser)}</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             {

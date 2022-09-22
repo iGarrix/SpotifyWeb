@@ -63,7 +63,7 @@ export const LayStartup: React.FC = () => {
               <div className="w-full h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-primary-100 text-light-100 col-[span_17] lg:col-[span_16] xl:col-[span_16] mm:col-span-full sm:col-span-full md:col-span-full
               flex mm:flex-col sm:flex-col md:flex-col justify-between items-center px-[2%] mm:py-[1%] sm:py-[1%] md:py-[1%]">
                 <div className="flex flex-col sm:w-full md:w-full">
-                  <p className="text-lg font-['Lexend'] font-bold] mm:hidden">{t("TEMPORALITY USING SOUNDWAVE")}</p>
+                  <p className="text-lg font-bold] mm:hidden">{t("TEMPORALITY USING SOUNDWAVE")}</p>
                   <p>{t("Sign up to listen to playlists, albums and songs for free")}</p>
                 </div>
                 <div className="flex ml-auto mm:w-full sm:w-full md:w-full">

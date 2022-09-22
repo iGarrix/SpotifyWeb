@@ -20,23 +20,23 @@ else {
   initTheme(theme, store.dispatch);
 }
 
-const lang = localStorage.getItem(StorageVariables.Language);
-if (lang === null || lang === undefined) {
-  localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
-}
+// const lang = localStorage.getItem(StorageVariables.Language);
+// if (lang === null || lang === undefined) {
+//   localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
+// }
 const volume = localStorage.getItem(StorageVariables.Volume);
 if (!volume) {
   localStorage.setItem(StorageVariables.Volume, "100");
 }
 
-const langStorage = localStorage.getItem(StorageVariables.Language);
-if (langStorage) {
-  initLang(langStorage, store.dispatch);
-}
-else {
-  localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
-  initLang(LanguageVars.EN, store.dispatch);
-}
+// const langStorage = localStorage.getItem(StorageVariables.Language);
+// if (langStorage) {
+//   initLang(langStorage, store.dispatch);
+// }
+// else {
+//   localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
+//   initLang(LanguageVars.EN, store.dispatch);
+// }
 
 setupInterceptors();
 InitUser(store.dispatch);

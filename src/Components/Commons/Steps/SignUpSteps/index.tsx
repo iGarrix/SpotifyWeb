@@ -33,7 +33,7 @@ export const SignUpStep: React.FC<ISignUpStep> = ({ title, description, children
         <div className="w-full flex flex-col justify-center items-center gap-8">
             <div className="flex flex-col gap-3 mm:gap-10 sm:gap-10 w-full items-center pt-5">
                 <LinearStepper paddingX={10} selectedIndex={props.index} stepsItem={steps} />
-                <p className="text-lg font-['Lexend'] text-center">{description}</p>
+                <p className="text-lg  text-center">{description}</p>
             </div>
             <div className="flex flex-col gap-2">
                 {children}

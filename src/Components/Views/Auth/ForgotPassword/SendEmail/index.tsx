@@ -63,8 +63,8 @@ export const PasswordSendEmail: React.FC = () => {
                             <Form className="mm:h-full sm:h-full">
                                 <div className="w-full mm:h-full flex flex-col justify-center items-center gap-8">
                                     <div className="flex flex-col gap-3 w-full items-center">
-                                        <h1 className="text-3xl font-['Lexend'] text-center">{t("Forgot password?")}</h1>
-                                        <p className="text-lg font-['Lexend'] text-center">{t("Enter your email address and we’ll send you a link to reset your password")}</p>
+                                        <h1 className="text-3xl  text-center">{t("Forgot password?")}</h1>
+                                        <p className="text-lg  text-center">{t("Enter your email address and we’ll send you a link to reset your password")}</p>
                                         {
                                             error &&
                                             <div className="flex flex-col gap-3 items-center bg-red-500 rounded-xl py-3 px-8">

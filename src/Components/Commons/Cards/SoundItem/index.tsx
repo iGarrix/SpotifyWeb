@@ -111,7 +111,7 @@ export const SoundItem: React.FC<ISoundItem> = ({ item, isPlay, onClick, }) => {
                                 className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                             <div className="flex flex-col">
                                 <div className="flex mm:flex-col gap-2 items-center mm:items-start mm:gap-0">
-                                    <h1 className="font-['Lexend'] text-xl">{item.track?.name}</h1>
+                                    <h1 className=" text-xl">{item.track?.name}</h1>
                                     <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3">
                                         <span className="text-center text-sm">{t("Sharing")}</span>
                                     </p>

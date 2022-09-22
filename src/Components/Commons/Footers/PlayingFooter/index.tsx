@@ -306,7 +306,7 @@ export const PlayingFooter: React.FC = () => {
                                             className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
-                                                <h1 className="font-['Lexend'] text-xl">{rx?.soundobjs[rx?.playedIndex].track?.name}</h1>
+                                                <h1 className=" text-xl">{rx?.soundobjs[rx?.playedIndex].track?.name}</h1>
                                                 <p className="bg-light-300 dark:bg-dark-100 text-dark-200 dark:text-light-200 rounded-2xl px-3">
                                                     <span className="text-center text-sm">Sharing</span>
                                                 </p>

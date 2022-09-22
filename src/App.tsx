@@ -17,7 +17,7 @@ import { ProfileAlbums } from "./Components/Views/Profile/ProfileAlbums";
 import { ProfileSingles } from "./Components/Views/Profile/ProfileSingles";
 import { ListeningAlbum } from "./Components/Views/ListeningPage/ListeningAlbum";
 import { IQueue } from "./Redux/Reducers/PlayingReducer/types";
-import { StorageVariables, TempTake, Theme } from "./types";
+import { LanguageVars, StorageVariables, TempTake, Theme } from "./types";
 import { useActions } from "./Hooks/useActions";
 import { useTypedSelector } from "./Hooks/useTypedSelector";
 import { AuthorizateRoute } from "./Components/ProtectedRoutes/AuthorizateRoute";
@@ -80,21 +80,35 @@ import { useTranslation } from "react-i18next";
 
 function App() {
 
-  const { theme, lang } = useTypedSelector(state => state.globalReducer);
+  const { theme} = useTypedSelector(state => state.globalReducer);
 
   const { i18n } = useTranslation();
-
-  useEffect(() => {
-    if (lang) {
-      i18n.changeLanguage(lang);
-    }
-  }, [lang]);
 
   const { initQueue } = useActions();
 
   document.documentElement.scrollTo(0, 0);
 
   const user = useTypedSelector(state => state.userReducer.profile);
+
+  const [lang, setLang] = useState(() => {
+    const local_lang = localStorage.getItem("lang");
+    if (local_lang) {
+        return local_lang;
+    }
+    else {
+      localStorage.setItem("lang", LanguageVars.EN);
+      return LanguageVars.EN;
+    }
+  });
+
+  useEffect(() => {
+    if (lang) {   
+      i18n.changeLanguage(lang);
+    }
+    else {
+      i18n.changeLanguage(LanguageVars.EN);
+    }
+  }, [lang]);
 
   useEffect(() => {
 

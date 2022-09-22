@@ -215,7 +215,7 @@ export const ListeningPlaylist: React.FC = () => {
                                             className="h-28 w-28 rounded-xl object-cover bg-cover" onError={(tg: any) => { tg.target.src = defaultPlaylistImage }} />
                                         <div className="flex flex-col">
                                             <div className="flex gap-2 items-center">
-                                                <h1 className="font-['Lexend'] text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                                <h1 className=" text-xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                                 <p className="bg-light-300 dark:bg-dark-100 rounded-2xl px-3 mm:hidden">
                                                     <span className="text-center text-sm text-dark-200 dark:text-light-200">{t("Sharing")}</span>
                                                 </p>
@@ -267,7 +267,7 @@ export const ListeningPlaylist: React.FC = () => {
                             <div className="flex flex-col gap-4 w-full">
                                 <div className="flex flex-col gap-1">
                                     <div className="flex gap-4 w-full items-center">
-                                        <h1 className="font-medium font-['Lexend'] text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
+                                        <h1 className="font-medium  text-3xl">{playingReducer.playlist?.playlistDto?.name}</h1>
                                         {
                                             playingReducer.playlist.playlistCreator?.username === user?.username &&
                                             <img alt="icon" className="w-[26px] cursor-pointer invert dark:invert-0 hover:scale-105" src={icon_cs} onClick={() => { nav('/creativestudio/overviewplaylist/' + id) }} />

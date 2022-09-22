@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { StorageVariables } from "../types";
+import { changeLanguage, LanguageVars, StorageVariables, Theme } from "../types";
 import { MyGenreActionTypes } from "./Reducers/GenreReducer/types";
 import { MyAlbumActionTypes } from "./Reducers/MyAlbumReducer/types";
 import { MyMediaLibraryActionTypes } from "./Reducers/MyMediaLibraryReducer/types";
@@ -25,9 +25,10 @@ export function ClearStorage(dispatch: Dispatch<any>) {
     ClearRedux(dispatch);
     localStorage.removeItem(StorageVariables.ForgotUser);
     localStorage.removeItem(StorageVariables.History);
-    localStorage.removeItem(StorageVariables.Language);
+    localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
+    changeLanguage(LanguageVars.EN);
     localStorage.removeItem(StorageVariables.Queue);
-    localStorage.removeItem(StorageVariables.Theme);
+    localStorage.setItem(StorageVariables.Theme, Theme.light);
     localStorage.removeItem(StorageVariables.Volume);
     localStorage.removeItem(StorageVariables.Track);
     localStorage.removeItem(StorageVariables.VerifyResponse);
