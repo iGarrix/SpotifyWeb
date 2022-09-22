@@ -45,11 +45,14 @@ export const Header: React.FC<IHeaderProps> = ({ ...props }) => {
                                         }
                                     </div>
                                 }
-                                <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer ml-auto"
-                                    onClick={() => { nav('/upload') }}
-                                    style={{ backgroundImage: `url('${bg}')` }}>
-                                    <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
-                                </div>
+                                {
+                                    user.status !== "Freeze" &&
+                                    <div className="rounded-[10px] p-[8px] flex items-center justify-center bg-cover object-cover cursor-pointer ml-auto"
+                                        onClick={() => { nav('/upload') }}
+                                        style={{ backgroundImage: `url('${bg}')` }}>
+                                        <img alt="icon" src={icon_upload} className="w-[20px] h-[20px]" />
+                                    </div>
+                                }
                                 <FixedModal trigger={GetUserAvatar(user) !== "" ? <div className="w-12 h-12 overflow-hidden"><img alt="avatar" src={GetUserAvatar(user)} className="rounded-xl cursor-pointer transition-all object-cover w-full h-full"
                                     onError={(tg: any) => { tg.target.src = defaultAvatarImage }} /></div> :
                                     <div className="bg-gray-600 w-10 h-10 animate-pulse rounded-lg px-3 py-1 cursor-pointer">

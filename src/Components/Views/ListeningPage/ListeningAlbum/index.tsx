@@ -184,6 +184,7 @@ export const ListeningAlbum: React.FC = () => {
 
     return (
         <div className="w-full h-full pt-[7%] px-[10%] mm:px-[3%] sm:px-[3%] md:px-[3%] lg:px-[3%] xl:px-[5%] text-dark-200 dark:text-light-200 relative">
+            <div className="fixed top-0 left-0 dark:bg-dark-200/80 w-full h-full"></div>
             {
                 playingReducer.album ?
                     <img alt="bg" src={`${baseUrl}Images/AlbomTemplates/${playingReducer.album?.albomDto?.templateimage}`} className="fixed top-0 left-0 object-cover bg-cover w-full h-full" style={{ zIndex: -2 }} onError={(tg: any) => { tg.target.src = defaultAlbumImage }} />

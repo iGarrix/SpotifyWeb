@@ -1,4 +1,4 @@
-import { faCheck, faEye, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEye, faIcicles, faShare, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -141,6 +141,18 @@ export const OverviewProfile: React.FC = () => {
           </div>
         </div>
       </div>
+      {
+          user.overviewer?.status === "Freeze" &&
+          <div className="w-full bg-blue-500 py-2 flex justify-center items-center">
+              <h1 className="text-center font-medium">{t(`Acc_Freeze`)}</h1>
+          </div >
+      }
+      {
+        user.overviewer?.status === "Banned" &&
+        <div className="w-full bg-orange-500 py-2 flex justify-center items-center">
+            <h1 className="text-center font-medium">{t(`Acc_Banned`)}</h1>
+        </div>
+      }
       <div className={`h-full w-full flex flex-col items-center mm:items-start sm:items-start md:items-start mm:px-[2%] sm:px-[2%] md:px-[2%] mt-5`}>
         <div className="bg-light-200 dark:bg-dark-100 mm:w-full sm:w-full md:w-full
          flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
