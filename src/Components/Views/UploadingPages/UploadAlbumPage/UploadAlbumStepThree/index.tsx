@@ -2,7 +2,7 @@ import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../../Hooks/useTypedSelector";
 import { defaultMusicImage, formatBytes } from "../../../../../types";
 import { ProfileButton } from "../../../../Commons/Buttons/ProfileButton";
@@ -17,6 +17,7 @@ export const UploadAlbumStepThree: React.FC = () => {
     const [copy, setCopy] = useState(false);
     const [link, setLink] = useState(document.location.origin + "/search?query=" + reducer.albumdata?.title);
     const { t } = useTranslation();
+
     useEffect(() => {
         if (!reducer.albumfiles) {
             nav(-2);
@@ -62,10 +63,10 @@ export const UploadAlbumStepThree: React.FC = () => {
                             </CopyToClipboard>
                         </div>
                     </div>
+                    <div className="w-full flex justify-end mt-5">
+                            <ProfileButton text={t("Go to main")} isSelect={true} onClick={() => { nav("/") }} />
+                    </div>
                 </div>
-            </div>
-            <div className="flex justify-end w-full mt-auto px-[15%] pb-[4%]">
-                <ProfileButton text={t("Go to main")} isSelect={true} onClick={() => { nav("/") }} />
             </div>
         </div>
     )

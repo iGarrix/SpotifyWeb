@@ -584,7 +584,7 @@ i18n.use(initReactI18next).init({
         "My singles": "Мої пісні",
         "My Playlists": "Мої плейлисти",
         "My albums": "Мої альбоми",
-        "Singles not found": "Пісней не знайдено",
+        "Singles not found": "Пісень не знайдено",
         "Upload you first single song": "Завантажте свою першу пісню",
         "Create you first playlist song": "Створіть свій перший плейлист",
         "Upload you first": "Завантажте свій перший альбом",

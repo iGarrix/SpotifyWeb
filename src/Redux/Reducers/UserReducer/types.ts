@@ -72,9 +72,7 @@ export const changeDataAccountValidate = Yup.object({
 });
 
 export const changeOtherDataAccountValidate = Yup.object({
-  date: Yup.number().required("Day is required").min(1, "Invalid Day").max(31, "Invalid Day"),
-  month: Yup.number().required("Month is required").min(1, "Invalid Month").max(12, "Invalid Month"),
-  years: Yup.number().required("Years is required").min(1970, "Invalid Years").max(new Date().getFullYear() - minYears, `From ${minYears} years old`),
+  date: Yup.date().required("Date is required"),
   gender: Yup.string().required("Gender is equired"),
   country: Yup.string().required("Country is equired"),
 });
@@ -298,9 +296,7 @@ export interface IChangeDataAccountRequest {
 }
 
 export interface IChangeOtherDataAccountForm {
-  date: string,
-  month: string,
-  years: string,
+  date: Date,
   gender: string,
   country: string,
 }

@@ -17,7 +17,7 @@ export const DateDropdown: React.FC<IDateDropdown> = ({
                     return <p className="text-red-500 font-medium">{errorMessage}</p>;
                 }} />
             </div>
-            <input type={"date"} defaultValue={value} 
+            <input type={"date"} defaultValue={new Date(value).toLocaleDateString('en-CA')} 
             className="outline-0 rounded-md py-3 px-5 pr-20 w-full text-dark-200 dark:text-light-100 bg-light-200 dark:bg-dark-100"
             onChange={field.onChange}
             name={field.name}/>        

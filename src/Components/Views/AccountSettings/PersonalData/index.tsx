@@ -14,6 +14,7 @@ import {
 import { defaultAvatarImage, defaultBackgroundImage, DeviceType, GetUserAvatar, GetUserBackground } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
 import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
+import { DateDropdown } from '../../../Commons/Dropdowns/DateDropdown';
 import { FormikField } from '../../../Commons/Inputs/FormikField';
 import { DefaultPhoneInput } from '../../../Commons/Inputs/PhoneInput';
 export const PersonalData: React.FC = () => {
@@ -36,9 +37,7 @@ export const PersonalData: React.FC = () => {
         username: user ? user.username : ""
     };
     const initialChangeOtherDataAccountValues: IChangeOtherDataAccountForm = {
-        date: user ? new Date(user.birthday).getDate().toString() : '',
-        month: user ? new Date(user.birthday).getMonth().toString() : '',
-        years: user ? new Date(user.birthday).getFullYear().toString() : '',
+        date: user ? new Date(user.birthday) : new Date(),
         gender: user ? user.gender : "",
         country: user ? user.country : "",
     };
@@ -98,7 +97,7 @@ export const PersonalData: React.FC = () => {
                     findEmail: user.email,
                     newName: user.name,
                     newSurname: user.surname,
-                    newBirthday: new Date(Number.parseInt(values.years), Number.parseInt(values.month), Number.parseInt(values.date)),
+                    newBirthday: new Date(values.date),
                     newGender: values.gender,
                     newCountry: values.country,
                     device: DeviceType.desktop,
@@ -221,12 +220,8 @@ export const PersonalData: React.FC = () => {
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change other data")}</h1>
-                                        <div className='grid grid-cols-3 gap-[30px]'>
-                                            <FormikField placeholder={t('Day')} type="text" value={new Date(user.birthday).getDate().toString()} onSumbit={() => { }} name={'date'} />
-                                            <FormikField placeholder={t('Month')} type="text" value={new Date(user.birthday).getMonth().toString()} onSumbit={() => { }} name={'month'} />
-                                            <FormikField placeholder={t('Years')} type="text" value={new Date(user.birthday).getFullYear().toString()} onSumbit={() => { }} name={'years'} />
-                                        </div>
-                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={t('Phone')} value={number} error={t('Invalid phone')} />
+                                        <DateDropdown name={'date'} value={user.birthday} title={'Enter new birthday date'} />
+                                        <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={t('Phone')} value={user.phone.toString()} error={t('Invalid phone')} />
                                         <div className='grid grid-cols-2 gap-[30px]'>
                                             <SettingsDropdownFormik name={'gender'} title={t('Gender')} value={user.gender} options={[t("Male"), t("Female"), t("Other")]} />
                                             <SettingsDropdownFormik name={'country'} title={t('Country')} value={user.country} options={[t("Ukraine"), t("USA"), t("Other")]} />

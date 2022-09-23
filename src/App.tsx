@@ -94,12 +94,12 @@ function App() {
   const user = useTypedSelector(state => state.userReducer.profile);
 
   const [lang, setLang] = useState(() => {
-    const local_lang = localStorage.getItem("lang");
+    const local_lang = localStorage.getItem(StorageVariables.Language);
     if (local_lang) {
         return local_lang;
     }
     else {
-      localStorage.setItem("lang", LanguageVars.EN);
+      localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
       return LanguageVars.EN;
     }
   });

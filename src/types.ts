@@ -202,15 +202,15 @@ export function changeLanguage(lang: string) {
   if (lang) {
       switch (lang) {
           case LanguageVars.EN:
-              localStorage.setItem("lang", LanguageVars.EN);
+              localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
               i18n.changeLanguage(LanguageVars.EN);
               break;
           case LanguageVars.UA:
-              localStorage.setItem("lang", LanguageVars.UA);
+              localStorage.setItem(StorageVariables.Language, LanguageVars.UA);
               i18n.changeLanguage(LanguageVars.UA);
               break;  
           default:
-              localStorage.setItem("lang", LanguageVars.EN);
+              localStorage.setItem(StorageVariables.Language, LanguageVars.EN);
               i18n.changeLanguage(LanguageVars.EN);
               break;
       }
