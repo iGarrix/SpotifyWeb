@@ -157,8 +157,8 @@ export const OverviewProfile: React.FC = () => {
         <div className="bg-light-200 dark:bg-dark-100 mm:w-full sm:w-full md:w-full
          flex mm:flex-col px-[50px] mm:px-[10px] sm:px-[20px] md:px-[30px] lg:px-[40px] rounded-xl py-3 justify-center gap-[100px] mm:gap-[10px] sm:gap-[10px]">
           <ProfileButton text={t("Singles")} isSelect={!history.pathname.includes("playlist") && !history.pathname.includes("albums")} onClick={() => { nav("") }} />
-          <ProfileButton text={t("Playli")} isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
-          <ProfileButton text={t("Albu")} isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
+          <ProfileButton text={t("Playlist2")} isSelect={history.pathname.includes("playlists")} onClick={() => { nav("playlists") }} />
+          <ProfileButton text={t("Album2")} isSelect={history.pathname.includes("albums")} onClick={() => { nav("albums") }} />
         </div>
         <Outlet />
       </div>

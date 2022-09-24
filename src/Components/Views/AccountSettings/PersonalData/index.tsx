@@ -9,7 +9,7 @@ import {
     changeOtherDataAccountValidate, changePasswordAccountValidate, IChangeDataAccountForm,
     IChangeDataAccountRequest, IChangeEmailAccountForm, IChangeEmailAccountRequest, IChangeEmojieForm,
     IChangeEmojieRequest, IChangeOtherDataAccountForm, IChangePasswordAccountForm, IChangePasswordAccountRequest,
-    IChangePhoneAccountRequest, IUpdatePersonalData
+    IChangePhoneAccountRequest, IInitGet, IUpdatePersonalData
 } from '../../../../Redux/Reducers/UserReducer/types';
 import { defaultAvatarImage, defaultBackgroundImage, DeviceType, GetUserAvatar, GetUserBackground } from '../../../../types';
 import { SettingsDropdownFormik } from '../../../Commons/AccountSettingsSideBar/SettingsDropdownFormik';
@@ -17,12 +17,23 @@ import { ProfileButton } from '../../../Commons/Buttons/ProfileButton';
 import { DateDropdown } from '../../../Commons/Dropdowns/DateDropdown';
 import { FormikField } from '../../../Commons/Inputs/FormikField';
 import { DefaultPhoneInput } from '../../../Commons/Inputs/PhoneInput';
+import jwt_decode from "jwt-decode";
 export const PersonalData: React.FC = () => {
     const { t } = useTranslation();
     const user = useTypedSelector(state => state.userReducer.profile);
     const error = useTypedSelector(state => state.userReducer.error);
     const { updateEmojieUser, updatePDUser, updateNicknameUser, updatePhoneUser, updateEmailUser, updatePasswordUser } = useActions();
     const [successMessage, setSuccessMessage] = useState("");
+    const [provider, setProvider] = useState(() => {
+        const token = localStorage.getItem("token");
+        if (token) {  
+            const data = jwt_decode(token) as IInitGet;
+            if (data) {
+                return data.provider
+            }
+        }
+        return "none";
+    })
     useEffect(() => {
         if (error) {
             document.documentElement.scrollTo(0, 0);
@@ -220,7 +231,7 @@ export const PersonalData: React.FC = () => {
                                 <Form>
                                     <div className='flex flex-col gap-[30px]'>
                                         <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change other data")}</h1>
-                                        <DateDropdown name={'date'} value={user.birthday} title={'Enter new birthday date'} />
+                                        <DateDropdown name={'date'} value={user.birthday} title={t(`Enter birthday date`)} />
                                         <DefaultPhoneInput onChange={(e: any) => { setNumber(e) }} name={'phone'} label={t('Phone')} value={user.phone.toString()} error={t('Invalid phone')} />
                                         <div className='grid grid-cols-2 gap-[30px]'>
                                             <SettingsDropdownFormik name={'gender'} title={t('Gender')} value={user.gender} options={[t("Male"), t("Female"), t("Other")]} />
@@ -246,22 +257,25 @@ export const PersonalData: React.FC = () => {
                                     </div>
                                 </Form>
                             </Formik>
-                            <Formik
-                                initialValues={initialChangePasswordAccountValues}
-                                validationSchema={changePasswordAccountValidate}
-                                onSubmit={onChangePasswordAccountHandle}>
-                                <Form>
-                                    <div className='flex flex-col gap-[30px]'>
-                                        <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change password")}</h1>
-                                        <FormikField placeholder={t('Old password')} type='password' onSumbit={() => { }} name={'oldPassword'} />
-                                        <FormikField placeholder={t('New password')} type='password' onSumbit={() => { }} name={'password'} />
-                                        <FormikField placeholder={t('Confirm new password')} type='password' onSumbit={() => { }} name={'passwordConfirm'} />
-                                        <div className='flex w-full justify-end'>
-                                            <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
+                            {
+                                provider && provider === "none" &&
+                                <Formik
+                                    initialValues={initialChangePasswordAccountValues}
+                                    validationSchema={changePasswordAccountValidate}
+                                    onSubmit={onChangePasswordAccountHandle}>
+                                    <Form>
+                                        <div className='flex flex-col gap-[30px]'>
+                                            <h1 className='font-bold text-3xl mm:text-2xl text-center'>{t("Change password")}</h1>
+                                            <FormikField placeholder={t('Old password')} type='password' onSumbit={() => { }} name={'oldPassword'} />
+                                            <FormikField placeholder={t('New password')} type='password' onSumbit={() => { }} name={'password'} />
+                                            <FormikField placeholder={t('Confirm new password')} type='password' onSumbit={() => { }} name={'passwordConfirm'} />
+                                            <div className='flex w-full justify-end'>
+                                                <ProfileButton text={t("Save changes")} onClick={() => { }} isSelect />
+                                            </div>
                                         </div>
-                                    </div>
-                                </Form>
-                            </Formik>
+                                    </Form>
+                                </Formik>
+                            }
                         </div>
                     </div>
                     :

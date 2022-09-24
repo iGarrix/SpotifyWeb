@@ -230,8 +230,8 @@ i18n.use(initReactI18next).init({
         //Overview profile
         "Share account": "Share account",
         "Singles": "Singles",
-        "Playli": "Playlists",
-        "Albu": "Albums",
+        "Playlist2": "Playlists",
+        "Album2": "Albums",
         "Unsubscribe": "Unsubscribe",
         "Subscribe": "Subscribe",
         //Account settings side bar
@@ -368,6 +368,8 @@ i18n.use(initReactI18next).init({
         "YHA": "You have a",
         "SDT": "status due to",
         "Yourmess": "Your message",
+        //
+        "Enter birthday date": "Enter birthday date",
       }
     },
     Ua: {
@@ -599,8 +601,8 @@ i18n.use(initReactI18next).init({
         //Overview profile
         "Share account": "Поділитись профілем",
         "Singles": "Пісні",
-        "Playli": "Плейлисти",
-        "Albu": "Альбоми",
+        "Playlist2": "Плейлисти",
+        "Album2": "Альбоми",
         "Unsubscribe": "Відписатись",
         "Subscribe": "Підписатись",
         //Account settings side bar
@@ -731,6 +733,8 @@ i18n.use(initReactI18next).init({
         "YHA": "У вас",
         "SDT": "статус",
         "Yourmess": "Ваше повідомлення",
+        //
+        "Enter birthday date": "Введіть дату народення",
       }
     },
   },
