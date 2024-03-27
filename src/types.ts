@@ -76,7 +76,7 @@ export interface IPagableResponse<T = any> {
 }
 
 // RELEASE
-export const baseUrl = "https://soundwave.gq/";
+export const baseUrl = "http://spotifyapi-001-site1.ktempurl.com/";
 // DEVELOPMENT
 //export const baseUrl = "https://localhost:5001/"; 
 //export const baseUrl = "https://localhost:7286/";
